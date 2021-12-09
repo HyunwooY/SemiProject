@@ -27,6 +27,7 @@ public class JoinController extends HttpServlet {
 		String email=req.getParameter("email");
 		String phone=req.getParameter("first")+"-"+req.getParameter("mid")+"-"+req.getParameter("back");
 		MemberVo vo=new MemberVo(id, pwd, name, email, phone);
+		
 //		MemberDao dao=MemberDao.getInstance();
 //		int n=dao.insert(vo);
 //		if(n>0) {
