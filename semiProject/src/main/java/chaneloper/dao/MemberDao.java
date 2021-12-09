@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import chaneloper.vo.MemberVo;
 import db.JDBC;
-   
+    
 public class MemberDao {
 	private static MemberDao instance = new MemberDao();
 	public static MemberDao getInstance() {
@@ -27,7 +27,6 @@ public class MemberDao {
 			pstmt.setString(3, vo.getName());
 			pstmt.setString(4, vo.getEmail());
 			pstmt.setString(5, vo.getPhone());
-			pstmt.executeUpdate();
 			con.commit();
 			return pstmt.executeUpdate();
 		}catch(SQLException s) {
@@ -104,15 +103,13 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	public boolean checkMember(HashMap<String, String> map) {
-		String id = map.get("id");
-		String pwd = map.get("pwd");
+	public boolean login(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "select * from member where id=? and pwd=?";
+			String sql = "select * from member_infomation where id=? and pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
