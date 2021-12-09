@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
@@ -15,6 +15,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <div id="wrap">
 <div id="ac">
 <ul id="account">
+	<li><a href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
 	<li><a href="">마이페이지</a></li>
 	<li><a href="">장바구니</a></li>
 	<li><a href="">로그인</a></li>
@@ -32,7 +33,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 </ul>
 </div>
 <div id="main">
-<span>옷 정보들 </span>
+	<jsp:include page="${requestScope.main }"/>
 </div>
 <div id="footer">
 </div>
