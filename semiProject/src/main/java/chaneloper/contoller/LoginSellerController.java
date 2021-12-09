@@ -3,16 +3,14 @@ package chaneloper.contoller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.MemberDao;
 
-@WebServlet("/member/login")
-public class LoginController extends HttpServlet {
-	@Override
+import chaneloper.dao.SellerDao;
+
+public class LoginSellerController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("main", "/member/login.jsp");
 		req.getRequestDispatcher("/layout").forward(req, resp);
@@ -22,8 +20,8 @@ public class LoginController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
 		String pwd=req.getParameter("pwd");
-		MemberDao dao=MemberDao.getInstance();
-		if(dao.login(id, pwd)) {
+		SellerDao dao=SellerDao.getInstance();
+		if(dao.sellerLogin(id, pwd)) {
 			req.setAttribute("code", true);
 			req.getSession().setAttribute("id", id);
 		}else {
@@ -33,11 +31,3 @@ public class LoginController extends HttpServlet {
 		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }
-
-
-
-
-
-
-
-
