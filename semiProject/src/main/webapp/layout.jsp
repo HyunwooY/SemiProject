@@ -18,14 +18,14 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <ul id="account">
 	<c:choose>
 		<c:when test="${requestScope.code=='fail' || requestScope.code==null}">
-			<li><a href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
+			<li><a href="${pageContext.request.contextPath }/joinlayout">회원가입</a></li>
 			<li><a href="${pageContext.request.contextPath }/member/login">로그인</a></li>
 		</c:when>
 		<c:otherwise>
 			<li><a href="">로그아웃</a></li>
 			<li><a href="">마이페이지</a></li>
 			<li><a href="">장바구니</a></li>
-			<li>${requestScope.id }님 반갑습니다</li>
+			<li>${sessionScope.id }님 반갑습니다</li>
 		</c:otherwise>
 	</c:choose>
 </ul>

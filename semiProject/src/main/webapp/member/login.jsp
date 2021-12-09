@@ -4,14 +4,14 @@
 #login{
 	position:relative;
 	top:150px;
-	left:400px;
+	
 	margin:auto;
 	color:white;
 }
 #login form .input{width:200px;}
 #login form .input,label{font-size:1.3em;margin:10px}
 #pwd{margin-left:40px}
-.btn{width:100px;height:35px;position:relative;left:300px;top:30px}
+.btn{width:100px;height:35px;position:relative;top:30px}
 </style>
 
 <div id="login">
