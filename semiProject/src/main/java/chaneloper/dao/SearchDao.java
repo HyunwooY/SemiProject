@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import chaneloper.vo.ProductVo;
+import chaneloper.vo.Search_ProductVo;
 import db.JDBC;
 
 public class SearchDao {
-	public ArrayList<ProductVo> search_product(String keyword, String classification, String sort){
+	public ArrayList<Search_ProductVo> search_product(String keyword, String classification, String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ProductVo> list = new ArrayList<ProductVo>();
+		ArrayList<Search_ProductVo> list = new ArrayList<Search_ProductVo>();
 		String sql = "";
 		try {
 			con = JDBC.getCon();
@@ -29,7 +29,7 @@ public class SearchDao {
 			pstmt=con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				ProductVo vo = new ProductVo(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				Search_ProductVo vo = new Search_ProductVo(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
 				list.add(vo);
 			}
 			return list;
