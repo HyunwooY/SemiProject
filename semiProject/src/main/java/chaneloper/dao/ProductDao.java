@@ -27,7 +27,7 @@ public class ProductDao {
 			String sql = "INSERT INTO PRODUCT_INFOMATION VALUES(?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPi_num());
-			pstmt.setString(2, svo.getSi_id());
+			pstmt.setString(2, vo.getSi_id());
 			pstmt.setString(3, vo.getPi_name());
 			pstmt.setInt(4, vo.getPi_price());
 			pstmt.setInt(5, vo.getPi_sales());
