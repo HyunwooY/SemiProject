@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import chaneloper.vo.SellerVo;
 import db.JDBC;
@@ -18,7 +19,7 @@ public class SellerDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
-			String sql="insert into seller_information values(?,?,?,?,?,?,?)";
+			String sql="insert into seller_infomation values(?,?,?,?,?,?,?)";
 			con=JDBC.getCon();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getSi_id());
@@ -37,6 +38,34 @@ public class SellerDao {
 			
 		}
 	}
+	
+	// 아이디 찾기
+	public boolean select(HashMap<String, String> map) {		
+		String si_num = map.get("si_num");
+		String si_email = map.get("si_email");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT ID FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_EMAIL=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, si_num);
+			pstmt.setString(2, si_email);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+			return false;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return false;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	
 }
 
 

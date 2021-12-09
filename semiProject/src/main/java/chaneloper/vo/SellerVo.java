@@ -15,13 +15,13 @@ public class SellerVo {
 	public SellerVo(String si_id, String si_pwd, String si_num, String si_addr, String si_phone, String si_name,
 			String email) {
 		super();
-		this.si_id = si_id;
-		this.si_pwd = si_pwd;
-		this.si_num = si_num;
-		this.si_addr = si_addr;
-		this.si_phone = si_phone;
-		this.si_name = si_name;
-		this.email = email;
+		this.si_id = si_id;		// 사업자 아이디
+		this.si_pwd = si_pwd;		// 사업자 비밀번호
+		this.si_num = si_num;		// 사업자번호
+		this.si_addr = si_addr;		// 소재지
+		this.si_phone = si_phone;		// 사업자 연락처
+		this.si_name = si_name;		// 브랜드명
+		this.email = email;			// 사업자 이메일
 	}
 
 	public String getSi_id() {
