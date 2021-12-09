@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css.css">
+<link rel="stylesheet" type="text/css" href="css/css.css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
