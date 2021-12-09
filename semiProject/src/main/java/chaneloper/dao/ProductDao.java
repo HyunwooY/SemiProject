@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
-import chaneloper.vo.ProductVo;
+import chaneloper.vo.Search_ProductVo;
 import chaneloper.vo.SellerVo;
 import db.JDBC;
 
@@ -18,7 +18,7 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public int insert(ProductVo vo) {
+	public int insert(Search_ProductVo vo) {
 		SellerVo svo = new SellerVo();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -48,7 +48,7 @@ public class ProductDao {
 	}
 
 	// 상품 업데이트
-	public int update(ProductVo vo) {
+	public int update(Search_ProductVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
