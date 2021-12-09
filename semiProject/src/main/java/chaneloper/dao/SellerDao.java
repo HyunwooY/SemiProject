@@ -65,8 +65,48 @@ public class SellerDao {
 		}
 	}
 	
+	// 삭제기능
+	public int delete(String Si_id,String Si_pwd) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql="delete from seller_information where Si_id=? and Si_pwd=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,Si_id);
+			pstmt.setString(2,Si_pwd);
+			return pstmt.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,null);
+		}
+		}
 	
-}
+	//수정 기능
+	public int update(SellerVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql="update seller_information set Si_pwd=?,Si_addr=?,Si_phone=?,Si_name=?,Email=? where Si_id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getSi_pwd());
+			pstmt.setString(2, vo.getSi_addr());
+			pstmt.setString(3, vo.getSi_phone());
+			pstmt.setString(4, vo.getSi_name());
+			pstmt.setString(5, vo.getEmail());
+			return pstmt.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,null);
+		}
+		}
+		
+	}
 
 
 
