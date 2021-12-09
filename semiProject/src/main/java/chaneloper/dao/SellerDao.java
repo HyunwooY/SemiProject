@@ -64,7 +64,7 @@ public class SellerDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	
+	푸쉬 안 됨
 	
 }
 
