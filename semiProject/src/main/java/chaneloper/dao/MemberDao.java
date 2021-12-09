@@ -14,6 +14,7 @@ public class MemberDao {
 	public static MemberDao getInstance() {
 		return instance;
 	}
+	//회원가입
 	public int insert(MemberVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -41,12 +42,13 @@ public class MemberDao {
 			JDBC.close(con,pstmt,null);
 		}
 	}
+	//회원 수정
 	public int update(MemberVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "update member_infomation set pwd=?, email=?, phone=? where pwd=?";
+			String sql = "update member_infomation set mi_pwd=?, mi_email=?, mi_phone=? where mi_pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPwd());
 			pstmt.setString(2, vo.getEmail());
@@ -60,12 +62,13 @@ public class MemberDao {
 			JDBC.close(con, pstmt, null);
 		}
 	}   
+	//회원 삭제
 	public int delete(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "delete from member_infomation where id=? and pwd=?";
+			String sql = "delete from member_infomation where mi_id=? and mi_pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -77,21 +80,22 @@ public class MemberDao {
 			JDBC.close(con, pstmt, null);
 		}
 	}
+	//내정보 확인
 	public MemberVo select(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql ="select * from member_infomation where id=? and pwd=?";
+			String sql ="select * from member_infomation where mi_id=? and mi_pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				String name = rs.getString("name");
-				String email = rs.getString("email");
-				String phone = rs.getString("phone");
+				String name = rs.getString("mi_name");
+				String email = rs.getString("mi_email");
+				String phone = rs.getString("mi_phone");
 				MemberVo member = new MemberVo(id, pwd, name, email, phone);
 				return member;
 			}
@@ -103,13 +107,14 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//로그인
 	public boolean login(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "select * from member_infomation where id=? and pwd=?";
+			String sql = "select * from member_infomation where mi_id=? and mi_pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -125,11 +130,51 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//아이디 찾기
+	public String findId(String name, String email, String phone) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select mi_id from member_infomation where mi_name=? and mi_email=? and mi_phone=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, phone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString("mi_id");
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	//비밀번호 찾기
+	public String findPwd(String id, String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select mi_pwd from member_infomation where mi_id=? and mi_email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString("mi_pwd");
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 }
-
-
-
-
-
-
-
