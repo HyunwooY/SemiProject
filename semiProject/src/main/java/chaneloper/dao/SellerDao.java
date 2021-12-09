@@ -102,9 +102,9 @@ public class SellerDao {
 		}finally {
 			JDBC.close(con,pstmt,null);
 		}
-		}
-		
 	}
+	
+}
 
 
 
