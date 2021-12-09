@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
-import chaneloper.vo.Search_ProductVo;
+import chaneloper.vo.ProductVo;
 import chaneloper.vo.SellerVo;
 import db.JDBC;
 
@@ -18,7 +17,7 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public int insert(Search_ProductVo vo) {
+	public int productInsert(ProductVo vo) {
 		SellerVo svo = new SellerVo();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -48,7 +47,7 @@ public class ProductDao {
 	}
 
 	// 상품 업데이트
-	public int update(Search_ProductVo vo) {
+	public int productUpdate(ProductVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
