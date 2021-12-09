@@ -15,7 +15,7 @@ public class SellerDao {
 	public static SellerDao getInstance() {
 		return instance;
 	}
-	public int insert(SellerVo vo) {
+	public int sllerInsert(SellerVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -40,9 +40,7 @@ public class SellerDao {
 	}
 	
 	// 아이디 찾기
-	public boolean select(HashMap<String, String> map) {		
-		String si_num = map.get("si_num");
-		String si_email = map.get("si_email");
+	public String sellerFindId(String si_num, String si_email) {	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -54,19 +52,19 @@ public class SellerDao {
 			pstmt.setString(2, si_email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return true;
+				return rs.getString("si_id");
 			}
-			return false;
+			return null;
 		}catch(SQLException se) {
 			se.printStackTrace();
-			return false;
+			return null;
 		}finally {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
 	
 	// 삭제기능
-	public int delete(String Si_id,String Si_pwd) {
+	public int sellerDelete(String Si_id,String Si_pwd) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -85,7 +83,7 @@ public class SellerDao {
 		}
 	
 	//수정 기능
-	public int update(SellerVo vo) {
+	public int sellerUpdate(SellerVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
