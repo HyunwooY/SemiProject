@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import chaneloper.vo.MemberVo;
 import db.JDBC;
-
+   
 public class MemberDao {
 	private static MemberDao instance = new MemberDao();
 	public static MemberDao getInstance() {
@@ -60,7 +60,7 @@ public class MemberDao {
 		}finally {
 			JDBC.close(con, pstmt, null);
 		}
-	}  
+	}   
 	public int delete(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
