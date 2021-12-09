@@ -30,7 +30,7 @@ public class JoinSellerController extends HttpServlet {
 		String phone=req.getParameter("first")+"-"+req.getParameter("mid")+"-"+req.getParameter("back");
 		SellerVo vo=new SellerVo(id, pwd, snum, saddr, phone, name, email);
 		SellerDao dao=SellerDao.getInstance();
-		int n=dao.sllerInsert(vo);
+		int n=dao.sellerInsert(vo);
 		if(n>0) {
 			req.setAttribute("code", "success");
 		}else {

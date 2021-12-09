@@ -15,7 +15,7 @@ public class SellerDao {
 	public static SellerDao getInstance() {
 		return instance;
 	}
-	public int sllerInsert(SellerVo vo) {
+	public int sellerInsert(SellerVo vo) { //회원가입
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -36,6 +36,25 @@ public class SellerDao {
 		}finally {
 			JDBC.close(con,pstmt,null);
 			
+		}
+	}
+	public boolean sellerLogin(String si_id,String si_pwd) { // 사업자 로그인
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con=JDBC.getCon();
+			pstmt=con.prepareStatement("select * from seller_infomation where si_id=? and si_pwd=?");
+			pstmt.setString(1, si_id);
+			pstmt.setString(2, si_pwd);
+			rs=pstmt.executeQuery();
+			return rs.next();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return false;
+		}finally {
+			JDBC.close(con,pstmt,rs);
 		}
 	}
 	
