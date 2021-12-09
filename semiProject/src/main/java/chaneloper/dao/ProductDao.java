@@ -30,7 +30,7 @@ public class ProductDao {
 			pstmt.setString(2, svo.getSi_id());
 			pstmt.setString(3, vo.getPi_name());
 			pstmt.setInt(4, vo.getPi_price());
-			pstmt.setInt(5, vo.getPi_slaes());
+			pstmt.setInt(5, vo.getPi_sales());
 			pstmt.setInt(6, vo.getPi_count());
 			con.commit();
 			return pstmt.executeUpdate();
@@ -57,7 +57,7 @@ public class ProductDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPi_name());
 			pstmt.setInt(2, vo.getPi_price());
-			pstmt.setInt(3, vo.getPi_slaes());
+			pstmt.setInt(3, vo.getPi_sales());
 			pstmt.setInt(4, vo.getPi_count());
 			return pstmt.executeUpdate();
 		} catch(SQLException e) {
