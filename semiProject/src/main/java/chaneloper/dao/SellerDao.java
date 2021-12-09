@@ -63,9 +63,7 @@ public class SellerDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	
-	
-	
+
 	// 비밀번호 찾기
 	public String sellerFindPwd(String si_num, String si_email) {	
 		Connection con = null;
@@ -107,7 +105,7 @@ public class SellerDao {
 		}finally {
 			JDBC.close(con,pstmt,null);
 		}
-		}
+	}
 	
 	//수정 기능
 	public int sellerUpdate(SellerVo vo) {
