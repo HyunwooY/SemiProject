@@ -31,30 +31,4 @@ public class SearchController extends HttpServlet{
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
-/*		if(n>0) {
-			req.setAttribute("word", word);
-			req.getRequestDispatcher("/search/searchResult.jsp").forward(req, resp);
-		}else {
-			resp.sendRedirect(req.getContextPath() + "/layout.jsp");
-		}
-	}
-}
 
-
-		String categori = req.getParameter("categori");
-/*		if(categori.equals("mainsearch")) {
-			if(keyword==null) {
-				req.setAttribute("misskeyword", "검색어를 입력해주세요.");
-				req.getRequestDispatcher("/main.jsp").forward(req, resp);
-			}else {
-
-			}
-		}else if(categori.equals("detailsearch")) {
-			if(keyword==null) {
-				req.setAttribute("misskeyword", "검색어를 입력해주세요.");
-				req.getRequestDispatcher("/search/detailsearch.jsp").forward(req, resp);
-			}else {
-
-			}
-		}
-*/	
