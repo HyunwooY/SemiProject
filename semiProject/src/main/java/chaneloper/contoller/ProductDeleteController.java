@@ -21,7 +21,7 @@ public class ProductDeleteController extends HttpServlet{
 		ProductVo vo = new ProductVo();
 		ProductDao dao = ProductDao.getInstance();
 		
-		int n= dao.productDelete(pi_num);ㅇㅇㅇ
+		int n= dao.productDelete(pi_num);
 		if(n>0) {
 			resp.sendRedirect(req.getContextPath() +"/layout");
 		}else {
