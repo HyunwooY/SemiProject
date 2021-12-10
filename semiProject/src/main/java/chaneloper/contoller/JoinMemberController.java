@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.MemberDao;
 import chaneloper.vo.MemberVo;
 
-@WebServlet("/member/join")
-public class JoinController extends HttpServlet {
+@WebServlet("/member/mjoin")
+public class JoinMemberController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("main", "/member/join.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		req.setAttribute("form", "/member/mjoin.jsp");
+		req.getRequestDispatcher("/joinlayout").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,22 +31,12 @@ public class JoinController extends HttpServlet {
 		MemberDao dao=MemberDao.getInstance();
 		int n=dao.insert(vo);
 		if(n>0) {
-			req.setAttribute("code", "success");
+			req.setAttribute("joincode", "success");
+			req.setAttribute("main", "result.jsp");
 		}else {
-			req.setAttribute("code", "fail");
+			req.setAttribute("joincode", "fail");
+			req.setAttribute("main", "result.jsp");
 		}
 		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

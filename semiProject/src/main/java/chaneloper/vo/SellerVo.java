@@ -2,7 +2,7 @@ package chaneloper.vo;
 
 public class SellerVo {
 	private String si_id;
-	private String  si_pwd;
+	private String si_pwd;
 	private String si_num;
 	private String si_addr;
 	private String si_phone;

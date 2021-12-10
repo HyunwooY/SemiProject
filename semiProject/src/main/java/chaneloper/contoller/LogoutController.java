@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/layout")
-public class HomeController extends HttpServlet {
+@WebServlet("/member/logout")
+public class LogoutController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("layout.jsp").forward(req, resp);
+		req.getSession().invalidate();
+		resp.sendRedirect(req.getContextPath()+"/layout");
 	}
 }
