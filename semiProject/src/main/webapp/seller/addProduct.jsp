@@ -6,52 +6,22 @@
 <meta charset="UTF-8">
 <title>상품 등록</title>
 </head>
-<body>	
-		<h1 class="display-3">상품 등록</h1>	
-	
-		<form name="newProduct" action="./processAddProduct.jsp>" class="form-horizontal" method="post">
-			<div class="form-group row">
-				<label class="col-sm-2">상품 코드</label>
-				<div class = "col-sm-3">
-					<input type="text" name="productId" class="form-control">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2">상품명</label>
-				<div class="col-sm-3">
-					<input type="text" name="name" class="form-control">
-				</div>				
-			</div>
-			
-			<div class="form-gropup row">
-				<label class="col-sm-2">가격</label>
-				<div class="col-sm-3">
-					<input type="text" name="unitPrice" class="form-control">
-				</div>
-			</div>					
-			
-			
-			<div class="form-group row">
-				<label class="col-sm-2">분류</label>
-				<div class="col-sm-3">
-					<input type="text" name="category" class="form-control">
-				</div>
-			</div>
-			
-			<div class="form-group row">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type ="file" name ="file1">					
-				</div>
-			</div>
-			
-			<div class="form-group row">
-				<div class="col-sm-offset-2 col-sm-10"><br>
-					<input type="submit" class="btn btn-primary" value="등록">
-				</div>
-			</div>
-			
-			
-		</form>
-	
+<body>
+	<h1>상품 등록</h1>
+	<form method="post"	action="${pageContext.request.contextPath }/seller/insert">		
+		상품 번호<br>
+		<input type="text" name="pi_num"><br>
+		상품명<br>
+		<input type="text" name="pi_name"><br>
+		가격<br>
+		<input type="text" name="pi_price"><br>
+		판매수<br>
+		<input type="text" name="pi_sales"><br>
+		조회수<br>
+		<input type="text" name="pi_count"><br><br>
+		파일첨부<br>
+		<input type="file" name="file"><br><br>
+		<input type="submit" value="등록">
+	</form>	
 </body>
 </html>

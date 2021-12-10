@@ -18,8 +18,8 @@
 		<option>010</option>
 		<option>011</option>
 	</select><span>-</span>
-	<input type="text" name="mid" class="phone"><span>-</span>
-	<input type="text" name="back" class="phone"><br>
+	<input type="text" maxlength="4" size="4" name="mid" class="phone"><span>-</span>
+	<input type="text" maxlength="4" size="4" name="back" class="phone"><br>
 	<input type="submit" value="회원가입" class="btn">
 	<input type="reset"	value="취소" class="btn">
 </form>
