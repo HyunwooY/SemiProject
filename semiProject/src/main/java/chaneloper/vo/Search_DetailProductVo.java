@@ -1,22 +1,24 @@
 package chaneloper.vo;
 
 public class Search_DetailProductVo {
+	private int pi_num;
 	private String pi_name;
-	private String pi_price;
+	private int pi_price;
 	private String pd_size;
 	private String pd_color;
-	private String pd_count;
+	private int pd_count;
 	private String pp_title;
-	private String r_num;
+	private int r_num;
 	private String r_title;
 	private String r_content;
 	private String r_date;
-	private String r_hit;
+	private int r_hit;
 	private String rp_title;
-	public Search_DetailProductVo(String pi_name, String pi_price, String pd_size, String pd_color, String pd_count,
-			String pp_title, String r_num, String r_title, String r_content, String r_date, String r_hit,
+	public Search_DetailProductVo(int pi_num, String pi_name, int pi_price, String pd_size, String pd_color,
+			int pd_count, String pp_title, int r_num, String r_title, String r_content, String r_date, int r_hit,
 			String rp_title) {
 		super();
+		this.pi_num = pi_num;
 		this.pi_name = pi_name;
 		this.pi_price = pi_price;
 		this.pd_size = pd_size;
@@ -30,16 +32,22 @@ public class Search_DetailProductVo {
 		this.r_hit = r_hit;
 		this.rp_title = rp_title;
 	}
+	public int getPi_num() {
+		return pi_num;
+	}
+	public void setPi_num(int pi_num) {
+		this.pi_num = pi_num;
+	}
 	public String getPi_name() {
 		return pi_name;
 	}
 	public void setPi_name(String pi_name) {
 		this.pi_name = pi_name;
 	}
-	public String getPi_price() {
+	public int getPi_price() {
 		return pi_price;
 	}
-	public void setPi_price(String pi_price) {
+	public void setPi_price(int pi_price) {
 		this.pi_price = pi_price;
 	}
 	public String getPd_size() {
@@ -54,10 +62,10 @@ public class Search_DetailProductVo {
 	public void setPd_color(String pd_color) {
 		this.pd_color = pd_color;
 	}
-	public String getPd_count() {
+	public int getPd_count() {
 		return pd_count;
 	}
-	public void setPd_count(String pd_count) {
+	public void setPd_count(int pd_count) {
 		this.pd_count = pd_count;
 	}
 	public String getPp_title() {
@@ -66,10 +74,10 @@ public class Search_DetailProductVo {
 	public void setPp_title(String pp_title) {
 		this.pp_title = pp_title;
 	}
-	public String getR_num() {
+	public int getR_num() {
 		return r_num;
 	}
-	public void setR_num(String r_num) {
+	public void setR_num(int r_num) {
 		this.r_num = r_num;
 	}
 	public String getR_title() {
@@ -90,10 +98,10 @@ public class Search_DetailProductVo {
 	public void setR_date(String r_date) {
 		this.r_date = r_date;
 	}
-	public String getR_hit() {
+	public int getR_hit() {
 		return r_hit;
 	}
-	public void setR_hit(String r_hit) {
+	public void setR_hit(int r_hit) {
 		this.r_hit = r_hit;
 	}
 	public String getRp_title() {
@@ -102,6 +110,7 @@ public class Search_DetailProductVo {
 	public void setRp_title(String rp_title) {
 		this.rp_title = rp_title;
 	}
+	
 	
 	
 }

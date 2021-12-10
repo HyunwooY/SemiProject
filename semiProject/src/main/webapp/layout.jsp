@@ -19,24 +19,20 @@
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="none";
 	}
+	
 	function search(e) {
 		if(e.keyCode==13){	// 엔터키를 누른경우
 			var word=e.target.value;
 			if(word==""){
 				alert('검색어를 입력해주세요');
 			}else {
-				var xhr=new XMLHttpRequest();
-				xhr.onreadystatechange=function () {
-					if(xhr.readyState==4 && xhr.status==200){
-						let data=xhr.responseText;
-						let user=JSON.parse(data);
-					}
-				};
-				xhr.open('get','${pageContext.request.contextPath}/search/search?word=' + word,true);
-				xhr.send();
+				window.location.href = '${pageContext.request.contextPath}/search/search?word='+e.target.value;
 			}
 		}	
 	}
+	
+
+	
 	
 </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">

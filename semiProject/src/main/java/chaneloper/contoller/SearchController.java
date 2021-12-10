@@ -21,38 +21,17 @@ public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String keyword = req.getParameter("keyword");	
+		String keyword = req.getParameter("keyword");
+		String categori = req.getParameter("categori");
+		String sort = req.getParameter("sort");
+		
 		// product_information Dao 조회
 		Search_ResultDao dao=new Search_ResultDao();
-		ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
+		ArrayList<Search_ProductVo> list=dao.search_product(keyword, categori, sort);
+		
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/searchResult.jsp").forward(req, resp);
+		req.setAttribute("main", "/searchResult.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
-/*		if(n>0) {
-			req.setAttribute("word", word);
-			req.getRequestDispatcher("/search/searchResult.jsp").forward(req, resp);
-		}else {
-			resp.sendRedirect(req.getContextPath() + "/layout.jsp");
-		}
-	}
-}
 
-
-		String categori = req.getParameter("categori");
-/*		if(categori.equals("mainsearch")) {
-			if(keyword==null) {
-				req.setAttribute("misskeyword", "검색어를 입력해주세요.");
-				req.getRequestDispatcher("/main.jsp").forward(req, resp);
-			}else {
-
-			}
-		}else if(categori.equals("detailsearch")) {
-			if(keyword==null) {
-				req.setAttribute("misskeyword", "검색어를 입력해주세요.");
-				req.getRequestDispatcher("/search/detailsearch.jsp").forward(req, resp);
-			}else {
-
-			}
-		}
-*/	

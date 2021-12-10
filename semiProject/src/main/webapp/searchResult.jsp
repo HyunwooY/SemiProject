@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
 <form method="get" action="detailSearch.jsp">
 	<select name="field1">
@@ -20,9 +13,8 @@
 	</section>
 	<br>
 <c:choose>
-		
 		<c:when test="">
-			<input type="text" value="">
+			<input type="text" value=" ">
 		</c:when>
 		<c:otherwise>
 			<input type="text" value="">
@@ -39,5 +31,3 @@
 	<c:forEach var="vo" items="">
 	</c:forEach>
 </div>
-</body>
-</html>
