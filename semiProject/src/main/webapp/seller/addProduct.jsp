@@ -18,6 +18,9 @@
 		판매수<br>
 		<input type="text" name="pi_sales"><br>
 		조회수<br>
+		<input type="text" name="pi_count"><br><br>
+		파일첨부<br>
+		<input type="file" name="file"><br><br>
 		<input type="submit" value="등록">
 	</form>	
 </body>
