@@ -31,9 +31,9 @@ public class JoinMemberController extends HttpServlet {
 		MemberDao dao=MemberDao.getInstance();
 		int n=dao.insert(vo);
 		if(n>0) {
-			req.setAttribute("code", "success");
+			req.setAttribute("joincode", "success");
 		}else {
-			req.setAttribute("code", "fail");
+			req.setAttribute("joincode", "fail");
 		}
 		req.getRequestDispatcher("/layout").forward(req, resp);
 	}

@@ -32,9 +32,9 @@ public class JoinSellerController extends HttpServlet {
 		SellerDao dao=SellerDao.getInstance();
 		int n=dao.sellerInsert(vo);
 		if(n>0) {
-			req.setAttribute("code", "success");
+			req.setAttribute("joincode", "success");
 		}else {
-			req.setAttribute("code", "fail");
+			req.setAttribute("joincode", "fail");
 		}
 		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
