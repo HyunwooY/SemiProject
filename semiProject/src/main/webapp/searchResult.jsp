@@ -20,13 +20,14 @@
 	</section>
 	<br>
 <c:choose>
-		<c:when test="${word!=null }">
-			<input type="text" value="${word }">
+		
+		<c:when test="">
+			<input type="text" value="">
 		</c:when>
 		<c:otherwise>
 			<input type="text" value="">
 		</c:otherwise>
-	</c:choose>
+</c:choose>
 	<br>
 	<select name="field2">
 		<option value="7">신상품 순</option>
@@ -34,5 +35,9 @@
 	</section>
 	<input type="button" value="SEARCH"> 
 </form>
+<div> <!-- 검색값 출력 -->
+	<c:forEach var="vo" items="">
+	</c:forEach>
+</div>
 </body>
 </html>
