@@ -27,10 +27,10 @@ public class ProductInsertController extends HttpServlet{
 		
 		int n = dao.productInsert(vo);
 		if(n>0) {
-			req.setAttribute("", "");
+			req.setAttribute("code", "success");
 		} else {
-			req.setAttribute("", "");
+			req.setAttribute("code", "success");
 		}
-		req.getRequestDispatcher("").forward(req, resp);
+		req.getRequestDispatcher("../layout.jsp").forward(req, resp);
 	}
 }
