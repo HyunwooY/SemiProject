@@ -21,16 +21,22 @@ public class ProductInsertController extends HttpServlet{
 		int pi_price = Integer.parseInt(req.getParameter("pir_price"));
 		int pi_sales = Integer.parseInt(req.getParameter("pi_sales"));
 		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
+		System.out.println(pi_num);
+		System.out.println(si_id);
+		System.out.println(pi_name);
+		System.out.println(pi_price);
+		System.out.println(pi_sales);
+		System.out.println(pi_count);
 		
 		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_sales, pi_count);
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productInsert(vo);
 		if(n>0) {
-			req.setAttribute("code", "success");
+			req.setAttribute("productCode", "success");
 		} else {
-			req.setAttribute("code", "success");
+			req.setAttribute("productCode", "success");
 		}
-		req.getRequestDispatcher("../layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/productResult.jsp").forward(req, resp);
 	}
 }

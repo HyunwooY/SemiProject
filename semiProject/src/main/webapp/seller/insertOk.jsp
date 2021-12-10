@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
 	String saveDir=application.getRealPath("/upload");
 	out.print("업로드경로"+ saveDir +"<br>");
 	
