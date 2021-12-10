@@ -21,19 +21,19 @@ public class FindIdController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String name = req.getParameter("mi_name");
 		String email = req.getParameter("mi_email");
-		String phone = req.getParameter("mi_phone");
 		MemberDao dao = MemberDao.getInstance();
-		String id = dao.findId(name, email, phone);
+		String id = dao.findId(name, email);
+		JSONObject json = new JSONObject();
 		if(id!=null) {
-			req.setAttribute("find", true);
-			req.setAttribute("id", id);
+			json.put("find", true);
+			json.put("id", id);
 		}else{
-			req.setAttribute("find", false);
-			req.setAttribute("errMsg", "입력한 회원정보가 없습니다.");
+			json.put("find", false);
 		}
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = resp.getWriter();
+		pw.print(json);
 	}
 }

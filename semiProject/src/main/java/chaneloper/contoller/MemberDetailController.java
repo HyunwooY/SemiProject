@@ -13,6 +13,6 @@ public class MemberDetailController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("main", "/member/mDetail.jsp");
-		req.getRequestDispatcher("layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
