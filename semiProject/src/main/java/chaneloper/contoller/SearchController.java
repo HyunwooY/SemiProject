@@ -21,14 +21,20 @@ public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String keyword = req.getParameter("word");	
-		// product_information Dao 조회
-		Search_ResultDao dao=new Search_ResultDao();
-		ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
-		
-		req.setAttribute("list", list);
-		req.setAttribute("main", "/searchResult.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		String keyword = req.getParameter("keyword");
+		if(keyword==null) {
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else {
+			// product_information Dao 조회
+			Search_ResultDao dao=new Search_ResultDao();
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
+			
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("list", list);
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
+}
 
