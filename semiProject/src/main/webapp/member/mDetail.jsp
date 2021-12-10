@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
 *{margin:0px;padding:0px}
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
@@ -20,10 +21,11 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-		<span class="l">입금전</span>
-		<span class="l">배송준비중</span>
-		<span class="l">배송중</span>
-		<span class="l">배송완료</span>
+		<span class="l">입금전 ${requestScope.aPayCom }</span>
+		<span class="l">입금완료 ${requestScope.bPayCom }</span>
+		<span class="l">배송준비중 ${requestScope.preparingP }</span>
+		<span class="l">배송중 ${requestScope.beingDelivery }</span>
+		<span class="l">배송완료 ${requestScope.compDelivery }</span>
 		
 		<span class="r">취소</span>
 		<span class="r">교환</span>

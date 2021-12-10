@@ -31,18 +31,11 @@
 	</form>	
 </div>
 <script>
-/*	if(document.getElementById("member").checked){
-		document.getElementById("form").action="${pageContext.request.contextPath }/member/mlogin";
-	}else if(document.getElementById("seller").checked){
-		document.getElementById("form").action="${pageContext.request.contextPath }/seller/login";
-	}*/
-	
 	function mclick(){
 		document.getElementById("form").action="${pageContext.request.contextPath }/member/mlogin";
 	}
 	function sclick(){
 		document.getElementById("form").action="${pageContext.request.contextPath }/seller/slogin";
-	}*/
 	}
 </script>
 
