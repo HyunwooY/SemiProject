@@ -14,9 +14,14 @@ public class Search_DetailProductVo {
 	private String r_date;
 	private int r_hit;
 	private String rp_title;
+	private int ih_num;
+	private String mi_id;
+	private String ih_title;
+	private String ih_quest;
+	private String ih_answer;
 	public Search_DetailProductVo(int pi_num, String pi_name, int pi_price, String pd_size, String pd_color,
 			int pd_count, String pp_title, int r_num, String r_title, String r_content, String r_date, int r_hit,
-			String rp_title) {
+			String rp_title, int ih_num, String mi_id, String ih_title, String ih_quest, String ih_answer) {
 		super();
 		this.pi_num = pi_num;
 		this.pi_name = pi_name;
@@ -31,6 +36,11 @@ public class Search_DetailProductVo {
 		this.r_date = r_date;
 		this.r_hit = r_hit;
 		this.rp_title = rp_title;
+		this.ih_num = ih_num;
+		this.mi_id = mi_id;
+		this.ih_title = ih_title;
+		this.ih_quest = ih_quest;
+		this.ih_answer = ih_answer;
 	}
 	public int getPi_num() {
 		return pi_num;
@@ -110,7 +120,36 @@ public class Search_DetailProductVo {
 	public void setRp_title(String rp_title) {
 		this.rp_title = rp_title;
 	}
-	
+	public int getIh_num() {
+		return ih_num;
+	}
+	public void setIh_num(int ih_num) {
+		this.ih_num = ih_num;
+	}
+	public String getMi_id() {
+		return mi_id;
+	}
+	public void setMi_id(String mi_id) {
+		this.mi_id = mi_id;
+	}
+	public String getIh_title() {
+		return ih_title;
+	}
+	public void setIh_title(String ih_title) {
+		this.ih_title = ih_title;
+	}
+	public String getIh_quest() {
+		return ih_quest;
+	}
+	public void setIh_quest(String ih_quest) {
+		this.ih_quest = ih_quest;
+	}
+	public String getIh_answer() {
+		return ih_answer;
+	}
+	public void setIh_answer(String ih_answer) {
+		this.ih_answer = ih_answer;
+	}
 	
 	
 }
