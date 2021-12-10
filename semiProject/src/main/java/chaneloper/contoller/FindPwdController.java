@@ -21,18 +21,19 @@ public class FindPwdController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String id = req.getParameter("mi_id");
 		String email = req.getParameter("mi_email");
 		MemberDao dao = MemberDao.getInstance();
 		String pwd = dao.findPwd(id, email);
+		JSONObject json = new JSONObject();
 		if(pwd!=null) {
-			req.setAttribute("find", true);
-			req.setAttribute("pwd", pwd);
+			json.put("find", true);
+			json.put("pwd", pwd);
 		}else{
-			req.setAttribute("find", false);
-			req.setAttribute("errMsg", "입력한 회원 아이디가 없습니다.");
+			json.put("find", false);
 		}
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = resp.getWriter();
+		pw.print(json);
 	}
 }

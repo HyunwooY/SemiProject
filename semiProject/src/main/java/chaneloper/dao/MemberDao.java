@@ -130,17 +130,16 @@ public class MemberDao {
 		}
 	}
 	//아이디 찾기
-	public String findId(String name, String email, String phone) {
+	public String findId(String name, String email) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "select mi_id from member_infomation where mi_name=? and mi_email=? and mi_phone=?";
+			String sql = "select mi_id from member_infomation where mi_name=? and mi_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, email);
-			pstmt.setString(3, phone);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("mi_id");
