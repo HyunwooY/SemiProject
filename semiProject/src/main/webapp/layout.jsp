@@ -22,18 +22,14 @@
 	
 	function search(e) {
 		if(e.keyCode==13){	// 엔터키를 누른경우
-			var word=e.target.value;
-			if(word==""){
+			var keyword=e.target.value;
+			if(keyword==""){
 				alert('검색어를 입력해주세요');
 			}else {
-				window.location.href = '${pageContext.request.contextPath}/search/search?word='+e.target.value;
+				window.location.href = '${pageContext.request.contextPath}/search/search?keyword='+e.target.value;
 			}
 		}	
 	}
-	
-
-	
-	
 </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
 <style type="text/css">
@@ -69,7 +65,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<li><a href="">아우터</a></li>
 	<li><a href="">악세서리</a></li>
 	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
-		<a href="${cp }/searchResult.jsp" >검색 </a></li>
+		<a href="${cp }/search/search" >검색 </a></li>
 </ul>
 	<input type="text" id="keyword" onkeypress="search(event)">
 </div>

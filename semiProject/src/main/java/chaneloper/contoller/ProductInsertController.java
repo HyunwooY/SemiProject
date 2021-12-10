@@ -14,6 +14,11 @@ import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/insert")
 public class ProductInsertController extends HttpServlet{
+	
+//	@Override
+//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		req.setAttribute("main", "/seller/productResult.jsp");
+//	}
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -21,17 +26,21 @@ public class ProductInsertController extends HttpServlet{
 		String si_id = req.getParameter("si_id");
 		String pi_name = req.getParameter("pi_name");
 		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
-		int pi_sales = Integer.parseInt(req.getParameter("pi_sales"));	
+		int pi_count = Integer.parseInt(req.getParameter("pi_count"));	
+		String pi_category = req.getParameter("pi_category");
 
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_sales, null);
+		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, null, pi_category);
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productInsert(vo);
 		if(n>0) {
 			req.setAttribute("productCode", "success");
+			req.setAttribute("main", "/seller/productResult.jsp");
 		} else {
 			req.setAttribute("productCode", "faile");
+			req.setAttribute("main", "/seller/productResult.jsp");
 		}
-		req.getRequestDispatcher("/seller/productResult.jsp").forward(req, resp);
+		
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
