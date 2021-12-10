@@ -41,6 +41,6 @@ public class ProductInsertController extends HttpServlet{
 			req.setAttribute("main", "/seller/productResult.jsp");
 		}
 		
-		req.getRequestDispatcher("/seller/productResult.jsp").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
