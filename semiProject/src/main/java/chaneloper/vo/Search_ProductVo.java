@@ -1,12 +1,12 @@
 package chaneloper.vo;
 
 public class Search_ProductVo {
-	String pi_num;
-	String pi_name;
-	String pi_price;
-	String pd_color;
-	String pp_title;
-	String t_name;
+	private String pi_num;
+	private String pi_name;
+	private String pi_price;
+	private String pd_color;
+	private String pp_title;
+	private String t_name;
 	public Search_ProductVo(String pi_num, String pi_name, String pi_price, String pd_color, String pp_title, String t_name) {
 		super();
 		this.pi_num = pi_num;
