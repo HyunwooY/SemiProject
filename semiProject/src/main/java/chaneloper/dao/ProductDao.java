@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 
 import chaneloper.vo.ProductVo;
-import chaneloper.vo.SellerVo;
 import db.JDBC;
 
 public class ProductDao {
@@ -17,29 +16,21 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public int productInsert(ProductVo vo) {
-		SellerVo svo = new SellerVo();
+	public int productInsert(ProductVo vo) {		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT INTO PRODUCT_INFOMATION VALUES(?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO PRODUCT_INFOMATION VALUES(?, ?, ?, ?, ?, sysdate)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPi_num());
 			pstmt.setString(2, vo.getSi_id());
 			pstmt.setString(3, vo.getPi_name());
 			pstmt.setInt(4, vo.getPi_price());
 			pstmt.setInt(5, vo.getPi_sales());
-			pstmt.setInt(6, vo.getPi_count());
-			con.commit();
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
-			try {
-				con.rollback();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 			return -1;
 		} finally {
 			JDBC.close(con, pstmt, null);
@@ -52,12 +43,11 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_SALES=?, PI_COUNT=? WHERE PI_NUM=?";
+			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_SALES=?, WHERE PI_NUM=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPi_name());
 			pstmt.setInt(2, vo.getPi_price());
 			pstmt.setInt(3, vo.getPi_sales());
-			pstmt.setInt(4, vo.getPi_count());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
