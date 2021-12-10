@@ -1,13 +1,13 @@
 package chaneloper.vo;
 
 public class Search_ProductVo {
-	private String pi_num;
+	private int pi_num;
 	private String pi_name;
-	private String pi_price;
+	private int pi_price;
 	private String pd_color;
 	private String pp_title;
 	private String t_name;
-	public Search_ProductVo(String pi_num, String pi_name, String pi_price, String pd_color, String pp_title, String t_name) {
+	public Search_ProductVo(int pi_num, String pi_name, int pi_price, String pd_color, String pp_title, String t_name) {
 		super();
 		this.pi_num = pi_num;
 		this.pi_name = pi_name;
@@ -16,10 +16,10 @@ public class Search_ProductVo {
 		this.pp_title = pp_title;
 		this.t_name = t_name;
 	}
-	public String getPi_num() {
+	public int getPi_num() {
 		return pi_num;
 	}
-	public void setPi_num(String pi_num) {
+	public void setPi_num(int pi_num) {
 		this.pi_num = pi_num;
 	}
 	public String getPi_name() {
@@ -28,10 +28,10 @@ public class Search_ProductVo {
 	public void setPi_name(String pi_name) {
 		this.pi_name = pi_name;
 	}
-	public String getPi_price() {
+	public int getPi_price() {
 		return pi_price;
 	}
-	public void setPi_price(String pi_price) {
+	public void setPi_price(int pi_price) {
 		this.pi_price = pi_price;
 	}
 	public String getPd_color() {
@@ -52,4 +52,5 @@ public class Search_ProductVo {
 	public void setT_name(String t_name) {
 		this.t_name = t_name;
 	}
+	
 }
