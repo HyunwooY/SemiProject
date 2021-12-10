@@ -64,7 +64,7 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public ArrayList<Search_DetailProductVo> search_product(int pi_num){
+	public ArrayList<Search_DetailProductVo> search_detail_product(int pi_num){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
