@@ -11,25 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import chaneloper.dao.SearchDao;
+
+
 @WebServlet("/search/search")  
 public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String word = req.getParameter("word");		
-		req.setAttribute("word", word);
-		req.getRequestDispatcher("/search/detailSearch.jsp").forward(req, resp);
+		String word = req.getParameter("word");	
+		System.out.println(word);
+		// product_information Dao 조회
+		SearchDao dao=new SearchDao();
 	}}
-/*		// product_information Dao 조회
-		Products dao=ProductsDao.getInstance();
-		int n=dao.search(word);	
-		if(n>0) {
+/*		if(n>0) {
 			req.setAttribute("word", word);
-			req.getRequestDispatcher("/search/detailSearch.jsp").forward(req, resp);
+			req.getRequestDispatcher("/search/searchResult.jsp").forward(req, resp);
 		}else {
 			resp.sendRedirect(req.getContextPath() + "/layout.jsp");
 		}
-*/
+	}
+}
+
 /*		resp.setContentType("text/xml;charset=utf-8");
 		PrintWriter pw=resp.getWriter();
 		JSONObject json=new JSONObject();
