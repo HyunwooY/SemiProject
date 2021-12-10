@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import chaneloper.vo.Search_DetailProductVo;
 import chaneloper.vo.Search_ProductVo;
 import db.JDBC;
 
@@ -62,4 +63,27 @@ public class Search_ResultDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	
+	public ArrayList<Search_DetailProductVo> search_product(String pi_num){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Search_DetailProductVo> list = new ArrayList<Search_DetailProductVo>();
+		String sql = "";
+		try {
+			con = JDBC.getCon();
+
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+			}
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
 }
