@@ -28,20 +28,20 @@ public class LoginMemberController extends HttpServlet {
 		if(radio.equals("일반사용자")) {
 			MemberDao dao=MemberDao.getInstance();
 			if(dao.login(id, pwd)) {
-				req.setAttribute("code", true);
+				req.setAttribute("lcode", true);
 				req.getSession().setAttribute("id", id);
 			}else {
-				req.setAttribute("code", false);
+				req.setAttribute("lcode", false);
 				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
 		}else if(radio.equals("판매사업자")) {
 			SellerDao dao=SellerDao.getInstance();
 			if(dao.sellerLogin(id, pwd)) {
-				req.setAttribute("code", true);
+				req.setAttribute("lcode", true);
 				req.getSession().setAttribute("id", id);
 			}else {
-				req.setAttribute("code", false);
+				req.setAttribute("lcode", false);
 				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
