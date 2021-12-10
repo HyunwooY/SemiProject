@@ -1,6 +1,7 @@
 package chaneloper.vo;
 
 public class Search_DetailProductVo {
+	private int pi_num;
 	private String pi_name;
 	private int pi_price;
 	private String pd_size;
@@ -13,9 +14,11 @@ public class Search_DetailProductVo {
 	private String r_date;
 	private int r_hit;
 	private String rp_title;
-	public Search_DetailProductVo(String pi_name, int pi_price, String pd_size, String pd_color, int pd_count,
-			String pp_title, int r_num, String r_title, String r_content, String r_date, int r_hit, String rp_title) {
+	public Search_DetailProductVo(int pi_num, String pi_name, int pi_price, String pd_size, String pd_color,
+			int pd_count, String pp_title, int r_num, String r_title, String r_content, String r_date, int r_hit,
+			String rp_title) {
 		super();
+		this.pi_num = pi_num;
 		this.pi_name = pi_name;
 		this.pi_price = pi_price;
 		this.pd_size = pd_size;
@@ -28,6 +31,12 @@ public class Search_DetailProductVo {
 		this.r_date = r_date;
 		this.r_hit = r_hit;
 		this.rp_title = rp_title;
+	}
+	public int getPi_num() {
+		return pi_num;
+	}
+	public void setPi_num(int pi_num) {
+		this.pi_num = pi_num;
 	}
 	public String getPi_name() {
 		return pi_name;
@@ -101,6 +110,7 @@ public class Search_DetailProductVo {
 	public void setRp_title(String rp_title) {
 		this.rp_title = rp_title;
 	}
+	
 	
 	
 }
