@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
+import chaneloper.dao.SellerDao;
 
 @WebServlet("/member/login")
 public class LoginMemberController extends HttpServlet {
@@ -22,15 +23,30 @@ public class LoginMemberController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
 		String pwd=req.getParameter("pwd");
-		MemberDao dao=MemberDao.getInstance();
-		if(dao.login(id, pwd)) {
-			req.setAttribute("code", true);
-			req.getSession().setAttribute("id", id);
-		}else {
-			req.setAttribute("code", false);
-			req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
+		String radio=req.getParameter("type");
+		System.out.println(radio);
+		if(radio.equals("일반사용자")) {
+			MemberDao dao=MemberDao.getInstance();
+			if(dao.login(id, pwd)) {
+				req.setAttribute("code", true);
+				req.getSession().setAttribute("id", id);
+			}else {
+				req.setAttribute("code", false);
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
+			}
+			req.getRequestDispatcher("/layout").forward(req, resp);
+		}else if(radio.equals("판매사업자")) {
+			SellerDao dao=SellerDao.getInstance();
+			if(dao.sellerLogin(id, pwd)) {
+				req.setAttribute("code", true);
+				req.getSession().setAttribute("id", id);
+			}else {
+				req.setAttribute("code", false);
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
+			}
+			req.getRequestDispatcher("/layout").forward(req, resp);
 		}
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		
 	}
 }
 
