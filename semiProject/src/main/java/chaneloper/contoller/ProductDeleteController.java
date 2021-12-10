@@ -16,7 +16,7 @@ public class ProductDeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		int pi_num=Integer.parseInt(req.getParameter("pi_num"));
+		int pi_num=Integer.parseInt(req.getParameter("pi_num"));ddd
 		
 		ProductVo vo = new ProductVo();
 		ProductDao dao = ProductDao.getInstance();
