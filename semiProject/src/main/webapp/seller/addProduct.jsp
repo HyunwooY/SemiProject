@@ -19,7 +19,6 @@
 		<input type="text" name="pi_sales"><br>
 		조회수<br>
 		<input type="submit" value="등록">
-	</form>
-	
+	</form>	
 </body>
 </html>
