@@ -15,12 +15,10 @@
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
 	}
-
 	function hideText(e) {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="none";
 	}
-
 	function search(e) {
 		if(e.keyCode==13){	// 엔터키를 누른경우
 			var word=e.target.value;
@@ -75,7 +73,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<li><a href="">아우터</a></li>
 	<li><a href="">악세서리</a></li>
 	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
-		<a href="${cp }/search/search" >검색 </a></li>
+		<a href="${cp }/searchResult.jsp" >검색 </a></li>
 </ul>
 	<input type="text" id="keyword" onkeypress="search(event)">
 </div>

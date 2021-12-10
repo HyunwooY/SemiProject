@@ -2,6 +2,7 @@ package chaneloper.contoller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import chaneloper.dao.SearchDao;
+import chaneloper.dao.Search_ResultDao;
+import chaneloper.vo.Search_ProductVo;
 
 
 @WebServlet("/search/search")  
@@ -19,11 +21,14 @@ public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String word = req.getParameter("word");	
-		System.out.println(word);
+		String keyword = req.getParameter("keyword");	
 		// product_information Dao 조회
-		SearchDao dao=new SearchDao();
-	}}
+		Search_ResultDao dao=new Search_ResultDao();
+		ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("/searchResult.jsp").forward(req, resp);
+		}
+	}
 /*		if(n>0) {
 			req.setAttribute("word", word);
 			req.getRequestDispatcher("/search/searchResult.jsp").forward(req, resp);
@@ -33,18 +38,7 @@ public class SearchController extends HttpServlet{
 	}
 }
 
-/*		resp.setContentType("text/xml;charset=utf-8");
-		PrintWriter pw=resp.getWriter();
-		JSONObject json=new JSONObject();
-		if(n>0) {
-			json.put("code","success");
-			req.setAttribute("word", word);
-		}else {
-			json.put("code","fail");
-		}
-		pw.print(json);
-		}
-	}
+
 		String categori = req.getParameter("categori");
 /*		if(categori.equals("mainsearch")) {
 			if(keyword==null) {
