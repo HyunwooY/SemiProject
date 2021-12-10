@@ -56,7 +56,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <div id="ac">
 <ul id="account">
 	<c:choose>
-		<c:when test="${requestScope.code=='fail' || requestScope.code==null}">
+		<c:when test="${requestScope.lcode=='fail' || requestScope.lcode==null}">
 			<li><a href="${pageContext.request.contextPath }/joinlayout">회원가입</a></li>
 			<li><a href="${pageContext.request.contextPath }/member/login">로그인</a></li>
 		</c:when>
