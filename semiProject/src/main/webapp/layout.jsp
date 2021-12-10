@@ -15,6 +15,7 @@
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
 	}
+
 	function hideText(e) {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="none";
