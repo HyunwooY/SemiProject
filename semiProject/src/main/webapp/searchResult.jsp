@@ -11,23 +11,27 @@
 		<option value="5">악세사리</option>
 		<option value="6">검색</option>
 	</section>
-	<br>
 <c:choose>
-		<c:when test="">
-			<input type="text" value=" ">
-		</c:when>
-		<c:otherwise>
-			<input type="text" value="">
-		</c:otherwise>
+	<c:when test="${empty requestScope.keyword }"> <!-- 검색탭으로 들어온경우 -->
+		<input type="text" value=""><br>
+	</c:when>
+	<c:otherwise>
+		<input type="text" value="${keyword }"><!-- 검색키워드로 들어온경우 --><br>
+	</c:otherwise>
 </c:choose>
-	<br>
 	<select name="field2">
 		<option value="7">신상품 순</option>
 		<option value="8">인기상품 순</option>
-	</section>
+	</section><br>
 	<input type="button" value="SEARCH"> 
 </form>
 <div> <!-- 검색값 출력 -->
-	<c:forEach var="vo" items="">
+	<c:forEach var="vo" items="${requestScope.list }">
+		${vo.pi_num }
+		${vo.pi_name }
+		${vo.pi_price }
+		${vo.pd_color }
+		${vo.pp_title }
+		${vo.t_name }
 	</c:forEach>
 </div>
