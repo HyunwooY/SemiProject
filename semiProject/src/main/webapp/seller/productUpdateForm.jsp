@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>상품 정보 수정</h1>
-	<form action="${pageContext.request.contextPath }/seller/update">
+	<form action="${pageContext.request.contextPath }/seller/update" enctype="multipart/form-data">
 		상품번호<br>
 		<input type="text" name="pi_num" value="${requestScope.vo.pi_num }" readonly="readonly"><br>
 		상품명<br>

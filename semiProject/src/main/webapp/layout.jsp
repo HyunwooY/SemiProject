@@ -15,32 +15,27 @@
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
 	}
-
 	function hideText(e) {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="none";
 	}
-
 	function search(e) {
 		if(e.keyCode==13){	// 엔터키를 누른경우
 			var word=e.target.value;
 			if(word==""){
 				alert('검색어를 입력해주세요');
-			}
-			var xhr=new XMLHttpRequest();
-			xhr.onreadystatechange=function () {
-				if(xhr.readyState==4 && xhr.status==200){
-					let data=xhr.responseText;
-					let user=JSON.parse(data);
-					if(json.code=='success'){
-						// word값가지고 detailSearch.jsp로 이동
-						${word}
+			}else {
+				var xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=function () {
+					if(xhr.readyState==4 && xhr.status==200){
+						let data=xhr.responseText;
+						let user=JSON.parse(data);
 					}
-				}
-			};
-			xhr.open('get','${pageContext.request.contextPath}/search/search?word=' + word,true);
-			xhr.send();
-		}
+				};
+				xhr.open('get','${pageContext.request.contextPath}/search/search?word=' + word,true);
+				xhr.send();
+			}
+		}	
 	}
 	
 </script>
@@ -78,9 +73,10 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<li><a href="">아우터</a></li>
 	<li><a href="">악세서리</a></li>
 	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
-		<a href="${cp }/search/search" >검색 </a></li>
+		<a href="${cp }/searchResult.jsp" >검색 </a></li>
 </ul>
-	<input type="text" id="keyword" onkeypress="search(event)"></div>
+	<input type="text" id="keyword" onkeypress="search(event)">
+</div>
 <div id="main">
 	<jsp:include page="${requestScope.main }"/>
 </div>
