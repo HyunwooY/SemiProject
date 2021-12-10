@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="post" action="${pageContext.request.contextPath }/seller/insert" enctype="multipart/form-data">
+<form method="post" action="${pageContext.request.contextPath }/seller/insert">
 	상품번호<br>
 	<input type="text" name="pi_num"><br>
 	판매자 아이디<br>
@@ -19,7 +19,7 @@
 	<input type="text" name="pi_price"><br>
 	판매수<br>
 	<input type="text" name="pi_sales"><br>
-	상품 재고<br>
+	조회수<br>
 	<input type="text" name="pi_count"><br>
 	<input type="submit" value="전송"><br>
 </form>

@@ -64,18 +64,39 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public ArrayList<Search_DetailProductVo> search_product(String pi_num){
+	public ArrayList<Search_DetailProductVo> search_detail_product(int pi_num){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Search_DetailProductVo> list = new ArrayList<Search_DetailProductVo>();
-		String sql = "";
-		try {
-			con = JDBC.getCon();
 
+		try {
+			String sql = "SELECT a.PI_NAME, a.PI_PRICE, b.PD_SIZE ,b.PD_COLOR,b.PD_COUNT, c.PP_TITLE , d.R_NUM ,d.R_TITLE,d.r_content ,d.R_DATE ,d.R_HIT ,e.RP_TITLE "
+					+ "FROM product_infomation a, PRODUCT_DETAIL b, PRODUCT_PHOTO c, REVIEW d, review_photo e,PURCHASE_HISTORY f "
+					+ "WHERE a.PI_NUM = b.PI_NUM "
+					+ "AND a.PI_NUM = c.PI_NUM "
+					+ "AND a.PI_NUM = f.PI_NUM "
+					+ "AND f.PH_NUM = d.PH_NUM "
+					+ "AND d.R_NUM = e.R_NUM "
+					+ "AND a.PI_NUM =" + pi_num;
+			con = JDBC.getCon();
 			pstmt=con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				Search_DetailProductVo vo = new Search_DetailProductVo(
+						pi_num,
+						rs.getString(1), 
+						rs.getInt(2), 
+						rs.getString(3), 
+						rs.getString(4), 
+						rs.getInt(5), 
+						rs.getString(6), 
+						rs.getInt(7), 
+						rs.getString(8), 
+						rs.getString(9), 
+						rs.getString(10), 
+						rs.getInt(11),
+						rs.getString(12));
 			}
 			return list;
 		}catch(SQLException se){
