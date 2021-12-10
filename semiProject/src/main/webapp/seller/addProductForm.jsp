@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>상품 등록</h1>
-	<form method="post"	action="${pageContext.request.contextPath }/seller/insert">		
+	<form method="post"	action="${pageContext.request.contextPath }/seller/insert" enctype="multipart/form-data">		
 		상품 번호<br>
 		<input type="text" name="pi_num"><br>
 		상품명<br>
