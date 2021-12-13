@@ -19,43 +19,18 @@
 .menu h4{margin-bottom:5px}
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
-<div id="mdetail">
-<h3>MY PAGE</h3>
-	<div id="info">
-	<span>주문 목록</span>
-		<div id="short">
-		<span class="l">입금전 ${requestScope.aPayCom }</span>
-		<span class="l">입금완료 ${requestScope.bPayCom }</span>
-		<span class="l">배송준비중 ${requestScope.preparingP }</span>
-		<span class="l">배송중 ${requestScope.beingDelivery }</span>
-		<span class="l">배송완료 ${requestScope.compDelivery }</span>
-		
-		<span class="r">취소</span>
-		<span class="r">교환</span>
-		<span class="r">반품</span>
-		</div>
-	</div>
 	<div id="detailmain">
-		<div id="membermenu">	
+		<div id="sellermenu">	
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
-				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
-				<a href="">반품/교환/취소내역</a>
-			</div>
+				<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br></div>
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
-				<a href="">개인정보확인/수정</a><br>
-				<a href="">배송지 관리</a>
-			</div>
-			<div id="wishlist" class="menu">
-				<h4>WISH LIST</h4>
-				<a href="">찜목록</a>
+				<a href="">판매자 정보확인/수정</a><br>
 			</div>
 			<div id="myboard" class="menu">
 				<h4>MY BOARD</h4>
-				<a href="">문의하기</a><br>
-				<a href="">문의내역 확인</a><br>
-				<a href="">리뷰관리</a>
+				<a href="">문의&반품&교환 내역관리</a><br>
 			</div>
 		</div>
 		<div id="showtitle">
