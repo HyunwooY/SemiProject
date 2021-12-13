@@ -21,7 +21,7 @@
 </script> 
 <form method="post" action="${pageContext.request.contextPath }/seller/sjoin">
 	<label for="id" class="label">아이디</label><br>
-	<input type="text" name="id" class="input" id="id">
+	<input type="text" name="id" class="input" id="id">    
 	<input type="button" value="중복확인" style="font-size:1em" onclick="checkDup()"><br>
 	<label for="pwd" class="label">비밀번호</label><br>
 	<input type="password" name="pwd" class="input"><br>

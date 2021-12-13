@@ -12,9 +12,10 @@ public class ProductVo {
 	private String pi_category;
 	
 	public ProductVo() {
+		
 	}
-	
 	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date, String pi_category) {
+
 		this.pi_num = pi_num;
 		this.si_id = si_id;
 		this.pi_name = pi_name;
