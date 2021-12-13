@@ -9,12 +9,14 @@ public class ProductVo {
 	private int pi_price;		// 가격
 	private int pi_count;		// 판매수
 	private Date pi_date;		// 등록일
-	private String pi_category;
+	private String pi_category;		// 분류
+	private String pp_title;		// 사진 파일 이름
+	
 	
 	public ProductVo() {
 		
 	}
-	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date, String pi_category) {
+	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date, String pi_category, String pp_title) {
 
 		this.pi_num = pi_num;
 		this.si_id = si_id;
@@ -23,6 +25,7 @@ public class ProductVo {
 		this.pi_count = pi_count;
 		this.pi_date = pi_date;
 		this.pi_category = pi_category;
+		this.pp_title = pp_title;
 	}
 	public int getPi_num() {
 		return pi_num;
@@ -67,6 +70,12 @@ public class ProductVo {
 
 	public void setPi_category(String pi_category) {
 		this.pi_category = pi_category;
+	}
+	public String getPp_title() {
+		return pp_title;
+	}
+	public void setPp_title(String pp_title) {
+		this.pp_title = pp_title;
 	}
 
 	

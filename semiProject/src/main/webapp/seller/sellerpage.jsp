@@ -28,8 +28,7 @@
 				<h4>MODIFY</h4>
 				<a href="">판매자 정보확인/수정</a><br>
 			</div>
-			<div id="myboard" class="menu">
-				<h4>MY BOARD</h4>
+				<h4>inquiryList</h4>
 				<a href="${pageContext.request.contextPath }/seller/inquiryList">문의&반품&교환 내역관리</a><br>
 			</div>
 		</div>
@@ -40,4 +39,3 @@
 			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 	</div>
-</div>
