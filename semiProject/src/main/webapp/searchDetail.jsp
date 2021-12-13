@@ -5,14 +5,13 @@
     pageEncoding="UTF-8"%>
 
 <%
-
-	
-	//제품명은 한번만 뽑고
-	//가격도 한번만 뽑고
-	//색상 
-	//사이즈
+	String name = (String)request.getAttribute("name");
+	String price = (String)request.getAttribute("price");
+	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
+	ArrayList<String> size = (ArrayList<String>)request.getAttribute("size");
+	ArrayList<String> title = (ArrayList<String>)request.getAttribute("title");
 %>
-
+"${name }"
 
 <!-- 이미지 -->
 <!-- 제품명 -->
