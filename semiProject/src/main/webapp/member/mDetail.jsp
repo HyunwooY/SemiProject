@@ -6,7 +6,7 @@
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
-#info{width:100%;height:100px;float:left;border-bottom:0.5px black solid}
+#info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
 #info span{margin:20px}
 #info #short{top:20px}
 .r{float:right;position:relative;top:-20px}
@@ -14,10 +14,10 @@
 #membermenu{float:left;width:15%;height:500px;padding-top:20px}
 #showtitle{float:left;width:85%;height:50px;padding-top:20px}
 #showtitle span{position:relative;}
-#show{float:left;left:10%;width:85%;height:400px}
+#show{float:left;width:85%;height:400px}
 .menu{margin-bottom:15px;}
 .menu h4{margin-bottom:5px}
-.menu a{margin-bottom:5px;display:inline-block}
+.menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
 <div id="mdetail">
 <h3>MY PAGE</h3>
@@ -39,7 +39,7 @@
 		<div id="membermenu">	
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
-				<a href="">주문내역</a><br>
+				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
 				<a href="">반품/교환/취소내역</a>
 			</div>
 			<div id="my" class="menu">
@@ -59,10 +59,10 @@
 			</div>
 		</div>
 		<div id="showtitle">
-			<span>타이틀</span>
+			<span>${requestScope.detailtitle }</span>
 		</div>
 		<div id="show">
-		본문
+			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 	</div>
 </div>
