@@ -12,7 +12,7 @@ public class JDBC {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			String url="jdbc:oracle:thin:@localhost:1521:xe";
-			con=DriverManager.getConnection(url,"semiproject","1234");	
+			con=DriverManager.getConnection(url,"c##semiproject","1234");	
 			System.out.println("데이터베이스접속성공");
 			return con;
 		}catch(ClassNotFoundException ce) {
