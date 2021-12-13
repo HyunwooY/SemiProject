@@ -8,11 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import chaneloper.dao.MemberDao;
+
 @WebServlet("/member/memberDetail")
 public class MemberDetailController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		String id=(String)req.getSession().getAttribute("id");
+		MemberDao dao=MemberDao.getInstance();
+		int aPayCom=dao.aPayCom(id);
+		int bPayCom=dao.aPayCom(id);
+		int preparingP=dao.preparingP(id);
+		int beingDelivery=dao.beingDelivery(id);
+		int compDelivery=dao.compDelivery(id);
+		req.setAttribute("aPayCom", aPayCom);
+		req.setAttribute("bPayCom", bPayCom);
+		req.setAttribute("preparingP", preparingP);
+		req.setAttribute("beingDelivery", beingDelivery);
+		req.setAttribute("compDelivery", compDelivery);
 		req.setAttribute("main", "/member/mDetail.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}

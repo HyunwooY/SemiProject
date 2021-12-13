@@ -175,4 +175,147 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	public int bPayCom(String id) { // 입금전(or 판매자확인중) -> 작업필요 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p"
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='결제전'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);		
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int aPayCom(String id) { // 입금완료(or 판매자확인중) -> 작업필요 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p"
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='결제완료'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);		
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int preparingP(String id) { // 입금전(or 판매자확인중) -> 작업필요 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p"
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='상품준비중'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int beingDelivery(String id) { // 입금전(or 판매자확인중) -> 작업필요 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p"
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='배송중'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int compDelivery(String id) { // 입금전(or 판매자확인중) -> 작업필요 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p"
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='배송완료'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public boolean checkId(String id) { // 멤버와 셀러 같이 탐색
+		Connection con = null;
+		PreparedStatement pstmt1 = null;
+		ResultSet rs1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		try {
+			con = JDBC.getCon();
+			pstmt1 = con.prepareStatement("select mi_id from member_infomation where mi_id=?");
+			pstmt1.setString(1, id);
+			rs1 = pstmt1.executeQuery();
+			pstmt2 = con.prepareStatement("select si_id from seller_infomation where si_id=?");
+			pstmt2.setString(1, id);
+			rs2 = pstmt2.executeQuery();
+			if(rs1.next() || rs2.next()) {
+				return false;
+			}else {
+				return true;
+			}
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return false;
+		}finally {
+			JDBC.close(null,pstmt2,rs2);
+			JDBC.close(con, pstmt1, rs1);
+		}
+	}
 }
+
+
+
+
+
+
