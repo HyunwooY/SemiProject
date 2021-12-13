@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import chaneloper.vo.ReviewVo;
+import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.Search_ProductVo;
 import chaneloper.vo.TagVo;
 import db.JDBC;
@@ -109,5 +109,24 @@ public class Search_ResultDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	public ArrayList<Inquiry_historyVo> get_Inquiry_historyVo(int pi_num){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Inquiry_historyVo> list = new ArrayList<Inquiry_historyVo>();
+		
+		try {
+			con = JDBC.getCon();
+			String sql = "";
+			pstmt = con.prepareStatement(sql);
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
 	
 }
