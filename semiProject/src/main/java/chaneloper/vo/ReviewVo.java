@@ -1,13 +1,13 @@
 package chaneloper.vo;
-
-public class Search_DetailProductVo {
+//리뷰 데이터 정의중 추후 명명변경 예정
+public class ReviewVo {
 	private int ih_num;
 	private String md_id;
 	private int pi_num;
 	private String ih_title;
 	private String ih_question;
 	private String ih_answer;
-	public Search_DetailProductVo(int ih_num, String md_id, int pi_num, String ih_title, String ih_question,
+	public ReviewVo(int ih_num, String md_id, int pi_num, String ih_title, String ih_question,
 			String ih_answer) {
 		super();
 		this.ih_num = ih_num;

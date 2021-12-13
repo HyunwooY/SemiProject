@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.Search_ResultDao;
-import chaneloper.vo.Search_DetailProductVo;
+import chaneloper.vo.ReviewVo;
 @WebServlet("/search/searchdetail")
 public class SearchDetailController extends HttpServlet{
 	@Override

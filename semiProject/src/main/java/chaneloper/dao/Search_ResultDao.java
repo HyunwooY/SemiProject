@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import chaneloper.vo.Search_DetailProductVo;
+import chaneloper.vo.ReviewVo;
 import chaneloper.vo.Search_ProductVo;
 import chaneloper.vo.TagVo;
 import db.JDBC;
