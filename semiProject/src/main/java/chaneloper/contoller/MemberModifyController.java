@@ -25,7 +25,7 @@ public class MemberModifyController extends HttpServlet{
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/member/modifyForm.jsp").forward(req, resp);
 		}	
-	}
+	} 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");

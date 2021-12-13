@@ -14,5 +14,5 @@
 	<input type="text" name="phone"  value="${vo.phone }" placeholder=" -없이 입력해 주세요"><br>
 	<label for="email" id="email">이메일</label>
 	<input type="text" name="email"  value="${vo.email }" placeholder=" 이메일"><br>
-	<input type="submit" value="수정"><input type="reset" value="취소">
+	<input type="submit" value="수정"><input type="reset" value="취소"> 
 </form>
