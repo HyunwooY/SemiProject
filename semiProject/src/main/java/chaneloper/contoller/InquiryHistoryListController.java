@@ -30,6 +30,7 @@ public class InquiryHistoryListController extends HttpServlet{
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();		
 		
 		
+		
 		req.getRequestDispatcher("/seller/inquiryList.jsp").forward(req, resp);
 	}
 }
