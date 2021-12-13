@@ -1,10 +1,8 @@
 package chaneloper.dao;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import chaneloper.vo.ProductVo;
 import db.JDBC;
