@@ -4,20 +4,23 @@
 <style>
 *{margin:0px;padding:0px}
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
-#mdetail div{position:relative;margin:0px;}
-#mdetail h4{height:40px}
-#info{width:100%;height:100px;float:left}
+#mdetail div{position:relative;}
+#mdetail h3{height:40px}
+#info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
 #info span{margin:20px}
 #info #short{top:20px}
 .r{float:right;position:relative;top:-20px}
 #detailmain{width:100%;height:600px;}
-#membermenu{float:left;width:10%;height:500px;}
-#showtitle{float:left;width:90%;height:100px;}
+#membermenu{float:left;width:15%;height:500px;padding-top:20px}
+#showtitle{float:left;width:85%;height:50px;padding-top:20px}
 #showtitle span{position:relative;}
-#show{float:left;left:10%;width:90%;height:400px}
+#show{float:left;width:85%;height:400px}
+.menu{margin-bottom:15px;}
+.menu h4{margin-bottom:5px}
+.menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
 <div id="mdetail">
-<h4>MY PAGE</h4>
+<h3>MY PAGE</h3>
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
@@ -34,18 +37,32 @@
 	</div>
 	<div id="detailmain">
 		<div id="membermenu">	
-			<div id="myshopping">
+			<div id="order" class="menu">
+				<h4>ORDER</h4>
+				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
+				<a href="">반품/교환/취소내역</a>
 			</div>
-			<div id="my">
+			<div id="my" class="menu">
+				<h4>MODIFY</h4>
+				<a href="">개인정보확인/수정</a><br>
+				<a href="">배송지 관리</a>
 			</div>
-			<div id="myshopping">
-		</div>
+			<div id="wishlist" class="menu">
+				<h4>WISH LIST</h4>
+				<a href="">찜목록</a>
+			</div>
+			<div id="myboard" class="menu">
+				<h4>MY BOARD</h4>
+				<a href="">문의하기</a><br>
+				<a href="">문의내역 확인</a><br>
+				<a href="">리뷰관리</a>
+			</div>
 		</div>
 		<div id="showtitle">
-			<span>타이틀</span>
+			<span>${requestScope.detailtitle }</span>
 		</div>
 		<div id="show">
-		본문
+			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 	</div>
 </div>
