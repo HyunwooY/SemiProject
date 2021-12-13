@@ -6,15 +6,13 @@ public class Search_ProductVo {
 	private int pi_price;
 	private String pd_color;
 	private String pp_title;
-	private String t_name;
-	public Search_ProductVo(int pi_num, String pi_name, int pi_price, String pd_color, String pp_title, String t_name) {
+	public Search_ProductVo(int pi_num, String pi_name, int pi_price, String pd_color, String pp_title) {
 		super();
 		this.pi_num = pi_num;
 		this.pi_name = pi_name;
 		this.pi_price = pi_price;
 		this.pd_color = pd_color;
 		this.pp_title = pp_title;
-		this.t_name = t_name;
 	}
 	public int getPi_num() {
 		return pi_num;
@@ -46,11 +44,7 @@ public class Search_ProductVo {
 	public void setPp_title(String pp_title) {
 		this.pp_title = pp_title;
 	}
-	public String getT_name() {
-		return t_name;
-	}
-	public void setT_name(String t_name) {
-		this.t_name = t_name;
-	}
+	
+	
 	
 }
