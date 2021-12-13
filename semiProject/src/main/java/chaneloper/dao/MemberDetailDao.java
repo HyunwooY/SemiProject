@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import db.JDBC;
 
@@ -122,7 +124,72 @@ public class MemberDetailDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-
+	public int cancel(String id) {  // 취소
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='취소' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int refund(String id) {  // 환불
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='환불' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int change(String id) {  // 취소내역
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='교환' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 }
 
 

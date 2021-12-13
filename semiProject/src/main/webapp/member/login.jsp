@@ -14,7 +14,7 @@
 .btn{width:100px;height:35px;position:relative;top:30px}
 #member{margin-right:100px}
 #find{position:relative;top:-35px}
-#findid{border-right:1px solid black;width:90px}
+#findid{border-right:1px solid black;width:90px;display:inline-block}
 </style>
 
 <div id="login">
