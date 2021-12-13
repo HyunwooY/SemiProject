@@ -9,15 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
-import chaneloper.vo.MemberVo;
-@WebServlet("/member/modify")
-public class MemberModifyController extends HttpServlet{
+@WebServlet("/checkpwd")
+public class PwdCheckController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("detailmain", "/member/modifyForm.jsp");
-		req.setAttribute("main", "/member/mDetail.jsp");
-//		req.setAttribute("detailtitle", "내 정보");
-		
-		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		req.setCharacterEncoding("utf-8");
+		String id = (String)req.getSession().getAttribute("id");
+		String pwd = req.getParameter("pwd");
+		MemberDao dao = MemberDao.getInstance();
+		if(dao.login(id, pwd)) {
+			req.setAttribute("check", true);
+		}else {
+			req.setAttribute("check", false);
+		}	
+		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }
