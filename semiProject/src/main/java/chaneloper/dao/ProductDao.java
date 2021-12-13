@@ -2,7 +2,9 @@ package chaneloper.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import chaneloper.vo.ProductVo;
 import db.JDBC;
@@ -72,6 +74,17 @@ public class ProductDao {
 			return -1;
 		} finally {
 			JDBC.close(con, pstmt, null);
+		}
+	}
+	
+	// 상품 리스트
+	public ArrayList<ProductVo> list selectAll() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH_PI_NUM";
 		}
 	}
 	
