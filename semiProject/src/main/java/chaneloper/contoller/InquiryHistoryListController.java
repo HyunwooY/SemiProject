@@ -25,12 +25,9 @@ public class InquiryHistoryListController extends HttpServlet{
 		 String ih_question = req.getParameter("ih_question");
 		 String ih_answer = req.getParameter("ih_answer");
 		
-		
 		Inquiry_historyVo vo = new Inquiry_historyVo(ih_num, mi_id, pi_num, ih_title, ih_question, ih_answer);
-		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();		
-		
-		
-		
+		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();				
+				
 		req.getRequestDispatcher("/seller/inquiryList.jsp").forward(req, resp);
 	}
 }
