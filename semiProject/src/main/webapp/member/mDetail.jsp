@@ -44,13 +44,8 @@
 			</div>
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
-<<<<<<< HEAD
-				<a href="">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-=======
 				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
-				<a href="">배송지 관리</a>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
@@ -67,7 +62,7 @@
 			<h3>${requestScope.detailtitle }</h3>
 		</div>
 		<div id="show">
-			<jsp:include page="${requestScope.detailmain }"></jsp:include>
+			<jsp:include page="${requestScope.detailmain }"/>
 		</div>
 	</div>
 </div>
