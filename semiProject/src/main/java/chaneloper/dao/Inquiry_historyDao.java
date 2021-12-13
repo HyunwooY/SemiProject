@@ -12,6 +12,11 @@ import chaneloper.vo.Inquiry_historyVo;
 import db.JDBC;
 
 public class Inquiry_historyDao {
+	private static Inquiry_historyDao instance = new Inquiry_historyDao();
+	
+	public static Inquiry_historyDao getInstance() {
+		return instance;
+	}
 	
 	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow){
 		Connection con = null;
@@ -46,6 +51,27 @@ public class Inquiry_historyDao {
 			se.printStackTrace();
 			return null;
 		} finally{
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	// 전체 글의 개수
+	public int getCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT NVL(count(num),0) cnt from inquiry_history";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int maxnum = rs.getInt("cnt");
+			return maxnum;
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
