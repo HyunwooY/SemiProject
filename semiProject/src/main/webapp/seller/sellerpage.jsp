@@ -4,48 +4,40 @@
 <style>
 *{margin:0px;padding:0px}
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
-#mdetail div{position:relative;margin:0px;}
-#mdetail h4{height:40px}
-#info{width:100%;height:100px;float:left}
+#mdetail div{position:relative;}
+#mdetail h3{height:40px}
+#info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
 #info span{margin:20px}
 #info #short{top:20px}
 .r{float:right;position:relative;top:-20px}
 #detailmain{width:100%;height:600px;}
-#membermenu{float:left;width:10%;height:500px;}
-#showtitle{float:left;width:90%;height:100px;}
+#membermenu{float:left;width:15%;height:500px;padding-top:20px}
+#showtitle{float:left;width:85%;height:50px;padding-top:20px}
 #showtitle span{position:relative;}
-#show{float:left;left:10%;width:90%;height:400px}
+#show{float:left;width:85%;height:400px}
+.menu{margin-bottom:15px;}
+.menu h4{margin-bottom:5px}
+.menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
-<div id="sellerpage">
-<h4>MY PAGE</h4>
-	<div id="info">
-	<span>주문 목록</span>
-		<div id="short">
-		<span class="l">입금전 ${requestScope.aPayCom }</span>
-		<span class="l">입금완료 ${requestScope.bPayCom }</span>
-		<span class="l">배송준비중 ${requestScope.preparingP }</span>
-		<span class="l">배송중 ${requestScope.beingDelivery }</span>
-		<span class="l">배송완료 ${requestScope.compDelivery }</span>
-		
-		<span class="r">취소</span>
-		<span class="r">교환</span>
-		<span class="r">반품</span>
-		</div>
-	</div>
 	<div id="detailmain">
-		<div id="membermenu">	
-			<div id="myshopping">
+		<div id="sellermenu">	
+			<div id="order" class="menu">
+				<h4>ORDER</h4>
+				<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br></div>
+			<div id="my" class="menu">
+				<h4>MODIFY</h4>
+				<a href="">판매자 정보확인/수정</a><br>
 			</div>
-			<div id="my">
+			<div id="myboard" class="menu">
+				<h4>MY BOARD</h4>
+				<a href="">문의&반품&교환 내역관리</a><br>
 			</div>
-			<div id="myshopping">
-		</div>
 		</div>
 		<div id="showtitle">
-			<span>타이틀</span>
+			<span>${requestScope.detailtitle }</span>
 		</div>
 		<div id="show">
-		본문
+			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 	</div>
 </div>
