@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import chaneloper.vo.Inquiry_historyVo;
+import chaneloper.vo.ReviewVo;
 import chaneloper.vo.Search_ProductVo;
 import chaneloper.vo.TagVo;
 import db.JDBC;
@@ -21,31 +22,27 @@ public class Search_ResultDao {
 		try {
 			con = JDBC.getCon();
 			if(CATEGORY==null&&sort==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,c.PP_TITLE, d.t_name FROM PRODUCT_INFOMATION a "
+				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size, c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
 				
 			}else if(CATEGORY==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,c.PP_TITLE, d.t_name FROM PRODUCT_INFOMATION a "
+				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "ORDER BY a." + sort;
 			}else if(sort==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,c.PP_TITLE, d.t_name FROM PRODUCT_INFOMATION a "
+				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "AND a.PI_CATEGORY = "+ CATEGORY;
 			}else if(CATEGORY!=null&&sort!=null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,c.PP_TITLE, d.t_name FROM PRODUCT_INFOMATION a "
+				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "AND a.PI_CATEGORY = "+ CATEGORY
 						+ " ORDER BY a." + sort;
@@ -117,8 +114,64 @@ public class Search_ResultDao {
 		
 		try {
 			con = JDBC.getCon();
-			String sql = "";
+			String sql = "SELECT ih.IH_NUM ,ih.MI_ID ,ih.PI_NUM ,ih.IH_TITLE ,ih.IH_QUESTION ,ih.IH_ANSWER "
+					+"FROM INQUIRY_HISTORY ih , PRODUCT_INFOMATION pi ,MEMBER_INFOMATION mi "
+					+"WHERE ih.PI_NUM =pi.PI_NUM "
+					+"AND ih.MI_ID =mi.MI_ID "
+					+"AND ih.pi_num = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<ReviewVo> get_review(int pi_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ReviewVo> list = new ArrayList<ReviewVo>();
+		
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT * FROM review r, REVIEW_PHOTO rp, PURCHASE_HISTORY ph "
+					+ "WHERE r.R_NUM =rp.R_NUM "
+					+ "AND r.PH_NUM =ph.PH_NUM "
+					+ "AND ph.PI_NUM =? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<Search_ProductVo> get_product(int pi_num){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Search_ProductVo> list = new ArrayList<Search_ProductVo>();
+		String sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
+				+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
+				+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
+				+ "where a.PI_NUM = ? ";
+		try {
+			con = JDBC.getCon();
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Search_ProductVo vo = new Search_ProductVo(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				list.add(vo);
+			}
 			return list;
 		}catch(SQLException se){
 			se.printStackTrace();

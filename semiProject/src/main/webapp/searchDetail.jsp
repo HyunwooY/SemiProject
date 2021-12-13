@@ -1,3 +1,4 @@
+<%@page import="chaneloper.vo.Search_ProductVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="chaneloper.vo.Inquiry_historyVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,12 +6,14 @@
 
 <%
 
-	//이미지
+	
 	//제품명은 한번만 뽑고
 	//가격도 한번만 뽑고
 	//색상 
 	//사이즈
 %>
+
+
 <!-- 이미지 -->
 <!-- 제품명 -->
 <!-- 가격 -->
