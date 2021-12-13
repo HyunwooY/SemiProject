@@ -37,7 +37,7 @@ public class ProductInsertController extends HttpServlet{
 			req.setAttribute("productCode", "success");
 			req.setAttribute("main", "/seller/productResult.jsp");
 		} else {
-			req.setAttribute("productCode", "faile");
+			req.setAttribute("productCode", "fail");
 			req.setAttribute("main", "/seller/productResult.jsp");
 		}
 		
