@@ -13,6 +13,7 @@
 #pwd{margin-left:40px}
 .btn{width:100px;height:35px;position:relative;top:30px}
 #member{margin-right:100px}
+#find{position:relative;top:-35px}
 </style>
 
 <div id="login">
