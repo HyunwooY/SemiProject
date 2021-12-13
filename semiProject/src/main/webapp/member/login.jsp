@@ -36,12 +36,7 @@
 	
 </div>
 <script>
-	function mclick(){
-		document.getElementById("form").action="${pageContext.request.contextPath }/member/mlogin";
-	}
-	function sclick(){
-		document.getElementById("form").action="${pageContext.request.contextPath }/seller/slogin";
-	}
+
 </script>
 
 
