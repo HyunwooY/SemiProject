@@ -12,27 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.Inquiry_historyDao;
 import chaneloper.vo.Inquiry_historyVo;
 
-@WebServlet("/seller/inquiry")
+@WebServlet("/seller/inquiryList")
 public class InquiryHistoryListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String spageNum = req.getParameter("pageNum");
-		int pageNum=1;
-		if (spageNum != null) {
-			pageNum = Integer.parseInt(spageNum);
-		}
-		int startRow = (pageNum-1) * 10 + 1;
-		int endRow = startRow + 9;
+		req.setCharacterEncoding("UTF-8");
 		
+		 int ih_num = Integer.parseInt(req.getParameter("ih_num"));
+		 String mi_id = req.getParameter("mi_id");
+		 int pi_num = Integer.parseInt(req.getParameter("pi_num"));
+		 String ih_title = req.getParameter("ih_title");
+		 String ih_question = req.getParameter("ih_question");
+		 String ih_answer = req.getParameter("ih_answer");
+		
+		
+		Inquiry_historyVo vo = new Inquiry_historyVo(ih_num, mi_id, pi_num, ih_title, ih_question, ih_answer);
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
-		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow);
-		int count = dao.getCount();		// 전체 글의 개수
-		int pageCount = (int)Math.ceil(count/10.0);		// 전체 페이지 개수
-		int startPageNum = ((pageNum -1) / 10 * 10) + 1;		// 시작 페이지 번호
-		int endPageNum = startPageNum + 9;		// 끝 페이지 번호
-		if(endPageNum > pageCount) {
-			endPageNum = pageCount;
-		}
 		
+		
+		
+		req.getRequestDispatcher("/seller/inquiryList.jsp").forward(req, resp);
 	}
 }
