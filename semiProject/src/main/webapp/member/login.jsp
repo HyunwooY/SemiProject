@@ -14,6 +14,7 @@
 .btn{width:100px;height:35px;position:relative;top:30px}
 #member{margin-right:100px}
 #find{position:relative;top:-35px}
+#findid{border-right:1px solid black;width:90px}
 </style>
 
 <div id="login">
@@ -31,7 +32,7 @@
 		<input type="submit" value="로그인" class="btn">
 	</form>	
 	<div id="find">
-		<a href="${pageContext.request.contextPath }/id/find">아이디찾기</a>
+		<a href="${pageContext.request.contextPath }/id/find" id="findid">아이디찾기</a>
 		<a href="${pageContext.request.contextPath }/pwd/find">비밀번호찾기</a>
 	</div>
 	

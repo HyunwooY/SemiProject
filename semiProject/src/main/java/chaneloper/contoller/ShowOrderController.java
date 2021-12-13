@@ -15,6 +15,8 @@ public class ShowOrderController extends HttpServlet {
 		req.setAttribute("detailmain", "/member/showOrder.jsp");
 		req.setAttribute("main", "/member/mDetail.jsp");
 		req.setAttribute("detailtitle", "나의 주문내역");
+		
+		
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }
