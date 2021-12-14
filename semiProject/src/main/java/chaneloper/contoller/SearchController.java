@@ -27,47 +27,45 @@ public class SearchController extends HttpServlet{
 		Search_ResultDao dao=new Search_ResultDao();
 		if(keyword==null) {
 			req.setAttribute("main", "/searchResult.jsp");
-			req.setAttribute("showMsg", "검색어를 입력해주세요");
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-		}else {
-			if(CATEGORY==null&&sort==null) {
-				ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
-				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
-				req.setAttribute("tag", tag);
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("CATEGORY", CATEGORY);
-				req.setAttribute("main", "/searchResult.jsp");
-				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-			}else if(CATEGORY==null){
-				ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, sort);
-				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
-				req.setAttribute("tag", tag);
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("sort", sort);
-				req.setAttribute("list", list);
-				req.setAttribute("main", "/searchResult.jsp");
-				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-			}else if(sort==null){
-				ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, null);
-				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
-				req.setAttribute("tag", tag);
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("CATEGORY", CATEGORY);
-				req.setAttribute("list", list);
-				req.setAttribute("main", "/searchResult.jsp");
-				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-			}else if(CATEGORY!=null&&sort!=null){
-				ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, sort);
-				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
-				req.setAttribute("tag", tag);
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("CATEGORY", CATEGORY);
-				req.setAttribute("sort", sort);
-				req.setAttribute("list", list);
-				req.setAttribute("main", "/searchResult.jsp");
-				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else if(CATEGORY==null&&sort==null) {
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
+			ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
+			req.setAttribute("tag", tag);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("list", list);
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else if(CATEGORY==null) {
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, sort);
+			ArrayList<TagVo> tag = dao.get_tag(keyword, null, sort);
+			req.setAttribute("tag", tag);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("sort", sort);
+			req.setAttribute("list", list);
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else if(sort==null) {
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, null);
+			ArrayList<TagVo> tag = dao.get_tag(keyword, CATEGORY, null);
+			req.setAttribute("tag", tag);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("CATEGORY", CATEGORY);
+			req.setAttribute("list", list);
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else if(CATEGORY!=null&&sort!=null) {
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, sort);
+			ArrayList<TagVo> tag = dao.get_tag(keyword, CATEGORY, sort);
+			req.setAttribute("tag", tag);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("CATEGORY", CATEGORY);
+			req.setAttribute("sort", sort);
+			req.setAttribute("list", list);
+			req.setAttribute("main", "/searchResult.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 			}
 		}
 	}
-}
+
 
