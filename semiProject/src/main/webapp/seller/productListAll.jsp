@@ -19,6 +19,5 @@
 				<td>${requestScope.pr.pd_color }</td>
 				<td>${requestScope.pr.pd_count }</td>
 			</tr>
-		</div>
-		
+		</div>		
 	</c:forEach>

@@ -203,6 +203,7 @@ public class MemberDao {
 			JDBC.close(con, pstmt1, rs1);
 		}
 	}
+	
 }
 
 
