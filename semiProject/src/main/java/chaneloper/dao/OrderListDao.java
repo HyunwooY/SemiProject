@@ -76,5 +76,24 @@ private static OrderListDao instance = new OrderListDao();
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	public int getCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int maxnum = rs.getInt("cnt");
+			return maxnum;
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 }
 	
