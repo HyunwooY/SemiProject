@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import chaneloper.vo.MemberVo;
 import db.JDBC;
@@ -201,6 +202,37 @@ public class MemberDao {
 		}finally {
 			JDBC.close(null,pstmt2,rs2);
 			JDBC.close(con, pstmt1, rs1);
+		}
+	}
+	
+	//배송지 조인
+	public HashMap<String, String> addrmap(String id, String name){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql ="select * from shipping_address where mi_id=? and sa_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			rs = pstmt.executeQuery();
+			HashMap<String, String> map = new HashMap<String, String>();
+			if(rs.next()) {
+				String sanickname = rs.getString("sa_nickname");
+				String saphone = rs.getString("sa_phone");
+				String saaddr = rs.getString("sa_addr");
+				map.put("sa_nickname", sanickname);
+				map.put("sa_phone", saphone);
+				map.put("sa_addr", saaddr);
+				return map;
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
 		}
 	}
 }

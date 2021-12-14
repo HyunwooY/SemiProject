@@ -44,7 +44,7 @@
 			</div>
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
-				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
+				<a href="${pageContext.request.contextPath }/member/mypage">개인정보확인/수정</a><br>
 				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
 			</div>
 			<div id="wishlist" class="menu">
