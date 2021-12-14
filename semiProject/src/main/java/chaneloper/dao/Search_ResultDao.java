@@ -88,12 +88,12 @@ public class Search_ResultDao {
 				sql = "SELECT a.PI_NUM , d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY;
+						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\'";
 			}else if(CATEGORY!=null&&sort!=null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY
+						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\' "
 						+ " ORDER BY a." + sort;
 			}
 			pstmt=con.prepareStatement(sql);
