@@ -85,6 +85,8 @@ public class ProductDao {
 		try {
 			con = JDBC.getCon();
 			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH_PI_NUM";
+		} catch(SQLException se) {
+			se.printStackTrace();
 		}
 	}
 	
