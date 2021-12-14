@@ -34,8 +34,6 @@ public class SearchDetailController extends HttpServlet{
 		ArrayList<ReviewVo> review = dao.get_review(pi_num);
 		ArrayList<Inquiry_historyVo> inq = dao.get_Inquiry_historyVo(pi_num);
 		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
-		
-		
 		ArrayList<String> color = new ArrayList<String>();
 		ArrayList<String> size = new ArrayList<String>();
 		ArrayList<String> img = new ArrayList<String>();
@@ -59,8 +57,6 @@ public class SearchDetailController extends HttpServlet{
             	img.add(vo.getPp_title());
             }
 		}
-		
-
 		req.setAttribute("name", name);
 		req.setAttribute("price", price);
 		req.setAttribute("color", color);
@@ -68,17 +64,20 @@ public class SearchDetailController extends HttpServlet{
 		req.setAttribute("img", img);
 		
 		String get_color = req.getParameter("get_color");
+		
 		if(get_color!=null) {
-			HashMap<String, Integer> size_map= dao.get_count(pi_num, get_color);
-			req.setAttribute("size_map", size_map);
+			req.setAttribute("post_color", get_color);
+			System.out.println(get_color);
 		}
 		
-		
+//		if(get_color!=null) {
+//			HashMap<String, Integer> size_map= dao.get_count(pi_num, get_color);
+//			req.setAttribute("size_map", size_map);
+//		}
 		req.setAttribute("inq", inq);
 		req.setAttribute("review",review);
 		req.setAttribute("main","/search/searchDetail.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		
-
 	}
 }
