@@ -5,7 +5,7 @@
 		if(${requestScope.result=='success'}){
 			alert("회원정보가 수정이 되었습니다.");
 		}
-	}
+	} 
 </script>
 <form method="post" action="<%=request.getContextPath() %>/member/modify" id="form2">
 	<h1>내 정보</h1>

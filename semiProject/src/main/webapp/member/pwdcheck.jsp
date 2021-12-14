@@ -5,7 +5,7 @@
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState==4 && xhr.status==200){
-				var data = xhr.responseText;
+				var data = xhr.responseText; 
 				var json = JSON.parse(data);
 				if(json.check==true){
 					var form1 = document.getElementById("form1").style.display = "none";

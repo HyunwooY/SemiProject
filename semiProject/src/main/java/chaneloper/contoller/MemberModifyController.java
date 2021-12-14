@@ -29,7 +29,7 @@ public class MemberModifyController extends HttpServlet{
 			req.getRequestDispatcher("/member/mypage.jsp").forward(req, resp);
 		}
 	} */
-	@Override
+	@Override 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id = (String)req.getSession().getAttribute("id");

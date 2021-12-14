@@ -170,7 +170,7 @@ public class MemberDao {
 			}
 			return null;
 		}catch(SQLException s) {
-			s.printStackTrace();
+			s.printStackTrace(); 
 			return null;
 		}finally {
 			JDBC.close(con, pstmt, rs);
@@ -236,7 +236,6 @@ public class MemberDao {
 		}
 	}
 }
-
 
 
 
