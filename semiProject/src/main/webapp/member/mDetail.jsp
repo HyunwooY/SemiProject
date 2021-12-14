@@ -33,7 +33,7 @@
 			<span class="r">취소 ${requestScope.cancel}</span>
 			<span class="r">교환 ${requestScope.change}</span>
 			<span class="r">반품 ${requestScope.refund}</span>
-			</div>
+		</div>
 	</div>
 	<div id="detailmain">
 		<div id="membermenu">	
@@ -42,13 +42,6 @@
 				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
 				<a href="${pageContext.request.contextPath }/member/showstate">반품/교환/취소내역</a>
 			</div>
-			<div id="my" class="menu">
-				<h4>MODIFY</h4>
-				<a href="">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-				<a href="">배송지 관리</a>
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
 				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
@@ -73,3 +66,4 @@
 		</div>
 	</div>
 </div>
+
