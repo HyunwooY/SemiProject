@@ -78,25 +78,30 @@ public class Search_ResultDao {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
-				
+				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY==null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
 			}else if(sort==null) {
 				sql = "SELECT a.PI_NUM , d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\'";
+						+ "AND a.PI_CATEGORY = ?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, CATEGORY);
 			}else if(CATEGORY!=null&&sort!=null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\' "
+						+ "AND a.PI_CATEGORY = ?"
 						+ " ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, CATEGORY);
 			}
-			pstmt=con.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				TagVo vo = new TagVo(rs.getInt(1),rs.getString(2));
