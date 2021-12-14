@@ -6,6 +6,9 @@
 .btn2,.btn3,.btn4,.btn5{border-top-left:-5px;border-bottom-left:-5px}
 #start,#end{height:18px;position:relative;top:-2px}
 #table{width:1000px;position:relative;top:10px;text-align:center}
+#table {margin:0px;padding:0px}
+th, tr{padding-left:0px;padding-right:0px}
+
 </style>
 <div>
 	<form action="${pageContext.request.contextPath }/member/showorder">
@@ -14,20 +17,20 @@
 		<input type="button" value="1개월" onclick="set(1)" class="btn3">
 		<input type="button" value="3개월" onclick="set(3)" class="btn4">
 		<input type="button" value="6개월" onclick="set(6)" class="btn5">	
-		<input type="date" id="start">
-		<input type="date" id="end">
+		<input type="date" name="start" id="start" value="${requestScope.start }">
+		<input type="date" name="end" id="end" value="${requestScope.start }">
 		<input type="submit" value="조회">
 	</form>
 </div>
 <div id="orderboard">
 	<table id="table">
 		<tr>
-			<th>주문일자</th>
-			<th>상품정보</th>
-			<th>수량</th>
-			<th>상품구매금액</th>
-			<th>주문상태</th>
-			<th>취소/교환/반품</th>
+			<th width="120px">주문일자</th>
+			<th width="400px">상품정보</th>
+			<th width="50px">수량</th>
+			<th width="120px">상품구매금액</th>
+			<th width="140px">주문상태</th>
+			<th width="170px">취소/교환/반품</th>
 		</tr>
 		<c:forEach var="vo" items="${requestScope.list}">
 		<tr>
@@ -52,7 +55,7 @@
 </div>
 
 <script>
-	window.onload=set(3);
+	
 	function set(change){
 		let date=new Date();
 		document.getElementById("start").value=new Date(date.setMonth(date.getMonth()-change)).toISOString().substring(0, 10);

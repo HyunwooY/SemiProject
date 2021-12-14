@@ -204,6 +204,7 @@ public class MemberDetailDao {
 					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? "
 					+ "and ph_regdate>=? and ph_regdate<=? and "
 					+ "(ph_state='결제전'or ph_state='결제완료' or ph_state='상품준비중' or ph_state='배송중' or ph_state='배송완료')");
+			ps.setString(1, id);
 			ps.setDate(2, start);
 			ps.setDate(3, end);
 			rs=ps.executeQuery();
@@ -229,7 +230,7 @@ public class MemberDetailDao {
 					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
 					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? "
 					+ "and ph_regdate>=? and ph_regdate<=?and "
-					+ "(ph_state='취소'or ph_state='환불' or ph_state='교환')");
+					+ "(ph_state='취소' or ph_state='환불' or ph_state='교환')");
 			ps.setString(1, id);
 			ps.setDate(2, start);
 			ps.setDate(3, end);
