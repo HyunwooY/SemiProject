@@ -20,4 +20,5 @@
 				<td>${requestScope.pr.pd_count }</td>
 			</tr>
 		</div>
+		
 	</c:forEach>
