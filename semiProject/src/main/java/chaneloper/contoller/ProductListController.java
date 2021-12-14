@@ -20,8 +20,10 @@ public class ProductListController extends HttpServlet{
 		ProductDao dao = ProductDao.getInstance();
 		
 		ArrayList<ProductVo> list = dao.selectAll();
-		
+		for(int i=0; i < list.size(); i++) {
+			System.out.println("i:" + i);
+		}
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/seller/listAll").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

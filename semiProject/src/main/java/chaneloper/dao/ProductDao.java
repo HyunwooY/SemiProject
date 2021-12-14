@@ -85,7 +85,7 @@ public class ProductDao {
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH_PI_NUM";
+			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH.PI_NUM";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
@@ -100,7 +100,7 @@ public class ProductDao {
 				int pd_num = rs.getInt("pd_num");
 				String pd_size = rs.getString("pd_size");
 				String pd_color = rs.getString("pd_color");
-				int pd_count = rs.getInt("pd_count");				
+				int pd_count = rs.getInt("pd_count");
 				ProductVo vo = new ProductVo(pi_count, pi_name, pi_name, pi_price, pi_count, pi_date, pi_name, pi_name, pi_price, sql, pi_name, pi_count);
 				list.add(vo);
 			}
