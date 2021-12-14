@@ -33,7 +33,7 @@ public class SearchController extends HttpServlet{
 			req.setAttribute("tag", tag);
 			req.setAttribute("keyword", keyword);
 			req.setAttribute("list", list);
-			req.setAttribute("main", "/searchResult.jsp");
+			req.setAttribute("main", "/search/searchResult.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
