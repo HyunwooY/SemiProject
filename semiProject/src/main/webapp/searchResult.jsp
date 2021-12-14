@@ -16,7 +16,7 @@
 		<form method="get" action="${cp }/search/search">
 			<div id="items">
 				<select id="CATEGORY" name="CATEGORY">
-					<option value="#" <c:if test="${CATEGORY=='0' }">selected</c:if>>상품분류 선택</option>
+					<option value=null <c:if test="${CATEGORY==null }">selected</c:if>>상품분류 선택</option>
 					<option value="상의" <c:if test="${CATEGORY=='상의' }">selected</c:if>>상의</option>
 					<option value="하의" <c:if test="${CATEGORY=='하의' }">selected</c:if>>하의</option>
 					<option value="원피스" <c:if test="${CATEGORY=='원피스' }">selected</c:if>>원피스</option>
@@ -29,7 +29,7 @@
 			</div>
 			<div id="items">
 				<select id="sort" name="sort">
-					<option value="#" <c:if test="${sort=='7' }">selected</c:if>>:::기준선택:::</option>
+					<option value=null <c:if test="${sort==null }">selected</c:if>>:::기준선택:::</option>
 					<option value="신상품 순" <c:if test="${sort=='신상품 순' }">selected</c:if>>신상품 순</option>
 					<option value="인기상품 순" <c:if test="${sort=='인기상품 순' }">selected</c:if>>인기상품 순</option>
 				</select><br>
@@ -44,6 +44,8 @@
 	</div>
 </div>
 <div id="searchProducts"> <!-- 조회된 제품들 -->
+	<div>
+	</div>
 	<c:forEach var="vo" items="${requestScope.list }">
 		상품사진 : ${vo.pp_title }
 		상품명 : ${vo.pi_name } 

@@ -25,10 +25,11 @@ public class SearchController extends HttpServlet{
 		String CATEGORY=req.getParameter("CATEGORY");
 		String sort=req.getParameter("sort");
 		Search_ResultDao dao=new Search_ResultDao();
+		
 		if(keyword==null) {
 			req.setAttribute("main", "/searchResult.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-		}else if(CATEGORY==null&&sort==null) {
+		}else if(CATEGORY==null&&sort.equals("null")) {
 			ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
 			ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
 			req.setAttribute("tag", tag);
@@ -45,7 +46,7 @@ public class SearchController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("main", "/searchResult.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-		}else if(sort==null) {
+		}else if(sort.equals("null")) {
 			ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, null);
 			ArrayList<TagVo> tag = dao.get_tag(keyword, CATEGORY, null);
 			req.setAttribute("tag", tag);
@@ -54,7 +55,7 @@ public class SearchController extends HttpServlet{
 			req.setAttribute("list", list);
 			req.setAttribute("main", "/searchResult.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-		}else if(CATEGORY!=null&&sort!=null) {
+		}else if(CATEGORY!=null&&sort.equals("null")) {
 			ArrayList<Search_ProductVo> list=dao.search_product(keyword, CATEGORY, sort);
 			ArrayList<TagVo> tag = dao.get_tag(keyword, CATEGORY, sort);
 			req.setAttribute("tag", tag);
