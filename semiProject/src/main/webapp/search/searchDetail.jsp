@@ -6,12 +6,11 @@
 
 <%
 	String name = (String)request.getAttribute("name");
-	String price = (String)request.getAttribute("price");
-	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
-	ArrayList<String> size = (ArrayList<String>)request.getAttribute("size");
-	ArrayList<String> title = (ArrayList<String>)request.getAttribute("title");
+	String price2 = (String)request.getAttribute("price");
+
 %>
-"${name }"
+"${name}"
+"${price2}"
 
 <!-- 이미지 -->
 <!-- 제품명 -->

@@ -1,4 +1,4 @@
-package chaneloper.contoller;
+package Search.contoller;
 
 /*
  * 	script writer : 
@@ -39,7 +39,7 @@ public class SearchDetailController extends HttpServlet{
 		ArrayList<String> color = new ArrayList<String>();
 		ArrayList<String> size = new ArrayList<String>();
 		ArrayList<String> title = new ArrayList<String>();
-		String name= null;
+		String name= "";
 		int price = 0;
 		for(Search_ProductVo vo:product){
 			//제품명
@@ -62,7 +62,7 @@ public class SearchDetailController extends HttpServlet{
 		
 
 		req.setAttribute("name", name);
-		req.setAttribute("price", price);
+		req.setAttribute("price2", price);
 		req.setAttribute("color", color);
 		req.setAttribute("size", size);
 		req.setAttribute("title", title);
