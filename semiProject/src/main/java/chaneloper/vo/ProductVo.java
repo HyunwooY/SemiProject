@@ -11,13 +11,20 @@ public class ProductVo {
 	private Date pi_date;		// 등록일
 	private String pi_category;		// 분류
 	private String pp_title;		// 사진 파일 이름
+	private int pd_num;		// 상품세부번호
+	private String pd_size;		// 제품 사이즈
+	private String pd_color;		// 색상
+	private int pd_count;		// 제품 수량
 	
 	
 	public ProductVo() {
 		
 	}
-	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date, String pi_category, String pp_title) {
 
+
+	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date,
+			String pi_category, String pp_title, int pd_num, String pd_size, String pd_color, int pd_count) {
+		super();
 		this.pi_num = pi_num;
 		this.si_id = si_id;
 		this.pi_name = pi_name;
@@ -26,57 +33,129 @@ public class ProductVo {
 		this.pi_date = pi_date;
 		this.pi_category = pi_category;
 		this.pp_title = pp_title;
+		this.pd_num = pd_num;
+		this.pd_size = pd_size;
+		this.pd_color = pd_color;
+		this.pd_count = pd_count;
 	}
+
+
 	public int getPi_num() {
 		return pi_num;
 	}
+
+
 	public void setPi_num(int pi_num) {
 		this.pi_num = pi_num;
 	}
+
+
 	public String getSi_id() {
 		return si_id;
 	}
+
+
 	public void setSi_id(String si_id) {
 		this.si_id = si_id;
 	}
+
+
 	public String getPi_name() {
 		return pi_name;
 	}
+
+
 	public void setPi_name(String pi_name) {
 		this.pi_name = pi_name;
 	}
+
+
 	public int getPi_price() {
 		return pi_price;
 	}
+
+
 	public void setPi_price(int pi_price) {
 		this.pi_price = pi_price;
 	}
+
+
 	public int getPi_count() {
 		return pi_count;
 	}
+
+
 	public void setPi_count(int pi_count) {
 		this.pi_count = pi_count;
 	}
+
+
 	public Date getPi_date() {
 		return pi_date;
 	}
+
+
 	public void setPi_date(Date pi_date) {
 		this.pi_date = pi_date;
 	}
+
 
 	public String getPi_category() {
 		return pi_category;
 	}
 
+
 	public void setPi_category(String pi_category) {
 		this.pi_category = pi_category;
 	}
+
+
 	public String getPp_title() {
 		return pp_title;
 	}
+
+
 	public void setPp_title(String pp_title) {
 		this.pp_title = pp_title;
 	}
 
-	
+
+	public int getPd_num() {
+		return pd_num;
+	}
+
+
+	public void setPd_num(int pd_num) {
+		this.pd_num = pd_num;
+	}
+
+
+	public String getPd_size() {
+		return pd_size;
+	}
+
+
+	public void setPd_size(String pd_size) {
+		this.pd_size = pd_size;
+	}
+
+
+	public String getPd_color() {
+		return pd_color;
+	}
+
+
+	public void setPd_color(String pd_color) {
+		this.pd_color = pd_color;
+	}
+
+
+	public int getPd_count() {
+		return pd_count;
+	}
+
+
+	public void setPd_count(int pd_count) {
+		this.pd_count = pd_count;
+	}	
 }

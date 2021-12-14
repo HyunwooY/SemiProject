@@ -1,8 +1,11 @@
 package chaneloper.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import chaneloper.vo.ProductVo;
 import db.JDBC;
@@ -75,9 +78,41 @@ public class ProductDao {
 		}
 	}
 	
+	// 상품 리스트
+	public ArrayList<ProductVo> selectAll() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH.PI_NUM";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
+			while(rs.next()) {
+				int pi_num = rs.getInt("pi_num");
+				String si_id = rs.getString("si_num");
+				String pi_name = rs.getString("pi_name");
+				int pi_price = rs.getInt("pi_price");
+				int pi_count = rs.getInt("pi_count");
+				Date pi_date = rs.getDate("pi_date");
+				String pi_category = rs.getString("pi_category");
+				int pd_num = rs.getInt("pd_num");
+				String pd_size = rs.getString("pd_size");
+				String pd_color = rs.getString("pd_color");
+				int pd_count = rs.getInt("pd_count");
+				ProductVo vo = new ProductVo(pi_count, pi_name, pi_name, pi_price, pi_count, pi_date, pi_name, pi_name, pi_price, sql, pi_name, pi_count);
+				list.add(vo);
+			}
+			return list;
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			JDBC.close(con, pstmt, rs);
+		}		
+	}
+	
 	// 상품 이미지 등록
 	
-	
-
-
 }
