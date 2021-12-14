@@ -79,29 +79,29 @@ public class ProductDao {
 	}
 	
 	// 상품 리스트
-	public ArrayList<ProductVo> selectAll() {
+	public ArrayList<ProductVo> listAll(int pi_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH WHERE PI.PI_NUM = PH.PI_NUM";
+			String sql = "SELECT * FROM PRODUCT_INFOMATION PI, PRODUCT_PHOTO PH, PRODUCT_DETAIL PD WHERE PI.PI_NUM=? AND PI.PI_NUM = PH.PI_NUM AND PI.PI_NUM = PD.PI_NUM";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
 			rs = pstmt.executeQuery();
 			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
-			while(rs.next()) {
-				int pi_num = rs.getInt("pi_num");
-				String si_id = rs.getString("si_num");
+			while(rs.next()) {				
+				String si_id = rs.getString("si_id");
 				String pi_name = rs.getString("pi_name");
 				int pi_price = rs.getInt("pi_price");
 				int pi_count = rs.getInt("pi_count");
 				Date pi_date = rs.getDate("pi_date");
 				String pi_category = rs.getString("pi_category");
-				int pd_num = rs.getInt("pd_num");
+				String pp_title = rs.getString("pp_title");
 				String pd_size = rs.getString("pd_size");
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
-				ProductVo vo = new ProductVo(pi_count, pi_name, pi_name, pi_price, pi_count, pi_date, pi_name, pi_name, pi_price, sql, pi_name, pi_count);
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pp_title, pi_num, pd_size, pd_color, pd_count);
 				list.add(vo);
 			}
 			return list;
