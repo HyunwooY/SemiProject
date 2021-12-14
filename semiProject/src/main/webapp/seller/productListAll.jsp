@@ -10,7 +10,7 @@
 <title> 상품 목록</title>
 </head>
 <body>
-	<h1 class="display-3">상품 목록</h1>
+	<h1>상품 목록</h1>
 	<c:forEach var="vo" items="${list }">	
 		<p>${vo.pi_num }</p>
 		<p>${vo.si_id }</p>
@@ -23,7 +23,7 @@
 		<p>${vo.pd_num }</p>
 		<p>${vo.pd_size }</p>
 		<p>${vo.pd_color }</p>
-		<p>${vo.pd_count }</p>		
+		<p>${vo.pd_count }</p>
 	</c:forEach>
 </body>
 </html>

@@ -90,7 +90,7 @@ public class ProductDao {
 			pstmt.setInt(1, pi_num);
 			rs = pstmt.executeQuery();
 			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
-			while(rs.next()) {				
+			while(rs.next()) {
 				String si_id = rs.getString("si_id");
 				String pi_name = rs.getString("pi_name");
 				int pi_price = rs.getInt("pi_price");
