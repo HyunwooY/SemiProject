@@ -1,0 +1,15 @@
+@charset "UTF-8";
+fieldset {
+	width:500px; height: 250px; border:3px solid black;
+}
+#searchbox, #searchResult {
+	margin: auto; width:630px; height: 300px;
+}
+#items {
+	width:500px; height: 40px;
+}
+.searchbox #CATEGORY,#keyword,#sort {
+	width: 410px;
+    border: 1px solid #ddd;
+    height: 40px!important;
+}
