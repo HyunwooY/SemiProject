@@ -2,16 +2,16 @@ package chaneloper.vo;
 //리뷰 데이터 정의중 추후 명명변경 예정
 public class Inquiry_historyVo {
 	private int ih_num;
-	private String md_id;
+	private String mi_id;
 	private int pi_num;
 	private String ih_title;
 	private String ih_question;
 	private String ih_answer;
-	public Inquiry_historyVo(int ih_num, String md_id, int pi_num, String ih_title, String ih_question,
+	public Inquiry_historyVo(int ih_num, String mi_id, int pi_num, String ih_title, String ih_question,
 			String ih_answer) {
 		super();
 		this.ih_num = ih_num;
-		this.md_id = md_id;
+		this.mi_id = mi_id;
 		this.pi_num = pi_num;
 		this.ih_title = ih_title;
 		this.ih_question = ih_question;
@@ -23,11 +23,11 @@ public class Inquiry_historyVo {
 	public void setIh_num(int ih_num) {
 		this.ih_num = ih_num;
 	}
-	public String getMd_id() {
-		return md_id;
+	public String getMi_id() {
+		return mi_id;
 	}
-	public void setMd_id(String md_id) {
-		this.md_id = md_id;
+	public void setMi_id(String mi_id) {
+		this.mi_id = mi_id;
 	}
 	public int getPi_num() {
 		return pi_num;

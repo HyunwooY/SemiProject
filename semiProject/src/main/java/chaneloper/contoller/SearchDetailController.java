@@ -8,6 +8,7 @@ package chaneloper.contoller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +24,11 @@ import chaneloper.vo.Search_ProductVo;
 public class SearchDetailController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		//상품번호
-		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
+		//int pi_num = Integer.parseInt(req.getParameter("pi_num"));
+		int pi_num = 3;
 		Search_ResultDao dao = new Search_ResultDao();
 		dao.search_product(getServletInfo(), getServletName(), getServletInfo());
 		ArrayList<ReviewVo> review = dao.get_review(pi_num);
@@ -35,11 +39,13 @@ public class SearchDetailController extends HttpServlet{
 		ArrayList<String> color = new ArrayList<String>();
 		ArrayList<String> size = new ArrayList<String>();
 		ArrayList<String> title = new ArrayList<String>();
+		String name= null;
+		int price = 0;
 		for(Search_ProductVo vo:product){
 			//제품명
-			String name = vo.getPi_name();
+			name = vo.getPi_name();
 			//가격
-			int price = vo.getPi_price();
+			price = vo.getPi_price();
 			//색상
             if (!color.contains(vo.getPd_color())) {
             	color.add(vo.getPd_color());
@@ -52,17 +58,26 @@ public class SearchDetailController extends HttpServlet{
             if (!title.contains(vo.getPp_title())) {
             	title.add(vo.getPp_title());
             }
+		}
+		
 
-			//재고 확인
-			//
+		req.setAttribute("name", name);
+		req.setAttribute("price", price);
+		req.setAttribute("color", color);
+		req.setAttribute("size", size);
+		req.setAttribute("title", title);
+		
+		String get_color = req.getParameter("get_color");
+		if(get_color!=null) {
+			HashMap<String, Integer> size_map= dao.get_count(pi_num, get_color);
+			req.setAttribute("size_map", size_map);
 		}
 		
 		
-		
-		req.setAttribute("product", product);
 		req.setAttribute("inq", inq);
 		req.setAttribute("review",review);
-		req.getRequestDispatcher("/searchDetail.jsp").forward(req, resp);
+		req.setAttribute("main","/searchDetail.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		
 
 	}

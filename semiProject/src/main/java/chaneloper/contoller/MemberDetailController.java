@@ -21,11 +21,17 @@ public class MemberDetailController extends HttpServlet {
 		int preparingP=dao.preparingP(id);
 		int beingDelivery=dao.beingDelivery(id);
 		int compDelivery=dao.compDelivery(id);
+		int cancel=dao.cancel(id);
+		int refund=dao.refund(id);
+		int change=dao.change(id);
 		req.setAttribute("aPayCom", aPayCom);
 		req.setAttribute("bPayCom", bPayCom);
 		req.setAttribute("preparingP", preparingP);
 		req.setAttribute("beingDelivery", beingDelivery);
 		req.setAttribute("compDelivery", compDelivery);
+		req.setAttribute("cancel", cancel);
+		req.setAttribute("refund", refund);
+		req.setAttribute("change", change);
 		req.setAttribute("main", "/member/mDetail.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}

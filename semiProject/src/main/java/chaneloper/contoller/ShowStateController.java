@@ -8,15 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.MemberDao;
-import chaneloper.vo.MemberVo;
-@WebServlet("/member/modify")
-public class MemberModifyController extends HttpServlet{
+@WebServlet("/member/showstate")
+public class ShowStateController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("detailmain", "/member/modifyForm.jsp");
+		req.setAttribute("detailmain", "/member/showstate.jsp");
 		req.setAttribute("main", "/member/mDetail.jsp");
-//		req.setAttribute("detailtitle", "내 정보");
+		req.setAttribute("detailtitle", "반품/교환/취소내역");
+		
 		
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}

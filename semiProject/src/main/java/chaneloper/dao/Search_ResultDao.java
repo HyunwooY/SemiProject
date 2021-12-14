@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
@@ -181,5 +182,29 @@ public class Search_ResultDao {
 		}
 	}
 	
+	public HashMap<String, Integer> get_count(int pi_num, String get_color) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		try {
+			String sql="select pd_size,pd_count from product_detail where pi_num = ? and pd_color = ?";
+			con = JDBC.getCon();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			pstmt.setString(2, get_color);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+					
+			return map;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 	
 }

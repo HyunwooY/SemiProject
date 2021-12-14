@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import chaneloper.vo.OrderHistoryVo;
+import chaneloper.vo.Purchase_historyVo;
 import db.JDBC;
 
 public class MemberDetailDao {
@@ -122,7 +126,95 @@ public class MemberDetailDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-
+	public int cancel(String id) {  // 취소
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='취소' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int refund(String id) {  // 환불
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='환불' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public int change(String id) {  // 취소내역
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='교환' and sysdate-ph_regdate<=30";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cstate");
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	public ArrayList<OrderHistoryVo> showOrder(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			ps=con.prepareStatement("select ph.ph_num ph_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price "
+					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
+					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=?");
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
+			while(rs.next()) {
+				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs.getString("ph_type"), rs.getString("ph_state"), 
+						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"));
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+	}
 }
 
 
