@@ -21,10 +21,10 @@
 	<input type="text" name="email"  value="${vo.email}" placeholder=" 이메일"><br>
 	
 	<label for="saname" id="saname">수령인</label>
-	<input type="text" name="saname"  value="" placeholder=" 수령인"><br>
+	<input type="text" name="saname"  value="${map.sanickname }" placeholder=" 수령인"><br>
 	<label for="saphone" id="saphone">휴대폰번호</label>
-	<input type="text" name="saphone"  value="" placeholder=" 휴대폰번호"><br>
+	<input type="text" name="saphone"  value="${map.saphone }" placeholder=" 휴대폰번호"><br>
 	<label for="saaddr" id="saaddr">주소</label>
-	<input type="text" name="saaddr"  value="" placeholder=" 주소"><br><br>
+	<input type="text" name="saaddr"  value="${map.saaddr }" placeholder=" 주소"><br><br>
 	<input type="submit" value="수정"><input type="reset" value="취소"> 
 </form>
