@@ -2,8 +2,8 @@
 fieldset {
 	width:500px; height: 250px; border:3px solid black;
 }
-#searchbox, #searchResult {
-	margin: auto; width:630px; height: 300px;
+.searchbox, .searchResult, .searchProducts {
+	margin: auto; width:630px; height: 300px; display: table;
 }
 div#items {
 	width:500px; height: 40px;
@@ -16,6 +16,19 @@ div#items {
 li {
     list-style: none;
 }
+ul.list {
+	display: table;
+    width: 100%;
+    margin: 0px 0 0;
+}
+li .chips{
+	float: left;
+	width: 15px;
+    height: 15px;
+    margin: 10px 4px 4px 0;
+    border: 1px solid #ddd;
+    line-height: 0;
+}
 ul.list li.item {
     display: inline-block;
     margin: 20px 0px 70px;
@@ -26,41 +39,24 @@ ul.list li.item {
     vertical-align: top;
 }
 #searchBar {
-	width: 175px; height: 50px;
+	width: 175px; height: 50px; margin-top: 60px
 }
-body h1{
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
-  font-size: 24px;
-  font-style: bold;
-  color: #545454;
+.color {
+	width:10px; height: 10px; list-style: none;
 }
-
 .searchProducts {
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0;
+  margin: auto;
   width: 740px;
   height: 1000px;
   text-align: center;
 }
-
-.searchProducts img{
-  width: 250px;
-  height: 310px;
+.img{
+  width: 170px;
+  height: 360px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
-
-.searchProducts a{
-  text-decoration: none;
-  color: black;
-  float: left;
-  font-size: 16px;
-}
-
 .price{
   margin-top: 4px;
-  margin-bottom: 80px;
+  margin-bottom: 4px;
 }
