@@ -9,6 +9,8 @@
 <body>
 
 <form method="post" action="${pageContext.request.contextPath }/seller/insert">
+	이미지 <br>
+	<input type="file" name="img"><br>
 	상품번호<br>
 	<input type="text" name="pi_num"><br>
 	판매자ID<br>
@@ -21,7 +23,8 @@
 	<input type="text" name="pi_count"><br>
 	분류<br>
 	<input type="text" name="pi_category"><br>
-	<input type="submit" value="전송"><br>
+	<input type="submit" value="등록"><br>
+	<input type="reset" value="취소"><br>
 </form>
 </body>
 </html>
