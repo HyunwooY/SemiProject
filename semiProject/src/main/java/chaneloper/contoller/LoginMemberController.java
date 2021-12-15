@@ -45,7 +45,8 @@ public class LoginMemberController extends HttpServlet {
 				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
-		}		
+		}
+		
 	}
 }
 

@@ -146,4 +146,9 @@ public class ProductDao {
 //			JDBC.close(con, pstmt, rs);
 //		}		
 //	}	
+	// 상품 이미지 등록
+	
+	
+
+
 }
