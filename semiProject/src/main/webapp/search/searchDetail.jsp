@@ -1,20 +1,13 @@
 <%@page import="chaneloper.vo.Search_ProductVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="chaneloper.vo.Inquiry_historyVo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
-<%
-	String name = (String)request.getAttribute("name");
-	int price = (int)request.getAttribute("price");
-	ArrayList<String> img = (ArrayList<String>)request.getAttribute("img");
-
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div>
 	<div>
-		<img src="images/"+${img[0]} alt="Image1">
+		<img src="images/"+ ${img[0]} alt="Image1">
 	</div>
 	<div>
 	    <table >
@@ -39,19 +32,30 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					
-					색상 <input type="button" value=${color[i]}>
-					
+
+				<td>색상 : 
+<%  
+	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
+	for(int i =0 ;i<color.size();i++){
+%>
+						<input type="button" value="<%=color.get(i) %>" onclick="location.herf='/search/searchdetail?get_color=<%=color.get(i) %>'">
+<%		
+	}
+%>
 				</td>
-				
 			</tr>
-			
+			<tr>
+				<td>
+					"${post_color }"
+				</td>
+			</tr>
 	    </table>
 	</div>
 </div>
 
-
+<script type="text/javascript">
+	
+</script>
 
 <!-- 이미지 -->
 <!-- 제품명 -->

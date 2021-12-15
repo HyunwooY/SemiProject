@@ -24,15 +24,15 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-		<span class="l">입금전 ${requestScope.aPayCom }</span>
-		<span class="l">입금완료 ${requestScope.bPayCom }</span>
-		<span class="l">배송준비중 ${requestScope.preparingP }</span>
-		<span class="l">배송중 ${requestScope.beingDelivery }</span>
-		<span class="l">배송완료 ${requestScope.compDelivery }</span>
-		
-		<span class="r">취소 ${requestScope.cancel}</span>
-		<span class="r">교환 ${requestScope.change}</span>
-		<span class="r">반품 ${requestScope.refund}</span>
+			<span class="l">입금전 ${requestScope.aPayCom }</span>
+			<span class="l">입금완료 ${requestScope.bPayCom }</span>
+			<span class="l">배송준비중 ${requestScope.preparingP }</span>
+			<span class="l">배송중 ${requestScope.beingDelivery }</span>
+			<span class="l">배송완료 ${requestScope.compDelivery }</span>
+			
+			<span class="r">취소 ${requestScope.cancel}</span>
+			<span class="r">교환 ${requestScope.change}</span>
+			<span class="r">반품 ${requestScope.refund}</span>
 		</div>
 	</div>
 	<div id="detailmain">
@@ -42,36 +42,10 @@
 				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
 				<a href="${pageContext.request.contextPath }/member/showstate">반품/교환/취소내역</a>
 			</div>
-<<<<<<< HEAD
-			<div id="my" class="menu">
-<<<<<<< HEAD
-				<h4>MODIFY</h4>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-				<h4>MODIFY</h4>
-=======
-				<h4>MODIFY</h4>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
-				<a href="">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
-				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
-<<<<<<< HEAD
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-=======
-				<a href="">배송지 관리</a>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
-=======
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
-				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
+				<a href="${pageContext.request.contextPath }/member/mypage">개인정보확인/수정</a><br>
 				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
@@ -92,3 +66,4 @@
 		</div>
 	</div>
 </div>
+
