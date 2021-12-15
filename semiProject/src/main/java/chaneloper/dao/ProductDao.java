@@ -118,25 +118,22 @@ public class ProductDao {
 	}
 
 	// 판매자 각각의 상품 리스트
-		public ArrayList<ProductVo> listAll() {
+		public ArrayList<ProductVo> selectList(String si_id) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
 			try {
 				con = JDBC.getCon();
-				String sql = "SELECT *"
-						+ " FROM SELLER_INFOMATION SI "
-						+ " INNER JOIN PRODUCT_INFOMATION PI ON(SI.SI_ID = PI.SI_ID)"
-						+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)"
-						+ " WHERE SI.SI_ID=?";
-						
-					
+				String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PD.PI_NUM"
+						+ " FROM SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_DETAIL PD"
+						+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID"
+						+ " ORDER BY PI.PI_NUM ASC";					
 				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "si_id");
 				rs = pstmt.executeQuery();			
 				if(rs.next()) {
 					int pi_num = rs.getInt("pi_num");
-					String si_id = rs.getString("si_id");
 					String pi_name = rs.getString("pi_name");
 					int pi_price = rs.getInt("pi_price");
 					int pi_count = rs.getInt("pi_count");
