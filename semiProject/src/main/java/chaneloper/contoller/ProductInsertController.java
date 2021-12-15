@@ -28,22 +28,20 @@ public class ProductInsertController extends HttpServlet{
 		String pi_category = req.getParameter("pi_category");
 		String pi_size = req.getParameter("pi_size");
 		String pi_color = req.getParameter("pi_color");
-		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
-		Date pi_regdate = req.getParameter("pi_regdate");
-		String 
+		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
 
-		ProductVo vo = new ProductVo(pi_num, pi_name, pi_price, null , pi_size, pi_color, pd_count, pi_regdate);
-		String pp_title = req.getParameter("pp_title");
-		
-		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\semiProject\\src\\main\\webapp\\images", 5*1024*1024, "utf-8",
-								new DefaultFileRenamePolicy());
-		
-		String filename = multi.getFilesystemName(pp_title);
-		
-		
 		ProductVo vo = new ProductVo();
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
+		
+		
+		
+		
+		String pp_title = req.getParameter("pp_title");
+		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\images", 5*1024*1024, "utf-8",
+								new DefaultFileRenamePolicy());		
+		String filename = multi.getFilesystemName(pp_title);	
+		
+		
 		
 		int n = dao.productInsert(vo);
 		if(n>0) {
