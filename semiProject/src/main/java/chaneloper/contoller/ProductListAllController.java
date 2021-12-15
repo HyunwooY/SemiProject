@@ -13,17 +13,16 @@ import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/listAll")
-public class ProductListController extends HttpServlet{
+public class ProductListAllController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("UTF-8");		
+
 		ProductDao dao = ProductDao.getInstance();
+		ArrayList<ProductVo> list = dao.listAll();		
 		
-		ArrayList<ProductVo> list = dao.selectAll();
-		for(int i=0; i < list.size(); i++) {
-			System.out.println("i:" + i);
-		}
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/seller/productListAll.jsp").forward(req, resp);
+		
 	}
 }

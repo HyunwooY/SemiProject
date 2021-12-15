@@ -26,7 +26,11 @@ public class ProductUpdateController extends HttpServlet{
 		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
 		Date pi_regdate = req.getParameter("pi_regdate");
 		
+<<<<<<< HEAD
 		ProductVo vo = new ProductVo(pi_num, pi_num, pi_name, pi_price, null, pi_count, pi_size, pi_color, pd_count, pi_regdate);
+=======
+		ProductVo vo = new ProductVo();
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productUpdate(vo);

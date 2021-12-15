@@ -11,11 +11,10 @@ public class ProductVo {
 	private Date pi_date;		// 등록일
 	private String pi_category;		// 분류
 	private String pp_title;		// 사진 파일 이름
-	private int pd_num;		// 상품세부번호
-	private String pd_size;		// 제품 사이즈
-	private String pd_color;		// 색상
-	private int pd_count;		// 제품 수량
-	
+	private String pd_size;			// 상품 사이즈
+	private String pd_color;		// 상품 색상
+	private int pd_count;			// 제품수량
+
 	
 	public ProductVo() {
 		
@@ -23,8 +22,7 @@ public class ProductVo {
 
 
 	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date,
-			String pi_category, String pp_title, int pd_num, String pd_size, String pd_color, int pd_count) {
-		super();
+			String pi_category, String pp_title, String pd_size, String pd_color, int pd_count) {
 		this.pi_num = pi_num;
 		this.si_id = si_id;
 		this.pi_name = pi_name;
@@ -33,7 +31,6 @@ public class ProductVo {
 		this.pi_date = pi_date;
 		this.pi_category = pi_category;
 		this.pp_title = pp_title;
-		this.pd_num = pd_num;
 		this.pd_size = pd_size;
 		this.pd_color = pd_color;
 		this.pd_count = pd_count;
@@ -120,16 +117,6 @@ public class ProductVo {
 	}
 
 
-	public int getPd_num() {
-		return pd_num;
-	}
-
-
-	public void setPd_num(int pd_num) {
-		this.pd_num = pd_num;
-	}
-
-
 	public String getPd_size() {
 		return pd_size;
 	}
@@ -157,5 +144,8 @@ public class ProductVo {
 
 	public void setPd_count(int pd_count) {
 		this.pd_count = pd_count;
-	}	
+	}
+
+	
+
 }

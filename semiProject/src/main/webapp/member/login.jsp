@@ -23,7 +23,6 @@
 	<label for="seller">판매사업자</label><br>
 	<input type="radio" name="type" value="일반사용자" id="member" class="radio" onclick="mclick()">
 	<input type="radio" name="type" value="판매사업자" id="seller" class="radio" onclick="sclick()"><br>
-
 	
 		<label for="id" id="id">아이디</label>
 		<input type="text" name="id" class="input">
@@ -35,7 +34,6 @@
 		<a href="${pageContext.request.contextPath }/id/find" id="findid">아이디찾기</a>
 		<a href="${pageContext.request.contextPath }/pwd/find">비밀번호찾기</a>
 	</div>
-	
 </div>
 <script>
 

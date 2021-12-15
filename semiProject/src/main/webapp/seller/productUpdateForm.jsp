@@ -13,8 +13,18 @@
 		<input type="text" name="pi_num" value="${requestScope.vo.pi_num }" readonly="readonly"><br>
 		상품명<br>
 		<input type="text" name="pi_name"><br>
-		가격<br>
+		상품가격<br>
 		<input type="text" name="pi_price"><br>
+		분류<br>
+		<input type="text" name="pi_category"><br>
+		사이즈<br>
+		<input type="text" name="pd_size"><br>
+		색상<br>
+		<input type="text" name="pd_color"><br>
+		재고<br>
+		<input type="text" name="pd_count"><br>
+		상품등록일<br>
+		<input type="text" name="pi_regdate"><br>
 		이미지<br>
 		<input type="file" name="file"><br><br>
 		<input type="submit" value="수정">

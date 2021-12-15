@@ -1,6 +1,7 @@
 package chaneloper.contoller;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
@@ -26,8 +30,19 @@ public class ProductInsertController extends HttpServlet{
 		String pi_color = req.getParameter("pi_color");
 		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
 		Date pi_regdate = req.getParameter("pi_regdate");
+		String 
 
 		ProductVo vo = new ProductVo(pi_num, pi_name, pi_price, null , pi_size, pi_color, pd_count, pi_regdate);
+		String pp_title = req.getParameter("pp_title");
+		
+		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\semiProject\\src\\main\\webapp\\images", 5*1024*1024, "utf-8",
+								new DefaultFileRenamePolicy());
+		
+		String filename = multi.getFilesystemName(pp_title);
+		
+		
+		ProductVo vo = new ProductVo();
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productInsert(vo);
