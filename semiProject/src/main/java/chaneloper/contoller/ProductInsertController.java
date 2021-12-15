@@ -23,24 +23,25 @@ public class ProductInsertController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
+		String si_id = req.getParameter("si_id");
 		String pi_name = req.getParameter("pi_name");
 		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
+//		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
 		String pi_category = req.getParameter("pi_category");
-		String pi_size = req.getParameter("pi_size");
-		String pi_color = req.getParameter("pi_color");
+		
+		String pd_size = req.getParameter("pd_size");
+		String pd_color = req.getParameter("pd_color");
 		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
-
-		ProductVo vo = new ProductVo();
-		ProductDao dao = ProductDao.getInstance();
-		
-		
-		
 		
 		String pp_title = req.getParameter("pp_title");
-		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\images", 5*1024*1024, "utf-8",
-								new DefaultFileRenamePolicy());		
-		String filename = multi.getFilesystemName(pp_title);	
+
+		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, pi_category, pd_size, pd_color, pd_count, pp_title);
+		ProductDao dao = ProductDao.getInstance();	
 		
+		
+//		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\images", 5*1024*1024, "utf-8",
+//								new DefaultFileRenamePolicy());		
+//		String filename = multi.getFilesystemName(pp_title);		
 		
 		
 		int n = dao.productInsert(vo);
