@@ -5,8 +5,7 @@
 
 <link rel="stylesheet"
 	href="https:/maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<body>		
-	<div class="container">
+<body>	
 		<div id="" class="row" align="center">
 			<c:forEach var="list" items="${requestScope.list }">
 				<div class="col-md-4">
@@ -18,7 +17,6 @@
 				</div>
 		</c:forEach>
 		</div>
-	</div>
 	<hr>
 
 

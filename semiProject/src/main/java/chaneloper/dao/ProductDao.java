@@ -44,6 +44,7 @@ public class ProductDao {
 			
 			pstmt.setString(10, vo.getPp_title());
 			pstmt.setInt(11, vo.getPi_num());
+			int n = pstmt.executeUpdate();
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
