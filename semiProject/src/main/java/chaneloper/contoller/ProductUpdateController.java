@@ -23,17 +23,12 @@ public class ProductUpdateController extends HttpServlet{
 		String pi_category = req.getParameter("pi_category");
 		String pi_size = req.getParameter("pi_size");
 		String pi_color = req.getParameter("pi_color");
-		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
-		Date pi_regdate = req.getParameter("pi_regdate");
-		
-<<<<<<< HEAD
-		ProductVo vo = new ProductVo(pi_num, pi_num, pi_name, pi_price, null, pi_count, pi_size, pi_color, pd_count, pi_regdate);
-=======
+		int pd_count = Integer.parseInt(req.getParameter("pd_count"));	
+
 		ProductVo vo = new ProductVo();
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
 		
-		int n = dao.productUpdate(vo);
+		int n = dao.(vo);
 		if(n > 0) {
 			req.setAttribute("productCode", "success");
 			req.setAttribute("main", "/seller/productResult.jsp");
