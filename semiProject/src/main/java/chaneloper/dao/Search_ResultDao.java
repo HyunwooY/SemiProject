@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
@@ -182,11 +185,11 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public HashMap<String, Integer> get_count(int pi_num, String get_color) {
+	public JSONArray get_count(int pi_num, String get_color) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		JSONArray jsonarray = new JSONArray();
 		try {
 			String sql="select pd_size,pd_count from product_detail where pi_num = ? and pd_color = ?";
 			con = JDBC.getCon();
@@ -194,11 +197,15 @@ public class Search_ResultDao {
 			pstmt.setInt(1, pi_num);
 			pstmt.setString(2, get_color);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				map.put(rs.getString(1), rs.getInt(2));
+				JSONObject json = new JSONObject();
+				json.put("color", get_color);
+				json.put("size",rs.getString(1));
+				json.put("count",rs.getInt(2));
+				jsonarray.put(json);
 			}
-					
-			return map;
+			return jsonarray;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;

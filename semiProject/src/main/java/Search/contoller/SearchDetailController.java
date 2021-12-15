@@ -7,6 +7,7 @@ package Search.contoller;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import chaneloper.dao.Search_ResultDao;
 import chaneloper.vo.Inquiry_historyVo;
@@ -60,25 +64,16 @@ public class SearchDetailController extends HttpServlet{
             }
 		}
 		
-
 		req.setAttribute("name", name);
 		req.setAttribute("price", price);
 		req.setAttribute("color", color);
 		req.setAttribute("size", size);
 		req.setAttribute("title", title);
-		
-		String get_color = req.getParameter("get_color");
-		if(get_color!=null) {
-			HashMap<String, Integer> size_map= dao.get_count(pi_num, get_color);
-			req.setAttribute("size_map", size_map);
-		}
-		
-		
+
 		req.setAttribute("inq", inq);
 		req.setAttribute("review",review);
 		req.setAttribute("main","/searchDetail.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		
-
 	}
 }
