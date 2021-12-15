@@ -19,7 +19,7 @@
 		</div>
 	</c:when>
 </c:choose>
-alert("dfdfd");
+
 
 
 
