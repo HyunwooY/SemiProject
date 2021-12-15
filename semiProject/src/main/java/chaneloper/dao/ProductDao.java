@@ -105,7 +105,7 @@ public class ProductDao {
 				String pd_size = rs.getString("pd_size");
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pp_title, pd_size, pd_color, pd_count);
+				ProductVo vo = new ProductVo
 				list.add(vo);
 			}
 			return list;
@@ -146,9 +146,7 @@ public class ProductDao {
 //			JDBC.close(con, pstmt, rs);
 //		}		
 //	}	
+
 	// 상품 이미지 등록
 	
-	
-
-
 }

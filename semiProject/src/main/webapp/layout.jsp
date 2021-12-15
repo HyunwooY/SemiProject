@@ -70,7 +70,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<input type="text" id="keyword" onkeypress="search(event)">
 </div>
 <div id="main">
-	<jsp:include page="${requestScope.main }"/>
+	<jsp:include page="${requestScope.main }"/> 
 </div>
 
 <div id="footer">

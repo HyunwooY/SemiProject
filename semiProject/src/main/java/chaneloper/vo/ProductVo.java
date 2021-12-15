@@ -13,8 +13,8 @@ public class ProductVo {
 	private String pp_title;		// 사진 파일 이름
 	private String pd_size;			// 상품 사이즈
 	private String pd_color;		// 상품 색상
-	private int pd_count;
-	
+	private int pd_count;			// 제품수량
+
 	
 	public ProductVo() {
 		
@@ -23,7 +23,6 @@ public class ProductVo {
 
 	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date,
 			String pi_category, String pp_title, String pd_size, String pd_color, int pd_count) {
-		super();
 		this.pi_num = pi_num;
 		this.si_id = si_id;
 		this.pi_name = pi_name;
@@ -146,7 +145,7 @@ public class ProductVo {
 	public void setPd_count(int pd_count) {
 		this.pd_count = pd_count;
 	}
+
 	
-	
-	
+
 }

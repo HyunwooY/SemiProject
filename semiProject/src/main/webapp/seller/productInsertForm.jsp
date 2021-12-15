@@ -17,7 +17,7 @@
 	<input type="text" name="pi_name"><br>
 	상품가격<br>
 	<input type="text" name="pi_price"><br>
-	조회수<br>
+	판매수<br>
 	<input type="text" name="pi_count"><br>
 	분류<br>
 	<input type="text" name="pi_category"><br>

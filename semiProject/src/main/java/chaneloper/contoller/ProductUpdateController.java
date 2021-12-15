@@ -22,6 +22,7 @@ public class ProductUpdateController extends HttpServlet{
 		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
 		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
 		String pi_category = req.getParameter("pi_category");
+		String pp_title = req.getParameter("pp_title");
 		
 		ProductVo vo = new ProductVo();
 		ProductDao dao = ProductDao.getInstance();
