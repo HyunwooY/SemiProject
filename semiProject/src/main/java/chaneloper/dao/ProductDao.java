@@ -130,6 +130,7 @@ public class ProductDao {
 	}
 
 	// 판매자 각각의 상품 리스트
+<<<<<<< HEAD
 //		public ArrayList<ProductVo> selectList(String si_id) {
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
@@ -167,5 +168,66 @@ public class ProductDao {
 //			}		
 //		}
 
+=======
+		public ArrayList<ProductVo> selectList(String si_id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
+			try {
+				con = JDBC.getCon();
+				String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PD.PI_NUM, PP_TITLE"
+						+ " FROM SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_DETAIL PD, PRODUCT_PHOTO PP"
+						+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID"
+						+ " ORDER BY PI.PI_NUM ASC";	
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "si_id");
+				rs = pstmt.executeQuery();			
+				while(rs.next()) {
+					int pi_num = rs.getInt("pi_num");
+					String pi_name = rs.getString("pi_name");
+					int pi_price = rs.getInt("pi_price");
+					int pi_count = rs.getInt("pi_count");
+					Date pi_date = rs.getDate("pi_date");
+					String pi_category = rs.getString("pi_category");
+					String pp_title = rs.getString("pp_title");
+					String pd_size = rs.getString("pd_size");
+					String pd_color = rs.getString("pd_color");
+					int pd_count = rs.getInt("pd_count");
+					ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pp_title, pd_size, pd_color, pd_count);
+					list.add(vo);
+				}
+				return list;
+			} catch(SQLException se) {
+				se.printStackTrace();
+				return null;
+			} finally {
+				JDBC.close(con, pstmt, rs);
+			}		
+		}
+		
+	// 상품 이미지 등록
+		public int photoInsert(ProductVo vo) {		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "INSERT INTO PRODUCT_INFOMATION VALUES(?, ?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, vo.getPi_num());
+				pstmt.setString(2, vo.getSi_id());
+				pstmt.setString(3, vo.getPi_name());
+				pstmt.setInt(4, vo.getPi_price());
+				pstmt.setInt(5, vo.getPi_count());
+				pstmt.setString(6, vo.getPi_category());
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				se.printStackTrace();
+				return -1;
+			} finally {
+				JDBC.close(con, pstmt, null);
+			}
+		}
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 	
 }

@@ -208,9 +208,13 @@ public class Search_ResultDao {
 			
 			while(rs.next()) {
 				JSONObject json = new JSONObject();
-				json.put("color", get_color);
 				json.put("size",rs.getString(1));
-				json.put("count",rs.getInt(2));
+				if(rs.getInt(2)==0) {
+					json.put("count","매진");
+				}else {
+					json.put("count", Integer.toString(rs.getInt(2)));
+				}
+				
 				jsonarray.put(json);
 			}
 			return jsonarray;

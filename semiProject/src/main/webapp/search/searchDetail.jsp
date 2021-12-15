@@ -5,6 +5,32 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript">
+	let select_color = '';
+	let select_size = '';
+	function get_size(e){
+		e.preventDefault();
+		select_color = e.target.innerText;
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				let text=xhr.responseText;
+				let data=JSON.parse(text);
+				var size_tag = document.getElementById("size");
+				console.log(data.length);
+				for(let i = 0 ;i < data.length; i++){
+					let newA=document.createElement("a");
+					newA.href="#";
+					newA.innerHTML=data[i].size;
+					size_tag.appendChild(newA);
+				}
+			}
+		}
+		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText,true);
+		xhr.send();
+	}
+</script>
+
 <div>
 	<div>
 		<img src="images/"+ ${img[0]} alt="Image1">
@@ -38,10 +64,21 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-						<input type="button" value="<%=color.get(i) %>" >
+						<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
+
 <%		
 	}
 %>
+				</td>
+			</tr>
+			<tr>
+				<td id="size">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span></span>
 				</td>
 			</tr>
 
@@ -49,26 +86,8 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
 
-=======
-<script type="text/javascript">
-	fucntion get_size(e){
-		let xhr = new XHLHttpRequest();
-		xhr.onreadystatechange=function(){
-			if(xhr.readyState==4&&xhr.status==200){
-				let data=JSON.parse(xhr.responseText);
-				for(var i = 0; i < data.length ; i++){
-					console.log(data[i]);
-				}
-				
-			}
-		}
-		xhr.open('get',"/search/staticsearch?get_color="+e.target.value,true);
-		xhr.send();
-	}
-</script>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+
 
 <!-- 이미지 -->
 <!-- 제품명 -->

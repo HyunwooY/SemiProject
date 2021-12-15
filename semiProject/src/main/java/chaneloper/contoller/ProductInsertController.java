@@ -25,13 +25,16 @@ public class ProductInsertController extends HttpServlet{
 		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		String si_id = req.getParameter("si_id");
 		String pi_name = req.getParameter("pi_name");
-		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
-//		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
-		String pi_category = req.getParameter("pi_category");
-		
+		int pi_price = Integer.parseInt(req.getParameter("pi_price"));	
 		String pd_size = req.getParameter("pd_size");
 		String pd_color = req.getParameter("pd_color");
-		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
+
+		String pi_category = req.getParameter("pi_category");
+		String pi_size = req.getParameter("pi_size");
+		String pi_color = req.getParameter("pi_color");
+		
+		int pd_count = Integer.parseInt(req.getParameter("pd_count"));	
+		
 		
 		String pp_title = req.getParameter("pp_title");
 
