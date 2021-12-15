@@ -49,6 +49,9 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
+
+=======
 <script type="text/javascript">
 	fucntion get_size(e){
 		let xhr = new XHLHttpRequest();
@@ -65,6 +68,7 @@
 		xhr.send();
 	}
 </script>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 
 <!-- 이미지 -->
 <!-- 제품명 -->

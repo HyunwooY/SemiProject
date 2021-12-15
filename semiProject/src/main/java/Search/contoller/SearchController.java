@@ -36,6 +36,13 @@ public class SearchController extends HttpServlet{
 		}
 
 		Search_ResultDao dao=new Search_ResultDao();
+		
+		//검색탭으로 검색할때
+		
+		
+		
+
+		//세부페이지로 이동후 검색할때
 		if(keyword!=null) {
 			//카테고리랑 정렬이 없다면
 			if(category==null&&sort==null) {
@@ -70,7 +77,6 @@ public class SearchController extends HttpServlet{
 				req.setAttribute("sort", sort);
 				req.setAttribute("list", list);
 			}
-
 		}
 		req.setAttribute("main", "/search/searchResult.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
