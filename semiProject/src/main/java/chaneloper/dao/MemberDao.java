@@ -206,13 +206,13 @@ public class MemberDao {
 	}
 	
 	//배송지 조인
-	public HashMap<String, String> addrmap(String id, String name){
+	public HashMap<String, String> selectaddr(String id, String name){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql ="select * from shipping_address where mi_id=? and sa_name=?";
+			String sql ="select * from member_infomation mi, shipping_address sa where mi.mi_id=? and sa.sa_name=? and mi.mi_id=sa.mi_id";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, name);
@@ -235,6 +235,30 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//배송지 추가
+/*	public int addrinsert(MemberVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con= JDBC.getCon();
+			con.setAutoCommit(false);
+			String sql = "insert into shipping_address values(?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			con.commit();
+			return pstmt.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,null);
+		}
+	} */
 }
 
 

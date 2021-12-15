@@ -1,6 +1,7 @@
 package chaneloper.contoller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -37,24 +38,26 @@ public class MemberModifyController extends HttpServlet{
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String email = req.getParameter("email");
-		
-		String saname = req.getParameter("saname");
-		String saphone = req.getParameter("saphone");
-		String saaddr = req.getParameter("saaddr");
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.get(saname);
-		map.get(saphone);
-		map.get(saaddr);
-		
 		MemberVo vo1 = new MemberVo(id, pwd, name, email, phone);
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.update(vo1);
 		if(n>0) {
-			req.setAttribute("result", "success");
-			MemberVo vo = dao.select(id, pwd);
-			req.setAttribute("vo", vo);
+				req.setAttribute("result", "success");
+				MemberVo vo = dao.select(id, pwd);
+				req.setAttribute("vo", vo);
 		}else {
 			req.setAttribute("result", "fail");
+		}
+		String saname = req.getParameter("saname");
+		HashMap<String, String> map = new HashMap<String, String>();
+		String sanickname = map.get("sanickname");
+		String saphone = map.get("saphone");
+		String saaddr = map.get("saaddr");
+		map = dao.selectaddr(id, saname);
+		if(map!=null) {
+			req.setAttribute("map",sanickname);
+			req.setAttribute("map",saphone);
+			req.setAttribute("map",saaddr);
 		}
 		req.setAttribute("detailmain","/member/mypage.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
