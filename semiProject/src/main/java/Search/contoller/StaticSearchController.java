@@ -18,6 +18,7 @@ public class StaticSearchController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String get_color = req.getParameter("get_color");
+		System.out.println(get_color);
 		//int pi_num =Integer.parseInt(req.getParameter("pi_num"));
 		int pi_num = 3;
 		

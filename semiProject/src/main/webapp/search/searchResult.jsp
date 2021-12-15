@@ -34,27 +34,7 @@
 					<option value="pi_count" <c:if test="${sort=='인기상품 순' }">selected</c:if>>인기상품 순</option>
 				</select><br>
 			</div>
-<<<<<<< HEAD
-			<input type="submit" value="SEARCH">
-		</form>
-	</fieldset>
-</div>
-<div id="searchResult" > <!-- 조회된 갯수 출력 -->
-	<div style= "text-align: center;">
-		<!-- ${total} --> ITEMS
-	</div>
-</div>
-<div id="searchProducts"> <!-- 조회된 제품들 -->
-	<div>
-	</div>
-	<c:forEach var="vo" items="${requestScope.list }">
-		상품사진 : ${vo.pp_title }
-		상품명 : ${vo.pi_name } 
-		가격: ${vo.pi_price }
-		색상 : ${vo.pd_color } 
-		<br>
-	</c:forEach>
-=======
+
 			<input type="submit" value="SEARCH" id="searchBar">
 		</form>
 	</fieldset>
@@ -83,5 +63,5 @@
 	</c:forEach>
 
 </ul>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+
 </div>
