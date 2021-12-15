@@ -93,7 +93,7 @@ public class ProductDao {
 				
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();			
-			if(rs.next()) {
+			while(rs.next()) {
 				int pi_num = rs.getInt("pi_num");
 				String si_id = rs.getString("si_id");
 				String pi_name = rs.getString("pi_name");

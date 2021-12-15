@@ -12,8 +12,7 @@
 <body>		
 	<div class="row" align="center">
 		<c:forEach var="list" items="${requestScope.list }">
-			<h3>${list.pi_name }</h3>
-			<img src="D:/2107/SemiProject/semiProject/src/main/webapp/images/" ${requestScope.list.pp_title} "style="width: 100%">
+			<h3>${list.pi_name }</h3>			
 		</c:forEach>
 		
 		<div class="col-md-4">
