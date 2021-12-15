@@ -9,6 +9,7 @@
 	let select_color = '';
 	let select_size = '';
 	function get_size(e){
+		e.preventDefault();
 		select_color = e.target.innerText;
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
@@ -16,9 +17,12 @@
 				let text=xhr.responseText;
 				let data=JSON.parse(text);
 				var size_tag = document.getElementById("size");
-				for(var i = 0 ;i < data.length; i++){
-					var newSpan = document.createElement("span");​
-					console.log(data[i].size);
+				console.log(data.length);
+				for(let i = 0 ;i < data.length; i++){
+					let newA=document.createElement("a");
+					newA.href="#";
+					newA.innerHTML=data[i].size;
+					size_tag.appendChild(newA);
 				}
 			}
 		}
