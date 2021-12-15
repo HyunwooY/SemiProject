@@ -78,7 +78,7 @@ public class ProductDao {
 		}
 	}
 	
-	// 상품 리스트
+	// 메인에 보여질 전체 상품 리스트
 	public ArrayList<ProductVo> listAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -88,7 +88,7 @@ public class ProductDao {
 			con = JDBC.getCon();
 			String sql = "SELECT *"
 					+ " FROM PRODUCT_INFOMATION PI "
-					+ " INNER JOIN PRODUCT_PHOTO PH ON(PI.PI_NUM = PH.PI_NUM)"
+					+ " INNER JOIN PRODUCT_PHOTO PP ON(PI.PI_NUM = PP.PI_NUM)"
 					+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)";
 				
 			pstmt = con.prepareStatement(sql);
@@ -117,6 +117,46 @@ public class ProductDao {
 		}		
 	}
 
+	// 판매자 각각의 상품 리스트
+		public ArrayList<ProductVo> listAll() {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
+			try {
+				con = JDBC.getCon();
+				String sql = "SELECT *"
+						+ " FROM SELLER_INFOMATION SI "
+						+ " INNER JOIN PRODUCT_INFOMATION PI ON(SI.SI_ID = PI.SI_ID)"
+						+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)"
+						+ " WHERE SI.SI_ID=?";
+						
+					
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();			
+				if(rs.next()) {
+					int pi_num = rs.getInt("pi_num");
+					String si_id = rs.getString("si_id");
+					String pi_name = rs.getString("pi_name");
+					int pi_price = rs.getInt("pi_price");
+					int pi_count = rs.getInt("pi_count");
+					Date pi_date = rs.getDate("pi_date");
+					String pi_category = rs.getString("pi_category");
+					String pp_title = rs.getString("pp_title");
+					String pd_size = rs.getString("pd_size");
+					String pd_color = rs.getString("pd_color");
+					int pd_count = rs.getInt("pd_count");
+					ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pp_title, pd_size, pd_color, pd_count);
+					list.add(vo);
+				}
+				return list;
+			} catch(SQLException se) {
+				se.printStackTrace();
+				return null;
+			} finally {
+				JDBC.close(con, pstmt, rs);
+			}		
+		}
 	// 상품 이미지 등록
 	
 }
