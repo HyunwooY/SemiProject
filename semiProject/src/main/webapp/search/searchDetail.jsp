@@ -38,17 +38,13 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-						<input type="button" value="<%=color.get(i) %>" onclick="location.herf='/search/searchdetail?get_color=<%=color.get(i) %>'">
+						<input type="button" value="<%=color.get(i) %>" >
 <%		
 	}
 %>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					"${post_color }"
-				</td>
-			</tr>
+
 	    </table>
 	</div>
 </div>
@@ -57,7 +53,20 @@
 
 =======
 <script type="text/javascript">
-	
+	fucntion get_size(e){
+		let xhr = new XHLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				let data=JSON.parse(xhr.responseText);
+				for(var i = 0; i < data.length ; i++){
+					console.log(data[i]);
+				}
+				
+			}
+		}
+		xhr.open('get',"/search/staticsearch?get_color="+e.target.value,true);
+		xhr.send();
+	}
 </script>
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 
