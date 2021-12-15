@@ -50,10 +50,10 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 		<c:otherwise>
 			<li><a href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
 			<c:choose>
-				<c:when test="">
+				<c:when test="${sessionScope.radio=='일반사용자' }">
 					<li><a href="${pageContext.request.contextPath }/member/memberDetail">마이페이지</a></li>
 				</c:when>
-				<c:when test="">
+				<c:when test="${sessionScope.radio=='판매사업자' }">
 					<li><a href="${pageContext.request.contextPath }/seller/">마이페이지</a></li>
 				</c:when>
 			</c:choose>
