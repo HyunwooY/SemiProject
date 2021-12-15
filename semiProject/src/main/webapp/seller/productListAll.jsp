@@ -8,13 +8,20 @@
 <meta charset="UTF-8">
 <title> 상품 목록</title>
 </head>
-<body>
-	<h1>상품 목록</h1>	
-	<c:forEach var="list" items="${requestScope.list }">
-		<td>${list.pi_name }</td>		
-		<td>${list.pi_price }</td>		
-		<td>${list.pd_color }</td>
-	</c:forEach>
+<body>		
+	<div class="row" align="center">
+		<c:forEach var="list" items="${requestScope.list }">
+			<h3>${list.pi_name }</h3>
+		</c:forEach>
+		
+		<div class="col-md-4">
+			<c:forEach var="list" items="${requestScope.list }">				
+				<p>${list.pi_price }원	
+				<p>${list.pd_color }
+			</c:forEach>
+		</div>
+	</div>
+	<hr>
 </body>
 </html>
 

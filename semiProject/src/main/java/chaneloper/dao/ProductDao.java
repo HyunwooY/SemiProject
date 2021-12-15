@@ -79,7 +79,7 @@ public class ProductDao {
 	}
 	
 	// 상품 리스트
-	public ArrayList<ProductVo> listAll(int pi_num) {
+	public ArrayList<ProductVo> listAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -89,12 +89,12 @@ public class ProductDao {
 			String sql = "SELECT *"
 					+ " FROM PRODUCT_INFOMATION PI "
 					+ " INNER JOIN PRODUCT_PHOTO PH ON(PI.PI_NUM = PH.PI_NUM)"
-					+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)"
-					+ " WHERE PI.PI_NUM=?";
+					+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)";
+				
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pi_num);
 			rs = pstmt.executeQuery();			
 			if(rs.next()) {
+				int pi_num = rs.getInt("pi_num");
 				String si_id = rs.getString("si_id");
 				String pi_name = rs.getString("pi_name");
 				int pi_price = rs.getInt("pi_price");
@@ -116,36 +116,7 @@ public class ProductDao {
 			JDBC.close(con, pstmt, rs);
 		}		
 	}
-	
-//	public ArrayList<ProductVo> listAll(int pi_num) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			con = JDBC.getCon();
-//			String sql = "SELECT * FROM PRODUCT_INFOMATION WHERE PI_NUM = ?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, pi_num);
-//			rs = pstmt.executeQuery();
-//			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
-//			while(rs.next()) {
-//				String si_id = rs.getString("si_id");
-//				String pi_name = rs.getString("pi_name");
-//				int pi_price = rs.getInt("pi_price");
-//				int pi_count = rs.getInt("pi_count");
-//				Date pi_date = rs.getDate("pi_date");
-//				String pi_category = rs.getString("pi_category");
-//				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, null, null, null, 0, null, null, 0);
-//				list.add(vo);
-//			}
-//			return list;
-//		} catch(SQLException se) {
-//			se.printStackTrace();
-//			return null;
-//		} finally {
-//			JDBC.close(con, pstmt, rs);
-//		}		
-//	}	
+
 
 	// 상품 이미지 등록
 	
