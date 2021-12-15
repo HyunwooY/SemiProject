@@ -30,11 +30,8 @@ public class ProductInsertController extends HttpServlet{
 		String pi_category = req.getParameter("pi_category");
 		String pp_title = req.getParameter("pp_title");
 
-<<<<<<< HEAD
+
 		ProductVo vo = new ProductVo();
-=======
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, null, pi_category, pp_title, pi_num, pi_category, pp_title, pi_count);
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productInsert(vo);
