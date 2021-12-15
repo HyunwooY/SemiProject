@@ -8,6 +8,7 @@
 <script type="text/javascript">
 	let select_color = '';
 	let select_size = '';
+	let size_length = 0;
 	function get_size(e){
 		e.preventDefault();
 		select_color = e.target.innerText;
@@ -17,18 +18,44 @@
 				let text=xhr.responseText;
 				let data=JSON.parse(text);
 				var size_tag = document.getElementById("size");
-				console.log(data.length);
-				for(let i = 0 ;i < data.length; i++){
-					let newA=document.createElement("a");
-					newA.href="#";
-					newA.innerHTML=data[i].size;
-					size_tag.appendChild(newA);
+				
+				if(!!document.getElementsByName("size_name")){
+					for(let i = size_length-1 ;i >= 0; i--){
+						size_tag.removeChild(document.getElementsByClassName("size_name")[i]);
+					}
 				}
+				for(let i = 0 ;i < data.length; i++){
+					
+					if(data[i].count=="매진"){
+						let newA=document.createElement("span");
+						newA.innerHTML="품절";
+						newA.className="size_name"
+						size_tag.appendChild(newA);
+					}else{
+						let newA=document.createElement("a");
+						newA.innerHTML=data[i].size;
+						newA.href="#";
+						newA.className="size_name"
+						newA.onclick="list(event)"
+						size_tag.appendChild(newA);
+					}
+					
+					
+				}
+				console.log(data.length);
+				size_length = data.length;
 			}
 		}
 		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText,true);
 		xhr.send();
 	}
+	
+	
+	function list(e){
+		select_size = e.target.innerHTML;
+		
+	}
+	
 </script>
 
 <div>

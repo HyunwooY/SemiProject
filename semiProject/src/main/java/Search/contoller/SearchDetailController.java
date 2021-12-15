@@ -42,7 +42,7 @@ public class SearchDetailController extends HttpServlet{
             if (!color.contains(vo.getPd_color())) {
             	color.add(vo.getPd_color());
             }
-			//사이즈
+			//사이즈\
             if (!size.contains(vo.getPd_size())) {
             	size.add(vo.getPd_size());
             }
