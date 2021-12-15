@@ -6,11 +6,12 @@
 <link rel="stylesheet"
 	href="https:/maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <body>	
+	<hr>
 		<div id="" class="row" align="center">
 			<c:forEach var="list" items="${requestScope.list }">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<h3>${list.pi_name }</h3>				
-					<p>${list.pi_price }원	
+					<p>${list.pi_price }원
 					<p>${list.pd_color }
 					<p>${list.pi_date }<br>
 					<a href="#" class="btn btn-secondary" role="button">상세 정보</a>
