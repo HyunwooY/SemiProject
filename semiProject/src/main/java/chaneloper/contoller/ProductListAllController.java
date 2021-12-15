@@ -13,7 +13,7 @@ import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/listAll")
-public class ProductListController extends HttpServlet {
+public class ProductListAllController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");		
