@@ -11,19 +11,19 @@
 </head>
 <body>
 	<h1>상품 목록</h1>
-	<c:forEach var="vo" items="${list }">	
-		<p>${vo.pi_num }</p>
-		<p>${vo.si_id }</p>
-		<p>${vo.pi_name }</p>
-		<p>${vo.pi_price }</p>
-		<p>${vo.pi_count }</p>
-		<p>${vo.pi_date }</p>
-		<p>${vo.pi_category }</p>
-		<p>${vo.pp_title }</p>
-		<p>${vo.pd_num }</p>
-		<p>${vo.pd_size }</p>
-		<p>${vo.pd_color }</p>
-		<p>${vo.pd_count }</p>
+	<c:forEach var="list" items="${requestScope.list }">	
+		<td>${list.pi_num }</td>
+		<td>${list.si_id }</td>
+		<td>${list.pi_name }</td>
+		<td>${list.pi_price }</td>
+		<td>${list.pi_count }</td>
+		<td>${list.pi_date }</td>
+		<td>${list.pi_category }</td>
+		<td>${list.pp_title }</td>
+		<td>${list.pd_num }</td>
+		<td>${list.pd_size }</td>
+		<td>${list.pd_color }</td>
+		<td>${list.pd_count }</td>
 	</c:forEach>
 </body>
 </html>
