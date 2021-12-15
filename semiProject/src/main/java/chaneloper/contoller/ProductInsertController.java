@@ -14,23 +14,20 @@ import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/insert")
 public class ProductInsertController extends HttpServlet{
-	
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		req.setAttribute("main", "/seller/productResult.jsp");
-//	}
+
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
-		String si_id = req.getParameter("si_id");
 		String pi_name = req.getParameter("pi_name");
 		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
-		int pi_count = Integer.parseInt(req.getParameter("pi_count"));	
 		String pi_category = req.getParameter("pi_category");
-		String pp_title = req.getParameter("pp_title");
+		String pi_size = req.getParameter("pi_size");
+		String pi_color = req.getParameter("pi_color");
+		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
+		Date pi_regdate = req.getParameter("pi_regdate");
 
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, null, pi_category, pp_title, pi_num, pi_category, pp_title, pi_count);
+		ProductVo vo = new ProductVo(pi_num, pi_name, pi_price, null , pi_size, pi_color, pd_count, pi_regdate);
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productInsert(vo);
