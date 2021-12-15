@@ -19,6 +19,7 @@
 			<c:forEach var="list" items="${requestScope.list }">				
 				<p>${list.pi_price }원	
 				<p>${list.pd_color }
+				<p>${list.pi_date }
 			</c:forEach>
 		</div>
 	</div>

@@ -16,13 +16,12 @@ import chaneloper.vo.ProductVo;
 public class ProductListAllController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");		
+		req.setCharacterEncoding("UTF-8");
 
 		ProductDao dao = ProductDao.getInstance();
-		ArrayList<ProductVo> list = dao.listAll();		
+		ArrayList<ProductVo> list = dao.listAll();
 		
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/seller/productListAll.jsp").forward(req, resp);
-		
+		req.getRequestDispatcher("/seller/productListAll.jsp").forward(req, resp);		
 	}
 }
