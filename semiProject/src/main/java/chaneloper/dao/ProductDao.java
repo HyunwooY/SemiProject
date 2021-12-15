@@ -93,7 +93,7 @@ public class ProductDao {
 				
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();			
-			if(rs.next()) {
+			while(rs.next()) {
 				int pi_num = rs.getInt("pi_num");
 				String si_id = rs.getString("si_id");
 				String pi_name = rs.getString("pi_name");
@@ -125,14 +125,14 @@ public class ProductDao {
 			ArrayList<ProductVo> list = new ArrayList<ProductVo>();
 			try {
 				con = JDBC.getCon();
-				String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PD.PI_NUM"
-						+ " FROM SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_DETAIL PD"
+				String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PD.PI_NUM, PP_TITLE"
+						+ " FROM SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_DETAIL PD, PRODUCT_PHOTO PP"
 						+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID"
-						+ " ORDER BY PI.PI_NUM ASC";					
+						+ " ORDER BY PI.PI_NUM ASC";	
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "si_id");
 				rs = pstmt.executeQuery();			
-				if(rs.next()) {
+				while(rs.next()) {
 					int pi_num = rs.getInt("pi_num");
 					String pi_name = rs.getString("pi_name");
 					int pi_price = rs.getInt("pi_price");
@@ -154,6 +154,28 @@ public class ProductDao {
 				JDBC.close(con, pstmt, rs);
 			}		
 		}
+		
 	// 상품 이미지 등록
+		public int photoInsert(ProductVo vo) {		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "INSERT INTO PRODUCT_INFOMATION VALUES(?, ?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, vo.getPi_num());
+				pstmt.setString(2, vo.getSi_id());
+				pstmt.setString(3, vo.getPi_name());
+				pstmt.setInt(4, vo.getPi_price());
+				pstmt.setInt(5, vo.getPi_count());
+				pstmt.setString(6, vo.getPi_category());
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				se.printStackTrace();
+				return -1;
+			} finally {
+				JDBC.close(con, pstmt, null);
+			}
+		}
 	
 }
