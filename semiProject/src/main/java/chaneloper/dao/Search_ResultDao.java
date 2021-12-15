@@ -206,5 +206,4 @@ public class Search_ResultDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	
 }

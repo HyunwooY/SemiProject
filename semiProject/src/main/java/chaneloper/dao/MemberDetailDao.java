@@ -12,6 +12,7 @@ import chaneloper.vo.OrderHistoryVo;
 import chaneloper.vo.Purchase_historyVo;
 import db.JDBC;
 
+
 public class MemberDetailDao {
 	private static MemberDetailDao instance=new MemberDetailDao();
 	public static MemberDetailDao getInstance() {
@@ -248,10 +249,6 @@ public class MemberDetailDao {
 		}
 	}
 }
-
-
-
-
 
 
 
