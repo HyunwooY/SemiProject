@@ -34,6 +34,7 @@
 					<option value="pi_count" <c:if test="${sort=='인기상품 순' }">selected</c:if>>인기상품 순</option>
 				</select><br>
 			</div>
+<<<<<<< HEAD
 			<input type="submit" value="SEARCH">
 		</form>
 	</fieldset>
@@ -53,4 +54,34 @@
 		색상 : ${vo.pd_color } 
 		<br>
 	</c:forEach>
+=======
+			<input type="submit" value="SEARCH" id="searchBar">
+		</form>
+	</fieldset>
+</div>
+<div id="searchResult" > <!-- 조회된 갯수 출력 -->
+	<div style= "text-align: center;">
+		<!-- ${total} --> ITEMS
+	</div>
+</div>
+<div id="searchProducts"> <!-- 조회된 제품들 -->
+<ul class="list">
+	<c:forEach var="vo" items="${requestScope.list }">
+	<li class="item">
+		<div class="box">
+			<p class="Img">
+				<a href="#"> <img src=""> </a>
+			</p>
+			<div class="prdInfo">
+				<p class="name">${vo.pi_name }</p>
+				<p class="price">${vo.pi_price }</p>
+				<p class="tag"></p>
+				<p class="color">${vo.pd_color } </p>				
+			</div>
+		</div>
+	</li>
+	</c:forEach>
+
+</ul>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 </div>

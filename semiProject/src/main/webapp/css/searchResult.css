@@ -5,6 +5,7 @@ fieldset {
 #searchbox, #searchResult {
 	margin: auto; width:630px; height: 300px;
 }
+<<<<<<< HEAD
 #items {
 	width:500px; height: 40px;
 }
@@ -12,4 +13,64 @@ fieldset {
 	width: 410px;
     border: 1px solid #ddd;
     height: 40px!important;
+=======
+div#items {
+	width:500px; height: 40px;
+}
+.searchbox #CATEGORY,#keyword,#sort {
+	width: 410px;
+    border: 1px solid #ddd;
+    height: 40px!important;
+}
+li {
+    list-style: none;
+}
+ul.list li.item {
+    display: inline-block;
+    margin: 20px 0px 70px;
+    border-right: 0px solid rgba(255,255,255,0);
+    border-left: 0px solid rgba(255,255,255,0);
+    box-sizing: border-box;
+    color: #757575;
+    vertical-align: top;
+}
+#searchBar {
+	width: 175px; height: 50px;
+}
+body h1{
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-size: 24px;
+  font-style: bold;
+  color: #545454;
+}
+
+.searchProducts {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 740px;
+  height: 1000px;
+  text-align: center;
+}
+
+.searchProducts img{
+  width: 250px;
+  height: 310px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.searchProducts a{
+  text-decoration: none;
+  color: black;
+  float: left;
+  font-size: 16px;
+}
+
+.price{
+  margin-top: 4px;
+  margin-bottom: 80px;
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 }

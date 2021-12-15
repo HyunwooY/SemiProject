@@ -42,17 +42,10 @@
 				<a href="${pageContext.request.contextPath }/member/showorder">주문내역</a><br>
 				<a href="${pageContext.request.contextPath }/member/showstate">반품/교환/취소내역</a>
 			</div>
-<<<<<<< HEAD
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
 				<a href="${pageContext.request.contextPath }/member/mypage">개인정보확인/수정</a><br>
 				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
-=======
-			<div id="my" class="menu">
-				<h4>MODIFY</h4>
-				<a href="${pageContext.request.contextPath }/member/modify">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>

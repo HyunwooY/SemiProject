@@ -12,6 +12,7 @@ import chaneloper.vo.OrderHistoryVo;
 import chaneloper.vo.Purchase_historyVo;
 import db.JDBC;
 
+
 public class MemberDetailDao {
 	private static MemberDetailDao instance=new MemberDetailDao();
 	public static MemberDetailDao getInstance() {
@@ -230,7 +231,11 @@ public class MemberDetailDao {
 					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
 					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? "
 					+ "and ph_regdate>=? and ph_regdate<=?and "
+<<<<<<< HEAD
 					+ "(ph_state='취소'or ph_state='환불' or ph_state='교환')");
+=======
+					+ "(ph_state='취소' or ph_state='환불' or ph_state='교환')");
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			ps.setString(1, id);
 			ps.setDate(2, start);
 			ps.setDate(3, end);
@@ -248,10 +253,6 @@ public class MemberDetailDao {
 		}
 	}
 }
-
-
-
-
 
 
 
