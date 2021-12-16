@@ -27,7 +27,7 @@ public class ProductInsertController extends HttpServlet{
 		int pi_num = Integer.parseInt(multi.getParameter("pi_num"));
 		String si_id = multi.getParameter("si_id");
 		String pi_name = multi.getParameter("pi_name");
-		int pi_price = Integer.parseInt(multi.getParameter("pi_price"));	
+		int pi_price = Integer.parseInt(multi.getParameter("pi_price"));
 		String pd_size = multi.getParameter("pd_size");
 		String pd_color = multi.getParameter("pd_color");
 
