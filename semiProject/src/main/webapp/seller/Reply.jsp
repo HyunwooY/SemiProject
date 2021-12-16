@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>등록된 상품</h2>
-<table border="1" width="600">
-	<tr>
-		<td>
-</table>
+
 </body>
 </html>
