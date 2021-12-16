@@ -22,11 +22,11 @@ public class InsertAddrController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id = (String)req.getSession().getAttribute("id");
-		String nickname = req.getParameter("nickname");
+		String nickname = req.getParameter("addrname");
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String addr = req.getParameter("addr");
-		AddressVo vo = new AddressVo(nickname, id , name, phone, addr);
+		AddressVo vo = new AddressVo(id, name, nickname, phone, addr);
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.insertaddr(vo);
 		if(n>0) {
