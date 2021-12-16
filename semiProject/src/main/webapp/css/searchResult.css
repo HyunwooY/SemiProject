@@ -5,23 +5,15 @@ fieldset {
 .searchbox, .searchResult, .searchProducts {
 	margin: auto; width:630px; height: 300px; display: table;
 }
+.items {
+	width:500px; height: 40px;
+}
+.searchbox #CATEGORY,#keyword1,#sort {
+	width: 410px;
+    border: 1px solid #ddd;
+    height: 40px!important;
+}
 
-#items {
-	width:500px; height: 40px;
-}
-.searchbox #CATEGORY,#keyword,#sort {
-	width: 410px;
-    border: 1px solid #ddd;
-    height: 40px!important;
-}
-div#items {
-	width:500px; height: 40px;
-}
-.searchbox #CATEGORY,#keyword,#sort {
-	width: 410px;
-    border: 1px solid #ddd;
-    height: 40px!important;
-}
 li {
     list-style: none;
 }

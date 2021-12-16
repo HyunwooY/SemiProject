@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#keyword {
+		width : 200px; height: 20px;
+		position: absolute; 
+		left: 1100px;
+		top: 200px;
+	}
+</style>
 <script type="text/javascript">
 	window.onload=function () {
 		var keyword=document.getElementById("keyword");
