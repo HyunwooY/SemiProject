@@ -90,7 +90,6 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <div id="main">
 	<jsp:include page="${requestScope.main }"/> 
 </div>
-
 <div id="footer">
 </div>
 </div>

@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import chaneloper.vo.AdressVo;
+import chaneloper.vo.AddressVo;
 import db.JDBC;
 
 public class PurchaseDao {
-	public int purchase(AdressVo vo, String id, String ph_type) {
+	public int purchase(AddressVo vo, String id, String ph_type) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
