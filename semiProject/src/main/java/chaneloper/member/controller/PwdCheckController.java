@@ -22,7 +22,7 @@ public class PwdCheckController extends HttpServlet{
 		String pwd = req.getParameter("pwd");
 		MemberDao dao = MemberDao.getInstance();
 		if(dao.login(id, pwd)) {
-			MemberVo vo = dao.select(id, pwd);
+			MemberVo vo = dao.select(id);
 			if(vo==null) {
 				req.setAttribute("result", "fail");
 			}else {
