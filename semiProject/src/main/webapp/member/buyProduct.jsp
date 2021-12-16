@@ -86,16 +86,16 @@ th, tr{padding-left:0px;padding-right:0px}
 		</table>
 	</div>
 	<div id="payinfo" class="div">
-		<h3>결제정보</h3>
+		<h3>상품정보</h3>
 		<table>
 			<tr>
 				<th colspan="4"><!-- 판매자 정보 -->a</th>
 			</tr>
 			<tr>
-				<td><!-- 사진 -->a</td>
-				<td><!-- 상품명 -->a</td>
-				<td><!-- 수량 -->a</td>
-				<td><!-- 총수량 -->a</td>
+				<td><!-- 사진 -->사진</td>
+				<td><!-- 상품명 -->상품명</td>
+				<td><!-- 수량 -->수량</td>
+				<td><!-- 총금액 -->총금액</td>
 			</tr>
 		</table>
 	</div>
