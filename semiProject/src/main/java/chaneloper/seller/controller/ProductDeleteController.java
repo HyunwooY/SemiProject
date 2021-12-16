@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
-@WebServlet("/seller/sellerpage")
+@WebServlet("/seller/delete")
 public class ProductDeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
