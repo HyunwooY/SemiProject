@@ -6,10 +6,6 @@
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
-#info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
-#info span{margin:20px}
-#info #short{top:20px}
-.r{float:right;position:relative;top:-20px}
 #detailmain{width:100%;height:600px;}
 #membermenu{float:left;width:15%;height:500px;padding-top:20px}
 #showtitle{float:left;width:85%;height:50px;padding-top:20px}
@@ -20,7 +16,8 @@
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
 <div id="mdetail">
-	<div id="detailmain">		
+	<div id="detailmain">	
+		<div id="membermenu">
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
 				<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br>
@@ -45,7 +42,7 @@
 				<h4>INSERT PRODUCT</h4>
 				<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>
 			</div>
-			
+		</div>
 		<div id="showtitle">
 			<span>${requestScope.detailtitle }</span>
 		</div>
