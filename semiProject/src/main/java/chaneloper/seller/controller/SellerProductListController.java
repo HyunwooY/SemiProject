@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.ProductDao;
+import chaneloper.dao.SellerDao;
 import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/productList")
@@ -20,8 +20,8 @@ public class SellerProductListController extends HttpServlet{
 		
 		String si_id = req.getParameter("si_id");
 
-		ProductDao dao = ProductDao.getInstance();
-		ArrayList<ProductVo> list = dao.selectList(si_id);
+		SellerDao dao = SellerDao.getInstance();
+		ArrayList<ProductVo> list = dao.productList(si_id);
 
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/seller/productList.jsp").forward(req, resp);

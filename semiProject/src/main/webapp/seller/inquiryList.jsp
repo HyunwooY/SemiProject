@@ -26,10 +26,10 @@
 			<td>${vo.pi_num }</td>
 			<td>${vo.ih_title }</td>
 			<td>${vo.ih_question }</td>
-			<td>${vo.ih_answer }</td>	
-			<hr>
+			<td>${vo.ih_answer }</td>			
 		</tr>
 	</c:forEach>
+	<hr>
 	</table>
 	
 	<!-- 페이징 처리 -->

@@ -7,7 +7,7 @@ import java.sql.Date;
  *
  */
 public class ProductVo {
-	//product_infomation
+	//product_infomation 테이블
 	private int pi_num;		// 상품번호
 	private String si_id;		// 사업자 아이디
 	private String pi_name;		// 상품명
@@ -16,12 +16,12 @@ public class ProductVo {
 	private Date pi_date;		// 등록일
 	private String pi_category;		// 분류
 	
-	// product_detail
+	// product_detail 테이블
 	private String pd_size;		// 상품 사이즈
 	private String pd_color;		// 상품 색상
 	private int pd_count;			// 제품수량
 	
-	// product_photo
+	// product_photo 테이블
 	private String pp_title;		// 사진 파일 이름
 	
 

@@ -11,18 +11,15 @@
 	<div class="row" align="center">
 		<h1>판매자 상품 목록</h1>
 		<c:forEach var="list" items="${requestScope.list }">
-			<h3>${list.pi_name }</h3>
+			<div class="col-md-2">
+				<h3>${list.pi_name }</h3>	
+				<p>${list.pi_num }
+				<p>${list.pd_size }
+				<p>${list.pd_color }
+				<p>${list.pd_count }
+				<p>${list.pi_price }원	
+			</div>
 		</c:forEach>
-		
-		<div class="col-md-4">
-			<c:forEach var="list" items="${requestScope.list }">
-				상품번호: <p>${list.pi_num }
-				사이즈: <p>${list.pd_size }
-				색상: <p>${list.pd_color }
-				재고수: <p>${list.pd_count }
-				가격: <p>${list.pi_price }원	
-			</c:forEach>
-		</div>
 	</div>
 	<hr>
 </body>

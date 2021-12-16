@@ -23,7 +23,7 @@
 		<div id="sellermenu">	
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
-				<a href="${pageContext.request.contextPath }/seller/orderlist.jsp">고객주문내역</a><br></div>
+				<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br></div>
 			<div id="modify" class="menu">
 				<h4>MODIFY</h4>
 				<a href="${pageContext.request.contextPath }/member/mypage">판매자 정보확인/수정</a><br>
