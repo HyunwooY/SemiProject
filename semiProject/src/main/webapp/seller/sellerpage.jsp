@@ -34,7 +34,7 @@
 			</div>
 			<div id="update" class="menu">
 				<h4>UPDATED LIST</h4>
-				<a href="${pageContext.request.contextPath }/seller/updatedlist.jsp">등록된상품</a><br>
+				<a href="${pageContext.request.contextPath }/seller/productList">등록된상품</a><br>
 		<div id="showtitle">
 			<span>${requestScope.detailtitle }</span>
 		</div>

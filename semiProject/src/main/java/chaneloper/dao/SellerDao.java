@@ -174,7 +174,7 @@ public class SellerDao {
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
 				String pp_title = rs.getString("pp_title");
-				ProductVo vo = new ProductVo(pi_num, null, pi_name, pi_price, 0, null, null, pd_size, pd_color, pd_count, pp_title);
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, null, pd_size, pd_color, pd_count, pp_title);
 				list.add(vo);
 			}
 			return list;
