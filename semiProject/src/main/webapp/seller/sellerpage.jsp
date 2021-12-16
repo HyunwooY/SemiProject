@@ -19,8 +19,7 @@
 .menu h4{margin-bottom:5px}
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
-<div id="ac">
-<ul id="account">
+<div id="mdetail">
 	<div id="detailmain">		
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
@@ -48,7 +47,5 @@
 			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 		</div>
-	</div>
-	
-</ul>
+	</div>	
 </div>
