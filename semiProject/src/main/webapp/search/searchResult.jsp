@@ -11,7 +11,7 @@
 	</c:otherwise>
 </c:choose>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-<div id="searchbox">
+<div class="searchbox">
 	<fieldset>
 		<form method="get" action="${cp }/search/search">
 			<div id="items">
@@ -30,38 +30,64 @@
 			<div id="items">
 				<select id="sort" name="sort">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>:::기준선택:::</option>
-					<option value="pi_date" <c:if test="${sort=='신상품 순' }">selected</c:if>>신상품 순</option>
-					<option value="pi_count" <c:if test="${sort=='인기상품 순' }">selected</c:if>>인기상품 순</option>
+					<option value="pi_date" <c:if test="${sort=='pi_date' }">selected</c:if>>신상품 순</option>
+					<option value="pi_count" <c:if test="${sort=='pi_count' }">selected</c:if>>인기상품 순</option>
 				</select><br>
 			</div>
-
 			<input type="submit" value="SEARCH" id="searchBar">
 		</form>
 	</fieldset>
 </div>
-<div id="searchResult" > <!-- 조회된 갯수 출력 -->
-	<div style= "text-align: center;">
-		<!-- ${total} --> ITEMS
-	</div>
-</div>
-<div id="searchProducts"> <!-- 조회된 제품들 -->
-<ul class="list">
+<div id="searchProducts"> <!-- 조회된 제품들 10개씩-->
 	<c:forEach var="vo" items="${requestScope.list }">
-	<li class="item">
-		<div class="box">
-			<p class="Img">
-				<a href="#"> <img src=""> </a>
-			</p>
-			<div class="prdInfo">
-				<p class="name">${vo.pi_name }</p>
-				<p class="price">${vo.pi_price }</p>
-				<p class="tag"></p>
-				<p class="color">${vo.pd_color } </p>				
+	<ul class="list">
+		<li class="item"> <!-- 상품 1 -->
+			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
+				<p class="Img"> <!-- 이미지 -->
+					<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
+					<img src="${vo.pp_title }">
+					</a>
+				</p>
+				<div class="prdInfo"> <!-- 상품 세부정보 -->
+					<p class="name">
+						<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
+						<span>${vo.pi_name }</span>
+						</a>
+					</p>
+					<p class="price">${vo.pi_price }</p>
+					<p class="tag">
+						<c:forEach var="t" items="${requestScope.tag }">
+						${t.tag }</p>
+						</c:forEach>
+					<div class="color"> <!-- 색상 div -->
+						<div class="colorchip">
+							<ul>
+								<li style="background-color:${vo.pd_color};" class="chips"> </li>
+							</ul>
+						</div>
+					</div> 				
+				</div>
 			</div>
-		</div>
-	</li>
+		</li>
+	</ul>
 	</c:forEach>
+</div>
 
-</ul>
-
+<div><!-- 페이징 처리 하는부분 -->
+	<c:if test="${startPage>10 }">
+		<a href="${cp }/search/list?pageNum=${startPage-1}">[이전페이지]</a>
+	</c:if>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
+				<a href="${cp }/search/list?pageNum=${i}"><span style="color:red">${i }</span></a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/search/list?pageNum=${i}"><span style="color:gray">${i }</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:if test="${endPage<pageCount }">
+		<a href="${cp }/search/list?pageNum=${endPage+1}">[다음페이지]</a>
+	</c:if>
 </div>

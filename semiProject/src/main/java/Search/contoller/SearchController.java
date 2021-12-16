@@ -34,13 +34,9 @@ public class SearchController extends HttpServlet{
 				sort=null;
 			}
 		}
-
 		Search_ResultDao dao=new Search_ResultDao();
 		
 		//검색탭으로 검색할때
-		
-		
-		
 
 		//세부페이지로 이동후 검색할때
 		if(keyword!=null) {
