@@ -19,15 +19,12 @@ public class SellerProductListController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String si_id = req.getParameter("si_id");
-
+		System.out.println(si_id);
 		SellerDao dao = SellerDao.getInstance();
-		ArrayList<ProductVo> productList = dao.productList(si_id);
-		
-		for(int i=0; i>productList.size(); i++) {
-			ProductVo tt = productList.get(i);
-			System.out.println("d:" + tt);
-		}
+		ArrayList<ProductVo> productList = dao.productList(si_id);				
+		System.out.println(productList);
 		req.setAttribute("productList", productList);
-		req.getRequestDispatcher("/seller/productList.jsp").forward(req, resp);
+		req.setAttribute("detailmain", "/seller/productList.jsp");
+		req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
 	}
 }

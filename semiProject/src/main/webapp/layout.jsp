@@ -18,6 +18,9 @@
 	window.onload=function () {
 		var keyword=document.getElementById("keyword");
 		hideText();
+		if(${requestScope.lcode==false}){
+			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
+		}
 	}
 	function showText(e) {
 		var keyword=document.getElementById("keyword");
@@ -62,7 +65,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 					<li><a href="${pageContext.request.contextPath }/member/memberDetail">마이페이지</a></li>
 				</c:when>
 				<c:when test="${sessionScope.radio=='판매사업자' }">
-					<li><a href="${pageContext.request.contextPath }/seller/">마이페이지</a></li>
+					<li><a href="${pageContext.request.contextPath }/seller/sellerpage">마이페이지</a></li>
 				</c:when>
 			</c:choose>
 			<li><a href="">장바구니</a></li>
@@ -87,7 +90,6 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <div id="main">
 	<jsp:include page="${requestScope.main }"/> 
 </div>
-
 <div id="footer">
 </div>
 </div>
