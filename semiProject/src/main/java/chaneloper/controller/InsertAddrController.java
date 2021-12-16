@@ -30,7 +30,7 @@ public class InsertAddrController extends HttpServlet {
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.insertaddr(vo);
 		if(n>0) {
-			req.setAttribute("result", "success");
+			req.setAttribute("result", "success"); 
 			req.setAttribute("detailmain", "/member/insertAddress.jsp");
 		}else {
 			req.setAttribute("result", "fail");
