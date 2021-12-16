@@ -1,4 +1,4 @@
-package chaneloper.controller;
+package chaneloper.seller.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/productList")
-public class SellerProductList extends HttpServlet{
+public class SellerProductListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");		
