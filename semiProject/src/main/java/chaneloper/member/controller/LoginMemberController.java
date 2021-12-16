@@ -33,7 +33,7 @@ public class LoginMemberController extends HttpServlet {
 				req.getSession().setAttribute("id", id);
 			}else {
 				req.setAttribute("lcode", false);
-				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); // 추후 script로 alert구현 요망.
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); //추후 script로 alert구현 요망.
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
 		}else if(radio.equals("판매사업자")) {
@@ -44,7 +44,7 @@ public class LoginMemberController extends HttpServlet {
 				req.getSession().setAttribute("id", id);
 			}else {
 				req.setAttribute("lcode", false);
-				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");// 추후 script로 alert구현 요망.
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); // 추후 script로 alert구현 요망.
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
 		}		

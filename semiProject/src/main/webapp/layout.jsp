@@ -38,6 +38,11 @@
 			}
 		}	
 	}
+	window.onload=function(){
+		if(${requestScope.lcode==false}){
+			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
+		}
+	}
 </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
 <style type="text/css">

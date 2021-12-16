@@ -6,25 +6,21 @@
 .btn2,.btn3,.btn4,.btn5{border-top-left:-5px;border-bottom-left:-5px}
 #start,#end{height:18px;position:relative;top:-2px}
 #table{width:1000px;position:relative;top:10px;text-align:center}
-<<<<<<< HEAD
-=======
 #table {margin:0px;padding:0px}
 th, tr{padding-left:0px;padding-right:0px}
-
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 </style>
 <script>
 
 </script>
 <div>
-	<form action="${pageContext.request.contextPath }/member/showorder">
+	<form method="get" action="${pageContext.request.contextPath }/member/showorder">
 		<input type="button" value="오늘" onclick="set(0)" class="btn1">
 		<input type="button" value="1주일" onclick="setweek(7)" class="btn2">
 		<input type="button" value="1개월" onclick="set(1)" class="btn3">
 		<input type="button" value="3개월" onclick="set(3)" class="btn4">
 		<input type="button" value="6개월" onclick="set(6)" class="btn5">	
 		<input type="date" name="start" id="start" value="${requestScope.start }">
-		<input type="date" name="end" id="end" value="${requestScope.start }">
+		<input type="date" name="end" id="end" value="${requestScope.end }">
 		<input type="submit" value="조회">
 	</form>
 </div>

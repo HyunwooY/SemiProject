@@ -81,22 +81,21 @@ public class MemberDao {
 		}
 	}
 	//내정보 확인
-	public MemberVo select(String id, String pwd) {
+	public MemberVo select(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql ="select * from member_infomation where mi_id=? and mi_pwd=?";
+			String sql ="select * from member_infomation where mi_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				String name = rs.getString("mi_name");
 				String email = rs.getString("mi_email");
 				String phone = rs.getString("mi_phone");
-				MemberVo member = new MemberVo(id, pwd, name, email, phone);
+				MemberVo member = new MemberVo(id, null, name, email, phone);
 				return member;
 			}
 			return null;
