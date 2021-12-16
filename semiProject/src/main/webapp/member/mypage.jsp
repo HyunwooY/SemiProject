@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	#form2{
+		position:relative;
+		left: 40px;
+		bottom: 30px;
+		margin: auto;
+	}
+</style>
 <script>
 	window.onload = function(){
 		if(${requestScope.result=='success'}){
@@ -19,12 +27,12 @@
 	<input type="text" name="phone"  value="${vo.phone}" placeholder=" -없이 입력해 주세요"><br>
 	<label for="email" id="email">이메일</label>
 	<input type="text" name="email"  value="${vo.email}" placeholder=" 이메일"><br>
-	
+	<h4>기본 배송지 정보</h4>
 	<label for="saname" id="saname">수령인</label>
-	<input type="text" name="saname"  value="${map.sanickname }" placeholder=" 수령인"><br>
+	<input type="text" name="saname"  value="${addrvo.nickname}" placeholder=" 수령인"><br>
 	<label for="saphone" id="saphone">휴대폰번호</label>
-	<input type="text" name="saphone"  value="${map.saphone }" placeholder=" 휴대폰번호"><br>
+	<input type="text" name="saphone"  value="${addrvo.saphone}" placeholder=" 휴대폰번호"><br>
 	<label for="saaddr" id="saaddr">주소</label>
-	<input type="text" name="saaddr"  value="${map.saaddr }" placeholder=" 주소"><br><br>
+	<input type="text" name="saaddr"  value="${addrvo.saaddr}" placeholder=" 주소"><br><br>
 	<input type="submit" value="수정"><input type="reset" value="취소"> 
 </form>

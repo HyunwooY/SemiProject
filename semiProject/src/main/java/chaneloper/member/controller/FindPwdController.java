@@ -40,7 +40,7 @@ public class FindPwdController extends HttpServlet{
 			PrintWriter pw = resp.getWriter();
 			pw.print(json);
 		}else if(radio.equals("판매사업자")) {
-			String num = req.getParameter("si_num");
+			String num = req.getParameter("id");
 			String email = req.getParameter("email");
 			SellerDao dao = SellerDao.getInstance();
 			String mi_pwd = dao.sellerFindPwd(num, email);

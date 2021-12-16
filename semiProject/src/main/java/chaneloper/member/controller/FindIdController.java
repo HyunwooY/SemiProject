@@ -40,12 +40,12 @@ public class FindIdController extends HttpServlet{
 			PrintWriter pw = resp.getWriter();
 			pw.print(json);
 		}else if(radio.equals("판매사업자")) {
-			String num = req.getParameter("si_num");
-			String phone = req.getParameter("mi_phone");
-			String email = req.getParameter("mi_email");
+			String num = req.getParameter("name");
+			String phone = req.getParameter("email");
 			SellerDao dao = SellerDao.getInstance();
-			String si_id = dao.sellerFindId(num, phone, email);
+			String si_id = dao.sellerFindId(num, phone);
 			JSONObject json = new JSONObject();
+			
 			if(si_id!=null) {
 				json.put("find", true);
 				json.put("id", si_id);
