@@ -24,7 +24,7 @@ public class SellerProductListController extends HttpServlet {
 		ArrayList<ProductVo> productList = dao.productList(si_id);				
 		System.out.println(productList);
 		req.setAttribute("productList", productList);
-		req.setAttribute("main", "/seller/productList.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		req.setAttribute("detailmain", "/seller/productList.jsp");
+		req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
 	}
 }
