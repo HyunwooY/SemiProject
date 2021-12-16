@@ -56,11 +56,15 @@ public class Search_ResultDao {
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
 				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY==null) {
-				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a "
-						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
-						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "ORDER BY a." + sort;
+				sql = "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count "
+						+ " from product_infomation pi, product_detail pd, product_photo pp"
+						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " order by "+ sort +" desc";
+//				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM (select * from product_infomation order by ? desc) a "
+//						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
+//						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
+//						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\'";
+//						+ "ORDER BY a." + sort;
 				pstmt=con.prepareStatement(sql);
 			}else if(sort==null) {
 				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a "
@@ -70,12 +74,17 @@ public class Search_ResultDao {
 						+ "AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'";
 				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY!=null&&sort!=null) {
-				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE,c.PP_TITLE FROM PRODUCT_INFOMATION a "
-						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
-						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\' "
-						+ " ORDER BY a." + sort;
+				sql = "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count, pi_category "
+						+ " from product_infomation pi, product_detail pd, product_photo pp"
+						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " AND pi_category = "+ "\'"+ CATEGORY+ "\'"
+						+ " order by "+ sort +" desc";
+//				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE,c.PP_TITLE FROM (select * from product_infomation order by ? desc) a "
+//						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
+//						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
+//						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
+//						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\'";
+//						+ " ORDER BY a." + sort;
 				pstmt=con.prepareStatement(sql);
 			}
 			
