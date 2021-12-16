@@ -1,4 +1,4 @@
-package chaneloper.controller;
+package chaneloper.seller.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +44,7 @@ public class InquiryHistoryListController extends HttpServlet{
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
 		
+		req.setAttribute("detailmain", "Sellerpage.jsp");
 		req.getRequestDispatcher("/seller/inquiryList.jsp").forward(req, resp);
 	}
 }

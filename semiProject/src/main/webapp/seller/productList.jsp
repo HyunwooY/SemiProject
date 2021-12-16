@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +10,16 @@
 <body>
 	<div class="row" align="center">
 		<h1>판매자 상품 목록</h1>
-		<c:forEach var="list" items="${requestScope.list }">
-			<h3>${list.pi_name }</h3>
+		<c:forEach var="productList" items="${requestScope.productList }">
+			<div class="col-md-2">
+				<h3>${productList.pi_name }</h3>
+				<p>${productList.pi_num }
+				<p>${productList.pd_size }
+				<p>${productList.pd_color }
+				<p>${productList.pd_count }
+				<p>${productList.pi_price }원
+			</div>
 		</c:forEach>
-		
-		<div class="col-md-4">
-			<c:forEach var="list" items="${requestScope.list }">
-				상품번호: <p>${list.pi_num }
-				사이즈: <p>${list.pd_size }
-				색상: <p>${list.pd_color }
-				재고수: <p>${list.pd_count }
-				가격: <p>${list.pi_price }원	
-			</c:forEach>
-		</div>
 	</div>
 	<hr>
 </body>
