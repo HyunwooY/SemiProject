@@ -199,7 +199,7 @@ public class Search_ResultDao {
 		ResultSet rs = null;
 		JSONArray jsonarray = new JSONArray();
 		try {
-			String sql="select pd_size,pd_count from product_detail where pi_num = ? and pd_color = ?";
+			String sql="select pd_size,pd_count from product_detail where pi_num = ? and pd_color = ? order by pd_size";
 			con = JDBC.getCon();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, pi_num);

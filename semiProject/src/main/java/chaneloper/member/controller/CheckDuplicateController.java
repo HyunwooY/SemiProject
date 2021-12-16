@@ -1,4 +1,4 @@
-package chaneloper.contoller;
+package chaneloper.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
