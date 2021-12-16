@@ -161,10 +161,10 @@ public class SellerDao {
 			con = JDBC.getCon();
 			String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP_TITLE"
 					+ " FROM SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_PHOTO PP, PRODUCT_DETAIL PD"
-					+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID"
+					+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID AND PI.PI_NUM = PD.PI_NUM AND PD.PI_NUM = PP.PI_NUM"
 					+ " ORDER BY PI.PI_NUM ASC";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "si_id");
+			pstmt.setString(1, si_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int pi_num = rs.getInt("pi_num");
@@ -181,6 +181,8 @@ public class SellerDao {
 		} catch(SQLException se) {
 			se.printStackTrace();
 			return null;
+		} finally {
+			JDBC.close(con, pstmt, rs);
 		}
 	}
 	

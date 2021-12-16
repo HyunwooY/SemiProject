@@ -26,6 +26,7 @@ ul.list {
     margin: 0px 0 0;
 }
 li .chips{
+	display: inline;
 	float: left;
 	width: 15px;
     height: 15px;
@@ -105,11 +106,9 @@ img{
 	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
-				<p class="Img"> <!-- 이미지 -->
-					<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
-					<img src="${vo.pp_title }">
-					</a>
-				</p>
+				<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
+				<img src="${cp }/${vo.pp_title}">
+				</a>
 				<div class="prdInfo"> <!-- 상품 세부정보 -->
 					<p class="name">
 						<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
@@ -118,8 +117,10 @@ img{
 					</p>
 					<p class="price">${vo.pi_price }</p>
 					<p class="tag">
-						<c:forEach var="t" items="${requestScope.tag }">
-						${t.tag }
+						<c:forEach var="t" items="${tag }" >
+							<c:if test="${t.pi_num==vo.pi_num }">
+								${t.tag } 
+							</c:if> 
 						</c:forEach>
 					</p>
 					<div class="color"> <!-- 색상 div -->
