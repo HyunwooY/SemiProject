@@ -1,4 +1,4 @@
-package chaneloper.contoller;
+package chaneloper.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -3,26 +3,22 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> 상품 목록</title>
-</head>
-<body>		
-	<div class="row" align="center">
-		<c:forEach var="list" items="${requestScope.list }">
-			<h3>${list.pi_name }</h3>			
-		</c:forEach>
-		
-		<div class="col-md-4">
-			<c:forEach var="list" items="${requestScope.list }">				
-				<p>${list.pi_price }원	
-				<p>${list.pd_color }
-			</c:forEach>
-		</div>
-	</div>
+<link rel="stylesheet"
+	href="https:/maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
+<body>	
 	<hr>
-</body>
-</html>
+		<div id="" class="row" align="center">
+			<c:forEach var="list" items="${requestScope.list }">
+				<div class="col-md-2">
+					<h3>${list.pi_name }</h3>
+					<p>${list.pi_price }원
+					<p>${list.pd_color }
+					<p>${list.pi_date }<br>
+					<a href="#" class="btn btn-secondary" role="button">상세 정보</a>
+				</div>
+		</c:forEach>
+		</div>
+	<hr>
+
 

@@ -18,12 +18,17 @@
 	상품명<br>
 	<input type="text" name="pi_name"><br>
 	가격<br>
-	<input type="text" name="pi_price"><br>
-	판매수인데잘못넣음<br>
-	<input type="text" name="pi_count"><br>
+	<input type="text" name="pi_price"><br>	
 	분류<br>
 	<input type="text" name="pi_category"><br>
-	
+	사이즈<br>
+	<input type="text" name="pd_size"><br>
+	색상<br>
+	<input type="text" name="pd_color"><br>
+	제품수량<br>
+	<input type="text" name="pd_count"><br>
+	이미지<br>
+	<input type="file" name="pp_title"><br>
 	
 	<input type="submit" value="등록">
 	<input type="reset" value="취소"><br>

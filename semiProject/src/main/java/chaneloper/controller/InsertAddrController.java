@@ -1,4 +1,4 @@
-package chaneloper.contoller;
+package chaneloper.controller;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import chaneloper.dao.MemberDao;
 
 @WebServlet("/member/insertaddr")
 public class InsertAddrController extends HttpServlet {
@@ -17,6 +19,10 @@ public class InsertAddrController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		String id = (String)req.getSession().getAttribute("id");
+		String saname = req.getParameter("saname");
+		MemberDao dao = MemberDao.getInstance();
 		
 	}
 }

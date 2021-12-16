@@ -1,7 +1,6 @@
-package chaneloper.contoller;
+package chaneloper.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -10,15 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
-@WebServlet("/seller/insert")
-public class ProductInsertController extends HttpServlet{
-
+@WebServlet("/seller/update")
+public class ProductUpdateController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -28,30 +23,19 @@ public class ProductInsertController extends HttpServlet{
 		String pi_category = req.getParameter("pi_category");
 		String pi_size = req.getParameter("pi_size");
 		String pi_color = req.getParameter("pi_color");
-		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
+		int pd_count = Integer.parseInt(req.getParameter("pd_count"));	
 
 		ProductVo vo = new ProductVo();
 		ProductDao dao = ProductDao.getInstance();
 		
-		
-		
-		
-		String pp_title = req.getParameter("pp_title");
-		MultipartRequest multi = new MultipartRequest(req, "D:\\2107\\SemiProject\\images", 5*1024*1024, "utf-8",
-								new DefaultFileRenamePolicy());		
-		String filename = multi.getFilesystemName(pp_title);	
-		
-		
-		
-		int n = dao.productInsert(vo);
-		if(n>0) {
+		int n = dao.(vo);
+		if(n > 0) {
 			req.setAttribute("productCode", "success");
 			req.setAttribute("main", "/seller/productResult.jsp");
 		} else {
 			req.setAttribute("productCode", "fail");
 			req.setAttribute("main", "/seller/productResult.jsp");
 		}
-		
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

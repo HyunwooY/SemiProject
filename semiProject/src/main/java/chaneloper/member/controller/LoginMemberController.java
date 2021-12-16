@@ -1,4 +1,4 @@
-package chaneloper.contoller;
+package chaneloper.member.controller;
 
 import java.io.IOException;
 
@@ -29,20 +29,22 @@ public class LoginMemberController extends HttpServlet {
 			MemberDao dao=MemberDao.getInstance();
 			if(dao.login(id, pwd)) {
 				req.setAttribute("lcode", true);
+				req.getSession().setAttribute("radio", radio);
 				req.getSession().setAttribute("id", id);
 			}else {
 				req.setAttribute("lcode", false);
-				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); // 추후 script로 alert구현 요망.
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
 		}else if(radio.equals("판매사업자")) {
 			SellerDao dao=SellerDao.getInstance();
 			if(dao.sellerLogin(id, pwd)) {
 				req.setAttribute("lcode", true);
+				req.getSession().setAttribute("radio", radio);
 				req.getSession().setAttribute("id", id);
 			}else {
 				req.setAttribute("lcode", false);
-				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");
+				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다.");// 추후 script로 alert구현 요망.
 			}
 			req.getRequestDispatcher("/layout").forward(req, resp);
 		}		
