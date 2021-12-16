@@ -13,8 +13,7 @@ public class Purchase_historyVo {
 	private String ph_name;
 	
 	
-	public Purchase_historyVo() {
-	}
+	public Purchase_historyVo() {}
 	
 	public Purchase_historyVo(int ph_num, String mi_id, int pd_num, String ph_type, String ph_state, Date ph_regdate,
 			String ph_phone, String ph_name) {
