@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 @WebServlet("/member/modify")
 public class MemberModifyController extends HttpServlet{
@@ -39,25 +40,22 @@ public class MemberModifyController extends HttpServlet{
 		String phone = req.getParameter("phone");
 		String email = req.getParameter("email");
 		MemberVo vo1 = new MemberVo(id, pwd, name, email, phone);
+		
+		String sanickname = req.getParameter("sanickname");
+		String saphone = req.getParameter("saphone");
+		String saaddr = req.getParameter("saaddr");
+		AddressVo addrvo = new AddressVo(id, name, sanickname, saphone, saaddr);
+		
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.update(vo1);
-		if(n>0) {
+		if(n>0 && addrvo!=null) {
 				req.setAttribute("result", "success");
-				MemberVo vo = dao.select(id, pwd);
+				MemberVo vo = dao.select(id);
 				req.setAttribute("vo", vo);
+				AddressVo addrvo2 = dao.selectaddr(id, name);
+				req.setAttribute("addrvo",addrvo2);
 		}else {
 			req.setAttribute("result", "fail");
-		}
-		String saname = req.getParameter("saname");
-		HashMap<String, String> map = new HashMap<String, String>();
-		String sanickname = map.get("sanickname");
-		String saphone = map.get("saphone");
-		String saaddr = map.get("saaddr");
-		map = dao.selectaddr(id, saname);
-		if(map!=null) {
-			req.setAttribute("map",sanickname);
-			req.setAttribute("map",saphone);
-			req.setAttribute("map",saaddr);
 		}
 		req.setAttribute("detailmain","/member/mypage.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
