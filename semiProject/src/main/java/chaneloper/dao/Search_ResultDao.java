@@ -19,7 +19,29 @@ import db.JDBC;
 
 public class Search_ResultDao {
 	
-	public ArrayList<ColorVo> get_color() {
+	public ArrayList<TagVo> get_Tag() { // 모든 태그값 다 가져오기
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<TagVo> list = new ArrayList<TagVo>();
+		String sql = "select * from tag";
+		try {
+			con = JDBC.getCon();
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new TagVo(rs.getInt("pi_num"),rs.getString("t_name")));
+			}
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<ColorVo> get_color() { // 모든 컬러 다 가져오기
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -93,7 +115,7 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public ArrayList<TagVo> get_tag(String keyword, String CATEGORY, String sort){
+	public ArrayList<TagVo> get_tag1(String keyword, String CATEGORY, String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
