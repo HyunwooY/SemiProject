@@ -51,6 +51,9 @@ public class FindPwdController extends HttpServlet{
 			}else {
 				json.put("find", false);
 			}
+			resp.setContentType("text/plain;charset=utf-8");
+			PrintWriter pw = resp.getWriter();
+			pw.print(json);
 		}
 	}
 }

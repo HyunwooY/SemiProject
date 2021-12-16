@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 import db.JDBC;
@@ -215,9 +217,9 @@ public class MemberDao {
 			con.setAutoCommit(false);
 			String sql = "insert into shipping_address values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getId());
-			pstmt.setString(2, vo.getName());
-			pstmt.setString(3, vo.getNickname());
+			pstmt.setString(1, vo.getNickname());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getName());
 			pstmt.setString(4, vo.getPhone());
 			pstmt.setString(5, vo.getAddr());
 			con.commit();
@@ -261,11 +263,5 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	
-	
 }
-
-
-
-
 

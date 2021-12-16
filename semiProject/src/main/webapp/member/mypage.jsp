@@ -11,7 +11,7 @@
 <script>
 	window.onload = function(){
 		if(${requestScope.result=='success'}){
-			alert("회원정보가 수정이 되었습니다.");
+			alert("회원정보가 수정 되었습니다.");
 		}
 	} 
 </script>

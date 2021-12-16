@@ -85,16 +85,16 @@ public class SellerDao {
 	}
 
 	// 비밀번호 찾기
-	public String sellerFindPwd(String si_num, String si_phone) {	
+	public String sellerFindPwd(String si_num, String si_email) {	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT SI_PWD FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_PHONE=?";
+			String sql = "SELECT * FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_EMAIL=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, si_num);	
-			pstmt.setString(2, si_phone);
+			pstmt.setString(2, si_email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("si_pwd");

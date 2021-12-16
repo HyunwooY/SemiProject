@@ -3,7 +3,7 @@
 <script>
 	window.onload = function(){
 		if(${requestScope.result=='success'}){
-			alert("배송지 등록이 되었습니다.");
+			alert("배송지가 등록 되었습니다.");
 		}
 	} 
 </script>
