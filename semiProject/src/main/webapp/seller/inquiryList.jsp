@@ -1,33 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> 문의 내역</title>
-</head>
-<body>
+<style>
+	table{width:990px}
+</style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
-	<h1>문의 내역</h1>
+	<!-- <h1>문의 내역</h1> -->
 	<table>
 		<tr>
 			<th>문의번호</th>
 			<th>작성자</th>
 			<th>제목</th>
-			<th>내용</th>
-			<th>답변</th>
 		</tr>	
 		<tr>
 	<c:forEach var="vo" items="${list }" >
 		<tr>
 			<td>${vo.ih_num }</td>
 			<td>${vo.mi_id }</td>
-			<td>${vo.pi_num }</td>
 			<td>${vo.ih_title }</td>
-			<td>${vo.ih_question }</td>
-			<td>${vo.ih_answer }</td>			
+			
 		</tr>
+		<c:if test="${vo.ih_answer!=null }">
+			<tr>
+			<td></td>
+			<td></td>
+				<td>
+					-re:${vo.ih_answer }
+				</td>
+			</tr>	
+		</c:if>
+		
 	</c:forEach>
 	<hr>
 	</table>
@@ -51,5 +53,3 @@
 			<a href="${cp }/seller/inquiryList?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
 		</c:if>
 	</div>  
-</body>
-</html>
