@@ -11,7 +11,7 @@
 	let size_length = 0;
 	function get_size(e){
 		e.preventDefault();
-		select_color = e.target.innerText;
+		
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4&&xhr.status==200){
@@ -28,22 +28,24 @@
 					
 					if(data[i].count=="매진"){
 						let newA=document.createElement("span");
-						newA.innerHTML="품절";
+						newA.innerHTML="품절 ";
 						newA.className="size_name"
+
 						size_tag.appendChild(newA);
 					}else{
 						let newA=document.createElement("a");
-						newA.innerHTML=data[i].size;
+						newA.innerHTML=data[i].size+" ";
 						newA.href="#";
-						newA.className="size_name"
-						newA.onclick="list(event)"
+						newA.className="size_name";
+						newA.onclick=list;
+
 						size_tag.appendChild(newA);
 					}
-					
-					
 				}
+				select_color = e.target.innerText;
 				console.log(data.length);
 				size_length = data.length;
+
 			}
 		}
 		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText,true);
@@ -52,8 +54,79 @@
 	
 	
 	function list(e){
-		select_size = e.target.innerHTML;
+
+		let td_name = document.createElement("td");
+		let pd_name = document.createElement("span");
+		let pd_color = document.createElement("span");
+		pd_name.innerHTML = '${name}';
+		pd_color.innerHTML = "( "+select_color+e.target.innerHTML+")";
 		
+		td_name.appendChild(pd_name);
+		td_name.appendChild(pd_color);
+		
+		let pd_count = document.createElement("span");
+		pd_count.innerHTML = 1;
+		let td_count = document.createElement("td");
+		td_count.appendChild(pd_count);
+		
+		let pd_up = document.createElement("input");
+		let pd_down = document.createElement("input");
+		let side_span = document.createElement("span");
+		pd_up.type="button"
+		pd_up.value="+1";
+		pd_up.onclick=pl;
+		side_span.innerHTML="<br>"
+		pd_down.type="button"
+		pd_down.value="-1";
+		pd_down.onclick=mi;
+		let td_updown = document.createElement("td");
+		td_updown.appendChild(pd_up);
+		td_updown.appendChild(side_span);
+		td_updown.appendChild(pd_down);
+		
+		let pd_delete = document.createElement("input");
+		pd_delete.type="button";
+		pd_delete.value="삭제";
+		pd_delete.onclick=deltr;
+		let pd_result = document.createElement("span");
+		pd_result.innerHTML='${price}';
+		let pd_result2 = document.createElement("span");
+		pd_result2.innerHTML='원';
+		let td_delete = document.createElement("td");
+		td_delete.appendChild(pd_result);
+		td_delete.appendChild(pd_result2);
+		td_delete.appendChild(pd_delete);
+		
+		let showtable = document.getElementById("showtable");
+		let tr_total = document.createElement("tr");
+		tr_total.appendChild(td_name);
+		tr_total.appendChild(td_count);
+		tr_total.appendChild(td_updown);
+		tr_total.appendChild(td_delete);
+		showtable.appendChild(tr_total);
+	}
+	
+	function pl(e){
+		let a = Number(e.target.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML);
+		e.target.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML=a+1;
+		let b = Number(e.target.parentElement.parentElement.childNodes[3].childNodes[0].innerHTML);
+		e.target.parentElement.parentElement.childNodes[3].childNodes[0].innerHTML=b+Number('${price}');
+	}
+	
+	function mi(e){
+		let a = Number(e.target.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML);
+		let b = Number(e.target.parentElement.parentElement.childNodes[3].childNodes[0].innerHTML);
+		if(a>1){
+			e.target.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML=a-1;
+			e.target.parentElement.parentElement.childNodes[3].childNodes[0].innerHTML=b-Number('${price}');
+		}else{
+			alert("최소 주문 수량입니다.");
+		}
+	}
+	
+	function deltr(e){
+		let showtable = document.getElementById("showtable");
+		showtable.removeChild(e.target.parentElement.parentElement);
 	}
 	
 </script>
@@ -63,30 +136,30 @@
 		<img src="images/"+ ${img[0]} alt="Image1">
 	</div>
 	<div>
-	    <table >
-			<th>${name}</th>
+	    <table id="showtable"  border='1' width="600px">
+			<th colspan=4>${name}</th>
 			<tr>
-			    <td><br><br>
+			    <td colspan=4><br><br>
 				    가격 :  ${price}원<br>
 				    적립금 :  ${Math.round(price*0.01)}원
 			    </td>
 			</tr>
 			<tr>
-			    <td><br><br>
+			    <td colspan=4><br><br>
 				    사이즈 정보<br>
 				    M - 어깨 50 / 가슴 44 / 팔길이 63 / 총길이 82<br>
 					L - 어깨 52 / 가슴 46 / 팔길이 65 / 총길이 84
 				</td>
 			</tr>
 			<tr>
-				<td><br><br>
+				<td colspan=4><br><br>
 					*실측 사이즈는 단면(cm)으로 측정되며, 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다.<br>
 					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.
 				</td>
 			</tr>
 			<tr>
 
-				<td>색상 : 
+				<td colspan=4>색상 : 
 <%  
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
@@ -99,13 +172,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="size">
-					
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<span></span>
+				<td colspan=4; id="size">
 				</td>
 			</tr>
 
