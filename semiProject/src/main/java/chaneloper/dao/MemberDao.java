@@ -93,9 +93,10 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				String name = rs.getString("mi_name");
+				String pwd = rs.getString("mi_pwd");
 				String email = rs.getString("mi_email");
 				String phone = rs.getString("mi_phone");
-				MemberVo member = new MemberVo(id, null, name, email, phone);
+				MemberVo member = new MemberVo(id, pwd, name, email, phone);
 				return member;
 			}
 			return null;

@@ -43,7 +43,7 @@ public class MemberModifyController extends HttpServlet{
 		int n = dao.update(vo1);
 		if(n>0) {
 				req.setAttribute("result", "success");
-				MemberVo vo = dao.select(id, pwd);
+				MemberVo vo = dao.select(id);
 				req.setAttribute("vo", vo);
 		}else {
 			req.setAttribute("result", "fail");
