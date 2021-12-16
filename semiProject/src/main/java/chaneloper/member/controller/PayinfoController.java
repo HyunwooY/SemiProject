@@ -16,7 +16,7 @@ public class PayinfoController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=(String)req.getSession().getAttribute("id");
-		String pi_num=(String)req.getAttribute("pi_num");
+		//String pi_num=(String)req.getAttribute("pi_num");
 		MemberDao dao=MemberDao.getInstance();
 		MemberVo membervo=dao.select(id);
 		req.setAttribute("vo", membervo);
