@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import chaneloper.vo.ColorVo;
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
 import chaneloper.vo.Search_ProductVo;
@@ -17,6 +18,51 @@ import chaneloper.vo.TagVo;
 import db.JDBC;
 
 public class Search_ResultDao {
+	
+	public ArrayList<TagVo> get_Tag() { // 모든 태그값 다 가져오기
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<TagVo> list = new ArrayList<TagVo>();
+		String sql = "select * from tag";
+		try {
+			con = JDBC.getCon();
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new TagVo(rs.getInt("pi_num"),rs.getString("t_name")));
+			}
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<ColorVo> get_color() { // 모든 컬러 다 가져오기
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ColorVo> list = new ArrayList<ColorVo>();
+		String sql = "select * from product_detail";
+		try {
+			con = JDBC.getCon();
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new ColorVo(rs.getInt("pi_num"),rs.getString("pd_color")));
+			}
+			return list;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
 	public ArrayList<Search_ProductVo> search_product(String keyword, String CATEGORY, String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -26,27 +72,27 @@ public class Search_ResultDao {
 		try {
 			con = JDBC.getCon();
 			if(CATEGORY==null&&sort==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size, c.PP_TITLE FROM PRODUCT_INFOMATION a "
+				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.pd_size, c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
 				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
+				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "ORDER BY a." + sort;
 				pstmt=con.prepareStatement(sql);
 			}else if(sort==null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
+				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'";
 				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY!=null&&sort!=null) {
-				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
+				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
@@ -57,7 +103,7 @@ public class Search_ResultDao {
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Search_ProductVo vo = new Search_ProductVo(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				Search_ProductVo vo = new Search_ProductVo(rs.getInt(1),rs.getString(2),rs.getInt(3),null,rs.getString(4),rs.getString(5));
 				list.add(vo);
 			}
 			return list;
@@ -69,7 +115,7 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public ArrayList<TagVo> get_tag(String keyword, String CATEGORY, String sort){
+	public ArrayList<TagVo> get_tag1(String keyword, String CATEGORY, String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -225,4 +271,5 @@ public class Search_ResultDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	
 }
