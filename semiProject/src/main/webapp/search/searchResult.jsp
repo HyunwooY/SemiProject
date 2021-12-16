@@ -6,9 +6,12 @@
 	width:500px; height: 250px; border:3px solid black;
 }
 .searchbox, .searchResult, .searchProducts {
-	margin: auto; width:630px; height: 300px; display: table;
+	margin: auto; width:700px; display: table;
 }
-.items {
+.searchbox { height: 400px;}
+.searchResult { height: 100px;}
+.searchProducts { height: 1500px;}
+.searchbox .items {
 	width:500px; height: 40px;
 }
 .searchbox #CATEGORY,#keyword1,#sort {
