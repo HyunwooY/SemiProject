@@ -6,8 +6,19 @@
 #start,#end{height:18px;position:relative;top:-2px}
 #table{width:1000px;position:relative;top:10px;text-align:center}
 </style>
+
 <div>
 	<form action="${pageContext.request.contextPath }/member/">
+<<<<<<< HEAD
+	<input type="button" value="오늘" onclick="set(0)" class="btn1">
+	<input type="button" value="1주일" onclick="setweek(7)" class="btn2">
+	<input type="button" value="1개월" onclick="set(1)" class="btn3">
+	<input type="button" value="3개월" onclick="set(3)" class="btn4">
+	<input type="button" value="6개월" onclick="set(6)" class="btn5">	
+	<input type="date" id="start">
+	<input type="date" id="end">
+	<input type="submit" value="조회">
+=======
 		<input type="button" value="오늘" onclick="set(0)" class="btn1">
 		<input type="button" value="1주일" onclick="setweek(7)" class="btn2">
 		<input type="button" value="1개월" onclick="set(1)" class="btn3">
@@ -16,6 +27,7 @@
 		<input type="date" id="start">
 		<input type="date" id="end">
 		<input type="submit" value="조회">
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 	</form>
 </div>
 <div id="stateboard">

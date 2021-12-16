@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
@@ -27,28 +30,31 @@ public class Search_ResultDao {
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
-				
+				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY==null) {
 				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
 			}else if(sort==null) {
 				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY;
+						+ "AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'";
+				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY!=null&&sort!=null) {
 				sql = "SELECT a.PI_NUM ,a.PI_NAME,a.PI_PRICE, b.PD_COLOR,b.pd_size,c.PP_TITLE FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY
+						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\' "
 						+ " ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
 			}
-			pstmt=con.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Search_ProductVo vo = new Search_ProductVo(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
@@ -75,25 +81,30 @@ public class Search_ResultDao {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
-				
+				pstmt=con.prepareStatement(sql);
 			}else if(CATEGORY==null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
 						+ "ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
 			}else if(sort==null) {
 				sql = "SELECT a.PI_NUM , d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY;
+						+ "AND a.PI_CATEGORY = ?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, CATEGORY);
 			}else if(CATEGORY!=null&&sort!=null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ CATEGORY
+						+ "AND a.PI_CATEGORY = ?"
 						+ " ORDER BY a." + sort;
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, CATEGORY);
 			}
-			pstmt=con.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				TagVo vo = new TagVo(rs.getInt(1),rs.getString(2));
@@ -182,11 +193,11 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public HashMap<String, Integer> get_count(int pi_num, String get_color) {
+	public JSONArray get_count(int pi_num, String get_color) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		JSONArray jsonarray = new JSONArray();
 		try {
 			String sql="select pd_size,pd_count from product_detail where pi_num = ? and pd_color = ?";
 			con = JDBC.getCon();
@@ -194,11 +205,19 @@ public class Search_ResultDao {
 			pstmt.setInt(1, pi_num);
 			pstmt.setString(2, get_color);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				map.put(rs.getString(1), rs.getInt(2));
+				JSONObject json = new JSONObject();
+				json.put("size",rs.getString(1));
+				if(rs.getInt(2)==0) {
+					json.put("count","매진");
+				}else {
+					json.put("count", Integer.toString(rs.getInt(2)));
+				}
+				
+				jsonarray.put(json);
 			}
-					
-			return map;
+			return jsonarray;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;

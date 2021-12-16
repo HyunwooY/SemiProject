@@ -5,6 +5,15 @@ fieldset {
 .searchbox, .searchResult, .searchProducts {
 	margin: auto; width:630px; height: 300px; display: table;
 }
+
+#items {
+	width:500px; height: 40px;
+}
+.searchbox #CATEGORY,#keyword,#sort {
+	width: 410px;
+    border: 1px solid #ddd;
+    height: 40px!important;
+}
 div#items {
 	width:500px; height: 40px;
 }
@@ -58,5 +67,4 @@ ul.list li.item {
 }
 .price{
   margin-top: 4px;
-  margin-bottom: 4px;
 }

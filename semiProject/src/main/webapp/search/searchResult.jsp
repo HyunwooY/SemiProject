@@ -38,9 +38,9 @@
 		</form>
 	</fieldset>
 </div>
-<div id="searchProducts"> <!-- 조회된 제품들 -->
+<div id="searchProducts"> <!-- 조회된 제품들 10개씩-->
 	<c:forEach var="vo" items="${requestScope.list }">
-	<ul class="list" >
+	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
 				<p class="Img"> <!-- 이미지 -->
@@ -55,12 +55,14 @@
 						</a>
 					</p>
 					<p class="price">${vo.pi_price }</p>
-					<p class="tag">샤넬로퍼 추천</p>
+					<p class="tag">
+						<c:forEach var="t" items="${requestScope.tag }">
+						${t.tag }</p>
+						</c:forEach>
 					<div class="color"> <!-- 색상 div -->
 						<div class="colorchip">
 							<ul>
-								<li style="background-color:green;" class="chips"> </li>
-								<li style="background-color:red" class="chips"> </li>
+								<li style="background-color:${vo.pd_color};" class="chips"> </li>
 							</ul>
 						</div>
 					</div> 				
@@ -69,4 +71,23 @@
 		</li>
 	</ul>
 	</c:forEach>
+</div>
+
+<div><!-- 페이징 처리 하는부분 -->
+	<c:if test="${startPage>10 }">
+		<a href="${cp }/search/list?pageNum=${startPage-1}">[이전페이지]</a>
+	</c:if>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
+				<a href="${cp }/search/list?pageNum=${i}"><span style="color:red">${i }</span></a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/search/list?pageNum=${i}"><span style="color:gray">${i }</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:if test="${endPage<pageCount }">
+		<a href="${cp }/search/list?pageNum=${endPage+1}">[다음페이지]</a>
+	</c:if>
 </div>

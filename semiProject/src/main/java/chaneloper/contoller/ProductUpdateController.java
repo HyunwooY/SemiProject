@@ -1,6 +1,7 @@
 package chaneloper.contoller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,13 +18,19 @@ public class ProductUpdateController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
-		String si_id = req.getParameter("si_id");
 		String pi_name = req.getParameter("pi_name");
 		int pi_price = Integer.parseInt(req.getParameter("pi_price"));
-		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
 		String pi_category = req.getParameter("pi_category");
+		String pi_size = req.getParameter("pi_size");
+		String pi_color = req.getParameter("pi_color");
+		int pi_count = Integer.parseInt(req.getParameter("pd_count"));
+		Date pi_regdate = req.getParameter("pi_regdate");
 		
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, null, pi_category);
+<<<<<<< HEAD
+		ProductVo vo = new ProductVo(pi_num, pi_num, pi_name, pi_price, null, pi_count, pi_size, pi_color, pd_count, pi_regdate);
+=======
+		ProductVo vo = new ProductVo();
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		ProductDao dao = ProductDao.getInstance();
 		
 		int n = dao.productUpdate(vo);
