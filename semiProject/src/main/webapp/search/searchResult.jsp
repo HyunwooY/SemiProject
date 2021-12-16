@@ -1,7 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/searchResult.css">
+<style>
+	fieldset {
+	width:500px; height: 250px; border:3px solid black;
+}
+.searchbox, .searchResult, .searchProducts {
+	margin: auto; width:630px; height: 300px; display: table;
+}
+.items {
+	width:500px; height: 40px;
+}
+.searchbox #CATEGORY,#keyword1,#sort {
+	width: 410px;
+    border: 1px solid #ddd;
+    height: 40px!important;
+}
+
+li {
+    list-style: none;
+}
+ul.list {
+	display: table;
+    width: 100%;
+    margin: 0px 0 0;
+}
+li .chips{
+	float: left;
+	width: 15px;
+    height: 15px;
+    margin: 10px 4px 4px 0;
+    border: 1px solid #ddd;
+    line-height: 0;
+}
+ul.list li.item {
+    display: inline-block;
+    margin: 20px 0px 70px;
+    border-right: 0px solid rgba(255,255,255,0);
+    border-left: 0px solid rgba(255,255,255,0);
+    box-sizing: border-box;
+    color: #757575;
+    vertical-align: top;
+}
+#searchBar {
+	width: 175px; height: 50px; margin-top: 60px
+}
+.color {
+	width:10px; height: 10px; list-style: none; float:left;
+}
+.searchProducts {
+  margin: auto;
+  width: 740px;
+  height: 1000px;
+  text-align: center;
+}
+img{
+  width: 170px;
+  height: 360px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.price{
+  margin-top: 4px;
+}
+</style>
 <c:choose>
 	<c:when test="${empty requestScope.keyword }"> <!-- 검색탭으로 들어온경우 -->
 		<c:set var="keyword" value=""/>
@@ -14,7 +76,7 @@
 <div class="searchbox">
 	<fieldset>
 		<form method="get" action="${cp }/search/search">
-			<div id="items">
+			<div class="items">
 				<select id="CATEGORY" name="CATEGORY">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>상품분류 선택</option>
 					<option value="상의" <c:if test="${CATEGORY=='상의' }">selected</c:if>>상의</option>
@@ -24,10 +86,10 @@
 					<option value="악세사리" <c:if test="${CATEGORY=='악세사리' }">selected</c:if>>악세사리</option>
 				</select> 
 			</div>
-			<div id="items">
-				<input type="text" id="keyword" name="keyword" value="${keyword }"><br>
+			<div class="items">
+				<input type="text" id="keyword1" name="keyword" value="${keyword }"><br>
 			</div>
-			<div id="items">
+			<div class="items">
 				<select id="sort" name="sort">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>:::기준선택:::</option>
 					<option value="pi_date" <c:if test="${sort=='pi_date' }">selected</c:if>>신상품 순</option>
@@ -39,7 +101,7 @@
 	</fieldset>
 </div>
 <div id="searchProducts"> <!-- 조회된 제품들 10개씩-->
-	<c:forEach var="vo" items="${requestScope.list }">
+	<c:forEach var="vo" items="${requestScope.list }" varStatus="status"> 
 	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
@@ -57,15 +119,20 @@
 					<p class="price">${vo.pi_price }</p>
 					<p class="tag">
 						<c:forEach var="t" items="${requestScope.tag }">
-						${t.tag }</p>
+						${t.tag }
 						</c:forEach>
+					</p>
 					<div class="color"> <!-- 색상 div -->
 						<div class="colorchip">
 							<ul>
-								<li style="background-color:${vo.pd_color};" class="chips"> </li>
+								<c:forEach var="co" items="${color }" >
+									<c:if test="${co.pi_num==vo.pi_num }">
+										<li style="background-color:${co.pd_color};" class="chips"> </li>
+									</c:if> 
+								</c:forEach>
 							</ul>
 						</div>
-					</div> 				
+					</div>
 				</div>
 			</div>
 		</li>
