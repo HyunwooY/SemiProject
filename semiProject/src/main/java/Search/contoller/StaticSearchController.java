@@ -2,6 +2,7 @@ package Search.contoller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Array;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -27,17 +28,27 @@ public class StaticSearchController extends HttpServlet{
 		Search_ResultDao dao = new Search_ResultDao();
 		
 		//색상_사이즈 가져오기
-		String get_color = req.getParameter("get_color");
+		
 		//작동확인
-		System.out.println(get_color);
-		if(get_color!=null) {
-			JSONArray size_count = dao.get_count(pi_num, get_color);
-			System.out.println(size_count.length());
-			
-			resp.setContentType("text/plain;charset=utf-8");
-			PrintWriter pw = resp.getWriter();
-			pw.print(size_count);
+		if(req.getParameter("get_color")!=null) {
+//			Array get_color = (Array)req.getAttribute("list");
+//			System.out.println(get_color);
+//			JSONArray size_count = dao.get_count(pi_num, get_color);
+//			System.out.println(size_count.length());
+//			
+//			resp.setContentType("text/plain;charset=utf-8");
+//			PrintWriter pw = resp.getWriter();
+//			pw.print(size_count);
 		}
+//		if(req.getParameter("g_color")!=null) {
+//			String g_color = req.getParameter("g_color");
+//			String g_size = req.getParameter("g_size");
+//			String g_count = req.getParameter("g_count");
+//			int json_pd_num = dao.get_pd_num(g_color,g_size,g_count);
+//			resp.setContentType("text/plain;charset=utf-8");
+//			PrintWriter pw = resp.getWriter();
+//			pw.print(json_pd_num);
+//		}
 
 	}
 }

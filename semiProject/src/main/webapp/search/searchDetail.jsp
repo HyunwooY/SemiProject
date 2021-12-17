@@ -59,7 +59,7 @@
 		let pd_name = document.createElement("span");
 		let pd_color = document.createElement("span");
 		pd_name.innerHTML = '${name}';
-		pd_color.innerHTML = "( "+select_color+e.target.innerHTML+")";
+		pd_color.innerHTML = "( "+select_color+" "+e.target.innerHTML+")";
 		
 		td_name.appendChild(pd_name);
 		td_name.appendChild(pd_color);
@@ -129,6 +129,23 @@
 		showtable.removeChild(e.target.parentElement.parentElement);
 	}
 	
+	function postdata(){
+		let resultdata = document.createElement("form");
+		
+		let showtable = document.getElementById("showtable");
+		let len = showtable.childElementCount;
+		let list = [];
+		for(var i = 2; i <= len ; i++){
+			let ip = document.createElement("input");
+			ip.type="text";
+			ip.value=showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+			ip.name="name"+(i-1);
+		}
+		
+		
+		
+	}
+	
 </script>
 
 <div>
@@ -175,7 +192,15 @@
 				<td colspan=4; id="size">
 				</td>
 			</tr>
-
+	    </table>
+	    <table>
+	    	<th>
+	    	</th>
+	    	<tr>
+	    		<td>
+	    			<a href="#" onclick="postdata()">구매하기</a>
+	    		</td>
+	    	</tr>
 	    </table>
 	</div>
 </div>
