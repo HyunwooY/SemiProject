@@ -1,12 +1,11 @@
 package chaneloper.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import chaneloper.vo.Inquiry_historyVo;
 import db.JDBC;
@@ -94,6 +93,34 @@ public class Inquiry_historyDao {
 			se.printStackTrace();
 			return -1;
 		} finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	//상세글보기 
+	public Inquiry_historyVo select(int num){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;		
+		try {
+			con=JDBC.getCon();
+			String sql="select * from inquiry_history where ih_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				String mi_id = rs.getString("mi_id");
+				int pi_num = rs.getInt("pi_num");
+				String ih_title = rs.getString("ih_title");
+				String ih_question = rs.getString("ih_question");
+				String ih_answer = rs.getString("ih_answer");
+				Inquiry_historyVo vo = new Inquiry_historyVo(num, mi_id, pi_num, ih_title, ih_question, ih_answer);
+				return vo;
+			}	
+			return null;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
