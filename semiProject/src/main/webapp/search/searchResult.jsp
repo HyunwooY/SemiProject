@@ -3,21 +3,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	fieldset {
-	width:500px; height: 250px; border:3px solid black;
+	margin: 40px auto 40px; width:500px; height: 250px; border:none;
 }
 .searchbox, .searchResult, .searchProducts {
-	margin: auto; width:700px; display: table;
+	margin: auto; display: table; 
 }
-.searchbox { height: 400px;}
-.searchResult { height: 100px;}
-.searchProducts { height: 1500px;}
+.searchbox { width:600px; height: 300px;}
+.searchResult { width:600px; height: 100px; border: 1px solid #666;}
+.count {margin-top: 40px; }
+.searchProducts { width:600px; height: 1000px;}
+.searchPaging { width:600px; height: 100px;}
 .searchbox .items {
-	width:500px; height: 40px;
+	width:500px; height: 40px; margin-bottom: 10px;
 }
 .searchbox #CATEGORY,#keyword1,#sort {
-	width: 410px;
-    border: 1px solid #ddd;
-    height: 40px!important;
+	width: 410px; margin-bottom: 5px; 
+	border: 1px solid #ddd; height: 40px!important;
 }
 
 li {list-style: none; }
@@ -38,6 +39,7 @@ li .chips{
 ul.list li.item {
     display: inline-block;
     margin: 20px 0px 70px;
+    width: 33.3%;
     border-right: 0px solid rgba(255,255,255,0);
     border-left: 0px solid rgba(255,255,255,0);
     box-sizing: border-box;
@@ -53,8 +55,8 @@ ul.list li.item {
   text-align: center;
 }
 img{
-  width: 170px;
-  height: 360px;
+  width: 250px;
+  height: 300px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
@@ -63,7 +65,9 @@ img{
 <script>
 	function checkNull() {
 		let keyword=document.getElementById("keyword1").value;
-		if(keyword==null || keyword==""){
+		let category=document.getElementById("CATEGORY").value;
+		let sort=document.getElementById("CATEGORY").value;
+		if(category==1 && sort==1 && keyword==""){
 			alert("검색어를 입력해주세요");
 		}
 	}
@@ -104,7 +108,12 @@ img{
 		</form>
 	</fieldset>
 </div>
-<div id="searchProducts"> <!-- 조회된 제품들 10개씩-->
+<div class="searchResult">
+	<p class="count"></p>
+	<p class="count"> ITEMS </p>
+</div>
+
+<div class="searchProducts"> <!-- 조회된 제품들 10개씩-->
 	<c:forEach var="vo" items="${requestScope.list }" varStatus="status"> 
 	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
@@ -144,7 +153,8 @@ img{
 	</c:forEach>
 </div>
 
-<div><!-- 페이징 처리 하는부분 -->
+<div calss="searchPaging"><!-- 페이징 처리 하는부분 -->
+	<p>
 	<c:if test="${startPage>10 }">
 		<a href="${cp }/search/list?pageNum=${startPage-1}">[이전페이지]</a>
 	</c:if>
@@ -161,4 +171,5 @@ img{
 	<c:if test="${endPage<pageCount }">
 		<a href="${cp }/search/list?pageNum=${endPage+1}">[다음페이지]</a>
 	</c:if>
+	</p>
 </div>

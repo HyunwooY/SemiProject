@@ -82,6 +82,16 @@ public class SearchController extends HttpServlet{
 				req.setAttribute("sort", sort);
 				req.setAttribute("list", list);
 			}
+		}else {	
+			keyword=null;
+			ArrayList<Search_ProductVo> list=dao.search_product(keyword, category, null);
+			ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
+			ArrayList<ColorVo> color = dao.get_color();
+			req.setAttribute("tag", tag);
+			req.setAttribute("keyword", keyword);
+			req.setAttribute("color", color);
+			req.setAttribute("CATEGORY", category);
+			req.setAttribute("list", list);
 		}
 		req.setAttribute("main", "/search/searchResult.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
