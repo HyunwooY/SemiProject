@@ -54,6 +54,17 @@
 	
 	
 	function list(e){
+		let showtable = document.getElementById("showtable");
+
+		
+		if(showtable.children.length>1){
+			for(var i=1;i<showtable.children.length;i++){
+				if(showtable.children[i].children[0].children[1].innerHTML=="( "+select_color+" "+e.target.innerHTML+")"){
+					alert("이미 선택된 상품입니다");
+					return 0;
+				}
+			}
+		}
 
 		let td_name = document.createElement("td");
 		let pd_name = document.createElement("span");
@@ -97,7 +108,7 @@
 		td_delete.appendChild(pd_result2);
 		td_delete.appendChild(pd_delete);
 		
-		let showtable = document.getElementById("showtable");
+		
 		let tr_total = document.createElement("tr");
 		tr_total.appendChild(td_name);
 		tr_total.appendChild(td_count);
