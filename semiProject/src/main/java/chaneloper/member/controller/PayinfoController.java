@@ -28,8 +28,8 @@ public class PayinfoController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		shipping_address받아오기
-//		AddressVo vo=dao.
+		req.setAttribute("main", "/member/buyProduct.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
 

@@ -23,7 +23,6 @@ public class SearchDetailController extends HttpServlet{
 
 		//상품번호
 		//int pi_num = Integer.parseInt(req.getParameter("pi_num"));
-
 		int pi_num = 3;
 		Search_ResultDao dao = new Search_ResultDao();
 		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
@@ -83,6 +82,9 @@ public class SearchDetailController extends HttpServlet{
 				int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
 				map.put(pd_num, Integer.parseInt(str[4]));
 			}
+			//세션으로
+			req.getSession().setAttribute("pd_num", map);
+			resp.sendRedirect(req.getContextPath()+"/member/buyProduct");
 			System.out.println(map);
 		}else {
 			System.out.println("연결오류");
