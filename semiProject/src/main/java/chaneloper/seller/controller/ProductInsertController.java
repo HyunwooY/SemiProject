@@ -28,6 +28,7 @@ public class ProductInsertController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext application = getServletConfig().getServletContext();		
 		String path = application.getRealPath("/upload");
+		System.out.println(path);
 		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 10, "UTF-8",
 				new DefaultFileRenamePolicy());
 		
