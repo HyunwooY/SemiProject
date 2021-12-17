@@ -48,7 +48,7 @@
 
 			}
 		}
-		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText,true);
+		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText+'&pi_num=${pi_num}',true);
 		xhr.send();
 	}
 	

@@ -22,8 +22,8 @@ public class SearchDetailController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 
 		//상품번호
-		//int pi_num = Integer.parseInt(req.getParameter("pi_num"));
-		int pi_num = 3;
+		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
+		//int pi_num = 3;
 		Search_ResultDao dao = new Search_ResultDao();
 		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
 		ArrayList<String> color = new ArrayList<String>();

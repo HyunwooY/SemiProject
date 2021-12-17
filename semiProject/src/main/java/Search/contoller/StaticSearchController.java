@@ -23,8 +23,8 @@ public class StaticSearchController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		//int pi_num =Integer.parseInt(req.getParameter("pi_num"));
-		int pi_num=3;
+		int pi_num =Integer.parseInt(req.getParameter("pi_num"));
+		//int pi_num=3;
 		Search_ResultDao dao = new Search_ResultDao();
 		
 		//색상_사이즈 가져오기
