@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject; 
 
 import chaneloper.dao.MemberDao;
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 @WebServlet("/member/checkpwd")
 public class PwdCheckController extends HttpServlet{
@@ -27,6 +28,8 @@ public class PwdCheckController extends HttpServlet{
 				req.setAttribute("result", "fail");
 			}else {
 				req.setAttribute("vo", vo);
+				AddressVo addrvo = dao.selectaddr(id, vo.getName());
+				req.setAttribute("addrvo",addrvo);
 				req.setAttribute("detailmain","/member/mypage.jsp");
 				req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 			}

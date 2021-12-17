@@ -264,6 +264,32 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	//
+//	public AddressVo defaultaddr(String id, String name, String df) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql ="select * from member_infomation mi, shipping_address sa "
+//					+ "where mi.mi_id=? and sa.sa_name=? and mi.mi_id=sa.mi_id";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			pstmt.setString(2, name);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				String sanickname = rs.getString("sa_nickname");
+//				String saphone = rs.getString("sa_phone");
+//				String saaddr = rs.getString("sa_addr");
+//				AddressVo addrvo = new AddressVo(id,name,sanickname,saphone,saaddr);
+//				return addrvo;
+//			}
+//			return null;
+//		}catch(SQLException s) {
+//			s.printStackTrace();
+//			return null;
+//		}finally {
+//			JDBC.close(con, pstmt, rs);
+//		}
+//	}
 }
 
