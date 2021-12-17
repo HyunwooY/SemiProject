@@ -1,34 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
-	fieldset {
+	fieldset{
 	margin: 40px auto 40px; width:500px; height: 250px; border:none;
 }
-.searchbox, .searchResult, .searchProducts {
+.searchbox, .searchResult, .searchProducts{
 	margin: auto; display: table; 
 }
-.searchbox { width:600px; height: 300px;}
-.searchResult { width:600px; height: 100px; border: 1px solid #666;}
-.count {margin-top: 40px; }
-.searchProducts { width:600px; height: 1000px;}
-.searchPaging { width:600px; height: 100px;}
-.searchbox .items {
+.searchbox{ width:600px; height: 300px;}
+.searchResult{ width:600px; height: 80px; border: 1px solid #666; text-align: center;}
+.searchResult strong {font-size: 30px; font-weight: bold; padding: 5px 5px;}
+.searchResult .record {margin: 15px auto 10px; padding: 2px 0 2px 8px;}
+.searchProducts{ width: 1100px; height: 1000px; text-align: center; margin: auto;}
+.searchPaging{ width:600px; height: 100px;}
+.searchbox .items{
 	width:500px; height: 40px; margin-bottom: 10px;
 }
-.searchbox #CATEGORY,#keyword1,#sort {
+.searchbox #CATEGORY,#keyword1,#sort{
 	width: 410px; margin-bottom: 5px; 
 	border: 1px solid #ddd; height: 40px!important;
 }
-
 li {list-style: none; }
-ul.list {
-	display: table;
-    width: 100%;
-    margin: 0px 0 0;
+ul.list{
+    width: 200px;
+    float : left;
+    margin : 5px;
 }
 li .chips{
-	display: inline;
 	float: left;
 	width: 15px;
     height: 15px;
@@ -36,10 +36,10 @@ li .chips{
     border: 1px solid #ddd;
     line-height: 0;
 }
-ul.list li.item {
+ul.list li.item{
     display: inline-block;
     margin: 20px 0px 70px;
-    width: 33.3%;
+    width: 100%;
     border-right: 0px solid rgba(255,255,255,0);
     border-left: 0px solid rgba(255,255,255,0);
     box-sizing: border-box;
@@ -47,20 +47,21 @@ ul.list li.item {
     vertical-align: top;
 }
 #searchBar {width: 175px; height: 50px; margin-top: 60px }
-.color {width:10px; height: 10px; list-style: none; float:left; }
-.searchProducts {
-  margin: auto;
-  width: 740px;
-  height: 1000px;
-  text-align: center;
+.color{width:100px; height: 10px; list-style: none; float:left; }
+.imgDiv{ width: 100%; height: 300px;}
+.imgDiv img{width:100%; height: 100%;
 }
-img{
+/*
+<!--img{
   width: 250px;
   height: 300px;
   margin-right: 20px;
   margin-bottom: 20px;
-}
+}-->*/
 .price{margin-top: 4px; }
+.color li{
+	display:inline;
+}
 </style>
 <script>
 	function checkNull() {
@@ -108,9 +109,10 @@ img{
 		</form>
 	</fieldset>
 </div>
-<div class="searchResult">
-	<p class="count"></p>
-	<p class="count"> ITEMS </p>
+<div class="searchResult"> <!-- 조회된 상품 갯수 출력 -->
+	<p class="record">
+		<strong>${fn:length(list) }</strong> ITEMS
+	</p>
 </div>
 
 <div class="searchProducts"> <!-- 조회된 제품들 10개씩-->
@@ -118,9 +120,11 @@ img{
 	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
-				<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
-				<img src="${cp }/${vo.pp_title}">
-				</a>
+				<div class="imgDiv">
+					<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
+						<img src="${cp }/${vo.pp_title}">
+					</a>
+				</div>
 				<div class="prdInfo"> <!-- 상품 세부정보 -->
 					<p class="name">
 						<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
@@ -131,20 +135,26 @@ img{
 					<p class="tag">
 						<c:forEach var="t" items="${tag }" >
 							<c:if test="${t.pi_num==vo.pi_num }">
-								${t.tag } 
-							</c:if> 
+								<c:choose >
+									<c:when test="${t.tag!=null}">
+										${t.tag }
+									</c:when>
+									<c:otherwise>
+										<span></span>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							 
 						</c:forEach>
 					</p>
 					<div class="color"> <!-- 색상 div -->
-						<div class="colorchip">
-							<ul>
-								<c:forEach var="co" items="${color }" >
-									<c:if test="${co.pi_num==vo.pi_num }">
-										<li style="background-color:${co.pd_color};" class="chips"> </li>
-									</c:if> 
-								</c:forEach>
-							</ul>
-						</div>
+						<ul>
+							<c:forEach var="co" items="${color }" >
+								<c:if test="${co.pi_num==vo.pi_num }">
+									<li style="background-color:${co.pd_color};" class="chips"> </li>
+								</c:if> 
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
 			</div>

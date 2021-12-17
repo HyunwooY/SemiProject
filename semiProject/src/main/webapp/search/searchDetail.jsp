@@ -140,11 +140,12 @@
 		showtable.removeChild(e.target.parentElement.parentElement);
 	}
 	
-	function postdata(){
+	function postdata(e){
+		
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
-        form.setAttribute("method", "post");  //Post 방식
-        form.setAttribute("action", "${pageContext.request.contextPath}/search/searchdetail"); //요청 보낼 주소
+        form.setAttribute("method", "get");  //Post 방식
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/buyProduct"); //요청 보낼 주소
 		
         let len = showtable.childElementCount;
         
@@ -157,6 +158,12 @@
         hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", "pi_num");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "check");
         hiddenField.setAttribute("value", "${pi_num}");
         form.appendChild(hiddenField);
         
@@ -211,7 +218,7 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-						<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
+					<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
 
 <%		
 	}
@@ -228,7 +235,13 @@
 	    	</th>
 	    	<tr>
 	    		<td>
-	    			<a href="#" onclick="postdata()" >구매하기</a>
+	    			<a href="#" onclick="postdata(event)" >구매하기</a>
+	    		</td>
+	    		<td>
+	    			<a href="#" onclick="postdata()" >찜하기</a>
+	    		</td>
+	    		<td>
+	    			<a href="#" onclick="postdata(event)" >장바구니 추가</a>
 	    		</td>
 	    	</tr>
 	    </table>

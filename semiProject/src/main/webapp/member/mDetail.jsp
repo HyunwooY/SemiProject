@@ -54,7 +54,7 @@
 			<div id="myboard" class="menu">
 				<h4>MY BOARD</h4>
 				<a href="">문의하기</a><br>
-				<a href="">문의내역 확인</a><br>
+				<a href="${pageContext.request.contextPath }/mypage/history">문의내역 확인</a><br>
 				<a href="">리뷰관리</a>
 			</div>
 		</div>
