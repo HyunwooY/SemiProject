@@ -2,13 +2,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>입력</title>
-</head>
-<body>
+
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">
 		상품번호<br>
 		<input type="text" name="pi_num"><br>
@@ -32,5 +26,3 @@
 		<input type="submit" value="등록">
 		<input type="reset" value="취소" onclick=""><br>
 	</form>
-</body>
-</html>

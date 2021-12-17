@@ -18,9 +18,14 @@ import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/insert")
 public class ProductInsertController extends HttpServlet {
-
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("detailmain", "productInsertForm.jsp");
+		req.setAttribute("main", "/seller/sellerpage.jsp");
+		req.getRequestDispatcher("/layout").forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext application = getServletConfig().getServletContext();		
 		String path = application.getRealPath("/upload");
 		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 10, "UTF-8",
@@ -41,10 +46,12 @@ public class ProductInsertController extends HttpServlet {
 		int n = dao.productInsert(vo);
 		if (n > 0) {
 			req.setAttribute("productCode", "success");			
-			req.setAttribute("main", "/seller/productResult.jsp");
+			req.setAttribute("detailmain", "productResult.jsp");
+			req.setAttribute("main", "/seller/sellerpage.jsp");
 		} else {
 			req.setAttribute("productCode", "fail");
-			req.setAttribute("main", "/seller/productResult.jsp");
+			req.setAttribute("detailmain", "productResult.jsp");
+			req.setAttribute("main", "/seller/sellerpage.jsp");
 		}
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
