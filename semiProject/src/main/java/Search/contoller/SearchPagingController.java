@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.Search_ResultDao;
 import chaneloper.vo.Search_ProductVo;
 @WebServlet("/search/paging") // 검색 후 페이징 처리
-public class SearchListController extends HttpServlet{
+public class SearchPagingController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String spageNum=req.getParameter("pageNum");
