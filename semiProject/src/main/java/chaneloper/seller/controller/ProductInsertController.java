@@ -22,7 +22,7 @@ public class ProductInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("detailmain", "productInsertForm.jsp");
 		req.setAttribute("main", "/seller/sellerpage.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class ProductInsertController extends HttpServlet {
 		String path = application.getRealPath("/upload");
 		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 10, "UTF-8",
 				new DefaultFileRenamePolicy());
-
+		
 		int pi_num = Integer.parseInt(multi.getParameter("pi_num"));
 		String si_id = multi.getParameter("si_id");
 		String pi_name = multi.getParameter("pi_name");
@@ -40,12 +40,14 @@ public class ProductInsertController extends HttpServlet {
 		String pi_category = multi.getParameter("pi_category");
 		int pd_count = Integer.parseInt(multi.getParameter("pd_count"));
 		String pp_title = multi.getOriginalFileName("pp_title");
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, pi_category, pd_size, pd_color, pd_count, pp_title);
+		String t_name = multi.getParameter("t_name");
+		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
 		ProductDao dao = ProductDao.getInstance();		
 
 		int n = dao.productInsert(vo);
 		if (n > 0) {
-			req.setAttribute("productCode", "success");			
+			req.setAttribute("productCode", "success");		
+			req.setAttribute("path", path);
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("main", "/seller/sellerpage.jsp");
 		} else {

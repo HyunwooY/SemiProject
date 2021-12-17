@@ -23,6 +23,6 @@ public class ProductListAllController extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		req.setAttribute("main", "/seller/productListAll.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }
