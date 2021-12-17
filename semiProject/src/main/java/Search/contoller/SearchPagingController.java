@@ -17,25 +17,26 @@ public class SearchPagingController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String spageNum=req.getParameter("pageNum");
 		int pageNum=1;
-		if (spageNum!=null) {
+		if (spageNum!=null) { // null일수가 없다. 
 			pageNum=Integer.parseInt(spageNum);
 		}
-		int endRow=pageNum*10;
-		int startRow=endRow-9;
+		// 몇개씩 출력할건지
+		int endRow=pageNum*10; //10
+		int startRow=endRow-9; //1 
 		
 		Search_ResultDao dao=new Search_ResultDao();
-//		ArrayList<Search_ProductVo> list = dao.list(startRow,endRow);	
+//		ArrayList<Search_ProductVo> list = dao.list(startRow,endRow);
+		int count=Integer.parseInt(req.getParameter("count")); // 검색된 전체재품 갯수값 (여기까진 ok)
 		
-//		int count = dao.getCount();		//전체글의 갯수
-//		int pageCount=(int)Math.ceil(count/10.0);	//전체 페이지 갯수
-//		int startPageNum= ((pageNum-1)/10*10) + 1;	//시작 페이지 번호
-//		int endPageNum=startPageNum+9;	//끝 페이지 번호
-//		
-//		if (endPageNum>pageCount) {
-//			endPageNum=pageCount;
-//		}
+		int totalPage=(int)Math.ceil(count/10.0);	// 전체페이지 갯수
+		int startPageNum= ((pageNum-1)/10*10) + 1;	//시작 페이지 번호
+		int endPageNum=startPageNum+9;	//끝 페이지 번호
+		
+		if (endPageNum>totalPage) {
+			endPageNum=totalPage;
+		}
 //		req.setAttribute("list", list);
-//		req.setAttribute("pageCount", pageCount);
+//		req.setAttribute("totalPage", totalPage);
 //		req.setAttribute("startPage", startPageNum);
 //		req.setAttribute("endPage", endPageNum);
 //		req.setAttribute("pageNum", pageNum);

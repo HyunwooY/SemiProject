@@ -109,9 +109,10 @@ ul.list li.item{
 		</form>
 	</fieldset>
 </div>
+<c:set var="count" value="${fn:length(list) }"></c:set>
 <div class="searchResult"> <!-- 조회된 상품 갯수 출력 -->
 	<p class="record">
-		<strong>${fn:length(list) }</strong> ITEMS
+		<strong>${count}</strong> ITEMS
 	</p>
 </div>
 
@@ -166,20 +167,23 @@ ul.list li.item{
 <div calss="searchPaging"><!-- 페이징 처리 하는부분 -->
 	<p>
 	<c:if test="${startPage>10 }">
-		<a href="${cp }/search/list?pageNum=${startPage-1}">[이전페이지]</a>
+		<a href="${cp }/search/paging?pageNum=${startPage-1}&count=${count}"><<</a>
 	</c:if>
+	<a href="${cp }/search/paging?pageNum=${pageNum-1}&count=${count}"><</a>
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
-				<a href="${cp }/search/list?pageNum=${i}"><span style="color:red">${i }</span></a>
+				<a href="${cp }/search/paging?pageNum=${i}&count=${count}"><span style="color:red">${i }</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/search/list?pageNum=${i}"><span style="color:gray">${i }</span></a>
+				<a href="${cp }/search/paging?pageNum=${i}&count=${count}"><span style="color:gray">${i }</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
-	<c:if test="${endPage<pageCount }">
-		<a href="${cp }/search/list?pageNum=${endPage+1}">[다음페이지]</a>
+	
+	<a href="${cp }/search/paging?pageNum=${pageNum+1}&count=${count}">></a>
+	<c:if test="${endPage<totalPage }">
+		<a href="${cp }/search/paging?pageNum=${endPage+1}&count=${count}">>></a>
 	</c:if>
 	</p>
 </div>
