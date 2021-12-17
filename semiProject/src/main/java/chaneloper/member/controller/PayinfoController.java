@@ -19,7 +19,7 @@ public class PayinfoController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=(String)req.getSession().getAttribute("id");
-		String pd_num=req.getParameter("pd_num");
+		String pd_num=(String)req.getSession().getAttribute("pd_num");
 		int num=-1;
 		if(pd_num==null||pd_num=="") {
 			num=0;
