@@ -73,15 +73,15 @@ th, tr{padding-left:0px;padding-right:0px}
 		<table id="myAddr">
 			<tr>
 				<th>이름</th>
-				<td></td>
+				<td>${avo.name }</td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
-				<td></td>
+				<td>${avo.addr}</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td></td>
+				<td>${avo.phone}</td>
 			</tr>
 		</table>
 	</div>
