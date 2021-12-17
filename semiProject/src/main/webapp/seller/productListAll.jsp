@@ -4,20 +4,23 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
-<body>	
+<style>
+	.prod{float:legt}
+</style>
+
 	<hr>
-		<div id="" class="row" align="center">
-			<c:forEach var="list" items="${requestScope.list }">
-				<div class="col-md-2">
-					<img src="../upload/${list.pp_title }">
-					<h3>${list.pi_name }</h3>
-					<p>${list.pi_price }원
-					<p>${list.pd_color }
-					<p>${list.pi_date }<br>
-					<a href="" class="btn btn-secondary" role="button">상세 정보</a>
-				</div>
+<form action="${pagecontext.request.contextPath }/seller/">
+	<div id="prod" class="row" align="center">
+		<c:forEach var="list" items="${requestScope.list }">
+			<!-- 이미지 클릭 시 상세페이지로 이동해야 함 -->
+			<img src="../upload/${list.pp_title }" onclick="location.href='https://www.naver.com'">
+			<h3>${list.pi_name }</h3>
+			<p>${list.pi_price }원
+			<p>${list.pd_color }			
+			<p>${list.t_name }<br>
 		</c:forEach>
-		</div>
+	</div>
+</form>
 	<hr>
 
 
