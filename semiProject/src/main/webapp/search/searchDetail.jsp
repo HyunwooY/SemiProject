@@ -181,6 +181,47 @@
         form.submit();
 	}
 	
+	function postdata2(e){
+		
+        var form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "get");  //Post 방식
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/buyProduct"); //요청 보낼 주소
+		
+        let len = showtable.childElementCount;
+        
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "count");
+        hiddenField.setAttribute("value", len-1);
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pi_num");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "check");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+		for(var i = 2; i <= len ; i++){
+	        var hiddenField = document.createElement("input");
+	        hiddenField.setAttribute("type", "hidden");
+	        hiddenField.setAttribute("name", "name"+(i-1));
+	        console.log("name"+(i-1));
+	        let va = showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+	        hiddenField.setAttribute("value", va);
+	        form.appendChild(hiddenField);
+		}
+      	document.body.appendChild(form);
+      	console.log(document.getElementsByName("name1")[0].value);
+        form.submit();
+	}
+	
 	
 	
 </script>
@@ -235,13 +276,13 @@
 	    	</th>
 	    	<tr>
 	    		<td>
-	    			<a href="#" onclick="postdata(event)" >구매하기</a>
+	    			<a href="#" onclick="postdata(event)">구매하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="#" onclick="postdata()" >찜하기</a>
+	    			<a href="${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}">찜하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="#" onclick="postdata(event)" >장바구니 추가</a>
+	    			<a href="#" onclick="postdata2(event)">장바구니 추가</a>
 	    		</td>
 	    	</tr>
 	    </table>
