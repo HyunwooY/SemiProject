@@ -6,9 +6,12 @@
 	width:500px; height: 250px; border:3px solid black;
 }
 .searchbox, .searchResult, .searchProducts {
-	margin: auto; width:630px; height: 300px; display: table;
+	margin: auto; width:700px; display: table;
 }
-.items {
+.searchbox { height: 400px;}
+.searchResult { height: 100px;}
+.searchProducts { height: 1500px;}
+.searchbox .items {
 	width:500px; height: 40px;
 }
 .searchbox #CATEGORY,#keyword1,#sort {
@@ -17,9 +20,7 @@
     height: 40px!important;
 }
 
-li {
-    list-style: none;
-}
+li {list-style: none; }
 ul.list {
 	display: table;
     width: 100%;
@@ -43,12 +44,8 @@ ul.list li.item {
     color: #757575;
     vertical-align: top;
 }
-#searchBar {
-	width: 175px; height: 50px; margin-top: 60px
-}
-.color {
-	width:10px; height: 10px; list-style: none; float:left;
-}
+#searchBar {width: 175px; height: 50px; margin-top: 60px }
+.color {width:10px; height: 10px; list-style: none; float:left; }
 .searchProducts {
   margin: auto;
   width: 740px;
@@ -61,10 +58,16 @@ img{
   margin-right: 20px;
   margin-bottom: 20px;
 }
-.price{
-  margin-top: 4px;
-}
+.price{margin-top: 4px; }
 </style>
+<script>
+	function checkNull() {
+		let keyword=document.getElementById("keyword1").value;
+		if(keyword==null || keyword==""){
+			alert("검색어를 입력해주세요");
+		}
+	}
+</script>
 <c:choose>
 	<c:when test="${empty requestScope.keyword }"> <!-- 검색탭으로 들어온경우 -->
 		<c:set var="keyword" value=""/>
@@ -97,7 +100,7 @@ img{
 					<option value="pi_count" <c:if test="${sort=='pi_count' }">selected</c:if>>인기상품 순</option>
 				</select><br>
 			</div>
-			<input type="submit" value="SEARCH" id="searchBar">
+			<input type="submit" value="SEARCH" id="searchBar" onclick="checkNull()">
 		</form>
 	</fieldset>
 </div>

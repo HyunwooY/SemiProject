@@ -44,9 +44,8 @@ public class SearchController extends HttpServlet{
 			//카테고리랑 정렬이 없다면
 			if(category==null&&sort==null) {
 				ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, null);
-//				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
+				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
 				ArrayList<ColorVo> color = dao.get_color();
-				ArrayList<TagVo> tag = dao.get_Tag();
 				req.setAttribute("tag", tag);
 				req.setAttribute("color", color);
 				req.setAttribute("keyword", keyword);
@@ -54,9 +53,8 @@ public class SearchController extends HttpServlet{
 			//카테고리만 없다면
 			}else if(category==null) {
 				ArrayList<Search_ProductVo> list=dao.search_product(keyword, null, sort);
-//				ArrayList<TagVo> tag = dao.get_tag(keyword, null, sort);
+				ArrayList<TagVo> tag = dao.get_tag(keyword, null, sort);
 				ArrayList<ColorVo> color = dao.get_color();
-				ArrayList<TagVo> tag = dao.get_Tag();
 				req.setAttribute("tag", tag);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("sort", sort);
@@ -65,9 +63,8 @@ public class SearchController extends HttpServlet{
 			//정렬만 없다면
 			}else if(sort==null) {
 				ArrayList<Search_ProductVo> list=dao.search_product(keyword, category, null);
-//				ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
+				ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
 				ArrayList<ColorVo> color = dao.get_color();
-				ArrayList<TagVo> tag = dao.get_Tag();
 				req.setAttribute("tag", tag);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("color", color);
@@ -76,9 +73,8 @@ public class SearchController extends HttpServlet{
 			// 둘다 있을때
 			}else if(category!=null&&sort!=null) {
 				ArrayList<Search_ProductVo> list=dao.search_product(keyword, category, sort);
-//				ArrayList<TagVo> tag = dao.get_tag(keyword, category, sort);
+				ArrayList<TagVo> tag = dao.get_tag(keyword, category, sort);
 				ArrayList<ColorVo> color = dao.get_color();
-				ArrayList<TagVo> tag = dao.get_Tag();
 				req.setAttribute("tag", tag);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("CATEGORY", category);

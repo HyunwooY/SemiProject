@@ -19,6 +19,7 @@ label{margin: 15px; font-size: 1.3em;}
 a{color:white;}
 </style>
 <script type="text/javascript">
+	var radio = null;
 	function findid(){
 		var xhr = new XMLHttpRequest();
 		var name = document.getElementById("name");
@@ -38,17 +39,19 @@ a{color:white;}
 			}
 		};
 		
-		let param = "name=" + name.value + "&email=" + email.value;
+		let param = "name=" + name.value + "&email=" + email.value + "&type=" + radio;
 		xhr.open('post','${pageContext.request.contextPath }/id/find',true);
 		xhr.setRequestHeader('ConTent-Type','application/x-www-form-urlencoded');
 		xhr.send(param);
 	}
 	function midfind(){
+		radio = "일반사용자";
 		document.getElementById("ex").innerHTML = "아이디는 가입시 입력하신 이름과 이메일을 통해 찾을 수 있습니다.";
 		document.getElementById("name").placeholder = "이름";
 		document.getElementById("email").placeholder = "이메일";
 	}
 	function sidfind(){
+		radio = "판매사업자";
 		document.getElementById("ex").innerHTML = "아이디는 가입시 입력하신 사업자번호와 전화번호를 통해 찾을 수 있습니다.";
 		document.getElementById("name").placeholder = "사업자번호";
 		document.getElementById("email").placeholder = "전화번호";
@@ -61,7 +64,7 @@ a{color:white;}
 			<label for="member">일반사용자</label>
 			<label for="seller">판매사업자</label><br>
 			<input type="radio" name="type" value="일반사용자" id="member" class="radio" onclick="midfind()">
-			<input type="radio" name="type" value="판매사용자" id="seller" class="radio" onclick="sidfind()"><br>
+			<input type="radio" name="type" value="판매사업자" id="seller" class="radio" onclick="sidfind()"><br>
 			<h5 id="ex"></h5>
 			<div id="t1">
 				<input type="text" name="name" id="name">

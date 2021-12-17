@@ -6,8 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 import db.JDBC;
+import oracle.net.jdbc.TNSAddress.Address;
     
 public class MemberDao {
 	private static MemberDao instance = new MemberDao();
@@ -81,18 +85,18 @@ public class MemberDao {
 		}
 	}
 	//내정보 확인
-	public MemberVo select(String id, String pwd) {
+	public MemberVo select(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql ="select * from member_infomation where mi_id=? and mi_pwd=?";
+			String sql ="select * from member_infomation where mi_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				String pwd = rs.getString("mi_pwd");
 				String name = rs.getString("mi_name");
 				String email = rs.getString("mi_email");
 				String phone = rs.getString("mi_phone");
@@ -204,39 +208,8 @@ public class MemberDao {
 			JDBC.close(con, pstmt1, rs1);
 		}
 	}
-	
-	//배송지 조인
-	public HashMap<String, String> selectaddr(String id, String name){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = JDBC.getCon();
-			String sql ="select * from member_infomation mi, shipping_address sa where mi.mi_id=? and sa.sa_name=? and mi.mi_id=sa.mi_id";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, name);
-			rs = pstmt.executeQuery();
-			HashMap<String, String> map = new HashMap<String, String>();
-			if(rs.next()) {
-				String sanickname = rs.getString("sa_nickname");
-				String saphone = rs.getString("sa_phone");
-				String saaddr = rs.getString("sa_addr");
-				map.put("sa_nickname", sanickname);
-				map.put("sa_phone", saphone);
-				map.put("sa_addr", saaddr);
-				return map;
-			}
-			return null;
-		}catch(SQLException s) {
-			s.printStackTrace();
-			return null;
-		}finally {
-			JDBC.close(con, pstmt, rs);
-		}
-	}
 	//배송지 추가
-/*	public int addrinsert(MemberVo vo) {
+	public int insertaddr(AddressVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -244,7 +217,11 @@ public class MemberDao {
 			con.setAutoCommit(false);
 			String sql = "insert into shipping_address values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setString(1, vo.getNickname());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getPhone());
+			pstmt.setString(5, vo.getAddr());
 			con.commit();
 			return pstmt.executeUpdate();
 		}catch(SQLException s) {
@@ -258,10 +235,34 @@ public class MemberDao {
 		}finally {
 			JDBC.close(con,pstmt,null);
 		}
-	} */
+	}
+	
+	//배송지 조인
+	public AddressVo selectaddr(String id, String name) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql ="select * from member_infomation mi, shipping_address sa where mi.mi_id=? and sa.sa_name=? and mi.mi_id=sa.mi_id";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String sanickname = rs.getString("sa_nickname");
+				String saphone = rs.getString("sa_phone");
+				String saaddr = rs.getString("sa_addr");
+				AddressVo addrvo = new AddressVo(id,name,sanickname,saphone,saaddr);
+				return addrvo;
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 }
-
-
-
-
 
