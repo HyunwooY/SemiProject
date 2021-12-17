@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 
 @WebServlet("/member/buyProduct")
@@ -19,7 +20,9 @@ public class PayinfoController extends HttpServlet {
 		String pi_num=(String)req.getAttribute("pi_num");
 		MemberDao dao=MemberDao.getInstance();
 		MemberVo membervo=dao.select(id);
+		AddressVo addressvo=dao.selectaddr(id, membervo.getName());
 		req.setAttribute("vo", membervo);
+		req.setAttribute("avo", addressvo);
 		req.setAttribute("main", "/member/buyProduct.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
