@@ -31,15 +31,14 @@ public class StaticSearchController extends HttpServlet{
 		
 		//작동확인
 		if(req.getParameter("get_color")!=null) {
-//			Array get_color = (Array)req.getAttribute("list");
-//			System.out.println(get_color);
-//			JSONArray size_count = dao.get_count(pi_num, get_color);
-//			System.out.println(size_count.length());
-//			
-//			resp.setContentType("text/plain;charset=utf-8");
-//			PrintWriter pw = resp.getWriter();
-//			pw.print(size_count);
+			String get_color = req.getParameter("get_color");
+			JSONArray size_count = dao.get_count(pi_num, get_color);
+			resp.setContentType("text/plain;charset=utf-8");
+			PrintWriter pw = resp.getWriter();
+			pw.print(size_count);
 		}
+		
+		
 //		if(req.getParameter("g_color")!=null) {
 //			String g_color = req.getParameter("g_color");
 //			String g_size = req.getParameter("g_size");

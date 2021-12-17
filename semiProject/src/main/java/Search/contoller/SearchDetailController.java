@@ -2,6 +2,7 @@ package Search.contoller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +27,6 @@ public class SearchDetailController extends HttpServlet{
 		int pi_num = 3;
 		Search_ResultDao dao = new Search_ResultDao();
 		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
-
-		
-		ArrayList<ReviewVo> review = dao.get_review(pi_num);
-		ArrayList<Inquiry_historyVo> inq = dao.get_Inquiry_historyVo(pi_num);
 		ArrayList<String> color = new ArrayList<String>();
 		ArrayList<String> size = new ArrayList<String>();
 		ArrayList<String> img = new ArrayList<String>();
@@ -58,22 +55,37 @@ public class SearchDetailController extends HttpServlet{
 		req.setAttribute("color", color);
 		req.setAttribute("size", size);
 		req.setAttribute("img", img);
+		req.setAttribute("pi_num", pi_num);
 		
-		String get_color = req.getParameter("get_color");
-		
-		if(get_color!=null) {
+		if(req.getParameter("get_color")!=null) {
+			String get_color = req.getParameter("get_color");
 			req.setAttribute("post_color", get_color);
 			System.out.println(get_color);
 		}
-		
-//		if(get_color!=null) {
-//			HashMap<String, Integer> size_map= dao.get_count(pi_num, get_color);
-//			req.setAttribute("size_map", size_map);
-//		}
-		req.setAttribute("inq", inq);
-		req.setAttribute("review",review);
+
 		req.setAttribute("main","/search/searchDetail.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		Search_ResultDao dao = new Search_ResultDao();
+		if(req.getParameter("count")!=null) {
+			int count =Integer.parseInt(req.getParameter("count")) ;
+			int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
+			HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+			System.out.println(pi_num);
+			System.out.println(count);
+			for(int i=1 ;i<=count; i++) {
+				String pd = req.getParameter("name"+i);
+				String[] str = pd.split("\\s+");
+				int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
+				map.put(pd_num, Integer.parseInt(str[4]));
+			}
+			System.out.println(map);
+		}else {
+			System.out.println("연결오류");
+		}
 	}
 }
