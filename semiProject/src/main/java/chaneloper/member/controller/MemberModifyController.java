@@ -41,10 +41,10 @@ public class MemberModifyController extends HttpServlet{
 		String email = req.getParameter("email");
 		MemberVo vo1 = new MemberVo(id, pwd, name, email, phone);
 		
-		String sanickname = req.getParameter("sanickname");
+		String nickname = req.getParameter("saname");
 		String saphone = req.getParameter("saphone");
 		String saaddr = req.getParameter("saaddr");
-		AddressVo addrvo = new AddressVo(id, name, sanickname, saphone, saaddr);
+		AddressVo addrvo = new AddressVo(id, name, nickname, saphone, saaddr);
 		
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.update(vo1);

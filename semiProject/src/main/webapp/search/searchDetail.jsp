@@ -19,7 +19,7 @@
 				let data=JSON.parse(text);
 				var size_tag = document.getElementById("size");
 				
-				if(!!document.getElementsByName("size_name")){
+				if(document.getElementsByName("size_name")){
 					for(let i = size_length-1 ;i >= 0; i--){
 						size_tag.removeChild(document.getElementsByClassName("size_name")[i]);
 					}
@@ -48,12 +48,23 @@
 
 			}
 		}
-		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText,true);
+		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText+'&pi_num=${pi_num}',true);
 		xhr.send();
 	}
 	
 	
 	function list(e){
+		let showtable = document.getElementById("showtable");
+
+		
+		if(showtable.children.length>1){
+			for(var i=1;i<showtable.children.length;i++){
+				if(showtable.children[i].children[0].children[1].innerHTML=="( "+select_color+" "+e.target.innerHTML+")"){
+					alert("이미 선택된 상품입니다");
+					return 0;
+				}
+			}
+		}
 
 		let td_name = document.createElement("td");
 		let pd_name = document.createElement("span");
@@ -97,7 +108,7 @@
 		td_delete.appendChild(pd_result2);
 		td_delete.appendChild(pd_delete);
 		
-		let showtable = document.getElementById("showtable");
+		
 		let tr_total = document.createElement("tr");
 		tr_total.appendChild(td_name);
 		tr_total.appendChild(td_count);
@@ -129,22 +140,48 @@
 		showtable.removeChild(e.target.parentElement.parentElement);
 	}
 	
-	function postdata(){
-		let resultdata = document.createElement("form");
+	function postdata(e){
 		
-		let showtable = document.getElementById("showtable");
-		let len = showtable.childElementCount;
-		let list = [];
+        var form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "get");  //Post 방식
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/buyProduct"); //요청 보낼 주소
+		
+        let len = showtable.childElementCount;
+        
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "count");
+        hiddenField.setAttribute("value", len-1);
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pi_num");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "check");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
 		for(var i = 2; i <= len ; i++){
-			let ip = document.createElement("input");
-			ip.type="text";
-			ip.value=showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
-			ip.name="name"+(i-1);
+	        var hiddenField = document.createElement("input");
+	        hiddenField.setAttribute("type", "hidden");
+	        hiddenField.setAttribute("name", "name"+(i-1));
+	        console.log("name"+(i-1));
+	        let va = showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+	        hiddenField.setAttribute("value", va);
+	        form.appendChild(hiddenField);
 		}
-		
-		
-		
+      	document.body.appendChild(form);
+      	console.log(document.getElementsByName("name1")[0].value);
+        form.submit();
 	}
+	
+	
 	
 </script>
 
@@ -181,7 +218,7 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-						<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
+					<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
 
 <%		
 	}
@@ -198,7 +235,13 @@
 	    	</th>
 	    	<tr>
 	    		<td>
-	    			<a href="#" onclick="postdata()">구매하기</a>
+	    			<a href="#" onclick="postdata(event)" >구매하기</a>
+	    		</td>
+	    		<td>
+	    			<a href="#" onclick="postdata()" >찜하기</a>
+	    		</td>
+	    		<td>
+	    			<a href="#" onclick="postdata(event)" >장바구니 추가</a>
 	    		</td>
 	    	</tr>
 	    </table>
