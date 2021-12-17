@@ -264,5 +264,6 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//
 }
 
