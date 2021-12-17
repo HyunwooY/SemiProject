@@ -145,7 +145,7 @@
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
         form.setAttribute("method", "get");  //Post 방식
-        form.setAttribute("action", "${pageContext.request.contextPath}/search/searchdetail"); //요청 보낼 주소
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/buyProduct"); //요청 보낼 주소
 		
         let len = showtable.childElementCount;
         

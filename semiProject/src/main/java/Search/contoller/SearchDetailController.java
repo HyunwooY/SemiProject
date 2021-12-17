@@ -69,32 +69,5 @@ public class SearchDetailController extends HttpServlet{
 
 		
 	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		Search_ResultDao dao = new Search_ResultDao();
-		if(req.getParameter("count")!=null) {
-			int count =Integer.parseInt(req.getParameter("count")) ;
-			int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
-			HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-			System.out.println(pi_num);
-			System.out.println(count);
-			for(int i=1 ;i<=count; i++) {
-				String pd = req.getParameter("name"+i);
-				String[] str = pd.split("\\s+");
-				int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
-				map.put(pd_num, Integer.parseInt(str[4]));
-			}
-			if(req.getSession().getAttribute("id")==null) {
-				req.setAttribute("main","/member/login.jsp");
-				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
-			}else {
-				req.getSession().setAttribute("pd_num", map);
-				resp.sendRedirect(req.getContextPath()+"/member/buyProduct");
-			}
-			System.out.println(map);
-		}else {
-			System.out.println("연결오류");
-		}
-	}
+
 }
