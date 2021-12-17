@@ -11,7 +11,7 @@
 <form name="frmReply" method="post" action="${contextPath }" enctype="multipart/form-data">
 <table align="center">
 <tr>
-<td align="right">작성자:&nbsp;</td>ㅊㅊ
+<td align="right">작성자:&nbsp;</td>
 <td><input type="text" size="5" value="관리자" disabled/></td>
 </tr>
 <tr>

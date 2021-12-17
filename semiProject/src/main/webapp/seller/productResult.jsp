@@ -4,13 +4,13 @@
 <c:choose>
 	<c:when test="${requestScope.productCode=='fail' || requestScope.productCode==null}">
 		<div id="result">
-			alert("실패");
+			<p>실패!
 		<a href="${pageContext.request.contextPath }/layout">메인페이지로</a>
 		</div>
 	</c:when>
 	<c:when test="${requestScope.productCode=='success' }">
 		<div id="result">
-			alert("등록되었습니다.");
+			<p>등록되었습니다.
 		<a href="${pageContext.request.contextPath }/layout">메인페이지로</a>
 		</div>
 	</c:when>	
