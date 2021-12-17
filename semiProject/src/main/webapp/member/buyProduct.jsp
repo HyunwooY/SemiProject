@@ -89,13 +89,15 @@ th, tr{padding-left:0px;padding-right:0px}
 		<h3>상품정보</h3>
 		<table>
 			<tr>
-				<th colspan="4"><!-- 판매자 정보 -->a</th>
+				<th colspan="4">${svo.si_name }</th>
 			</tr>
 			<tr>
-				<td><!-- 사진 -->사진</td>
-				<td><!-- 상품명 -->상품명</td>
-				<td><!-- 수량 -->수량</td>
-				<td><!-- 총금액 -->총금액</td>
+				<td><img src="${pageContext.request.contextPath}/upload/${svo.pp_title}"></td>
+				<td>${svo.pi_name }</td>
+				<td>${svo.pd_color }</td>
+				<td>${svo.pd_size }</td>
+				<td>${param.count}</td>
+				<td>${svo.pi_price * param.count}</td>
 			</tr>
 		</table>
 	</div>
