@@ -6,10 +6,6 @@
 #mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
-#info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
-#info span{margin:20px}
-#info #short{top:20px}
-.r{float:right;position:relative;top:-20px}
 #detailmain{width:100%;height:600px;}
 #membermenu{float:left;width:15%;height:500px;padding-top:20px}
 #showtitle{float:left;width:85%;height:50px;padding-top:20px}
@@ -27,7 +23,12 @@
 		
 =======
 <div id="mdetail">
+<<<<<<< HEAD
 	<div id="detailmain">		
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+=======
+	<div id="detailmain">	
+		<div id="membermenu">
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
@@ -44,16 +45,21 @@
 				<a href="${pageContext.request.contextPath }/seller/inquiryList">문의/반품/교환 내역관리</a><br>
 			</div>
 			
-			<div id="update" class="menu">
+			<div id="list" class="menu">
 				<h4>UPDATED LIST</h4>
 				<a href="${pageContext.request.contextPath }/seller/productList">등록된상품</a><br>
+			</div>
 			
+			<div id="" class="menu">
+				<h4>INSERT PRODUCT</h4>
+				<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>
+			</div>
+		</div>
 		<div id="showtitle">
 			<span>${requestScope.detailtitle }</span>
 		</div>
 		<div id="show">
 			<jsp:include page="${requestScope.detailmain }"></jsp:include>
-		</div>
-		</div>
+		</div>		
 	</div>	
 </div>

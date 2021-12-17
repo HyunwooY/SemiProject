@@ -28,4 +28,14 @@ public class PurchaseDao {
 			JDBC.close(con,ps,null);
 		}
 	}
+	
 }
+
+
+
+
+
+
+
+
+

@@ -25,9 +25,11 @@ public class SearchDetailController extends HttpServlet{
 
 		int pi_num = 3;
 		Search_ResultDao dao = new Search_ResultDao();
+		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
+
+		
 		ArrayList<ReviewVo> review = dao.get_review(pi_num);
 		ArrayList<Inquiry_historyVo> inq = dao.get_Inquiry_historyVo(pi_num);
-		ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
 		ArrayList<String> color = new ArrayList<String>();
 		ArrayList<String> size = new ArrayList<String>();
 		ArrayList<String> img = new ArrayList<String>();
