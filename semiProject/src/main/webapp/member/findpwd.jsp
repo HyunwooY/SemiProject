@@ -21,6 +21,7 @@ label{margin: 15px; font-size: 1.3em;}
 a{color:white;}
 </style>
 <script>
+	var radio = null;
 	function findpwd(){
 		var xhr = new XMLHttpRequest();
 		var id = document.getElementById("id");
@@ -35,21 +36,23 @@ a{color:white;}
 					form.style.display = "none";
 					div.innerHTML = "회원가입 시 사용한 비밀번호는 <strong>" + json.pwd + "</strong> 입니다.";
 				}else{
-					div.innerHTML = "아이디 또는 이메일 정보가 없습니다."
+					div.innerHTML = "아이디 또는 이메일 정보가 틀렸습니다."
 				}
 			}
 		};
-		let param = "id=" + id.value + "&email=" + email.value;
+		let param = "id=" + id.value + "&email=" + email.value + "&type=" + radio;
 		xhr.open('post','${pageContext.request.contextPath }/pwd/find',true);
 		xhr.setRequestHeader('ConTent-Type','application/x-www-form-urlencoded');
 		xhr.send(param);
 	}
 	function mpwdfind(){
+		radio = "일반사용자";
 		document.getElementById("ex").innerHTML = "비밀번호는 아이디와 이메일을 통해 찾을 수 있습니다.";
-		document.getElementById("id").placeholder = "이름";
+		document.getElementById("id").placeholder = "아이디";
 		document.getElementById("email").placeholder = "이메일";
 	}
 	function spwdfind(){
+		radio = "판매사업자";
 		document.getElementById("ex").innerHTML = "비밀번호는 사업자번호와 이메일을 통해 찾을 수 있습니다.";
 		document.getElementById("id").placeholder = "사업자번호";
 		document.getElementById("email").placeholder = "이메일";
@@ -62,7 +65,7 @@ a{color:white;}
 			<label for="member">일반사용자</label>
 			<label for="seller">판매사업자</label><br>
 			<input type="radio" name="type" value="일반사용자" id="member" class="radio" onclick="mpwdfind()">
-			<input type="radio" name="type" value="판매사용자" id="seller" class="radio" onclick="spwdfind()"><br>
+			<input type="radio" name="type" value="판매사업자" id="seller" class="radio" onclick="spwdfind()"><br>
 			<h5 id="ex"></h5>
 			<div id="t1">
 				<input type="text" name="id" id="id">

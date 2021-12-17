@@ -1,13 +1,13 @@
 package chaneloper.vo;
 
-public class AdressVo {
+public class AddressVo {
 	private String id;
 	private String name;
 	private String nickname;
 	private String phone;
 	private String addr;
-	public AdressVo() {}
-	public AdressVo(String id, String name, String nickname, String phone, String addr) {
+	public AddressVo() {}
+	public AddressVo(String id, String name, String nickname, String phone, String addr) {
 		super();
 		this.id = id;
 		this.name = name;

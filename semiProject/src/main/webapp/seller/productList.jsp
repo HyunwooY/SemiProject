@@ -8,19 +8,19 @@
 <title>판매자 상품 목록</title>
 </head>
 <body>
-	<div class="row" align="center">
-		<h1>판매자 상품 목록</h1>
-		<c:forEach var="productList" items="${requestScope.productList }">
-			<div class="col-md-2">
-				<h3>${productList.pi_name }</h3>
-				<p>${productList.pi_num }
-				<p>${productList.pd_size }
-				<p>${productList.pd_color }
-				<p>${productList.pd_count }
-				<p>${productList.pi_price }원
-			</div>
-		</c:forEach>
-	</div>
+	
+	<div id="productlist"></div>
+		<table id = "table">		
+			<c:forEach var="productList" items="${requestScope.productList }">			
+					<th>${productList.pi_name }
+					<th>${productList.pi_num }
+					<th>${productList.pd_size }
+					<th>${productList.pd_color }
+					<th>${productList.pd_count }
+					<th>${productList.pi_price }원
+				
+			</c:forEach>
+		</table>
 	<hr>
 </body>
 </html>

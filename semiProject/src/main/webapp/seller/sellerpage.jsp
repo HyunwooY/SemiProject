@@ -19,11 +19,16 @@
 .menu h4{margin-bottom:5px}
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
+<<<<<<< HEAD
 <div id="ac">
 <h3>MY PAGE</h3>
 <ul id="account">
 	<div id="detailmain">	
 		
+=======
+<div id="mdetail">
+	<div id="detailmain">		
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			<div id="order" class="menu">
 				<h4>ORDER</h4>
 				<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br>
@@ -50,7 +55,5 @@
 			<jsp:include page="${requestScope.detailmain }"></jsp:include>
 		</div>
 		</div>
-	</div>
-	
-</ul>
+	</div>	
 </div>

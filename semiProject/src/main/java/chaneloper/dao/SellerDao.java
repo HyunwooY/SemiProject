@@ -61,17 +61,16 @@ public class SellerDao {
 	}
 	
 	// 아이디 찾기
-	public String sellerFindId(String si_num, String si_phone, String si_email) {	
+	public String sellerFindId(String si_num, String si_phone) {	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT SI_ID FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_PHONE=? AND SI_EMAIL=?";
+			String sql = "select * from seller_infomation where si_num=? and si_phone=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, si_num);
 			pstmt.setString(2, si_phone);
-			pstmt.setString(3, si_email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("si_id");
@@ -92,10 +91,10 @@ public class SellerDao {
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT SI_PWD FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_EMAIL=?";
+			String sql = "SELECT * FROM SELLER_INFOMATION WHERE SI_NUM=? AND SI_EMAIL=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, si_num);	
-			pstmt.setString(3, si_email);
+			pstmt.setString(2, si_email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString("si_pwd");
