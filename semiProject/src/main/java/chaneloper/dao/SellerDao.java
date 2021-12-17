@@ -30,7 +30,7 @@ public class SellerDao {
 			pstmt.setString(4,vo.getSi_addr());
 			pstmt.setString(5,vo.getSi_phone());
 			pstmt.setString(6,vo.getSi_name());
-			pstmt.setString(7,vo.getEmail());
+			pstmt.setString(7,vo.getSi_email());
 			return pstmt.executeUpdate();
 		}catch(SQLException s) {
 			s.printStackTrace();
@@ -127,19 +127,51 @@ public class SellerDao {
 		}
 	}
 	
+	// 판매자 정보 확인
+	public SellerVo sellerSellect(String si_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "SELECT * FROM SELLER_INFOMATION WHERE SI_ID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, si_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String si_pwd = rs.getString("si_pwd");
+				String si_num = rs.getString("si_num");
+				String si_addr = rs.getString("si_addr");
+				String si_phone = rs.getString("si_phone");
+				String si_name = rs.getString("si_name");
+				String si_email = rs.getString("si_email");
+				SellerVo vo = new SellerVo(si_id, si_pwd, si_num, si_addr, si_phone, si_name, si_email);
+				return vo;
+			}
+			return null;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
 	//수정 기능
 	public int sellerUpdate(SellerVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
 			con=JDBC.getCon();
-			String sql="update seller_information set Si_pwd=?,Si_addr=?,Si_phone=?,Si_name=?,Email=? where Si_id=?";
+			String sql="update seller_infomation set Si_pwd=?, Si_num=?, Si_addr=?,Si_phone=?,Si_name=?, si_Email=? where Si_id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getSi_pwd());
-			pstmt.setString(2, vo.getSi_addr());
-			pstmt.setString(3, vo.getSi_phone());
-			pstmt.setString(4, vo.getSi_name());
-			pstmt.setString(5, vo.getEmail());
+			pstmt.setString(2, vo.getSi_num());
+			pstmt.setString(3, vo.getSi_addr());
+			pstmt.setString(4, vo.getSi_phone());
+			pstmt.setString(5, vo.getSi_name());
+			pstmt.setString(6, vo.getSi_email());
+			pstmt.setString(7, vo.getSi_id());
 			return pstmt.executeUpdate();
 		}catch(SQLException s) {
 			s.printStackTrace();
@@ -147,7 +179,7 @@ public class SellerDao {
 		}finally {
 			JDBC.close(con,pstmt,null);
 		}
-	}
+	}	
 	
 	
 	// 판매자 상품 리스트
