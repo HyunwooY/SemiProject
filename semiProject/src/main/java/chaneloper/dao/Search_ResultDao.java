@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -254,6 +254,31 @@ public class Search_ResultDao {
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public int get_pd_num(int pi_num, String color, String size) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql="select pd_num from product_detail where pi_num = ? and pd_color = ? and pd_size =?";
+			con = JDBC.getCon();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			pstmt.setString(2, color);
+			pstmt.setString(3, size);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}else {
+				return -1;
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
 		}finally {
 			JDBC.close(con, pstmt, rs);
 		}
