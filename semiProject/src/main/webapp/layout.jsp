@@ -82,6 +82,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<li><a href="">원피스</a></li>
 	<li><a href="">아우터</a></li>
 	<li><a href="">악세서리</a></li>
+	<li><a href="">공지사항</a></li>
 	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
 		<a href="${cp }/search/search" >검색 </a></li>
 </ul>
