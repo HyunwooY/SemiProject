@@ -18,23 +18,24 @@
 		bottom: 30px;
 		margin-top: 20px;
 	}
+	
 </style>
 <h1>내 문의 내역</h1>
-<table width="600">
+<table width="600" border="1">
 	<tr>
-		<th>문의번호</th><th>작성자아이디</th><th>문의제목</th><th>문의내용</th><th>상품번호</th>
+		<th>문의 번호</th><th>작성자 아이디</th><th>문의 제목</th><th>문의 내용</th><th>상품 번호</th>
 	</tr>
 	<c:forEach var="vo" items="${list }">
 		<tr>
 			<td>${vo.ih_num }</td>
 			<td>${vo.mi_id }</td>
 			<td>${vo.ih_title }</td>
-			<td><a href="inquiryDetail.jsp?ih_num=${vo.getIh_num() }">${vo.ih_question }</a></td>
+			<td><a href="${cp }/mypage/ihdetail?ih_num=${vo.getIh_num() }">${vo.ih_question }</a></td>
 			<td>${vo.pi_num }</td>
 		</tr>
 	</c:forEach>
 </table>
-<div>
+<div id="page">
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }">
