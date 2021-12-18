@@ -6,7 +6,7 @@
 	fieldset{
 	margin: 40px auto 40px; width:500px; height: 250px; border:none;
 }
-.searchbox, .searchResult, .searchProducts{
+.searchbox, .searchResult, .searchProducts, .searchPaging{
 	margin: auto; display: table; 
 }
 .searchbox{ width:600px; height: 300px;}
@@ -67,7 +67,7 @@ ul.list li.item{
 	function checkNull() {
 		let keyword=document.getElementById("keyword1").value;
 		let category=document.getElementById("CATEGORY").value;
-		let sort=document.getElementById("CATEGORY").value;
+		let sort=document.getElementById("sort").value;
 		if(category==1 && sort==1 && keyword==""){
 			alert("검색어를 입력해주세요");
 		}
@@ -81,10 +81,11 @@ ul.list li.item{
 		<c:set var="keyword" value="${keyword }"/><!-- 검색키워드로 들어온경우 --><br>
 	</c:otherwise>
 </c:choose>
+<c:set var="count" value="${fn:length(list) }"></c:set> <!-- 검색된 제품 갯수 -->
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <div class="searchbox">
 	<fieldset>
-		<form method="get" action="${cp }/search/search">
+		<form method="get" action="${cp }/search/search?pageNum=rr">
 			<div class="items">
 				<select id="CATEGORY" name="CATEGORY">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>상품분류 선택</option>
@@ -100,7 +101,7 @@ ul.list li.item{
 			</div>
 			<div class="items">
 				<select id="sort" name="sort">
-					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>:::기준선택:::</option>
+					<option value="1" <c:if test="${sort=='1' }">selected</c:if>>:::기준선택:::</option>
 					<option value="pi_date" <c:if test="${sort=='pi_date' }">selected</c:if>>신상품 순</option>
 					<option value="pi_count" <c:if test="${sort=='pi_count' }">selected</c:if>>인기상품 순</option>
 				</select><br>
@@ -109,7 +110,7 @@ ul.list li.item{
 		</form>
 	</fieldset>
 </div>
-<c:set var="count" value="${fn:length(list) }"></c:set>
+
 <div class="searchResult"> <!-- 조회된 상품 갯수 출력 -->
 	<p class="record">
 		<strong>${count}</strong> ITEMS
@@ -164,26 +165,27 @@ ul.list li.item{
 	</c:forEach>
 </div>
 
-<div calss="searchPaging"><!-- 페이징 처리 하는부분 -->
+<div class="searchPaging"><!-- 페이징 처리 하는부분 -->
 	<p>
 	<c:if test="${startPage>10 }">
-		<a href="${cp }/search/paging?pageNum=${startPage-1}&count=${count}"><<</a>
+		<a href="${cp }/search/search?pageNum=${startPage-1}&count=${count}"><<</a>
 	</c:if>
-	<a href="${cp }/search/paging?pageNum=${pageNum-1}&count=${count}"><</a>
+	<a href="${cp }/search/search?pageNum=${pageNum-1}&count=${count}"><</a>
+	
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
-				<a href="${cp }/search/paging?pageNum=${i}&count=${count}"><span style="color:red">${i }</span></a>
+				<a href="${cp }/search/search?pageNum=${i}&count=${count}"><span style="color:red">${i }</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/search/paging?pageNum=${i}&count=${count}"><span style="color:gray">${i }</span></a>
+				<a href="${cp }/search/search?pageNum=${i}&count=${count}"><span style="color:gray">${i }</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	
-	<a href="${cp }/search/paging?pageNum=${pageNum+1}&count=${count}">></a>
+	<a href="${cp }/search/search?pageNum=${pageNum+1}&count=${count}">></a>
 	<c:if test="${endPage<totalPage }">
-		<a href="${cp }/search/paging?pageNum=${endPage+1}&count=${count}">>></a>
+		<a href="${cp }/search/search?pageNum=${endPage+1}&count=${count}">>></a>
 	</c:if>
 	</p>
 </div>

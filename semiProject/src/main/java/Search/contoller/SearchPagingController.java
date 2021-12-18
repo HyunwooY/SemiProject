@@ -27,7 +27,6 @@ public class SearchPagingController extends HttpServlet{
 		Search_ResultDao dao=new Search_ResultDao();
 //		ArrayList<Search_ProductVo> list = dao.list(startRow,endRow);
 		int count=Integer.parseInt(req.getParameter("count")); // 검색된 전체재품 갯수값 (여기까진 ok)
-		
 		int totalPage=(int)Math.ceil(count/10.0);	// 전체페이지 갯수
 		int startPageNum= ((pageNum-1)/10*10) + 1;	//시작 페이지 번호
 		int endPageNum=startPageNum+9;	//끝 페이지 번호
