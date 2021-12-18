@@ -17,6 +17,8 @@ public class PurchaseDao {
 	public int purchase(AddressVo vo, String id, String ph_type) {
 		Connection con = null;
 		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		ResultSet rs=null;
 		try {
 			con = JDBC.getCon();
 			ps=con.prepareStatement("insert into purchase_history values(ph_seq.nextval,?,?,'결제전',sysdate,?,?,?)");
@@ -25,6 +27,30 @@ public class PurchaseDao {
 			ps.setString(3, vo.getAddr());
 			ps.setString(4, vo.getPhone());
 			ps.setString(5, vo.getName());
+			ps.executeUpdate();
+			ps1=con.prepareStatement("select ph_seq.currval ph_seq from dual");
+			rs=ps1.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("ph_seq");
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(null,ps1,rs);
+			JDBC.close(con,ps,null);
+		}
+	}
+	public int purchase(ShowPurchaseListVo vo,int ph_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = JDBC.getCon();
+			ps=con.prepareStatement("insert into packaging values(p_seq.nextval,?,?,?)");
+			ps.setInt(1, ph_num);
+			ps.setInt(2, vo.getPd_num());
+			ps.setInt(3, vo.getPurchase_count());
 			return ps.executeUpdate();
 		}catch(SQLException se) {
 			se.printStackTrace();
@@ -33,6 +59,7 @@ public class PurchaseDao {
 			JDBC.close(con,ps,null);
 		}
 	}
+	
 	public ShowPurchaseListVo selectProduct(int pd_num,int count) {
 		Connection con = null;
 		PreparedStatement ps = null;

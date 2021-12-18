@@ -19,11 +19,17 @@ import chaneloper.vo.ShowPurchaseListVo;
 
 @WebServlet("/member/buyProduct")
 public class PayinfoController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=(String)req.getSession().getAttribute("id");
+		String radio=(String)req.getSession().getAttribute("radio");
+		req.getSession().invalidate();
+		req.getSession().setAttribute("id", id);
+		req.getSession().setAttribute("radio",radio);				
 		Search_ResultDao dao = new Search_ResultDao();
-		ArrayList<ShowPurchaseListVo> list =new ArrayList<ShowPurchaseListVo>();
+		String param="";
+		ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
         if(req.getParameter("count")!=null) {
             int count =Integer.parseInt(req.getParameter("count")) ;
             int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
@@ -31,33 +37,49 @@ public class PayinfoController extends HttpServlet {
                 String pd = req.getParameter("name"+i);
                 String[] str = pd.split("\s+");
                 int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
+                param+="&name"+i+"="+pd;
                 System.out.println(pd_num);
                 PurchaseDao pdao=PurchaseDao.getInstance();
                 ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]));
-                list.add(svo);
+                purchaseList.add(svo);
             }
         }else {
             System.out.println("연결오류");
         }
 		MemberDao mdao=MemberDao.getInstance();
 		MemberVo membervo=mdao.select(id);
-		AddressVo addressvo=mdao.selectaddr(id, membervo.getName());
+		ArrayList<AddressVo> addrlist=mdao.addrList(id);
 		req.setAttribute("vo", membervo);
-		req.setAttribute("avo", addressvo);
-		req.setAttribute("list", list);
-		if(req.getSession().getAttribute("id")==null) {
-            req.setAttribute("main","/member/login.jsp");
-            req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		req.getSession().setAttribute("list", purchaseList);
+		if(req.getSession().getAttribute("id")==null||req.getSession().getAttribute("id").equals("")) {
+			req.getSession().setAttribute("backp", "go");
+			req.getSession().setAttribute("count", req.getParameter("count"));
+			req.getSession().setAttribute("pi_num", req.getParameter("pi_num"));
+			req.getSession().setAttribute("parame", param);
+            resp.sendRedirect(req.getContextPath()+"/member/login");
         }else {
+        	AddressVo addressvo=mdao.selectaddr(id, membervo.getName());
+        	req.setAttribute("avo", addressvo);
+        	req.setAttribute("addr", addrlist);
         	req.setAttribute("main", "/member/buyProduct.jsp");
     		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
         }
-		
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-
+		req.setCharacterEncoding("utf-8");
+		ArrayList<ShowPurchaseListVo> list=(ArrayList<ShowPurchaseListVo>)req.getSession().getAttribute("list");
+		String id=(String)req.getSession().getAttribute("id");
+		String payType=req.getParameter("type");
+		String name=req.getParameter("name");
+		String addr=req.getParameter("addr");
+		String phone=req.getParameter("phone");
+		AddressVo avo=new AddressVo(id, name, null, phone, addr);
+		PurchaseDao dao=PurchaseDao.getInstance();
+		int ph_num=dao.purchase(avo, id, payType);
+		for(ShowPurchaseListVo vo:list) {
+			dao.purchase(vo, ph_num);
+		}
 		req.setAttribute("main", "/member/buyProduct.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
