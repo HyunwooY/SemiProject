@@ -143,20 +143,24 @@
 	}
 </script>
 <style>
-#purchase{position:relative;top:50px;left:100px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
-
+#purchase{position:relative;top:50px;left:100px;width:70%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
+#purchase h2{margin-bottom:30px}
 table{width:800px;position:relative;top:10px;}
 table {margin:0px;padding:0px}
 th, tr{padding-left:0px;padding-right:0px}
-.div{margin-bottom:20px}
+.div{margin-bottom:100px}
 #takeinfo #h3{display:inline-block}
 #takeinfo #btn{height:25px;position:relative;top:-2px;left:10px}
 .input{display:none;}
 .imgs{width:140px;height:190px}
 #changeAddr{display:none;}
 #addrList{display:none}
+#purchaseType{position:relative;top:-80px}
+#purchaseType input{margin-right:25px;margin-bottom:10px}
+#purchaseType #purchasebtn{position:relative;font-size:1.1em;}
 </style>    
 <div id="purchase">
+	<h2>주문결제</h2>
 	<div id="buyinfo" class="div">
 		<h3>구매자정보</h3>
 		<table>
@@ -270,10 +274,8 @@ th, tr{padding-left:0px;padding-right:0px}
 		<label for="creditcard">신용카드</label>
 		<input type="radio" name="type" value="신용카드" id="creditcard" onclick="card()">
 		<label for="cash">무통장입금</label>
-		<input type="radio" name="type" value="무통장입금" id="cash" onclick="cash()">
-	</div>
-	<div>
-		<input type="button" value="결제하기" onclick="go()">
+		<input type="radio" name="type" value="무통장입금" id="cash" onclick="cash()"><br>
+		<input type="button" value="결제하기" onclick="go()" id="purchasebtn">
 	</div>
 </div>
 

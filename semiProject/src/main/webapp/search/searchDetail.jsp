@@ -186,7 +186,7 @@
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
         form.setAttribute("method", "get");  //Post 방식
-        form.setAttribute("action", "${pageContext.request.contextPath}/member/buyProduct"); //요청 보낼 주소
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/gocart"); //요청 보낼 주소
 		
         let len = showtable.childElementCount;
         
@@ -222,6 +222,29 @@
         form.submit();
 	}
 	
+	/*테스트 스크립트*/
+	function testscript(){
+		let xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				let data=xhr.responseText;
+				let json=JSON.parse(data);
+				if(json.checkcart==true){
+					alert('장바구니에 추가되었습니다.');
+				}else{
+					alert('오류가 발생하였습니다..');
+				}
+			}
+		};
+		let len11 = document.getElementById("showtable").childElementCount-1;
+		let param='';
+		for(var i = 2; i <= len11+1 ; i++){
+	        let va = showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+			param+="&name"+(i-1)+'='+va;
+		}
+		xhr.open('get','${pageContext.request.contextPath}/member/gocart?count='+len11+'&pi_num='+${pi_num}+param,true);
+		xhr.send();
+	}
 	
 	
 </script>
@@ -282,7 +305,7 @@
 	    			<a href="${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}">찜하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="#" onclick="postdata2(event)">장바구니 추가</a>
+	    			<a href="#" onclick="testscript()">장바구니 추가</a>
 	    		</td>
 	    	</tr>
 	    </table>

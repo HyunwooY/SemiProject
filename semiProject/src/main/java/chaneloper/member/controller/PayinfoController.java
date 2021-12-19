@@ -35,6 +35,7 @@ public class PayinfoController extends HttpServlet {
             int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
             for(int i=1 ;i<=count; i++) {
                 String pd = req.getParameter("name"+i);
+                System.out.println(pd);
                 String[] str = pd.split("\s+");
                 int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
                 param+="&name"+i+"="+pd;
