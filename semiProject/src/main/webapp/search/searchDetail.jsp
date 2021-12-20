@@ -4,6 +4,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+	
+</style>
+
 
 <script type="text/javascript">
 	let select_color = '';
@@ -245,7 +249,23 @@
 		xhr.open('get','${pageContext.request.contextPath}/member/gocart?count='+len11+'&pi_num='+${pi_num}+param,true);
 		xhr.send();
 	}
-	
+	function goods1(){
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				let xml=xhr.responseXML;
+				let code=xml.getElementsByTagName("find1")[0].textContent;
+				if(code=='success'){
+					alert("찜목록에 추가 되었습니다.");
+				}else{
+					alert("찜목록에 제거 되었습니다.");
+				}
+			}
+		}
+		xhr.open('get','${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}',true);
+		xhr.send();
+	}
+
 	
 </script>
 
@@ -254,7 +274,7 @@
 		<img src="images/"+ ${img[0]} alt="Image1">
 	</div>
 	<div>
-	    <table id="showtable"  border='1' width="600px">
+	    <table id="showtable"  border='1' width="600px" align="right">
 			<th colspan=4>${name}</th>
 			<tr>
 			    <td colspan=4><br><br>
@@ -302,12 +322,25 @@
 	    			<a href="#" onclick="postdata(event)">구매하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}">찜하기</a>
+	    			<a href="#" onclick="goods1()">찜하기</a>
 	    		</td>
 	    		<td>
 	    			<a href="#" onclick="testscript()">장바구니 추가</a>
 	    		</td>
 	    	</tr>
+	    </table>
+	    
+	   	<table align="center">
+	    	<th>
+	    	</th>
+	    	
+<c:forEach var="i" begin="0" end="2">
+			<tr>
+				<td>
+					<img src="images/"+ ${img[i]} alt="Image${i }">
+				</td>
+			</tr>
+</c:forEach>
 	    </table>
 	</div>
 </div>
