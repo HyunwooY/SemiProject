@@ -1,19 +1,24 @@
 package chaneloper.vo;
 
 public class AddressVo {
+	private int num;
 	private String id;
 	private String name;
 	private String nickname;
 	private String phone;
 	private String addr;
 	public AddressVo() {}
-	public AddressVo(String id, String name, String nickname, String phone, String addr) {
+	public AddressVo(int num, String id, String name, String nickname, String phone, String addr) {
 		super();
+		this.num = num;
 		this.id = id;
 		this.name = name;
 		this.nickname = nickname;
 		this.phone = phone;
 		this.addr = addr;
+	}
+	public int getNum() {
+		return num;
 	}
 	public String getId() {
 		return id;
@@ -29,6 +34,9 @@ public class AddressVo {
 	}
 	public String getAddr() {
 		return addr;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public void setId(String id) {
 		this.id = id;

@@ -26,7 +26,7 @@ public class InsertAddrController extends HttpServlet {
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String addr = req.getParameter("addr");
-		AddressVo vo = new AddressVo(id, name, nickname, phone, addr);
+		AddressVo vo = new AddressVo(0,id, name, nickname, phone, addr);
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.insertaddr(vo);
 		if(n>0) {
