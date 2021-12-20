@@ -16,7 +16,7 @@
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}
 </style>
 
-<div id="detailmain">	
+<div id="detailmain">
 	<div id="membermenu">
 		<div id="order" class="menu">
 			<h4>ORDER</h4>
@@ -40,8 +40,14 @@
 		
 		<div id="" class="menu">
 			<h4>INSERT PRODUCT</h4>
-			<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>
+			<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>	
 		</div>
+
+		<div id="" class="menu">
+			<h4>INSERT DETAIL PRODUCT</h4>
+			<a href="${pageContext.request.contextPath }/seller/detail">상품 상세 등록</a>	
+		</div>
+		
 	</div>
 	<div id="showtitle">
 		<span>${requestScope.detailtitle }</span>
