@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import chaneloper.vo.NoticeVo;
+import chaneloper.vo.ProductVo;
 import db.JDBC;
 
 public class NoticeDao {
@@ -32,31 +33,10 @@ public class NoticeDao {
 		} finally {
 			JDBC.close(con, pstmt, null);
 		}
+		
 		}
-		public NoticeVo select(int num){
-			Connection con=null;
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;		
-			try {
-				con=JDBC.getCon();
-				String sql="select * from Notice where n_num=?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setInt(1, num);
-				rs=pstmt.executeQuery();
-				if(rs.next()) {
-					String n_context = rs.getString("n_context");
-					
-					NoticeVo vo = new NoticeVo(num,n_context );
-					return vo;
-				}	
-				return null;
-			}catch(SQLException se) {
-				se.printStackTrace();
-				return null;
-			}finally {
-				JDBC.close(con, pstmt, rs);
-			}
-		}
+		
+		//전체 글의 갯수
 		public int getCount() {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -74,6 +54,43 @@ public class NoticeDao {
 				return -1;
 			} finally {
 				JDBC.close(con, pstmt, rs);
+			}
+		}
+		
+		// 공지사항 수정
+		public int Notice(NoticeVo vo) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "UPDATE Notice SET n_num=?, n_context=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, vo.getN_num());
+				pstmt.setString(2, vo.getN_context());
+				return pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			} finally {
+				JDBC.close(con, pstmt, null);
+			}
+		}
+
+		// 공지사항 삭제
+		public int NoticeDelete(int n_num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "DELETE FROM Notice WHERE n_num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,n_num);
+				return pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			} finally {
+				JDBC.close(con, pstmt, null);
 			}
 		}
 
