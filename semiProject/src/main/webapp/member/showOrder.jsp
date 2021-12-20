@@ -34,24 +34,49 @@ th, tr{padding-left:0px;padding-right:0px}
 			<th width="140px">주문상태</th>
 			<th width="170px">취소/교환/반품</th>
 		</tr>
-		<c:forEach var="vo" items="${requestScope.list}">
-		<tr>
-			<td>${vo.ph_regdate }</td>
-			<td>${vo.pi_name }</td>
-			<td>${vo.p_count }</td>
-			<td>${vo.pi_price * vo.p_count }</td>
-			<td>${vo.ph_state }</td>
-			<td>
+		<c:forEach var="vo" items="${requestScope.phList}">
+
 			<c:choose>
-				<c:when test="${vo.ph_state=='결제전' || vo.ph_state=='결제완료'}">
-				<a href="">취소</a>
-				</c:when>
-				<c:otherwise>
-				<a href="">교환</a>/<a href="">반품</a>
-				</c:otherwise>
+			<c:when test="${ph_num!=vo.ph_num }">
+				<tr>
+					<td>${vo.ph_regdate }</td>
+					<td>${vo.pi_name } 외 </td>
+					<td>${vo.p_count }</td>
+					<td>${priceAll + (vo.pi_price * vo.p_count) }</td>
+					<td>${vo.ph_state }</td>
+					<td>
+					<c:choose>
+						<c:when test="${vo.ph_state=='결제전' || vo.ph_state=='결제완료'}">
+						<a href="">취소</a>
+						</c:when>
+						<c:otherwise>
+						<a href="">교환</a>/<a href="">반품</a>
+						</c:otherwise>
+					</c:choose>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td>${vo.ph_regdate }</td>
+					<td>${vo.pi_name }</td>
+					<td>${vo.p_count }</td>
+					<td>${vo.pi_price * vo.p_count }</td>
+					<td>${vo.ph_state }</td>
+					<td>
+					<c:choose>
+						<c:when test="${vo.ph_state=='결제전' || vo.ph_state=='결제완료'}">
+						<a href="">취소</a>
+						</c:when>
+						<c:otherwise>
+						<a href="">교환</a>/<a href="">반품</a>
+						</c:otherwise>
+					</c:choose>
+					</td>
+				</tr>
+			</c:otherwise>
+			
 			</c:choose>
-			</td>
-		</tr>
 		</c:forEach>
 	</table>
 </div>
