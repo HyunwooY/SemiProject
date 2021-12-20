@@ -31,19 +31,19 @@ public class ProductDao {
 					+ " SELECT *"
 					+ " FROM DUAL";
 			// 상품 
-			pstmt = con.prepareStatement(sql1);		
+			pstmt = con.prepareStatement(sql1);
 			pstmt.setString(1, vo.getSi_id());
 			pstmt.setString(2, vo.getPi_name());
 			pstmt.setInt(3, vo.getPi_price());
-			pstmt.setString(4, vo.getPi_category());			
+			pstmt.setString(4, vo.getPi_category());
 			pstmt.setString(5, vo.getPp_title());
-			pstmt.setInt(6, vo.getPi_num());			
+			pstmt.setInt(6, vo.getPi_num());
 			pstmt.setInt(7, vo.getPi_num());
 			pstmt.setString(8, vo.getT_name());
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return 
+				return pstmt.executeUpdate();
 			}
 			
 			String sql2 = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?, ?, ?)";
@@ -61,26 +61,26 @@ public class ProductDao {
 		}
 	}
 	
-	// 상품 상세 등록
-	public int productInsertDetail(ProductVo vo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = JDBC.getCon();
-			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
-			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
-			pstmt.setString(3, vo.getPd_color());		// 상품 색상
-			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
-			return pstmt.executeUpdate();
-		} catch (SQLException se) {
-			se.printStackTrace();
-			return -1;
-		} finally {
-			JDBC.close(con, pstmt, null);
-		}
-	}
+//	// 상품 상세 등록
+//	public int productInsertDetail(ProductVo vo) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
+//			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
+//			pstmt.setString(3, vo.getPd_color());		// 상품 색상
+//			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
+//			return pstmt.executeUpdate();
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			return -1;
+//		} finally {
+//			JDBC.close(con, pstmt, null);
+//		}
+//	}
 
 	// 상품 수정
 	public int productUpdate(ProductVo vo) {

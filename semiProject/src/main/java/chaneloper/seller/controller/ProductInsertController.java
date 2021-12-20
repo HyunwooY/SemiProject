@@ -37,9 +37,14 @@ public class ProductInsertController extends HttpServlet {
 		String pi_name = multi.getParameter("pi_name");
 		int pi_price = Integer.parseInt(multi.getParameter("pi_price"));
 		String pi_category = multi.getParameter("pi_category");
+		
+		String pd_size = req.getParameter("pd_size");
+		String pd_color = req.getParameter("pd_color");
+		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
+		
 		String pp_title = multi.getOriginalFileName("pp_title");
 		String t_name = multi.getParameter("t_name");
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, pi_category, null, null, 0, pp_title, t_name);
+		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pd_count, null, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
 		ProductDao dao = ProductDao.getInstance();
 
 		int n = dao.productInsert(vo);
