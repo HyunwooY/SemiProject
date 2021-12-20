@@ -52,8 +52,6 @@ public class MemberModifyController extends HttpServlet{
 				req.setAttribute("result", "success");
 				MemberVo vo = dao.select(id);
 				req.setAttribute("vo", vo);
-				AddressVo addrvo2 = dao.selectaddr(id, name);
-				req.setAttribute("addrvo",addrvo2);
 		}else {
 			req.setAttribute("result", "fail");
 		}

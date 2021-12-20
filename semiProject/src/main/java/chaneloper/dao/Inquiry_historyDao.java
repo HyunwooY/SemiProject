@@ -44,7 +44,6 @@ public class Inquiry_historyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = JDBC.getCon();
 			String sql = "select * from "
 					+ "("
 					+ "		select ih.*, rownum rnum from"
@@ -52,6 +51,7 @@ public class Inquiry_historyDao {
 					+ "        select * from inquiry_history order by ih_num desc"
 					+ "     ) ih"
 					+ ") where rnum>=? and rnum<=?";
+			con = JDBC.getCon();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
@@ -65,7 +65,9 @@ public class Inquiry_historyDao {
 				String ih_question = rs.getString("ih_question");
 				String ih_answer = rs.getString("ih_answer");
 				Inquiry_historyVo vo = new Inquiry_historyVo(ih_num, mi_id, pi_num, ih_title, ih_question, ih_answer);
+				System.out.println(vo);
 				list.add(vo);
+				System.out.println(list);
 			}
 			return list;
 		} catch(SQLException se) {

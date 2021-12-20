@@ -4,6 +4,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+	
+</style>
+
 
 <script type="text/javascript">
 	let select_color = '';
@@ -181,7 +185,87 @@
         form.submit();
 	}
 	
+	function postdata2(e){
+		
+        var form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "get");  //Post 방식
+        form.setAttribute("action", "${pageContext.request.contextPath}/member/gocart"); //요청 보낼 주소
+		
+        let len = showtable.childElementCount;
+        
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "count");
+        hiddenField.setAttribute("value", len-1);
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pi_num");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "check");
+        hiddenField.setAttribute("value", "${pi_num}");
+        form.appendChild(hiddenField);
+        
+		for(var i = 2; i <= len ; i++){
+	        var hiddenField = document.createElement("input");
+	        hiddenField.setAttribute("type", "hidden");
+	        hiddenField.setAttribute("name", "name"+(i-1));
+	        console.log("name"+(i-1));
+	        let va = showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+	        hiddenField.setAttribute("value", va);
+	        form.appendChild(hiddenField);
+		}
+      	document.body.appendChild(form);
+      	console.log(document.getElementsByName("name1")[0].value);
+        form.submit();
+	}
 	
+	/*테스트 스크립트*/
+	function testscript(){
+		let xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				let data=xhr.responseText;
+				let json=JSON.parse(data);
+				if(json.checkcart==true){
+					alert('장바구니에 추가되었습니다.');
+				}else{
+					alert('오류가 발생하였습니다..');
+				}
+			}
+		};
+		let len11 = document.getElementById("showtable").childElementCount-1;
+		let param='';
+		for(var i = 2; i <= len11+1 ; i++){
+	        let va = showtable.childNodes[i].childNodes[0].childNodes[1].innerHTML+" "+showtable.childNodes[i].childNodes[1].childNodes[0].innerHTML;
+			param+="&name"+(i-1)+'='+va;
+		}
+		xhr.open('get','${pageContext.request.contextPath}/member/gocart?count='+len11+'&pi_num='+${pi_num}+param,true);
+		xhr.send();
+	}
+	function goods1(){
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				let xml=xhr.responseXML;
+				let code=xml.getElementsByTagName("find1")[0].textContent;
+				if(code=='success'){
+					alert("찜목록에 추가 되었습니다.");
+				}else{
+					alert("찜목록에 제거 되었습니다.");
+				}
+			}
+		}
+		xhr.open('get','${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}',true);
+		xhr.send();
+	}
+
 	
 </script>
 
@@ -190,7 +274,7 @@
 		<img src="images/"+ ${img[0]} alt="Image1">
 	</div>
 	<div>
-	    <table id="showtable"  border='1' width="600px">
+	    <table id="showtable"  border='1' width="600px" align="right">
 			<th colspan=4>${name}</th>
 			<tr>
 			    <td colspan=4><br><br>
@@ -235,15 +319,28 @@
 	    	</th>
 	    	<tr>
 	    		<td>
-	    			<a href="#" onclick="postdata(event)" >구매하기</a>
+	    			<a href="#" onclick="postdata(event)">구매하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="#" onclick="postdata()" >찜하기</a>
+	    			<a href="#" onclick="goods1()">찜하기</a>
 	    		</td>
 	    		<td>
-	    			<a href="#" onclick="postdata(event)" >장바구니 추가</a>
+	    			<a href="#" onclick="testscript()">장바구니 추가</a>
 	    		</td>
 	    	</tr>
+	    </table>
+	    
+	   	<table align="center">
+	    	<th>
+	    	</th>
+	    	
+<c:forEach var="i" begin="0" end="2">
+			<tr>
+				<td>
+					<img src="images/"+ ${img[i]} alt="Image${i }">
+				</td>
+			</tr>
+</c:forEach>
 	    </table>
 	</div>
 </div>
