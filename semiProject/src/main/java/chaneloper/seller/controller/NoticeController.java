@@ -27,8 +27,7 @@ public class NoticeController extends HttpServlet{
 		int endRow = startRow + 9;
 		
 		NoticeDao dao = NoticeDao.getInstance();
-		ArrayList<NoticeVo> list = dao.list(startRow, endRow);
-		
+		ArrayList<NoticeVo> list = dao.list();
 		
 		int count = dao.getCount();		// 전체 글의 수
 		int pageCount = (int)Math.ceil(count / 10.0);		// 전체 페이지 수
@@ -44,9 +43,7 @@ public class NoticeController extends HttpServlet{
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
 		
-		req.setAttribute("detailtitle", "공지사항");
-		req.setAttribute("detailmain", "/seller/inquiryList.jsp");
-		req.setAttribute("main", "/seller/sellerpage.jsp");
+		req.setAttribute("main", "/seller/notice.jsp");
 		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 	}

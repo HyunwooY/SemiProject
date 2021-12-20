@@ -14,14 +14,16 @@
 		<tr>
 	<c:forEach var="vo" items="${list }" >
 		<tr>
-			<td>${vo.N_NUM }</td>
-			<td>${vo.N_CONTEXT }</td>
+			<td>${vo.n_num }</td>
+			<td>${vo.n_context}</td>
 			
 		</tr>
 	</c:forEach>
 	<hr>
 	</table>
-	
+	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/noticeForm.jsp">
+	<input type="submit" value="글쓰기">
+	</form>
 	<!-- 페이징 처리 -->
   	<div>
 		<c:if test="${requestScope.startPage>10 }">

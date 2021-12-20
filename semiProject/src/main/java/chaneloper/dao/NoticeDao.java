@@ -94,22 +94,15 @@ public class NoticeDao {
 			}
 		}
 
-public ArrayList<NoticeVo> list(int startRow, int endRow){
+public ArrayList<NoticeVo> list(){
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	try {
-		String sql = "select * from "
-				+ "("
-				+ "		select n.*, rownum rnum from"
-				+ "	    ("
-				+ "        select * from notice order by n_num desc"
-				+ "     ) n"
-				+ ") where rnum>=? and rnum<=?";
+		String sql = "select * from notice order by n_num desc";
+				
 		con = JDBC.getCon();
 		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, startRow);
-		pstmt.setInt(2, endRow);
 		rs = pstmt.executeQuery();
 		ArrayList<NoticeVo> list = new ArrayList<NoticeVo>();
 		while(rs.next()) {

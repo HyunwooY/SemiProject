@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript">
+</script>
 <script src="https://code.jquery.com/jquery-latest.js"></script> 
  <style>
         /* The Modal (background) */
@@ -29,7 +31,7 @@
             margin: 15% auto; /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
-            width: 30%; /* Could be more or less, depending on screen size */                          
+            width: 90%; /* Could be more or less, depending on screen size */                          
         }
  
 </style>
@@ -69,7 +71,7 @@
         });
         //팝업 Close 기능
         function close_pop(flag) {
-             $('#myModal').hide();
+         self.close();
         };
         
       </script>
