@@ -24,31 +24,45 @@ public class ProductDao {
 		try {
 			con = JDBC.getCon();
 			String sql = "INSERT ALL"
-					+ " INTO PRODUCT_INFOMATION VALUES(?, ?, ?, ?, 0, SYSDATE, ?)"
-					+ " INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)"
+					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, 0, SYSDATE, ?)"					
 					+ " INTO PRODUCT_PHOTO VALUES(?, ?)"
 					+ " INTO TAG VALUES(TAG_SEQ.NEXTVAL, ?, ?)"
 					+ " SELECT *"
 					+ " FROM DUAL";
 			// 상품 
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getPi_num());
-			pstmt.setString(2, vo.getSi_id());
-			pstmt.setString(3, vo.getPi_name());
-			pstmt.setInt(4, vo.getPi_price());
+			pstmt = con.prepareStatement(sql);		
+			pstmt.setString(1, vo.getSi_id());
+			pstmt.setString(2, vo.getPi_name());
+			pstmt.setInt(3, vo.getPi_price());
 //			pstmt.setInt(5, vo.getPi_count());
-			pstmt.setString(5, vo.getPi_category());
+			pstmt.setString(4, vo.getPi_category());
 			
+			pstmt.setString(5, vo.getPp_title());
 			pstmt.setInt(6, vo.getPi_num());
-			pstmt.setString(7, vo.getPd_size());
-			pstmt.setString(8, vo.getPd_color());
-			pstmt.setInt(9, vo.getPd_count());
 			
-			pstmt.setString(10, vo.getPp_title());
-			pstmt.setInt(11, vo.getPi_num());
-			
-			pstmt.setInt(12, vo.getPi_num());
-			pstmt.setString(13, vo.getT_name());
+			pstmt.setInt(7, vo.getPi_num());
+			pstmt.setString(8, vo.getT_name());
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
+	
+	// 상품 상세 등록
+	public int productInsertDetail(ProductVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
+			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
+			pstmt.setString(3, vo.getPd_color());		// 상품 색상
+			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
