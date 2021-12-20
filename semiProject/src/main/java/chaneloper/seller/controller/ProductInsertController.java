@@ -49,13 +49,10 @@ public class ProductInsertController extends HttpServlet {
 		if (n > 0) {
 			req.setAttribute("productCode", "success");		
 			req.setAttribute("path", path);
-<<<<<<< HEAD
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("productCode", "success");
-=======
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("productCode", "success");			
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("main", "/seller/sellerpage.jsp");
 		} else {
