@@ -20,6 +20,8 @@
 		<input type="text" name="pd_color"><br>
 		제품수량<br>
 		<input type="text" name="pd_count"><br>
+		태그명<br>
+		<input type="text" name="t_name" value="#"><br>
 		이미지<br>	
 		<input type="file" name="pp_title"><br>
 	

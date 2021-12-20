@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -264,6 +265,81 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	//
+	public ArrayList<AddressVo> addrList(String id){
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			ps=con.prepareStatement("select * from shipping_address where mi_id=?");
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			ArrayList<AddressVo> list=new ArrayList<AddressVo>();
+			while(rs.next()) {
+				list.add(new AddressVo(rs.getString("mi_id"), rs.getString("sa_name"), rs.getString("sa_nickname")
+						, rs.getString("sa_phone"), rs.getString("sa_addr")));
+			}
+			return list;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con,ps,rs);
+		}
+	}
+	//구매내역 배송지 조인 다르게 쓰기위함. => any칸은 null로 비워두면 됨
+	public AddressVo selectaddr(String id, String nickname,String any) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			String sql ="select * from member_infomation mi, shipping_address sa where mi.mi_id=? and sa.sa_nickname=? and mi.mi_id=sa.mi_id";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String saname = rs.getString("sa_name");
+				String saphone = rs.getString("sa_phone");
+				String saaddr = rs.getString("sa_addr");
+				AddressVo addrvo = new AddressVo(id,saname,nickname,saphone,saaddr);
+				return addrvo;
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+//	public AddressVo defaultaddr(String id, String name, String df) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql ="select * from member_infomation mi, shipping_address sa "
+//					+ "where mi.mi_id=? and sa.sa_name=? and mi.mi_id=sa.mi_id";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			pstmt.setString(2, name);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				String sanickname = rs.getString("sa_nickname");
+//				String saphone = rs.getString("sa_phone");
+//				String saaddr = rs.getString("sa_addr");
+//				AddressVo addrvo = new AddressVo(id,name,sanickname,saphone,saaddr);
+//				return addrvo;
+//			}
+//			return null;
+//		}catch(SQLException s) {
+//			s.printStackTrace();
+//			return null;
+//		}finally {
+//			JDBC.close(con, pstmt, rs);
+//		}
+//	}
 }
 

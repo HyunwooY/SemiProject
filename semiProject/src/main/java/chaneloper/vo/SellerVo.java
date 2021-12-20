@@ -7,13 +7,13 @@ public class SellerVo {
 	private String si_addr;
 	private String si_phone;
 	private String si_name;
-	private String email;
+	private String si_email;
 	
 	public SellerVo() {
 	}
 
 	public SellerVo(String si_id, String si_pwd, String si_num, String si_addr, String si_phone, String si_name,
-			String email) {
+			String si_email) {
 		super();
 		this.si_id = si_id;		// 사업자 아이디
 		this.si_pwd = si_pwd;		// 사업자 비밀번호
@@ -21,7 +21,7 @@ public class SellerVo {
 		this.si_addr = si_addr;		// 소재지
 		this.si_phone = si_phone;		// 사업자 연락처
 		this.si_name = si_name;		// 브랜드명
-		this.email = email;			// 사업자 이메일
+		this.si_email = si_email;			// 사업자 이메일
 	}
 
 	public String getSi_id() {
@@ -72,12 +72,12 @@ public class SellerVo {
 		this.si_name = si_name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getSi_email() {
+		return si_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSi_email(String si_email) {
+		this.si_email = si_email;
 	}
 	
 	

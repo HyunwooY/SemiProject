@@ -49,7 +49,7 @@
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
-				<a href="${pageContext.request.contextPath }/member/buyProduct">찜목록</a>
+				<a href="${pageContext.request.contextPath }">찜목록</a>
 			</div>
 			<div id="myboard" class="menu">
 				<h4>MY BOARD</h4>

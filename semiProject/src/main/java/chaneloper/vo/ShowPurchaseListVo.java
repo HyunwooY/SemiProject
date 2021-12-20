@@ -7,9 +7,11 @@ public class ShowPurchaseListVo {
 	private String pd_color;
 	private int pi_price;
 	private String si_name;
+	private int purchase_count;
+	private int pd_num;
 	public ShowPurchaseListVo() {}
 	public ShowPurchaseListVo(String pp_title, String pi_name, String pd_size, String pd_color, int pi_price,
-			String si_name) {
+			String si_name,int purchase_count,int pd_num) {
 		super();
 		this.pp_title = pp_title;
 		this.pi_name = pi_name;
@@ -17,6 +19,8 @@ public class ShowPurchaseListVo {
 		this.pd_color = pd_color;
 		this.pi_price = pi_price;
 		this.si_name = si_name;
+		this.purchase_count=purchase_count;
+		this.pd_num=pd_num;
 	}
 	public String getPp_title() {
 		return pp_title;
@@ -53,6 +57,18 @@ public class ShowPurchaseListVo {
 	}
 	public void setSi_name(String si_name) {
 		this.si_name = si_name;
+	}
+	public int getPurchase_count() {
+		return purchase_count;
+	}
+	public void setPurchase_count(int purchase_count) {
+		this.purchase_count = purchase_count;
+	}
+	public int getPd_num() {
+		return pd_num;
+	}
+	public void setPd_num(int pd_num) {
+		this.pd_num = pd_num;
 	}
 	
 	

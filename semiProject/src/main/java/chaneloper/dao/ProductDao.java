@@ -27,8 +27,10 @@ public class ProductDao {
 					+ " INTO PRODUCT_INFOMATION VALUES(?, ?, ?, ?, 0, SYSDATE, ?)"
 					+ " INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)"
 					+ " INTO PRODUCT_PHOTO VALUES(?, ?)"
+					+ " INTO TAG VALUES(TAG_SEQ.NEXTVAL, ?, ?)"
 					+ " SELECT *"
 					+ " FROM DUAL";
+			// 상품 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPi_num());
 			pstmt.setString(2, vo.getSi_id());
@@ -44,6 +46,9 @@ public class ProductDao {
 			
 			pstmt.setString(10, vo.getPp_title());
 			pstmt.setInt(11, vo.getPi_num());
+			
+			pstmt.setInt(12, vo.getPi_num());
+			pstmt.setString(13, vo.getT_name());
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -103,7 +108,8 @@ public class ProductDao {
 			String sql = "SELECT *"
 					+ " FROM PRODUCT_INFOMATION PI "
 					+ " INNER JOIN PRODUCT_PHOTO PP ON(PI.PI_NUM = PP.PI_NUM)"
-					+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)";				
+					+ " INNER JOIN PRODUCT_DETAIL PD ON(PI.PI_NUM = PD.PI_NUM)"
+					+ " INNER JOIN TAG P ON(PI.PI_NUM = P.PI_NUM)";				
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();			
 			while(rs.next()) {
@@ -118,7 +124,8 @@ public class ProductDao {
 				String pd_size = rs.getString("pd_size");
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title);
+				String t_name = rs.getString("t_name");
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
 				list.add(vo);
 			}
 			return list;
