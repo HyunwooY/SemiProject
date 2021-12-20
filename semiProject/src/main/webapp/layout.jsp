@@ -21,6 +21,8 @@
 		if(${requestScope.lcode==false}){
 			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
 		}
+		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+		
 	}
 	function showText(e) {
 		var keyword=document.getElementById("keyword");
@@ -82,6 +84,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<li><a href="">원피스</a></li>
 	<li><a href="">아우터</a></li>
 	<li><a href="">악세서리</a></li>
+	<li><a href="${cp }/seller/notice" >공지사항 </a></li>
 	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
 		<a href="${cp }/search/search" >검색 </a></li>
 </ul>

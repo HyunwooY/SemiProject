@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,8 @@ public class ShowOrderController extends HttpServlet {
 		}
 		MemberDetailDao dao=MemberDetailDao.getInstance();
 		ArrayList<OrderHistoryVo> list=dao.showOrder(id,start,end);
-
+		ArrayList<OrderHistoryVo> phList=dao.getPhcount(id, start, end);
+		req.setAttribute("phList", phList);
 		req.setAttribute("list", list);
 		req.setAttribute("start", start);
 		req.setAttribute("detailmain", "/member/showOrder.jsp");

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 
 import chaneloper.dao.Search_ResultDao;
+import chaneloper.dao.Search_inqDao;
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
 import chaneloper.vo.Search_ProductVo;
@@ -48,14 +50,40 @@ public class SearchDetailController extends HttpServlet{
 	            	img.add(vo.getPp_title());
 	            }
 			}
+			
+			String spageNum=req.getParameter("pageNum");
+			
+			int pageNum=1;
+			if(spageNum!=null) {
+				pageNum=Integer.parseInt(spageNum);
+			}
+			int startRow=(pageNum-1)*10+1;
+			int endRow=startRow+9;	
+			Search_inqDao dao2=Search_inqDao.getInstance();
+			ArrayList<Inquiry_historyVo> list=dao2.list(startRow, endRow, pi_num);
+			int pageCount=(int)Math.ceil(dao2.getCount(pi_num)/10.0);
+			int startPage=(pageNum-1)/10*10+1;
+			int endPage=startPage+9;
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
+			req.setAttribute("list", list);
+			req.setAttribute("endPage", endPage);
+			req.setAttribute("startPage", startPage);
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("pageNum", pageNum);
+			
 			req.setAttribute("name", name);
 			req.setAttribute("price", price);
 			req.setAttribute("color", color);
 			req.setAttribute("size", size);
 			req.setAttribute("img", img);
 			req.setAttribute("pi_num", pi_num);
+			
+			
+			
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
 		}
 		
 		
@@ -63,11 +91,10 @@ public class SearchDetailController extends HttpServlet{
 			String get_color = req.getParameter("get_color");
 			req.setAttribute("post_color", get_color);
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
 		}
 
 
-		
 	}
 
 }

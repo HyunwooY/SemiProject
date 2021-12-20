@@ -92,12 +92,13 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=?, WHERE PI_NUM=?";
+			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=? WHERE PI_NUM=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPi_name());
 			pstmt.setInt(2, vo.getPi_price());
 			pstmt.setString(3, vo.getPi_category());
 			pstmt.setInt(4, vo.getPi_count());
+			pstmt.setInt(5, vo.getPi_num());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
