@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
 
 	<script>
-		function home(){
-		
+		function home(){			
+			confirm("등록을 취소하시겠습니까?");
 		}
 	</script>
 
@@ -24,5 +24,5 @@
 		<input type="file" name="pp_title"><br>
 	
 		<input type="submit" value="등록">
-		<input type="reset" value="취소" onclick="home()"><br>
+		<input type="submit" value="취소" onclick="home()"><br>
 	</form>
