@@ -16,28 +16,28 @@ public class SellerPwdCheckController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String id = (String) req.getSession().getAttribute("id");
-		String pwd = req.getParameter("pwd");
+		String si_id = (String) req.getSession().getAttribute("si_id");
+		String si_pwd = req.getParameter("si_pwd");
 		SellerDao dao = SellerDao.getInstance();
-		if (dao.sellerLogin(id, pwd)) {
-			SellerVo vo = dao.sellerSellect(id);
+		if (dao.sellerLogin(si_id, si_pwd)) {
+			SellerVo vo = dao.sellerSellect(si_id);
 			if (vo == null) {
 				req.setAttribute("result", "fail");
 			} else {
 				req.setAttribute("vo", vo);
 				req.setAttribute("detailmain", "/seller/sellermypage.jsp");
-				req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+				req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
 			}
 		} else {
 			req.setAttribute("result", "fail");
-			req.setAttribute("detailmain", "/member/pwdcheck.jsp");
-			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+			req.setAttribute("detailmain", "/seller/sellerpwdcheck.jsp");
+			req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("detailmain", "/member/pwdcheck.jsp");
-		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		req.setAttribute("detailmain", "/seller/sellerpwdcheck.jsp");
+		req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
 	}
 }

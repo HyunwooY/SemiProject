@@ -38,4 +38,5 @@ public class SellerDetailController extends HttpServlet{
 		 req.setAttribute("detailmain", "/seller/sellermypage.jsp");
 		 req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
+	
 }
