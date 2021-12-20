@@ -25,7 +25,7 @@
 		
 		<div id="modify" class="menu">
 			<h4>MODIFY</h4>
-			<a href="${pageContext.request.contextPath }/seller/sellerInformationPage">판매자 정보확인/수정</a><br>
+			<a href="${pageContext.request.contextPath }/seller/sellermypage">판매자 정보확인/수정</a><br>
 		</div>
 		
 		<div id="inquiry" class="menu">
@@ -43,10 +43,10 @@
 			<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>	
 		</div>
 
-		<div id="" class="menu">
-			<h4>INSERT DETAIL PRODUCT</h4>
-			<a href="${pageContext.request.contextPath }/seller/detail">상품 상세 등록</a>	
-		</div>
+<!-- 		<div id="" class="menu"> -->
+<!-- 			<h4>INSERT DETAIL PRODUCT</h4> -->
+<%-- 			<a href="${pageContext.request.contextPath }/seller/detail">상품 상세 등록</a>	 --%>
+<!-- 		</div> -->
 		
 	</div>
 	<div id="showtitle">
