@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
 
 	<script>
-		function home(){
-		
+		function home(){			
+			confirm("등록을 취소하시겠습니까?");
 		}
 	</script>
 
@@ -21,8 +21,56 @@
 		태그명<br>
 		<input type="text" name="t_name" value="#"><br>
 		이미지<br>	
-		<input type="file" name="pp_title"><br>
-	
+		<input type="file" name="pp_title"><br><br><br>
+		
+		상세 정보<br>
+		<label>
+			<input type="checkbox" name="pd_size" value="S">S
+		</LABEL>
+		<label>
+			<input type="checkbox" name="pd_size" value="M">M
+		</label>
+		<label>
+			<input type="checkbox" name="pd_size" value="L">L
+		</label>
+		<label>
+			<input type="checkbox" name="pd_size" value="XL">XL
+		</label>
+		<label>
+			<input type="checkbox" name="pd_size" value="free">Free<br>
+		</label>
+		
+		
+		<label for="pd_color" id="red">
+			<input type="checkbox" name="pd_color" value="RED">레드		
+		</label>
+		<label>
+			<input type="checkbox" name="pd_color" value="YELLOW">옐로우
+		</label>
+		<label>
+			<input type="checkbox" name="pd_color" value="BLUE">블루
+		</label>
+		<label>
+			<input type="checkbox" name="pd_color" value="GREEN">그린
+		</label>
+		<label>			
+			<input type="checkbox" name="pd_color" value="GRAY">그레이
+		</label>
+		<label>
+			<input type="checkbox" name="pd_color" value="BLACK">블랙<br>
+		</label>		
+<!-- 		분류<br> -->
+<!-- 		<select> -->
+<!-- 			<option>상의</option> -->
+<!-- 			<option>하의</option> -->
+<!-- 			<option>원피스</option> -->
+<!-- 			<option>아우터</option> -->
+<!-- 			<option>악세서리</option> -->
+<!-- 			<option> -->
+<!-- 		</select><br><br><br> -->
+		재고량<br>
+		<input type="text" name="pd_count"><br><br>
+		
 		<input type="submit" value="등록">
-		<input type="reset" value="취소" onclick="home()"><br>
+		<input type="submit" value="취소" onclick="home()"><br>
 	</form>
