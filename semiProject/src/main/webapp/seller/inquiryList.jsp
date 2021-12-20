@@ -21,8 +21,8 @@
 			
 		</tr>
 		<c:if test="${vo.ih_answer!=null }">
-			<tr>
-			<td></td>
+			<tr>			
+			<td></td>			
 			<td></td>
 				<td>
 					-re:${vo.ih_answer }
