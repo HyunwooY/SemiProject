@@ -61,7 +61,6 @@ public class PayinfoController extends HttpServlet {
         }else {
         	System.out.println(id+","+membervo.getName());
         	AddressVo addressvo=mdao.selectaddr(id, membervo.getName());
-        	System.out.println(addressvo);
         	req.setAttribute("avo", addressvo);
         	req.setAttribute("addr", addrlist);
         	req.setAttribute("main", "/member/buyProduct.jsp");
@@ -77,7 +76,7 @@ public class PayinfoController extends HttpServlet {
 		String name=req.getParameter("name");
 		String addr=req.getParameter("addr");
 		String phone=req.getParameter("phone");
-		AddressVo avo=new AddressVo(id, name, null, phone, addr);
+		AddressVo avo=new AddressVo(-1,id, name, null, phone, addr);
 		PurchaseDao dao=PurchaseDao.getInstance();
 		int ph_num=dao.purchase(avo, id, payType);
 		for(ShowPurchaseListVo vo:list) {

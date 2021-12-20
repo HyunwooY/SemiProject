@@ -30,7 +30,7 @@
 	
 	<h4>기본 배송지 정보</h4>
 	<label for="saname" id="saname">수령인</label>
-	<input type="text" name="saname"  value="${addrvo.nickname}" placeholder=" 수령인"  readonly="readonly"><br>
+	<input type="text" name="saname"  value="${addrvo.name}" placeholder=" 수령인"  readonly="readonly"><br>
 	<label for="saphone" id="saphone">휴대폰번호</label>
 	<input type="text" name="saphone"  value="${addrvo.phone}" placeholder=" 휴대폰번호"  readonly="readonly"><br>
 	<label for="saaddr" id="saaddr">주소</label>

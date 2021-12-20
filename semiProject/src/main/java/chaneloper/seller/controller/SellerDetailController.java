@@ -23,9 +23,9 @@ public class SellerDetailController extends HttpServlet{
 		String si_addr = req.getParameter("si_addr");
 		String si_phone = req.getParameter("si_phone");
 		String si_name = req.getParameter("si_name");
-		String email = req.getParameter("email");
+		String si_email = req.getParameter("si_email");
 		
-		 SellerVo vo1 = new SellerVo(si_id, si_pwd, si_num, si_addr, si_phone, si_name, email);
+		 SellerVo vo1 = new SellerVo(si_id, si_pwd, si_num, si_addr, si_phone, si_name, si_email);
 		 SellerDao dao = SellerDao.getInstance();
 		 
 		 int n = dao.sellerUpdate(vo1);
