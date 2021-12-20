@@ -4,10 +4,8 @@
     pageEncoding="UTF-8"%>
 
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">
-		상품번호<br>
-		<input type="text" name="pi_num" value="${param.pi_num }"/><br>
-		사업자<br>
-		<input type="text" name="si_id" value="${param.si_name }"/><br>		
+		<input type="hidden" name="pi_num" value="${param.pi_num }"/><br>		
+		<input type="hidden" name="si_id" value="${param.si_id }"/><br>		
 		상품명<br>
 		<input type="text" name="pi_name"><br>
 		가격<br>
