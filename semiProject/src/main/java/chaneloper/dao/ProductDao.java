@@ -21,27 +21,37 @@ public class ProductDao {
 	public int productInsert(ProductVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT ALL"
+			String sql1 = "INSERT ALL"
 					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, 0, SYSDATE, ?)"					
 					+ " INTO PRODUCT_PHOTO VALUES(?, ?)"
 					+ " INTO TAG VALUES(TAG_SEQ.NEXTVAL, ?, ?)"
 					+ " SELECT *"
 					+ " FROM DUAL";
 			// 상품 
-			pstmt = con.prepareStatement(sql);		
+			pstmt = con.prepareStatement(sql1);		
 			pstmt.setString(1, vo.getSi_id());
 			pstmt.setString(2, vo.getPi_name());
 			pstmt.setInt(3, vo.getPi_price());
-//			pstmt.setInt(5, vo.getPi_count());
-			pstmt.setString(4, vo.getPi_category());
-			
+			pstmt.setString(4, vo.getPi_category());			
 			pstmt.setString(5, vo.getPp_title());
-			pstmt.setInt(6, vo.getPi_num());
-			
+			pstmt.setInt(6, vo.getPi_num());			
 			pstmt.setInt(7, vo.getPi_num());
 			pstmt.setString(8, vo.getT_name());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return 
+			}
+			
+			String sql2 = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setString(1, vo.getPd_size());
+			pstmt.setString(2, vo.getPd_color());
+			pstmt.setInt(3, vo.getPd_count());
+			
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
