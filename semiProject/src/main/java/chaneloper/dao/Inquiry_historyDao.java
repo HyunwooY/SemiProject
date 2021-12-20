@@ -22,7 +22,7 @@ public class Inquiry_historyDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SQE.NEXTVAL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getMi_id());
 			pstmt.setInt(2, vo.getPi_num());
