@@ -44,7 +44,7 @@ public class MemberModifyController extends HttpServlet{
 		String nickname = req.getParameter("saname");
 		String saphone = req.getParameter("saphone");
 		String saaddr = req.getParameter("saaddr");
-		AddressVo addrvo = new AddressVo(id, name, nickname, saphone, saaddr);
+		AddressVo addrvo = new AddressVo(0, id, name, nickname, saphone, saaddr);
 		
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.update(vo1);

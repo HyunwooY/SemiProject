@@ -216,13 +216,14 @@ public class MemberDao {
 		try {
 			con= JDBC.getCon();
 			con.setAutoCommit(false);
-			String sql = "insert into shipping_address values(?,?,?,?,?)";
+			String sql = "insert into shipping_address values(?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getNickname());
-			pstmt.setString(2, vo.getId());
-			pstmt.setString(3, vo.getName());
-			pstmt.setString(4, vo.getPhone());
-			pstmt.setString(5, vo.getAddr());
+			pstmt.setInt(1, vo.getNum());
+			pstmt.setString(2, vo.getNickname());
+			pstmt.setString(3, vo.getId());
+			pstmt.setString(4, vo.getName());
+			pstmt.setString(5, vo.getPhone());
+			pstmt.setString(6, vo.getAddr());
 			con.commit();
 			return pstmt.executeUpdate();
 		}catch(SQLException s) {
@@ -251,10 +252,11 @@ public class MemberDao {
 			pstmt.setString(2, name);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				int num = rs.getInt("sa_num");
 				String sanickname = rs.getString("sa_nickname");
 				String saphone = rs.getString("sa_phone");
 				String saaddr = rs.getString("sa_addr");
-				AddressVo addrvo = new AddressVo(id,name,sanickname,saphone,saaddr);
+				AddressVo addrvo = new AddressVo(num, id, name, sanickname, saphone, saaddr);
 				return addrvo;
 			}
 			return null;
@@ -276,7 +278,7 @@ public class MemberDao {
 			rs=ps.executeQuery();
 			ArrayList<AddressVo> list=new ArrayList<AddressVo>();
 			while(rs.next()) {
-				list.add(new AddressVo(rs.getString("mi_id"), rs.getString("sa_name"), rs.getString("sa_nickname")
+				list.add(new AddressVo(rs.getInt("sa_num"), rs.getString("mi_id"), rs.getString("sa_name"), rs.getString("sa_nickname")
 						, rs.getString("sa_phone"), rs.getString("sa_addr")));
 			}
 			return list;
@@ -300,10 +302,11 @@ public class MemberDao {
 			pstmt.setString(2, nickname);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				int sanum = rs.getInt("sa_num");
 				String saname = rs.getString("sa_name");
 				String saphone = rs.getString("sa_phone");
 				String saaddr = rs.getString("sa_addr");
-				AddressVo addrvo = new AddressVo(id,saname,nickname,saphone,saaddr);
+				AddressVo addrvo = new AddressVo(sanum,id,saname,nickname,saphone,saaddr);
 				return addrvo;
 			}
 			return null;

@@ -59,7 +59,9 @@ public class PayinfoController extends HttpServlet {
 			req.getSession().setAttribute("parame", param);
             resp.sendRedirect(req.getContextPath()+"/member/login");
         }else {
+        	System.out.println(id+","+membervo.getName());
         	AddressVo addressvo=mdao.selectaddr(id, membervo.getName());
+        	System.out.println(addressvo);
         	req.setAttribute("avo", addressvo);
         	req.setAttribute("addr", addrlist);
         	req.setAttribute("main", "/member/buyProduct.jsp");

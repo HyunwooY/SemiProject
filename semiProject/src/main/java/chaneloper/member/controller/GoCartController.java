@@ -30,31 +30,30 @@ public class GoCartController extends HttpServlet {
 		JSONObject json=new JSONObject();
         if(req.getParameter("count")!=null) {
             int count =Integer.parseInt(req.getParameter("count")) ;
-            //int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
+            String pi_num =req.getParameter("pi_num");
+            System.out.println(pi_num);
             Cookie[] clist=req.getCookies();
-            String[] cvalue;
             for(Cookie cl:clist) {
-            	if(cl.getName().equals("JSESSIONID")) {
-            		
+            	if(cl.getName().equals("JSESSIONID")) {	
             	}else {
             		URLDecoder.decode(cl.getValue(),"utf-8");
-	            	lastCookieNum=cl.getName().substring(4);
+	            	lastCookieNum=cl.getName().substring(4,cl.getName().indexOf("_"));
             	}
             }
             for(int i=Integer.parseInt(lastCookieNum)+1;i<=Integer.parseInt(lastCookieNum)+count;i++) {
             	boolean check=false;
             	int minus=0;
                 String pd = req.getParameter("name"+(i-Integer.parseInt(lastCookieNum)));
-                System.out.println(pd);
                 for(Cookie cl:clist) {
                 	if(cl.getName().equals("JSESSIONID")) {
                 	}else {
                 		String clvalue=URLDecoder.decode(cl.getValue(),"utf-8");
                 		if(clvalue.substring(0, clvalue.length()-1).equals(pd.substring(0, pd.length()-1))) {
-                			int a=clvalue.charAt(clvalue.length())+pd.charAt(pd.length());
-                			String npd=pd.substring(0, pd.length()-1)+a;
-                			URLEncoder.encode(npd,"utf-8");
-                			Cookie c=new Cookie(cl.getName(),npd);
+                			int a=Integer.parseInt(Character.toString(clvalue.charAt(clvalue.length()-1)))
+                					+Integer.parseInt(Character.toString(pd.charAt(pd.length()-1)));
+                			String npd=pd.substring(0, pd.length()-1).concat(Integer.toString(a));
+                			System.out.println(npd);
+                			Cookie c=new Cookie(cl.getName(),URLEncoder.encode(npd,"utf-8"));
                 			c.setMaxAge(60*60*24*30); //30일 저장
                             resp.addCookie(c);  
                             check=true;
@@ -66,8 +65,8 @@ public class GoCartController extends HttpServlet {
                 if(check==true) {
                 	continue;
                 }else {
-                	URLEncoder.encode(pd,"utf-8");
-        			Cookie c=new Cookie("name"+(i-minus),pd);
+                	System.out.println(pd);
+        			Cookie c=new Cookie(("name"+(i-minus)).concat("_"+pi_num),URLEncoder.encode(pd,"utf-8"));
         			c.setMaxAge(60*60*24*30); //30일 저장
                     resp.addCookie(c);  
                 }
