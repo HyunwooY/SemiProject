@@ -57,18 +57,19 @@
 			<input type="checkbox" name="pd_color" value="GRAY">그레이
 		</label>
 		<label>
-			<input type="checkbox" name="pd_color" value="BLACK">블랙<br><br>
+			<input type="checkbox" name="pd_color" value="BLACK">블랙<br>
 		</label>		
-		분류<br>
-		<select>
-			<option>상의</option>
-			<option>하의</option>
-			<option>원피스</option>
-			<option>아우터</option>
-			<option>악세서리</option>
-			<option>
-		</select><br><br><br>
-		
+<!-- 		분류<br> -->
+<!-- 		<select> -->
+<!-- 			<option>상의</option> -->
+<!-- 			<option>하의</option> -->
+<!-- 			<option>원피스</option> -->
+<!-- 			<option>아우터</option> -->
+<!-- 			<option>악세서리</option> -->
+<!-- 			<option> -->
+<!-- 		</select><br><br><br> -->
+		재고량<br>
+		<input type="text" name="pd_count"><br><br>
 		
 		<input type="submit" value="등록">
 		<input type="submit" value="취소" onclick="home()"><br>

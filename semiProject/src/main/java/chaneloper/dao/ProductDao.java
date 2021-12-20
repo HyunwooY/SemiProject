@@ -20,7 +20,8 @@ public class ProductDao {
 	// 상품 등록
 	public int productInsert(ProductVo vo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
@@ -31,33 +32,36 @@ public class ProductDao {
 					+ " SELECT *"
 					+ " FROM DUAL";
 			// 상품 
-			pstmt = con.prepareStatement(sql1);
-			pstmt.setString(1, vo.getSi_id());
-			pstmt.setString(2, vo.getPi_name());
-			pstmt.setInt(3, vo.getPi_price());
-			pstmt.setString(4, vo.getPi_category());
-			pstmt.setString(5, vo.getPp_title());
-			pstmt.setInt(6, vo.getPi_num());
-			pstmt.setInt(7, vo.getPi_num());
-			pstmt.setString(8, vo.getT_name());
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt1.setString(1, vo.getSi_id());
+			pstmt1.setString(2, vo.getPi_name());
+			pstmt1.setInt(3, vo.getPi_price());
+			pstmt1.setString(4, vo.getPi_category());
+			pstmt1.setString(5, vo.getPp_title());
+			pstmt1.setInt(6, vo.getPi_num());
+			pstmt1.setInt(7, vo.getPi_num());
+			pstmt1.setString(8, vo.getT_name());
 			
-			rs = pstmt.executeQuery();
+			rs = pstmt1.executeQuery();
 			if(rs.next()) {
-				return pstmt.executeUpdate();
+				return pstmt1.executeUpdate();
 			}
 			
 			String sql2 = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql2);
-			pstmt.setString(1, vo.getPd_size());
-			pstmt.setString(2, vo.getPd_color());
-			pstmt.setInt(3, vo.getPd_count());
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, vo.getPd_size());
+			pstmt2.setString(2, vo.getPd_color());
+			pstmt2.setInt(3, vo.getPd_count());
 			
-			return pstmt.executeUpdate();
+			return pstmt2.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return -1;
-		} finally {
-			JDBC.close(con, pstmt, null);
+		} finally {		
+			JDBC.close(rs);
+			JDBC.close(pstmt2);
+			JDBC.close(pstmt1);
+			JDBC.disconnect(con);
 		}
 	}
 	

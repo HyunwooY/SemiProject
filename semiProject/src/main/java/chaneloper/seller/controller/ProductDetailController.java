@@ -1,16 +1,16 @@
-package chaneloper.seller.controller;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import chaneloper.dao.ProductDao;
-import chaneloper.vo.ProductVo;
-
+//package chaneloper.seller.controller;
+//
+//import java.io.IOException;
+//
+//import javax.servlet.ServletException;
+//import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpServlet;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//
+//import chaneloper.dao.ProductDao;
+//import chaneloper.vo.ProductVo;
+//
 //@WebServlet("/seller/detail")
 //public class ProductDetailController extends HttpServlet{
 //	@Override
