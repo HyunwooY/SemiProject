@@ -3,15 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	<script>
-		function home(){			
-			confirm("등록을 취소하시겠습니까?");
-		}
-	</script>
 
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">
-		<input type="hidden" name="pi_num" value="${param.pi_num }"/><br>		
-		<input type="hidden" name="si_id" value="${param.si_id }"/><br>		
+		
+		
 		상품명<br>
 		<input type="text" name="pi_name"><br>
 		가격<br>
@@ -68,9 +63,9 @@
 <!-- 			<option>악세서리</option> -->
 <!-- 			<option> -->
 <!-- 		</select><br><br><br> -->
-		재고량<br>
+		재고수<br>
 		<input type="text" name="pd_count"><br><br>
 		
-		<input type="submit" value="등록">
+		<input type="submit" value="등록" onclick="return checkBox()">
 		<input type="submit" value="취소" onclick="home()"><br>
 	</form>

@@ -28,26 +28,20 @@ public class ProductInsertController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext application = getServletConfig().getServletContext();		
 		String path = application.getRealPath("/upload");
-		//System.out.println(path);
+		System.out.println(path);
+		String id = (String)req.getSession().getAttribute("id");
 		MultipartRequest multi = new MultipartRequest(req, path, 1024 * 1024 * 10, "UTF-8",
 				new DefaultFileRenamePolicy());
 		
-		int pi_num = Integer.parseInt(multi.getParameter("pi_num"));
-		String si_id = multi.getParameter("si_id");
 		String pi_name = multi.getParameter("pi_name");
 		int pi_price = Integer.parseInt(multi.getParameter("pi_price"));
-		String pi_category = multi.getParameter("pi_category");
-		
-		String pd_size = req.getParameter("pd_size");
-		String pd_color = req.getParameter("pd_color");
-		int pd_count = Integer.parseInt(req.getParameter("pd_count"));
-		
-		String pp_title = multi.getOriginalFileName("pp_title");
+		String pi_category = multi.getParameter("pi_category");	
+		String pp_title = multi.getFilesystemName("pp_title");
+		System.out.println("title: " + pp_title);
 		String t_name = multi.getParameter("t_name");
-		ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pd_count, null, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
-		ProductDao dao = ProductDao.getInstance();
-
-		int n = dao.productInsert(vo);
+		ProductVo vo1 = new ProductVo(0, id, pi_name, pi_price, 0, null, pi_category, null, null, 0, pp_title, t_name);
+		ProductDao dao = ProductDao.getInstance();	
+		int n = dao.productInsert(vo1);
 		if (n > 0) {
 			req.setAttribute("productCode", "success");		
 			req.setAttribute("path", path);
@@ -59,6 +53,17 @@ public class ProductInsertController extends HttpServlet {
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("main", "/seller/sellerpage.jsp");
 		}
+		System.out.println("pi_num:" + n);
+		String[] pd_size = multi.getParameterValues("pd_size");
+		String[] pd_color = multi.getParameterValues("pd_color");
+		int pd_count = Integer.parseInt(multi.getParameter("pd_count"));
+		
+		for(String size:pd_size) {
+			for(String color:pd_color) {
+				ProductVo vo2 = new ProductVo(0, null, null, 0, 0, null, null, size, color, pd_count, null, null);
+				dao.productInsertDetail(n,vo2);
+			}
+		}		
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
