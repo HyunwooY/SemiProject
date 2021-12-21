@@ -16,7 +16,7 @@
 		}
 	} 
 </script>
-<form method="post" action="<%=request.getContextPath() %>/seller/modify" id="form2">
+<form method="post" action="<%=request.getContextPath() %>/seller/informationUpdate" id="form2">
 	<h1>내 정보</h1>
 	<label for="id" id="id">아이디</label>
 	<input type="text" name="si_id" value="${sessionScope.id }" readonly="readonly"><br>
