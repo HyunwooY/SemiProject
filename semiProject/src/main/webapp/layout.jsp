@@ -19,9 +19,9 @@
 		var keyword=document.getElementById("keyword");
 		hideText();
 		if(${requestScope.lcode==false}){
-			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
+			alert('${errMsg}')
 		}
-		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+		
 		
 	}
 	function showText(e) {

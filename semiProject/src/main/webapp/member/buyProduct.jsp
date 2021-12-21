@@ -146,8 +146,10 @@
 #purchase{position:relative;top:50px;left:100px;width:70%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
 #purchase h2{margin-bottom:30px}
 table{width:800px;position:relative;top:10px;}
-table {margin:0px;padding:0px}
+table {margin:0px;padding:0px;border-top:2px solid black;border-bottom:2px solid black;
+		border-collapse:collapse;}
 th, tr{padding-left:0px;padding-right:0px}
+th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 .div{margin-bottom:100px}
 #takeinfo #h3{display:inline-block}
 #takeinfo #btn{height:25px;position:relative;top:-2px;left:10px}
@@ -157,7 +159,8 @@ th, tr{padding-left:0px;padding-right:0px}
 #addrList{display:none}
 #purchaseType{position:relative;top:-80px}
 #purchaseType input{margin-right:25px;margin-bottom:10px}
-#purchaseType #purchasebtn{position:relative;font-size:1.1em;}
+#purchaseType{position:relative;font-size:1.1em;}
+#purchasebtn{widht:100px;height:30px;font-size:1.05em}
 </style>    
 <div id="purchase">
 	<h2>주문결제</h2>
