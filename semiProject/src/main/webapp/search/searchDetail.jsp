@@ -346,7 +346,7 @@
 
 <script type="text/javascript">
 	function inqck(e){
-		e.target.parentElement.parentElement.parentElement.style.display="none";
+		alert(e.target.parentElement.parentElement.parentElement.innerHTML);
 	}
 
 </script>
@@ -383,28 +383,25 @@
 
 			</c:forEach>
 	</table>
-	
 	<a href="#">문의하기</a>
-	
-	<div><!-- 페이징처리 -->
-		<c:forEach var="i" begin="${startPage }" end="${endPage}">
-			<c:choose>
-				<c:when test="${i==pageNum }">
-					<a href="${cp }/search/searchdetail?pageNum=${i}">
-						<span style="color:red">${i }</span>
-					</a>
-				</c:when>
-				<c:otherwise>
-					<a href="${cp }/search/searchdetail?pageNum=${i}">
-						<span style="gray">${i }</span>
-					</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-	</div>
-	
 </div>
 
+<div><!-- 페이징처리 -->
+	<c:forEach var="i" begin="${startPage }" end="${endPage}">
+		<c:choose>
+			<c:when test="${i==pageNum }">
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="color:red">${i }</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="gray">${i }</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
 
 <!-- 이미지 -->
 <!-- 제품명 -->
