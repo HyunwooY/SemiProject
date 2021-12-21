@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.Inquiry_historyDao;
 import chaneloper.vo.Inquiry_historyVo;
 @WebServlet("/mypage/ihdetail")
-public class inquiryDetailController extends HttpServlet{
+public class InquiryDetailController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int num = Integer.parseInt(req.getParameter("ih_num"));
