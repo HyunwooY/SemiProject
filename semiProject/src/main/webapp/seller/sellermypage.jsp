@@ -38,6 +38,7 @@
 	
 	<label for="email" id="email">이메일</label>
 	<input type="text" name="si_email"  value="${vo.si_email}" placeholder=" 이메일"><br>
+
 	
 	<input type="submit" value="수정"><input type="reset" value="취소"> 
 </form>

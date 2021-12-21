@@ -29,15 +29,15 @@ public class SellerDetailController extends HttpServlet{
 		 SellerDao dao = SellerDao.getInstance();
 		 
 		 int n = dao.sellerUpdate(vo1);
+		 
 		 if(n > 0) {
-			 req.setAttribute("ProductCode", "success");
-			 req.setAttribute("detailmain", "productResult.jsp");
+			 req.setAttribute("productCode", "success");
+			 req.setAttribute("detailmain", "/seller/productResult.jsp");
 			 SellerVo vo = dao.sellerSellect(si_id);
 		 } else {
-			 req.setAttribute("ProductCode", "fail");
-			 req.setAttribute("detailmain", "productResult.jsp");
+			 req.setAttribute("productCode", "fail");
+			 req.setAttribute("detailmain", "/seller/productResult.jsp");
 		 }
-//		 req.setAttribute("detailmain", "/seller/sellermypage.jsp");
 		 req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	
