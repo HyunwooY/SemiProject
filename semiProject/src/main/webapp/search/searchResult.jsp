@@ -85,7 +85,8 @@ ul.list li.item{
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <div class="searchbox">
 	<fieldset>
-		<form method="get" action="${cp }/search/search?pageNum=rr">
+		<form method="get" action="${cp }/search/search?pageNum=1">
+			<input type="hidden" name="pageNum" value="1">
 			<div class="items">
 				<select id="CATEGORY" name="CATEGORY">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>상품분류 선택</option>
@@ -113,7 +114,7 @@ ul.list li.item{
 
 <div class="searchResult"> <!-- 조회된 상품 갯수 출력 -->
 	<p class="record">
-		<strong>${count}</strong> ITEMS
+		<strong>${ccc}</strong> ITEMS
 	</p>
 </div>
 
@@ -168,24 +169,24 @@ ul.list li.item{
 <div class="searchPaging"><!-- 페이징 처리 하는부분 -->
 	<p>
 	<c:if test="${startPage>10 }">
-		<a href="${cp }/search/search?pageNum=${startPage-1}&count=${count}"><<</a>
+		<a href="${cp }/search/search?pageNum=${startPage-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><<</a>
 	</c:if>
-	<a href="${cp }/search/search?pageNum=${pageNum-1}&count=${count}"><</a>
+	<a href="${cp }/search/search?pageNum=${pageNum-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><</a>
 	
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
-				<a href="${cp }/search/search?pageNum=${i}&count=${count}"><span style="color:red">${i }</span></a>
+				<a href="${cp }/search/search?pageNum=${i}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><span style="color:red">${i }</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/search/search?pageNum=${i}&count=${count}"><span style="color:gray">${i }</span></a>
+				<a href="${cp }/search/search?pageNum=${i}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><span style="color:gray">${i }</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	
-	<a href="${cp }/search/search?pageNum=${pageNum+1}&count=${count}">></a>
-	<c:if test="${endPage<totalPage }">
-		<a href="${cp }/search/search?pageNum=${endPage+1}&count=${count}">>></a>
+	<a href="${cp }/search/search?pageNum=${pageNum+1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}">></a>
+	<c:if test="${endPage<totalPage1 }">
+		<a href="${cp }/search/search?pageNum=${endPage+1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}">>></a>
 	</c:if>
 	</p>
 </div>
