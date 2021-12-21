@@ -353,56 +353,56 @@
 
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 
+
 <div>
-	<div>
-		<table border="1" width="500">
-			<tr>
-				<th>글번호</th>
-				<th>작성자</th>
-				<th>제목</th>
-			</tr>
-				<c:forEach var="vo" items="${list }">
-					<tr>
-						<td>${vo.ih_num }</td>
-						<td>${vo.mi_id }</td>
-						<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
-					</tr>
-					<tr style="display:;">
-						<td>문의</td>
-						<td>${vo.ih_question }</td>
-						<td>
-						<input type="button" value="삭제" onclick="">
-						<input type="button" value="수정" onclick="">
-						</td>
-					</tr>
-					<tr style="display:;">
-						<td>답변</td>
-						<td colspan=2>${vo.ih_answer }</td>
-					</tr>
-						
-	
-				</c:forEach>
-		</table>
-		<a href="#">문의하기</a>
-	</div>
-	
-	<div><!-- 페이징처리 -->
-		<c:forEach var="i" begin="${startPage }" end="${endPage}">
-			<c:choose>
-				<c:when test="${i==pageNum }">
-					<a href="${cp }/search/searchdetail?pageNum=${i}">
-						<span style="color:red">${i }</span>
-					</a>
-				</c:when>
-				<c:otherwise>
-					<a href="${cp }/search/searchdetail?pageNum=${i}">
-						<span style="gray">${i }</span>
-					</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-	</div>
+	<table border="1" width="500">
+		<tr>
+			<th>글번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+		</tr>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<td>${vo.ih_num }</td>
+					<td>${vo.mi_id }</td>
+					<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
+				</tr>
+				<tr style="display:;">
+					<td>문의</td>
+					<td>${vo.ih_question }</td>
+					<td>
+					<input type="button" value="삭제" onclick="">
+					<input type="button" value="수정" onclick="">
+					</td>
+				</tr>
+				<tr style="display:;">
+					<td>답변</td>
+					<td colspan=2>${vo.ih_answer }</td>
+				</tr>
+					
+
+			</c:forEach>
+	</table>
+	<a href="#">문의하기</a>
 </div>
+
+<div><!-- 페이징처리 -->
+	<c:forEach var="i" begin="${startPage }" end="${endPage}">
+		<c:choose>
+			<c:when test="${i==pageNum }">
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="color:red">${i }</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="gray">${i }</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
+
 <!-- 이미지 -->
 <!-- 제품명 -->
 <!-- 가격 -->

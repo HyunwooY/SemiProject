@@ -23,25 +23,42 @@ public class SearchController extends HttpServlet{
 		// 카테고리, 키워드, 기준 받아오기
 		req.setCharacterEncoding("UTF-8");
 		String keyword = req.getParameter("keyword");
+		req.setAttribute("keyword", keyword);
 		String category =req.getParameter("CATEGORY");
+		req.setAttribute("category", category);
 		if(category!=null) {
 			if(category.equals("1")) {
 				category=null;
 			}
 		}
+		System.out.println(category);
 		String sort = req.getParameter("sort");
+		req.setAttribute("sort", sort);
 		if(sort!=null) {
 			if(sort.equals("1")) {
 				sort=null;
 			}
 		}
+		System.out.println(sort + "," + keyword);
+		
 		Search_ResultDao dao=new Search_ResultDao();
 		ArrayList<Search_ProductVo> list=null;
+		String spageNum=req.getParameter("pageNum"); // **
+		System.out.println(spageNum);
+		int pageNum=1;
+		if (spageNum!=null) { // null일수가 없다. 
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int endRow=pageNum*10; //10
+		int startRow=endRow-9; //1
+		int ccc=0;
 		//세부페이지로 이동후 검색할때
 		if(keyword!=null) {
 			//카테고리랑 정렬이 없다면
-			if(category==null&&sort==null) {
-				list=dao.search_product(keyword, null, null);
+			if(category==null&&sort==null) { 
+				System.out.println("ok");
+				list=dao.search_product(keyword, null, null, startRow, endRow);
+				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
 				ArrayList<ColorVo> color = dao.get_color();
 				req.setAttribute("tag", tag);
@@ -50,7 +67,8 @@ public class SearchController extends HttpServlet{
 				req.setAttribute("list", list);
 			//카테고리만 없다면
 			}else if(category==null) {
-				list=dao.search_product(keyword, null, sort);
+				list=dao.search_product(keyword, null, sort, startRow, endRow);
+				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, null, sort);
 				ArrayList<ColorVo> color = dao.get_color();
 				req.setAttribute("tag", tag);
@@ -60,7 +78,8 @@ public class SearchController extends HttpServlet{
 				req.setAttribute("list", list);
 			//정렬만 없다면
 			}else if(sort==null) {
-				list=dao.search_product(keyword, category, null);
+				list=dao.search_product(keyword, category, null, startRow, endRow);
+				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
 				ArrayList<ColorVo> color = dao.get_color();
 				req.setAttribute("tag", tag);
@@ -70,7 +89,8 @@ public class SearchController extends HttpServlet{
 				req.setAttribute("list", list);
 			// 둘다 있을때
 			}else if(category!=null&&sort!=null) {
-				list=dao.search_product(keyword, category, sort);
+				list=dao.search_product(keyword, category, sort, startRow, endRow);
+				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, category, sort);
 				ArrayList<ColorVo> color = dao.get_color();
 				req.setAttribute("tag", tag);
@@ -82,7 +102,7 @@ public class SearchController extends HttpServlet{
 			}
 		}else {	
 			keyword=null;
-			list=dao.search_product(keyword, category, null);
+			list=dao.search_product(keyword, category, null, startRow, endRow);
 			ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
 			ArrayList<ColorVo> color = dao.get_color();
 			req.setAttribute("tag", tag);
@@ -91,31 +111,17 @@ public class SearchController extends HttpServlet{
 			req.setAttribute("CATEGORY", category);
 			req.setAttribute("list", list);
 		}
-		String spageNum=req.getParameter("pageNum"); // **
-		System.out.println(spageNum); // 안찍히네..     // **
-		int pageNum=1;
-		if (spageNum!=null) { // null일수가 없다. 
-			pageNum=Integer.parseInt(spageNum);
-		}
-		int endRow=pageNum*10; //10
-		int startRow=endRow-9; //1 
-		String totalcount=req.getParameter("count");// 검색된 전체재품 갯수값 (여기까진 ok)
-//		int count1=list.size();					// **
-		int count=1;
-		if (totalcount!=null) {
-			count=Integer.parseInt(totalcount);
-		}
-		int totalPage=(int)Math.ceil(count/10.0);	// 전체페이지 갯수
-//		int totalPage1=(int)Math.ceil(count1/10.0);
+	
+		int totalPage1=(int)Math.ceil(ccc/10.0);	// 전체페이지 갯수
 		int startPageNum= ((pageNum-1)/10*10) + 1;	//시작 페이지 번호
 		int endPageNum=startPageNum+9;	//끝 페이지 번호
 		
-		if (endPageNum>totalPage) {
-			endPageNum=totalPage;
+		if (endPageNum>totalPage1) {
+			endPageNum=totalPage1;
 		}
-		req.setAttribute("totalPage", totalPage);
-//		req.setAttribute("totalPage1", totalPage1);
+		req.setAttribute("totalPage1", totalPage1);
 		req.setAttribute("startPage", startPageNum);
+		req.setAttribute("ccc", ccc);
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("main", "/search/searchResult.jsp");
