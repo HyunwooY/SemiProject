@@ -41,8 +41,7 @@ public class InquiryHistoryListUpdate extends HttpServlet{
 		}
 		req.getRequestDispatcher("//result.jsp").forward(req, resp);
 	}
-}
 
 	}
 
-}
+
