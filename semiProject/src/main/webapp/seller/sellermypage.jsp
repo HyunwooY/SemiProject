@@ -19,7 +19,7 @@
 <form method="post" action="<%=request.getContextPath() %>/seller/modify" id="form2">
 	<h1>내 정보</h1>
 	<label for="id" id="id">아이디</label>
-	<input type="text" name="id번" value="${sessionScope.si_id }" readonly="readonly"><br>
+	<input type="text" name="id" value="${sessionScope.id }" readonly="readonly"><br>
 	<label for="pwd" id="pwd">비밀번호</label>
 	<input type="password" name="pwd" value="${vo.si_pwd }"  placeholder=" 비밀번호"><br>
 	<label for="name" id="name">사업자번호</label>

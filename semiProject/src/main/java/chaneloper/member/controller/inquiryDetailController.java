@@ -20,7 +20,6 @@ public class inquiryDetailController extends HttpServlet{
 		req.setAttribute("vo", vo);
 		req.setAttribute("detailmain", "/member/inquiryDetail.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
-		
 	}
 	
 }

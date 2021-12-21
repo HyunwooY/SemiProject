@@ -16,7 +16,7 @@ public class SellerPwdCheckController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String si_id = (String) req.getSession().getAttribute("si_id");
+		String si_id = (String) req.getSession().getAttribute("id");
 		String si_pwd = req.getParameter("si_pwd");
 		SellerDao dao = SellerDao.getInstance();
 		if (dao.sellerLogin(si_id, si_pwd)) {

@@ -37,7 +37,7 @@
 // 		xhr.open("post","${pageContext.request.contextPath}/checkpwd",true);
 // 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 // 		xhr.send(param); 
-// 	} 
+	} 
 	window.onload = function(){
 		if(${requestScope.result == 'fail'}){
 			alert("올바른 비밀번호가 아닙니다.");
