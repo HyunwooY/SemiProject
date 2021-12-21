@@ -19,6 +19,48 @@ import db.JDBC;
 
 public class Search_ResultDao {
 	
+	public int search_productCount(String keyword, String CATEGORY, String sort){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Search_ProductVo> list = new ArrayList<Search_ProductVo>();
+		String sql = ""; 
+		try {
+			con = JDBC.getCon();
+			if(CATEGORY==null&&sort==null) {
+				sql = "SELECT distinct NVL(count(a.pi_num),0) count FROM PRODUCT_INFOMATION a"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'";
+				pstmt=con.prepareStatement(sql);
+			}else if(CATEGORY==null) {
+				sql = "SELECT distinct NVL(count(a.pi_num),0) count FROM PRODUCT_INFOMATION a"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " order by "+ sort +" desc";
+				pstmt=con.prepareStatement(sql);
+			}else if(sort==null) {
+				sql = "SELECT distinct NVL(count(a.pi_num),0) count FROM PRODUCT_INFOMATION a"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " and a.pi_category = "+ "\'"+ CATEGORY+ "\'";
+				pstmt=con.prepareStatement(sql);
+			}else if(CATEGORY!=null&&sort!=null) {
+				sql = "SELECT distinct NVL(count(a.pi_num),0) count FROM PRODUCT_INFOMATION a"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " and pi_category = "+ "\'"+ CATEGORY+ "\'"
+						+ " order by "+ sort +" desc";
+				pstmt=con.prepareStatement(sql);
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("count");
+			}
+			return -1;
+		}catch(SQLException se){
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
 	public ArrayList<ColorVo> get_color() { // 모든 컬러 다 가져오기
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -41,7 +83,7 @@ public class Search_ResultDao {
 		}
 	}
 	
-	public ArrayList<Search_ProductVo> search_product(String keyword, String CATEGORY, String sort){
+	public ArrayList<Search_ProductVo> search_product(String keyword, String CATEGORY, String sort, int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -50,44 +92,68 @@ public class Search_ResultDao {
 		try {
 			con = JDBC.getCon();
 			if(CATEGORY==null&&sort==null) {
-				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a "
-						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
-						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
-				pstmt=con.prepareStatement(sql);
-			}else if(CATEGORY==null) {
-				sql = "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count "
-						+ " from product_infomation pi, product_detail pd, product_photo pp"
-						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
-						+ " order by "+ sort +" desc";
-//				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM (select * from product_infomation order by ? desc) a "
+//				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a "
 //						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
 //						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-//						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\'";
-//						+ "ORDER BY a." + sort;
-				pstmt=con.prepareStatement(sql);
+//						+ "where a.PI_NAME like "+"\'%"+keyword+"%\'";
+				sql = "select * from "
+						+ "("
+						+ "   select z.*,rownum rnum from"
+						+ "   ("
+						+ "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a"
+						+ " INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM)"
+						+ " INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM)"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ "   )z"
+						+ ") where rnum>=? and rnum<=?"; 
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
+			}else if(CATEGORY==null) {		////////// 여기
+				sql = "select * from "
+						+ "("
+						+ "   select z.*,rownum rnum from"
+						+ "   ("
+						+ "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count"
+						+ " from product_infomation pi, product_detail pd, product_photo pp"
+						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " order by "+ sort +" desc"
+						+ "   )z"
+						+ " ) where rnum>=? and rnum<=?";	
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
 			}else if(sort==null) {
-				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a "
-						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
-						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'";
-				pstmt=con.prepareStatement(sql);
-			}else if(CATEGORY!=null&&sort!=null) {
-				sql = "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count, pi_category "
+				sql = "select * from "
+						+ "("
+						+ "   select z.*,rownum rnum from"
+						+ "   ("
+						+	"SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a"
+						+ " INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM)"
+						+ " INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM)"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'"
+						+ "   )z"
+						+ ") where rnum>=? and rnum<=?"; 
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
+			}else if(CATEGORY!=null&&sort!=null) {		////////// 여기
+				sql = "select * from "
+						+ "("
+						+ "   select z.*,rownum rnum from"
+						+ "   ("
+						+ "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count"
 						+ " from product_infomation pi, product_detail pd, product_photo pp"
 						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
 						+ " AND pi_category = "+ "\'"+ CATEGORY+ "\'"
-						+ " order by "+ sort +" desc";
-//				sql = "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE,c.PP_TITLE FROM (select * from product_infomation order by ? desc) a "
-//						+ "INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM) "
-//						+ "INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM) "
-//						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-//						+ "AND a.PI_CATEGORY = "+ "\'"+ CATEGORY+ "\'";
-//						+ " ORDER BY a." + sort;
-				pstmt=con.prepareStatement(sql);
+						+ " order by "+ sort +" desc"
+						+ "   )z"
+						+ " ) where rnum>=? and rnum<=?";	
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
 			}
-			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Search_ProductVo vo = new Search_ProductVo(rs.getInt(1),rs.getString(2),rs.getInt(3),null,null,rs.getString(4));
