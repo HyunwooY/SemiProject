@@ -17,7 +17,6 @@
 		<tr>
 			<td>${vo.ih_num }</td>
 			<td>${vo.mi_id }</td>
-			<td>${vo.ih_title }</td>
 			<td><a href="${cp }/inquirydetail?ih_num=${vo.getIh_num() }">${vo.ih_question }</a></td>
 			
 		</tr>

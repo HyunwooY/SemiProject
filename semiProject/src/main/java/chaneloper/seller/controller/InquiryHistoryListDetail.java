@@ -18,6 +18,6 @@ public class InquiryHistoryListDetail extends HttpServlet{
 		Inquiry_historyVo vo = dao.select(num);
 		req.setAttribute("vo", vo);
 		req.setAttribute("main", "/seller/inquiryList.jsp");
-		req.getRequestDispatcher("/seller/layout.jsp").forward(req,resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }
