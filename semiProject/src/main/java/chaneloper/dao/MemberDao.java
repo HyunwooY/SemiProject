@@ -216,7 +216,7 @@ public class MemberDao {
 		try {
 			con= JDBC.getCon();
 			con.setAutoCommit(false);
-			String sql = "insert into shipping_address values(?,?,?,?,?)";
+			String sql = "insert into shipping_address values(sa_seq.nextval,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getNickname());
 			pstmt.setString(2, vo.getId());
@@ -251,10 +251,11 @@ public class MemberDao {
 			pstmt.setString(2, name);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				int num = rs.getInt("sa_num");
 				String sanickname = rs.getString("sa_nickname");
 				String saphone = rs.getString("sa_phone");
 				String saaddr = rs.getString("sa_addr");
-				AddressVo addrvo = new AddressVo(id,name,sanickname,saphone,saaddr);
+				AddressVo addrvo = new AddressVo(num, id, name, sanickname, saphone, saaddr);
 				return addrvo;
 			}
 			return null;
@@ -276,7 +277,7 @@ public class MemberDao {
 			rs=ps.executeQuery();
 			ArrayList<AddressVo> list=new ArrayList<AddressVo>();
 			while(rs.next()) {
-				list.add(new AddressVo(rs.getString("mi_id"), rs.getString("sa_name"), rs.getString("sa_nickname")
+				list.add(new AddressVo(rs.getInt("sa_num"), rs.getString("mi_id"), rs.getString("sa_name"), rs.getString("sa_nickname")
 						, rs.getString("sa_phone"), rs.getString("sa_addr")));
 			}
 			return list;
@@ -300,10 +301,11 @@ public class MemberDao {
 			pstmt.setString(2, nickname);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				int sanum = rs.getInt("sa_num");
 				String saname = rs.getString("sa_name");
 				String saphone = rs.getString("sa_phone");
 				String saaddr = rs.getString("sa_addr");
-				AddressVo addrvo = new AddressVo(id,saname,nickname,saphone,saaddr);
+				AddressVo addrvo = new AddressVo(sanum,id,saname,nickname,saphone,saaddr);
 				return addrvo;
 			}
 			return null;
@@ -314,6 +316,45 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//배송지 수정
+		public int updateaddr(AddressVo vo) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "update shipping_address set sa_nickname=?, name=?, phone=?, addr=? where mi_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, vo.getNickname());
+				pstmt.setString(2, vo.getName());
+				pstmt.setString(3, vo.getPhone());
+				pstmt.setString(4, vo.getAddr());
+				pstmt.setString(5, vo.getId());
+				return pstmt.executeUpdate();
+			}catch(SQLException s) {
+				s.printStackTrace();
+				return -1;
+			}finally {
+				JDBC.close(con, pstmt, null);
+			}
+		}   
+		//배송지 삭제
+		public int deleteaddr(String id, String addr) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JDBC.getCon();
+				String sql = "delete from shipping_address where mi_id=? and sa_addr=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, addr);
+				return pstmt.executeUpdate();
+			}catch(SQLException s) {
+				s.printStackTrace();
+				return -1;
+			}finally {
+				JDBC.close(con, pstmt, null);
+			}
+		}
 //	public AddressVo defaultaddr(String id, String name, String df) {
 //		Connection con = null;
 //		PreparedStatement pstmt = null;

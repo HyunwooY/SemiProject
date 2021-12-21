@@ -5,7 +5,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-	
+#maindiv {position: relative; padding:50px}
+#mainimg{width:400px; height:500px; border:1px solid red; float:left;margin-top:21px ; width: 40%;margin-left:50px; margin-right:50px;margin-bottom:200px;}
+#maintable{float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
+#pubutton{float: right; width: 40%;text-align: left; margin-right:50px}
+#showimg{}
 </style>
 
 
@@ -52,7 +56,7 @@
 
 			}
 		}
-		xhr.open('get','../search/staticsearch?get_color='+e.target.innerText+'&pi_num=${pi_num}',true);
+		xhr.open('get','${pageContext.request.contextPath}/search/staticsearch?get_color='+e.target.innerText+'&pi_num=${pi_num}',true);
 		xhr.send();
 	}
 	
@@ -239,7 +243,7 @@
 					alert('오류가 발생하였습니다..');
 				}
 			}
-		};
+		}
 		let len11 = document.getElementById("showtable").childElementCount-1;
 		let param='';
 		for(var i = 2; i <= len11+1 ; i++){
@@ -269,21 +273,21 @@
 	
 </script>
 
-<div>
-	<div>
-		<img src="images/"+ ${img[0]} alt="Image1">
+<div id="maindiv">
+	<div id="mainimg">
+		<img src="images/"+ ${img[0]}>
 	</div>
-	<div>
-	    <table id="showtable"  border='1' width="600px" align="right">
+	<div id="maintable">
+	    <table id="showtable" >
 			<th colspan=4>${name}</th>
 			<tr>
-			    <td colspan=4><br><br>
+			    <td colspan=4><br>
 				    가격 :  ${price}원<br>
 				    적립금 :  ${Math.round(price*0.01)}원
 			    </td>
 			</tr>
 			<tr>
-			    <td colspan=4><br><br>
+			    <td colspan=4><br>
 				    사이즈 정보<br>
 				    M - 어깨 50 / 가슴 44 / 팔길이 63 / 총길이 82<br>
 					L - 어깨 52 / 가슴 46 / 팔길이 65 / 총길이 84
@@ -292,61 +296,112 @@
 			<tr>
 				<td colspan=4><br><br>
 					*실측 사이즈는 단면(cm)으로 측정되며, 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다.<br>
-					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.
+					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.<br><br>
 				</td>
 			</tr>
 			<tr>
 
-				<td colspan=4>색상 : 
+				<td colspan=4>
 <%  
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-					<a href="#" onclick="get_size(event)" ><%=color.get(i) %></a>
+					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
 
 <%		
 	}
 %>
+<br>
 				</td>
 			</tr>
-			<tr>
+			<tr><br>
 				<td colspan=4; id="size">
 				</td>
 			</tr>
 	    </table>
-	    <table>
-	    	<th>
-	    	</th>
+	</div>
+	<div id="pubutton">
+	    <table >
 	    	<tr>
 	    		<td>
-	    			<a href="#" onclick="postdata(event)">구매하기</a>
+	    			<a href="#" onclick="postdata(event)">구매하기</a>&nbsp;&nbsp;
 	    		</td>
+
 	    		<td>
-	    			<a href="#" onclick="goods1()">찜하기</a>
+	    			<a href="#" onclick="goods1()">찜하기</a>&nbsp;&nbsp;
 	    		</td>
+
 	    		<td>
-	    			<a href="#" onclick="testscript()">장바구니 추가</a>
+	    			<a href="#" onclick="testscript()">장바구니 담기</a>&nbsp;&nbsp;
 	    		</td>
 	    	</tr>
 	    </table>
-	    
-	   	<table align="center">
-	    	<th>
-	    	</th>
-	    	
+		<div id="showimg">
 <c:forEach var="i" begin="0" end="2">
-			<tr>
-				<td>
-					<img src="images/"+ ${img[i]} alt="Image${i }">
-				</td>
-			</tr>
+			<img src="images/"+ ${img[i]} class="showimg" width=40% height=400px border="1px solid red">
 </c:forEach>
-	    </table>
+	    </div>
 	</div>
 </div>
 
+<script type="text/javascript">
+	function inqck(e){
+		alert(e.target.parentElement.parentElement.parentElement.innerHTML);
+	}
+
+</script>
+
+<c:set var="cp" value="${pageContext.request.contextPath }"/>
 
 
+<div>
+	<table border="1" width="500">
+		<tr>
+			<th>글번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+		</tr>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<td>${vo.ih_num }</td>
+					<td>${vo.mi_id }</td>
+					<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
+				</tr>
+				<tr style="display:;">
+					<td>문의</td>
+					<td>${vo.ih_question }</td>
+					<td>
+					<input type="button" value="삭제" onclick="">
+					<input type="button" value="수정" onclick="">
+					</td>
+				</tr>
+				<tr style="display:;">
+					<td>답변</td>
+					<td colspan=2>${vo.ih_answer }</td>
+				</tr>
+					
+
+			</c:forEach>
+	</table>
+	<a href="#">문의하기</a>
+</div>
+
+<div><!-- 페이징처리 -->
+	<c:forEach var="i" begin="${startPage }" end="${endPage}">
+		<c:choose>
+			<c:when test="${i==pageNum }">
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="color:red">${i }</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/search/searchdetail?pageNum=${i}">
+					<span style="gray">${i }</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
 
 <!-- 이미지 -->
 <!-- 제품명 -->

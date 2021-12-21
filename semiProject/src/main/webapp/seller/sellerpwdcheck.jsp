@@ -19,7 +19,7 @@
 	}
 </style>
 <script>
-/*	function checkpwd(){
+	function checkpwd(){
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState==4 && xhr.status==200){
@@ -37,14 +37,14 @@
 		xhr.open("post","${pageContext.request.contextPath}/checkpwd",true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(param); 
-	} */
+	} 
 	window.onload = function(){
 		if(${requestScope.result == 'fail'}){
 			alert("올바른 비밀번호가 아닙니다.");
 		}
 	}
 </script>
-<form method="post" action="<%=request.getContextPath() %>/seller/checkpwd"  id="form1">
+<form method="post" action="<%=request.getContextPath() %>/seller/modify  id="form1">
 	<h2>비밀번호 입력</h2><br>
 	<input type="password" name="pwd" id="pwd" placeholder="password"><br>
 	<input type="submit" value="확인" id="btn">

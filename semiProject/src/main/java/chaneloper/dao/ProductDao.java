@@ -20,57 +20,71 @@ public class ProductDao {
 	// 상품 등록
 	public int productInsert(ProductVo vo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT ALL"
+			String sql1 = "INSERT ALL"
 					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, 0, SYSDATE, ?)"					
 					+ " INTO PRODUCT_PHOTO VALUES(?, ?)"
 					+ " INTO TAG VALUES(TAG_SEQ.NEXTVAL, ?, ?)"
 					+ " SELECT *"
 					+ " FROM DUAL";
 			// 상품 
-			pstmt = con.prepareStatement(sql);		
-			pstmt.setString(1, vo.getSi_id());
-			pstmt.setString(2, vo.getPi_name());
-			pstmt.setInt(3, vo.getPi_price());
-//			pstmt.setInt(5, vo.getPi_count());
-			pstmt.setString(4, vo.getPi_category());
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt1.setString(1, vo.getSi_id());
+			pstmt1.setString(2, vo.getPi_name());
+			pstmt1.setInt(3, vo.getPi_price());
+			pstmt1.setString(4, vo.getPi_category());
+			pstmt1.setString(5, vo.getPp_title());
+			pstmt1.setInt(6, vo.getPi_num());
+			pstmt1.setInt(7, vo.getPi_num());
+			pstmt1.setString(8, vo.getT_name());
 			
-			pstmt.setString(5, vo.getPp_title());
-			pstmt.setInt(6, vo.getPi_num());
+			rs = pstmt1.executeQuery();
+			if(rs.next()) {
+				return pstmt1.executeUpdate();
+			}
 			
-			pstmt.setInt(7, vo.getPi_num());
-			pstmt.setString(8, vo.getT_name());
-			return pstmt.executeUpdate();
+			String sql2 = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?, ?, ?)";
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, vo.getPd_size());
+			pstmt2.setString(2, vo.getPd_color());
+			pstmt2.setInt(3, vo.getPd_count());
+			
+			return pstmt2.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return -1;
-		} finally {
-			JDBC.close(con, pstmt, null);
+		} finally {		
+			JDBC.close(rs);
+			JDBC.close(pstmt2);
+			JDBC.close(pstmt1);
+			JDBC.disconnect(con);
 		}
 	}
 	
-	// 상품 상세 등록
-	public int productInsertDetail(ProductVo vo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = JDBC.getCon();
-			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
-			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
-			pstmt.setString(3, vo.getPd_color());		// 상품 색상
-			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
-			return pstmt.executeUpdate();
-		} catch (SQLException se) {
-			se.printStackTrace();
-			return -1;
-		} finally {
-			JDBC.close(con, pstmt, null);
-		}
-	}
+//	// 상품 상세 등록
+//	public int productInsertDetail(ProductVo vo) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
+//			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
+//			pstmt.setString(3, vo.getPd_color());		// 상품 색상
+//			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
+//			return pstmt.executeUpdate();
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			return -1;
+//		} finally {
+//			JDBC.close(con, pstmt, null);
+//		}
+//	}
 
 	// 상품 수정
 	public int productUpdate(ProductVo vo) {
@@ -78,12 +92,13 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=?, WHERE PI_NUM=?";
+			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=? WHERE PI_NUM=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPi_name());
 			pstmt.setInt(2, vo.getPi_price());
 			pstmt.setString(3, vo.getPi_category());
 			pstmt.setInt(4, vo.getPi_count());
+			pstmt.setInt(5, vo.getPi_num());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

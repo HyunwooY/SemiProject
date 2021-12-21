@@ -10,11 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
 import chaneloper.vo.AddressVo;
-
-@WebServlet("/member/insertaddr")
-public class InsertAddrController extends HttpServlet {
+@WebServlet("/member/updateaddr")
+public class UpdateAddrController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String id = (String)req.getSession().getAttribute("id");
+		String name = req.getParameter("name");
+		MemberDao dao = MemberDao.getInstance();
+		AddressVo vo = dao.selectaddr(id, name);
+		if(vo==null) {
+			req.setAttribute("result", "fail");
+		}else {
+			req.setAttribute("vo", vo);
+		}
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
@@ -28,13 +36,14 @@ public class InsertAddrController extends HttpServlet {
 		String addr = req.getParameter("addr");
 		AddressVo vo = new AddressVo(0, id, name, nickname, phone, addr);
 		MemberDao dao = MemberDao.getInstance();
-		int n = dao.insertaddr(vo);
+		int n = dao.updateaddr(vo);
 		if(n>0) {
 			req.setAttribute("result", "success"); 
+			req.setAttribute("vo", vo);
 		}else {
 			req.setAttribute("result", "fail");
 		}
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
-		req.getRequestDispatcher("/member/addrmanagement").forward(req, resp);
+		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }

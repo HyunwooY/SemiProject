@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,21 +26,28 @@ public class ShowOrderController extends HttpServlet {
 		String sEnd=req.getParameter("end");
 		Date start=null;
 		Date end=null;
-		Calendar c=Calendar.getInstance();
+		Calendar c1=Calendar.getInstance();
+		Calendar c2=Calendar.getInstance();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		if(sStart==null||sEnd==null) {
-			end=Date.valueOf(sdf.format(c.getTime()));
-			c.add(Calendar.MONTH, -3);
-			start=Date.valueOf(sdf.format(c.getTime()));
+			end=Date.valueOf(sdf.format(c1.getTime()));
+			req.setAttribute("end", end);
+			c1.add(Calendar.DAY_OF_MONTH, 1);
+			end=Date.valueOf(sdf.format(c1.getTime()));
+			c2.add(Calendar.MONTH, -3);
+			start=Date.valueOf(sdf.format(c2.getTime()));
 		}else {
 			start=Date.valueOf(sStart);
-			end=Date.valueOf(sEnd);
+			System.out.println(sEnd.substring(0,9));
+			end=Date.valueOf(sEnd.substring(0,9).concat(Integer.toString(Integer.parseInt(Character.toString(sEnd.charAt(9)))+1)));
+			req.setAttribute("end", sEnd);
 		}
 		MemberDetailDao dao=MemberDetailDao.getInstance();
 		ArrayList<OrderHistoryVo> list=dao.showOrder(id,start,end);
+		ArrayList<OrderHistoryVo> phList=dao.getPhcount(id, start, end);
+		req.setAttribute("phList", phList);
 		req.setAttribute("list", list);
 		req.setAttribute("start", start);
-		req.setAttribute("end", end);
 		req.setAttribute("detailmain", "/member/showOrder.jsp");
 		req.setAttribute("detailtitle", "나의 주문내역");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);

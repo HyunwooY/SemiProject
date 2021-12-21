@@ -11,9 +11,12 @@ public class OrderHistoryVo {
 	private String pi_name; // 상품명
 	private int p_count; // 구매수량
 	private int pi_price;
+	private int ph_count;
+	private int priceAll;
+	
 	public OrderHistoryVo() {};
 	public OrderHistoryVo(int ph_num, String mi_id, String ph_type, String ph_state, Date ph_regdate, String pi_name,
-			int p_count, int pi_price) {
+			int p_count, int pi_price,int ph_count,int priceAll) {
 		this.ph_num = ph_num;
 		this.mi_id = mi_id;
 		this.ph_type = ph_type;
@@ -22,6 +25,20 @@ public class OrderHistoryVo {
 		this.pi_name = pi_name;
 		this.p_count = p_count;
 		this.pi_price = pi_price;
+		this.ph_count = ph_count;
+		this.priceAll = priceAll;
+	}
+	public int getPh_count() {
+		return ph_count;
+	}
+	public void setPh_count(int ph_count) {
+		this.ph_count = ph_count;
+	}
+	public int getPriceAll() {
+		return priceAll;
+	}
+	public void setPriceAll(int priceAll) {
+		this.priceAll = priceAll;
 	}
 	public int getPh_num() {
 		return ph_num;

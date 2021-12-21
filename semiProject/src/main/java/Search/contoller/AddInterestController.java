@@ -31,6 +31,5 @@ public class AddInterestController extends HttpServlet{
 			}
 			pw.print("</result>");
 		}
-
 	}
 }

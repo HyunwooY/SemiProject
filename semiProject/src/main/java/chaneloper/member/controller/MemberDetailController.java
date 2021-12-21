@@ -17,7 +17,7 @@ public class MemberDetailController extends HttpServlet {
 		String id=(String)req.getSession().getAttribute("id");
 		MemberDetailDao dao=MemberDetailDao.getInstance();
 		int aPayCom=dao.aPayCom(id);
-		int bPayCom=dao.aPayCom(id);
+		int bPayCom=dao.bPayCom(id);
 		int preparingP=dao.preparingP(id);
 		int beingDelivery=dao.beingDelivery(id);
 		int compDelivery=dao.compDelivery(id);

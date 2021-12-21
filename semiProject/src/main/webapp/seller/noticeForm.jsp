@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1 style="text-align:center">답글작성</h1>
-<form name="frmReply" method="post" action="${contextPath }" enctype="multipart/form-data">
+<h1 style="text-align:center">공지사항작성</h1>
+<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/notice1">
 <table align="center">
 <tr>
 <td align="right">작성자:&nbsp;</td>
@@ -26,8 +19,8 @@
 <td align="right"></td>
 <td>
 <input type=submit value="등록"/>
+<input type=button value="취소" onClick="backToList(this.form)"/>
 </td>
 </tr>
 </table>
-</body>
-</html>
+</form>

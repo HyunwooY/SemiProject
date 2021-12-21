@@ -24,8 +24,8 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-			<span class="l">입금전 ${requestScope.aPayCom }</span>
-			<span class="l">입금완료 ${requestScope.bPayCom }</span>
+			<span class="l">입금전 ${requestScope.bPayCom }</span>
+			<span class="l">입금완료 ${requestScope.aPayCom }</span>
 			<span class="l">배송준비중 ${requestScope.preparingP }</span>
 			<span class="l">배송중 ${requestScope.beingDelivery }</span>
 			<span class="l">배송완료 ${requestScope.compDelivery }</span>
@@ -45,7 +45,7 @@
 			<div id="my" class="menu">
 				<h4>MODIFY</h4>
 				<a href="${pageContext.request.contextPath }/member/mypage">개인정보확인/수정</a><br>
-				<a href="${pageContext.request.contextPath }/member/insertaddr">배송지 관리</a>
+				<a href="${pageContext.request.contextPath }/member/addrmanagement">배송지 관리</a>
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
@@ -66,4 +66,7 @@
 		</div>
 	</div>
 </div>
+
+
+
 
