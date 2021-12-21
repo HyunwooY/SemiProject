@@ -316,19 +316,35 @@ public class MemberDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	/*
+	 * //배송지 아이디만 가지고 찾기 public AddressVo selectaddr(String id) { Connection con =
+	 * null; PreparedStatement pstmt = null; ResultSet rs = null; try { con =
+	 * JDBC.getCon(); String sql
+	 * ="select * from member_infomation mi, shipping_address sa where mi.mi_id=? and mi.mi_id=sa.mi_id"
+	 * ; pstmt = con.prepareStatement(sql); pstmt.setString(1, id); rs =
+	 * pstmt.executeQuery(); if(rs.next()) { int sanum = rs.getInt("sa_num"); String
+	 * saname = rs.getString("sa_name"); String nickname =
+	 * rs.getString("sa_nickname"); String saphone = rs.getString("sa_phone");
+	 * String saaddr = rs.getString("sa_addr"); AddressVo addrvo = new
+	 * AddressVo(sanum,id,saname,nickname,saphone,saaddr); return addrvo; } return
+	 * null; }catch(SQLException s) { s.printStackTrace(); return null; }finally {
+	 * JDBC.close(con, pstmt, rs); } }
+	 */
+	
 	//배송지 수정
 		public int updateaddr(AddressVo vo) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
 				con = JDBC.getCon();
-				String sql = "update shipping_address set sa_nickname=?, name=?, phone=?, addr=? where mi_id=?";
+				String sql = "update shipping_address set sa_nickname=?, sa_name=?, sa_phone=?, sa_addr=? where mi_id=? and sa_num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, vo.getNickname());
 				pstmt.setString(2, vo.getName());
 				pstmt.setString(3, vo.getPhone());
 				pstmt.setString(4, vo.getAddr());
 				pstmt.setString(5, vo.getId());
+				pstmt.setInt(6, vo.getNum());
 				return pstmt.executeUpdate();
 			}catch(SQLException s) {
 				s.printStackTrace();

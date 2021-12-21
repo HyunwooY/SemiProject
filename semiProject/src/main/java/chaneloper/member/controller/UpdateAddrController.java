@@ -10,40 +10,43 @@ import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
 import chaneloper.vo.AddressVo;
+import chaneloper.vo.MemberVo;
 @WebServlet("/member/updateaddr")
 public class UpdateAddrController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = (String)req.getSession().getAttribute("id");
-		String name = req.getParameter("name");
 		MemberDao dao = MemberDao.getInstance();
+		
+		String name = req.getParameter("name");
 		AddressVo vo = dao.selectaddr(id, name);
 		if(vo==null) {
-			req.setAttribute("result", "fail");
+			req.setAttribute("code", "fail");
 		}else {
 			req.setAttribute("vo", vo);
+			req.setAttribute("detailmain", "/member/updateAddress.jsp");
 		}
-		req.setAttribute("detailmain", "/member/insertAddress.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id = (String)req.getSession().getAttribute("id");
+		int num = Integer.parseInt(req.getParameter("num"));
 		String nickname = req.getParameter("addrname");
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String addr = req.getParameter("addr");
-		AddressVo vo = new AddressVo(0, id, name, nickname, phone, addr);
+		AddressVo vo = new AddressVo(num, id, name, nickname, phone, addr);
 		MemberDao dao = MemberDao.getInstance();
 		int n = dao.updateaddr(vo);
+		System.out.println(n);
 		if(n>0) {
-			req.setAttribute("result", "success"); 
-			req.setAttribute("vo", vo);
+			req.setAttribute("code", "success"); 
 		}else {
-			req.setAttribute("result", "fail");
+			req.setAttribute("code", "fail");
 		}
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
-		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		req.getRequestDispatcher("/member/addrmanagement").forward(req, resp);
 	}
 }
