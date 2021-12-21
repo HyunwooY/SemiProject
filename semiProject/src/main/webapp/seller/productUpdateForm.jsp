@@ -1,32 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 수정</title>
-</head>
-<body>
-	<h1>상품 정보 수정</h1>
-	<form action="${pageContext.request.contextPath }/seller/update" enctype="multipart/form-data">
+
+
+	<form action="${pageContext.request.contextPath }/seller/update" enctype="multipart/form-data" method="post">
 		상품번호<br>
 		<input type="text" name="pi_num" value="${requestScope.vo.pi_num }" readonly="readonly"><br>
 		상품명<br>
-		<input type="text" name="pi_name"><br>
+		<input type="text" name="pi_name" value="${vo.pi_name }"><br>
 		상품가격<br>
-		<input type="text" name="pi_price"><br>
+		<input type="text" name="pi_price" value="${vo.pi_price }"><br>
 		분류<br>
-		<input type="text" name="pi_category"><br>
+		<input type="text" name="pi_category" value="${vo.pi_category }"><br>
 		사이즈<br>
-		<input type="text" name="pd_size"><br>
+		<input type="text" name="pd_size" value="${vo.pd_size }"><br>
 		색상<br>
-		<input type="text" name="pd_color"><br>
+		<input type="text" name="pd_color" value="${vo.pd_color }"><br>
 		재고<br>
-		<input type="text" name="pd_count"><br>
+		<input type="text" name="pd_count" value="${vo.pd_count }"><br>
 		상품등록일<br>
-		<input type="text" name="pi_regdate"><br>
+		<input type="text" name="pi_regdate" value="${vo.pi_regdate }"><br>
 		이미지<br>
-		<input type="file" name="file"><br><br>
+		<input type="file" name="pp_title"><br><br>
 		<input type="submit" value="수정">
 	</form>
 	
@@ -34,5 +28,3 @@
 	<form action="${pageContext.request.contextPath }/layout.jsp">
 		<input type="submit" value="취소">
 	</form>
-</body>
-</html>

@@ -30,8 +30,6 @@ public class ProductDao {
 			con = JDBC.getCon();
 			String sql = "INSERT "
 					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?)";			
-					
-			// 상품 
 			pstmt1 = con.prepareStatement(sql);
 			pstmt1.setString(1, vo.getSi_id());
 			pstmt1.setString(2, vo.getPi_name());
@@ -84,18 +82,30 @@ public class ProductDao {
 		}
 	}
 
-	// 상품 수정
+	// 상품 정보 수정
 	public int productUpdate(ProductVo vo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=? WHERE PI_NUM=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getPd_size());
-			pstmt.setString(2, vo.getPd_color());
-			pstmt.setInt(3, vo.getPd_count());
-			return pstmt.executeUpdate();
+			String sql1 = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PD_COUNT=? WHERE PI_NUM=?";
+			pstmt1 = con.prepareStatement(sql);
+			pstmt1.setString(1, vo.getPd_size());
+			pstmt1.setString(2, vo.getPd_color());
+			pstmt1.setInt(3, vo.getPd_count());
+			pstmt1.setInt(4, vo.getPd_count());
+			pstmt1.setInt(5, vo.getPi_num());
+			int a = pstmt1.executeUpdate();
+			
+			String sql2 = "UPDATE PRODUCT_PHOTO SET PP_TITLE=? WHERE PI_NUM=?";
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, vo.getPp_title());
+			pstmt2.setInt(2, vo.getPi_num());
+			
+			String sql3 = "UPDATE TAG T_NAME=? WHERE PI_NUM=?";
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
@@ -103,6 +113,8 @@ public class ProductDao {
 			JDBC.close(con, pstmt, null);
 		}
 	}
+	
+	
 
 	// 상품 삭제
 	public int productDelete(int pi_num) {

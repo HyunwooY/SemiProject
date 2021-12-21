@@ -14,20 +14,7 @@ import chaneloper.vo.ProductVo;
 
 @WebServlet("/seller/productupdate")
 public class ProductUpdateController extends HttpServlet{
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
-		ProductDao dao = ProductDao.getInstance();
-		ProductVo vo = new ProductVo();
-		if(vo==null) {
-			req.setAttribute("result", "fail");
-			req.getRequestDispatcher("/seller/layout.jsp").forward(req,resp);
-		}else {
-			req.setAttribute("vo", vo);
-			req.getRequestDispatcher("/seller/productList.jsp").forward(req,resp);
-		}
-	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
@@ -38,7 +25,7 @@ public class ProductUpdateController extends HttpServlet{
 		//String pd_size =req.getParameter("pd_size");
 		//String pd_color =req.getParameter("pd_color");
 		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
-		ProductVo vo = new ProductVo();
+		ProductVo vo = new ProductVo(pi_num, null, pi_name, pi_price, pi_count, null, pi_category, pd_size, pi_category, pi_count, pi_category, pi_name)
 		ProductDao dao = ProductDao.getInstance();
 		int n=dao.productUpdate(vo);
 		if(n > 0) {
