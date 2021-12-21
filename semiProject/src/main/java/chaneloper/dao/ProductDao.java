@@ -22,69 +22,67 @@ public class ProductDao {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
+
 		try {
 			con = JDBC.getCon();
-			String sql1 = "INSERT ALL"
-					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, 0, SYSDATE, ?)"					
-					+ " INTO PRODUCT_PHOTO VALUES(?, ?)"
-					+ " INTO TAG VALUES(TAG_SEQ.NEXTVAL, ?, ?)"
-					+ " SELECT *"
-					+ " FROM DUAL";
+			String sql = "INSERT "
+					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?)";			
+					
 			// 상품 
-			pstmt1 = con.prepareStatement(sql1);
+			pstmt1 = con.prepareStatement(sql);
 			pstmt1.setString(1, vo.getSi_id());
 			pstmt1.setString(2, vo.getPi_name());
 			pstmt1.setInt(3, vo.getPi_price());
-			pstmt1.setString(4, vo.getPi_category());
-			pstmt1.setString(5, vo.getPp_title());
-			pstmt1.setInt(6, vo.getPi_num());
-			pstmt1.setInt(7, vo.getPi_num());
-			pstmt1.setString(8, vo.getT_name());
-			
-			rs = pstmt1.executeQuery();
-			if(rs.next()) {
-				return pstmt1.executeUpdate();
-			}
-			
-			String sql2 = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?, ?, ?)";
+			pstmt1.setInt(4, vo.getPi_count());
+			pstmt1.setString(5, vo.getPi_category());			
+			int a = pstmt1.executeUpdate();
+			String sql2 = "INSERT INTO PRODUCT_PHOTO VALUES(?, PRO_SEQ.CURRVAL)";
 			pstmt2 = con.prepareStatement(sql2);
-			pstmt2.setString(1, vo.getPd_size());
-			pstmt2.setString(2, vo.getPd_color());
-			pstmt2.setInt(3, vo.getPd_count());
-			
-			return pstmt2.executeUpdate();
+			pstmt2.setString(1, vo.getPp_title());			
+			int b = pstmt2.executeUpdate();
+			String sql3 =  "INSERT INTO TAG VALUES(TAG_SEQ.NEXTVAL, PRO_SEQ.CURRVAL, ?)";
+			pstmt3 = con.prepareStatement(sql3);
+			pstmt3.setString(1, vo.getT_name());
+			int c = pstmt3.executeUpdate();
+			pstmt4 = con.prepareStatement("select pro_seq.currval pi_num from dual");
+			rs = pstmt4.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("pi_num");				
+			}
+			return -1;
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return -1;
 		} finally {		
-			JDBC.close(rs);
+			JDBC.close(pstmt3);
 			JDBC.close(pstmt2);
-			JDBC.close(pstmt1);
-			JDBC.disconnect(con);
+			JDBC.close(con, pstmt1, null);
 		}
 	}
 	
-//	// 상품 상세 등록
-//	public int productInsertDetail(ProductVo vo) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		try {
-//			con = JDBC.getCon();
-//			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";	
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, vo.getPi_num());		// 상품 번호
-//			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
-//			pstmt.setString(3, vo.getPd_color());		// 상품 색상
-//			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
-//			return pstmt.executeUpdate();
-//		} catch (SQLException se) {
-//			se.printStackTrace();
-//			return -1;
-//		} finally {
-//			JDBC.close(con, pstmt, null);
-//		}
-//	}
+	// 상품 상세 등록
+	public int productInsertDetail(int pi_num, ProductVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;	
+		try {
+			con = JDBC.getCon();
+			String sql = "INSERT INTO PRODUCT_DETAIL VALUES(PRODUCT_DETAIL_SEQ.NEXTVAL, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);		// 상품 사이즈
+			pstmt.setString(2, vo.getPd_size());		// 상품 사이즈
+			pstmt.setString(3, vo.getPd_color());		// 상품 색상
+			pstmt.setInt(4, vo.getPd_count());			// 상품 재고량
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
 
 	// 상품 수정
 	public int productUpdate(ProductVo vo) {
@@ -94,11 +92,9 @@ public class ProductDao {
 			con = JDBC.getCon();
 			String sql = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PI_COUNT=? WHERE PI_NUM=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getPi_name());
-			pstmt.setInt(2, vo.getPi_price());
-			pstmt.setString(3, vo.getPi_category());
-			pstmt.setInt(4, vo.getPi_count());
-			pstmt.setInt(5, vo.getPi_num());
+			pstmt.setString(1, vo.getPd_size());
+			pstmt.setString(2, vo.getPd_color());
+			pstmt.setInt(3, vo.getPd_count());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
