@@ -2,7 +2,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">	
@@ -63,9 +63,9 @@
 		재고수<br>
 		<input type="text" name="pd_count"><br><br>
 		
-		
+
 		태그<br>
-		<input type="text" name="t_name" value="#"><br>
+		<input type="text" name="t_name" value="#" id="tp"><br>
 		
 		<input type="submit" value="등록" onclick="return checkBox()">
 		<input type="submit" value="취소" onclick="home()"><br>

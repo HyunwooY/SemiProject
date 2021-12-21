@@ -12,20 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.ProductDao;
 import chaneloper.vo.ProductVo;
 
-@WebServlet("/seller/productupdate")
+@WebServlet("/seller/productUpdate")
 public class ProductUpdateController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		String pi_name=req.getParameter("pi_name");
 		int pi_price=Integer.parseInt(req.getParameter("pi_price"));
 		String pi_category =req.getParameter("pi_category");
-		//String pd_size =req.getParameter("pd_size");
-		//String pd_color =req.getParameter("pd_color");
+		String pd_size =req.getParameter("pd_size");
+		String pd_color =req.getParameter("pd_color");
 		int pi_count = Integer.parseInt(req.getParameter("pi_count"));
-		ProductVo vo = new ProductVo(pi_num, null, pi_name, pi_price, pi_count, null, pi_category, pd_size, pi_category, pi_count, pi_category, pi_name)
+		ProductVo vo = new ProductVo(0, null, pi_name, pi_price, pi_count, null, pi_category, pd_size, pi_category, pi_count, pi_category, pi_name);
 		ProductDao dao = ProductDao.getInstance();
 		int n=dao.productUpdate(vo);
 		if(n > 0) {
