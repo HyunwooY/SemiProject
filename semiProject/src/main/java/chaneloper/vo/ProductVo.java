@@ -12,7 +12,7 @@ public class ProductVo {
 	private String si_id; // 사업자 아이디
 	private String pi_name; // 상품명
 	private int pi_price; // 가격
-	private int pi_count; // 판매수
+	private int pi_count; // 조회수
 	private Date pi_date; // 등록일
 	private String pi_category; // 분류
 
