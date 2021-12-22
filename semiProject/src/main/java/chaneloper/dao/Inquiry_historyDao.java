@@ -21,13 +21,12 @@ public class Inquiry_historyDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SEQ.NEXTVAL, ?, ?, ?, ?, null)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getMi_id());
 			pstmt.setInt(2, vo.getPi_num());
 			pstmt.setString(3, vo.getIh_title());
 			pstmt.setString(4, vo.getIh_question());
-			pstmt.setString(5, vo.getIh_answer());
 			
 			return pstmt.executeUpdate();
 		} catch(SQLException se) {
@@ -127,6 +126,25 @@ public class Inquiry_historyDao {
 			pstmt.setString(1, vo.getIh_title());
 			pstmt.setString(2, vo.getIh_question());
 			pstmt.setInt(3, vo.getIh_num());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
+	
+	// 판매자 문의 답글
+	public int SellerInquiryUpdate(Inquiry_historyVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "UPDATE Inquiry_history SET IH_ANSWER=? WHERE IH_NUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getIh_answer());
+			pstmt.setInt(2, vo.getIh_num());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

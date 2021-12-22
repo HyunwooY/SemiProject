@@ -29,9 +29,9 @@
 				</td>
 			</tr>	
 		</c:if>
-		
+		<hr>
 	</c:forEach>
-	<hr>
+	</tr>
 	</table>
 	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/inquiryListReplyForm.jsp">
 	<input type="submit" value="글쓰기">
