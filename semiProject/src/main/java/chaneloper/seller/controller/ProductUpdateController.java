@@ -18,6 +18,7 @@ public class ProductUpdateController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		String pi_name=req.getParameter("pi_name");
 		int pi_price=Integer.parseInt(req.getParameter("pi_price"));
 		String pi_category =req.getParameter("pi_category");

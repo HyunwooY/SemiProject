@@ -22,9 +22,10 @@ public class InquireInsertController extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		String id = (String)req.getSession().getAttribute("id");
 		String title = req.getParameter("title");
+		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		String content = req.getParameter("content");
 		
-		Inquiry_historyVo vo = new Inquiry_historyVo(0, id, 0, title, content, null);
+		Inquiry_historyVo vo = new Inquiry_historyVo(0, id, pi_num, title, content, null);
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
 		int n = dao.inquiryInsert(vo);
 		if(n>0) {

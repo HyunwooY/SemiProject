@@ -24,12 +24,13 @@
 		상품등록일<br>
 		<input type="text" name="pi_regdate" value="${vo.pi_regdate }" readonly="readonly"><br>
 		이미지<br>
-		<input type="file" name="pp_title"><br><br>
-		<input type="submit" value="수정">
+		<input type="file" name="pp_title"><br><br>		
 	</form>
 	 
-	 
-	<!-- 취소버튼 위치가 수정 옆에 위치해야 함 -->
-	<form action="${pageContext.request.contextPath }/layout.jsp">
-		<input type="submit" value="취소">
-	</form>
+	 <input type="submit" value="수정">
+	<input type="submit" value="취소" onclick="cansel()">
+<script>
+	function cansel(){
+		location.href="${pageContext.request.contextPath}/seller/productList.jsp";
+	}
+</script>

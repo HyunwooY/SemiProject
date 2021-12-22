@@ -217,6 +217,24 @@ public class SellerDao {
 		}
 	}
 	
+	// 판매자 상품 삭제
+	public int sellerDelete(int pi_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "DELTE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			return pstmt.executeUpdate();
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
+	
 }
 
 

@@ -44,7 +44,7 @@ public class NoticeController extends HttpServlet{
 		req.setAttribute("pageNum", pageNum);
 		
 		req.setAttribute("main", "/seller/notice.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	}
 
