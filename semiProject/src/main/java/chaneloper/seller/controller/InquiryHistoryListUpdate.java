@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.Inquiry_historyDao;
 import chaneloper.vo.Inquiry_historyVo;
 
-<<<<<<< HEAD
-=======
 @WebServlet("/inquiryupdate")
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 public class InquiryHistoryListUpdate extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,11 +45,4 @@ public class InquiryHistoryListUpdate extends HttpServlet{
 		}
 		req.getRequestDispatcher("//result.jsp").forward(req, resp);
 	}
-<<<<<<< HEAD
 }
-=======
-
-	}
-
-
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
