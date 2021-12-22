@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="chaneloper.vo.Search_ProductVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="chaneloper.vo.Inquiry_historyVo"%>
@@ -10,6 +13,37 @@
 #maintable{float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
 #pubutton{float: right; width: 40%;text-align: left; margin-right:50px}
 #showimg{}
+
+#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#myform label{
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#myform label:hover{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+}
+
+#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform fieldset legend{
+    text-align: left;
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+}
 </style>
 
 
@@ -512,6 +546,89 @@
 		</tr>
 	</table>
 </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+	function addrv(){
+		var rvtable = document.getElementById("rvtable");
+		rvtable.style.display = "none";
+		var input_lv = document.getElementById("input_lv");
+		input_lv.style.display ="block";
+	}
+
+</script>
+
+<div id="rvtable">
+	<c:forEach var="vo" items="${list_rv }">
+		<div>
+			<span>${vo.getMI_ID() }</span> 
+			<c:forEach var="i" begin="0" end="${vo.getR_HIT()-1 }">
+			<span>★</span>
+			</c:forEach>
+			<span>${vo.getR_DATE() }</span> <a href="#">삭제</a><br>
+			
+			<span>${vo.getR_TITLE() }</span><br>
+			<span>${vo.getR_CONTENT() }</span><br>
+		</div>
+		<c:forEach var="vo2" items="${list_pt}">
+			<c:if test="${vo2.getR_num() eq vo.getR_NUM() }">
+					<div>
+						<img src="${vo2.getTitle() }">
+					</div>
+			</c:if>
+		</c:forEach>
+	</c:forEach>
+	<div>
+		<a href="#" onclick="addrv()">후기작성</a>
+	</div>
+</div>
+
+<script>
+	var adbt=0;
+	function addbutton(){
+		adbt = adbt+1;
+		var inputfile= document.createElement("input");
+		var inputspan= document.createElement("span");
+		inputfile.type="file";
+		inputfile.name="file"+adbt;
+		inputspan.innerHTML ="<br>";
+		let myform = document.getElementById("myform");
+		let adimg = document.getElementsByName("adimg")[0];
+		myform.insertBefore(inputfile,adimg);
+		myform.insertBefore(inputspan,adimg);
+		let adbt2 = document.getElementsByName("adbt")[0];
+		adbt2.value=adbt;
+	}
+</script>
+
+<% 
+	Date date = new Date();
+	SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+	String dates = transFormat.format(date);
+	
+%>
+<div id="input_lv" style="display:none">
+	<form name="myform" id="myform" action="${cp }/search/upload?pi_num=${pi_num}" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+    </fieldset><br>
+    	아이디 <input type="text" name="mi_id" value="${sessionScope.id}" readonly>
+    	날짜 <input type="text" name="date" value=<%=dates %> readonly><br>
+		제목 <input type="text" name="title"><br>
+		내용 <input type="text" name="context"><br>
+		<input type="hidden" value="0" name="adbt">
+		<input type="file" name="file0"><br>
+		<input type="button" value="이미지추가" onclick="addbutton()"  name="adimg"><br>
+		
+		<input type="submit" value="등록">
+	</form>
+</div>
+
 
 <!-- 이미지 -->
 <!-- 제품명 -->

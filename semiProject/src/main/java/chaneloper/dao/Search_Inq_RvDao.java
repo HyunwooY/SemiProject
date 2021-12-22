@@ -11,12 +11,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import chaneloper.vo.Inquiry_historyVo;
+import chaneloper.vo.Search_ReviewVo;
+import chaneloper.vo.Search_ReviewptVo;
 import db.JDBC;
 
-public class Search_inqDao {
-	private static Search_inqDao instance=new Search_inqDao();
-	private Search_inqDao() {}
-	public static Search_inqDao getInstance() {
+public class Search_Inq_RvDao {
+	private static Search_Inq_RvDao instance=new Search_Inq_RvDao();
+	private Search_Inq_RvDao() {}
+	public static Search_Inq_RvDao getInstance() {
 		return instance;
 	}
 
@@ -175,6 +177,55 @@ public class Search_inqDao {
 			return -1;
 		}finally {
 			JDBC.close(con, pstmt, null);
+		}		
+	}
+	
+	public ArrayList<Search_ReviewVo> getrv(int pi_num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		try {
+			con=JDBC.getCon();
+			String sql="SELECT ph.ph_num, ph.MI_ID ,r.R_HIT,r.R_DATE , r.R_TITLE,r.R_CONTENT,r.R_NUM FROM REVIEW r ,PURCHASE_HISTORY ph WHERE r.PH_NUM =ph.PH_NUM AND ph.pi_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			ArrayList<Search_ReviewVo> list = new ArrayList<Search_ReviewVo>();
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Search_ReviewVo vo = new Search_ReviewVo(rs.getInt("ph_num"), rs.getString("MI_ID"), rs.getInt("R_HIT"), rs.getDate("R_DATE"), rs.getString("R_TITLE"),rs.getString("R_CONTENT"),rs.getInt("R_NUM"));
+				list.add(vo);
+			}
+			return list;	
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}		
+	}
+	
+	public ArrayList<Search_ReviewptVo> getpt() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		try {
+			con=JDBC.getCon();
+			String sql="select rp.rp_title,rp.r_num FROM REVIEW r , REVIEW_PHOTO rp WHERE r.R_NUM =rp.R_NUM";
+			pstmt=con.prepareStatement(sql);
+			ArrayList<Search_ReviewptVo> list = new ArrayList<Search_ReviewptVo>();
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Search_ReviewptVo vo = new Search_ReviewptVo(rs.getInt("r_num"),rs.getString("rp_title"));
+				list.add(vo);
+			}
+			return list;	
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
 		}		
 	}
 }
