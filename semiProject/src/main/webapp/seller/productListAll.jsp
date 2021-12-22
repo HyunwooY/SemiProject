@@ -3,23 +3,56 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
+
 <style>
-	.prod{float:legt}
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		list-style: none;
+	}
+	.clear {
+		clear: both;
+	}
+	.box {
+		width: 1320px; 
+		margin: 0 auto;
+	}
+#content_box h3 {				/* 후손 선택자 */
+	flaot: left;
+	margin-left: 0px;
+}
+#content_box p {
+	float: right;
+}
 </style>
 
-	<hr>
-<form action="${pagecontext.request.contextPath }/seller/">
-	<div id="prod" class="row" align="center">
-		<c:forEach var="list" items="${requestScope.list }">
+
+<form action="${pagecontext.request.contextPath }/seller/listAll">		
+	<section id="content_box">
+	<div class="box">	
+		<h3>전체 상품</h3>
+		<p> 판매자추천순 | 인기도순 | 평점높은순 | 최신등록순</p>
+		<div class="clear"></div>
+		<ul class="items">
+		<c:forEach var="list" items="${requestScope.list }">	
 			<!-- 이미지 클릭 시 상세페이지로 이동해야 함 -->
-			<img src="../upload/${list.pp_title }" onclick="location.href='https://www.naver.com'">
-			<h3>${list.pi_name }</h3>
-			<p>${list.pi_price }원
-			<p>${list.pd_color }			
-			<p>${list.t_name }<br>
+	
+		
+			<div class="box">
+				<img src="../upload/${list.pp_title }" onclick="location.href='https://www.naver.com'">			
+			</div>
+			<li class="a">${list.pi_name }</li>		
+			<li class="b">${list.pi_price }원</li>	
+			<li class="c">${list.pd_color }</li>			
+			<li class="d">${list.t_name }</li>	
+
 		</c:forEach>
+		</ul>
 	</div>
+	<div class="clear"></div>
+	</section>
 </form>
 	<hr>
 

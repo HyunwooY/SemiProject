@@ -16,13 +16,8 @@ public class DeleteAddrController extends HttpServlet{
 		String id = (String)req.getSession().getAttribute("id");
 		String addr = req.getParameter("addr");
 		MemberDao dao = MemberDao.getInstance();
-		int n = dao.deleteaddr(id, addr);
-		if(n>0) {
-			req.setAttribute("result", "success");
-		}else {
-			req.setAttribute("result", "fail");
-		}
+		dao.deleteaddr(id, addr);
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
-		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		req.getRequestDispatcher("/member/addrmanagement").forward(req, resp);
 	}
 }

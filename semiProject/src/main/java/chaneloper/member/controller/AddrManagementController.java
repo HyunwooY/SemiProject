@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
 import chaneloper.vo.AddressVo;
+import chaneloper.vo.MemberVo;
 @WebServlet("/member/addrmanagement")
 public class AddrManagementController extends HttpServlet{
 	@Override

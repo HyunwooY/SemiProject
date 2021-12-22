@@ -47,6 +47,7 @@ public class GoCartController extends HttpServlet {
                 for(Cookie cl:clist) {
                 	if(cl.getName().equals("JSESSIONID")) {
                 	}else {
+                		
                 		String clvalue=URLDecoder.decode(cl.getValue(),"utf-8");
                 		if(pi_num.equals(cl.getName().substring(cl.getName().indexOf("_")+1)) && 
                 				clvalue.substring(0, clvalue.length()-1).equals(pd.substring(0, pd.length()-1))) {

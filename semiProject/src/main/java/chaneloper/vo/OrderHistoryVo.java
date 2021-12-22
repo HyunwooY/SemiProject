@@ -13,10 +13,11 @@ public class OrderHistoryVo {
 	private int pi_price;
 	private int ph_count;
 	private int priceAll;
+	private String pp_title;
 	
 	public OrderHistoryVo() {};
 	public OrderHistoryVo(int ph_num, String mi_id, String ph_type, String ph_state, Date ph_regdate, String pi_name,
-			int p_count, int pi_price,int ph_count,int priceAll) {
+			int p_count, int pi_price,int ph_count,int priceAll,String pp_title) {
 		this.ph_num = ph_num;
 		this.mi_id = mi_id;
 		this.ph_type = ph_type;
@@ -27,6 +28,14 @@ public class OrderHistoryVo {
 		this.pi_price = pi_price;
 		this.ph_count = ph_count;
 		this.priceAll = priceAll;
+		this.pp_title=pp_title;
+	}
+	
+	public String getPp_title() {
+		return pp_title;
+	}
+	public void setPp_title(String pp_title) {
+		this.pp_title = pp_title;
 	}
 	public int getPh_count() {
 		return ph_count;

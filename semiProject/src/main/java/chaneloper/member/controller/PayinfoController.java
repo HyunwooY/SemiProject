@@ -30,7 +30,7 @@ public class PayinfoController extends HttpServlet {
 		Search_ResultDao dao = new Search_ResultDao();
 		String param="";
 		ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
-        if(req.getParameter("count")!=null) {
+        if(req.getParameter("count")!=null && req.getParameter("pi_num")!=null&&(!req.getParameter("pi_num").equals(""))) {
             int count =Integer.parseInt(req.getParameter("count")) ;
             int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
             for(int i=1 ;i<=count; i++) {
@@ -45,7 +45,11 @@ public class PayinfoController extends HttpServlet {
                 purchaseList.add(svo);
             }
         }else {
-            System.out.println("연결오류");
+            int count=Integer.parseInt(req.getParameter("count"));
+            int pd_num =Integer.parseInt(req.getParameter("pd_num")) ;
+            PurchaseDao pdao=PurchaseDao.getInstance();
+            ShowPurchaseListVo svo=pdao.selectProduct(pd_num,count);
+            purchaseList.add(svo);
         }
 		MemberDao mdao=MemberDao.getInstance();
 		MemberVo membervo=mdao.select(id);
@@ -82,7 +86,7 @@ public class PayinfoController extends HttpServlet {
 		for(ShowPurchaseListVo vo:list) {
 			dao.purchase(vo, ph_num);
 		}
-		req.setAttribute("main", "/member/buyProduct.jsp");
+		req.setAttribute("main", "/member/purchaseResult.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

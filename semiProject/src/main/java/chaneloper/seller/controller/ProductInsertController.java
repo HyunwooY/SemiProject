@@ -43,7 +43,6 @@ public class ProductInsertController extends HttpServlet {
 		ProductDao dao = ProductDao.getInstance();	
 		int n = dao.productInsert(vo1);
 		if (n > 0) {
-			req.setAttribute("productCode", "success");		
 			req.setAttribute("path", path);
 			req.setAttribute("detailmain", "productResult.jsp");
 			req.setAttribute("productCode", "success");

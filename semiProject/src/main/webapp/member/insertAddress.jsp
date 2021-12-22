@@ -19,20 +19,29 @@
 	window.onload = function(){
 		if(${requestScope.result=='success'}){
 			alert("배송지가 등록 되었습니다.");
+		}else if(${requestScope.result=='fail'}){
+			alert("배송지 등록 실패");
+		}else if(${requestScope.code=='success'}){
+			alert("배송지가 수정 되었습니다.");
+		}
+		}else if(${requestScope.code=='fail'}){
+			alert("배송지 수정 실패");
 		}
 	} 
 </script>
 <div id="showaddress">
 		<table>
 			<tr>
-				<th>배송지명</th><th>수령인</th><th>전화번호</th><th>주소</th>
+				<th>배송지명</th><th>수령인</th><th>전화번호</th><th>주소</th><th>수정</th><th>삭제</th>
 			</tr>
 			<c:forEach var="avo" items="${list }">
 			<tr>
-				<td>${avo.nickname }</td>
+				<td>${avo.nickname}</td>
 				<td>${avo.name}</td>
-				<td>${avo.phone }</td>
+				<td>${avo.phone}</td>
 				<td>${avo.addr }</td>
+				<td><a href="<%=request.getContextPath()%>/member/updateaddr?id=${avo.id}&name=${avo.name}">수정</a></td>
+				<td><a href="<%=request.getContextPath()%>/member/deleteaddr?id=${avo.id}&addr=${avo.addr}">삭제</a></td>
 			</tr>
 			</c:forEach>
 		</table>
