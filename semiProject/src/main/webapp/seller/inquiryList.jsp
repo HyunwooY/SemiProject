@@ -29,9 +29,9 @@
 				</td>
 			</tr>	
 		</c:if>
-		
+		<hr>
 	</c:forEach>
-	<hr>
+	</tr>
 	</table>
 	
 	<!-- 페이징 처리 -->

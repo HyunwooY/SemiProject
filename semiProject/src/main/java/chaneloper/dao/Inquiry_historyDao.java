@@ -132,6 +132,25 @@ public class Inquiry_historyDao {
 			JDBC.close(con, pstmt, null);
 		}
 	}
+	
+	// 판매자 문의 답글
+	public int SellerInquiryUpdate(Inquiry_historyVo vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "UPDATE Inquiry_history SET IH_ANSWER=? WHERE IH_NUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getIh_answer());
+			pstmt.setInt(2, vo.getIh_num());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
 
 	// 문의내역 삭제
 	public int inquiryDelete(int ih_num) {
