@@ -23,6 +23,8 @@
 	</table>
 	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/noticeForm.jsp">
 	<input type="submit" value="글쓰기">
+		<c:if test="${result0==null }">
+	<c:if test="${ }"></c:if>
 	</form>
 	<!-- 페이징 처리 -->
   	<div>

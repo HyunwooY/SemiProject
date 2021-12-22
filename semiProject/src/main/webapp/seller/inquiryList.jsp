@@ -33,6 +33,9 @@
 	</c:forEach>
 	<hr>
 	</table>
+	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/inquiryListReplyForm.jsp">
+	<input type="submit" value="글쓰기">
+	</form>
 	
 	<!-- 페이징 처리 -->
   	<div>
