@@ -20,8 +20,13 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
+<<<<<<< HEAD
+		}
+		
+=======
 		}
 //		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 	}
 	function showText() {
 		var keyword=document.getElementById("keyword");

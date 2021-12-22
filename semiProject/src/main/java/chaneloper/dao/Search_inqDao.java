@@ -81,4 +81,100 @@ public class Search_inqDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	
+	public ArrayList<String> getqa(String mi_id, int pi_num, String title) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			con=JDBC.getCon();
+			String sql="select * from INQUIRY_HISTORY where PI_NUM = ? and mi_id=? and ih_title=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			pstmt.setString(2, mi_id);
+			pstmt.setString(3, title);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				list.add(rs.getString("ih_question"));
+				if(rs.getString("ih_answer")==null) {
+					list.add("답변 준비중 입니다.");
+				}else {
+					list.add(rs.getString("ih_answer"));
+				}
+				
+				list.add(title);
+			}
+			return list;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			JDBC.close(con, pstmt, rs);
+		}		
+	}
+	
+	public int delqa(String mi_id, int pi_num, String title) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql="delete from INQUIRY_HISTORY where PI_NUM = ? and mi_id=? and ih_title=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			pstmt.setString(2, mi_id);
+			pstmt.setString(3, title);
+			return pstmt.executeUpdate();
+			
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}		
+	}
+	
+	public int altqa(String mi_id, int pi_num, String title, String p3_q) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql="update INQUIRY_HISTORY set ih_question=? where PI_NUM = ? and mi_id=? and ih_title=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, p3_q);
+			pstmt.setInt(2, pi_num);
+			pstmt.setString(3, mi_id);
+			pstmt.setString(4, title);
+			
+			return pstmt.executeUpdate();
+			
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}		
+	}
+	
+	public int insertqna(String mi_id, int pi_num, String title, String p3_q) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql="INSERT INTO INQUIRY_HISTORY VALUES(IH_SEQ.nextval, ?, ?, ?, ?,'답변 준비중 입니다.')";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, mi_id);
+			pstmt.setInt(2, pi_num);
+			pstmt.setString(3, title);
+			pstmt.setString(4, p3_q);
+			
+			return pstmt.executeUpdate();
+			
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}		
+	}
 }
