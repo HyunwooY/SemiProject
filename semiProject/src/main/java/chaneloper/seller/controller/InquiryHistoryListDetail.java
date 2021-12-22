@@ -17,7 +17,7 @@ public class InquiryHistoryListDetail extends HttpServlet{
 		Inquiry_historyDao dao = new Inquiry_historyDao();
 		Inquiry_historyVo vo = dao.select(num);
 		req.setAttribute("vo", vo);
-		req.setAttribute("main", "/seller/inquirytest.jsp");
+		req.setAttribute("main", "/seller/test.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }

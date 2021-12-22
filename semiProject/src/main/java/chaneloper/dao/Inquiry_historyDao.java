@@ -113,6 +113,8 @@ public class Inquiry_historyDao {
 		}
 	}
 	
+	
+	
 	// 문의내역 수정
 	public int InquiryUpdate(Inquiry_historyVo vo) {
 		Connection con = null;
