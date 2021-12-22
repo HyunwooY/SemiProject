@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<form method="post" action="${pageContext.request.contextPath }/seller/productList">
+<form method="post" action="${pageContext.request.contextPath }/seller/">
 	<div id="productlist"></div>
 	<c:forEach var="productList" items="${requestScope.productList }">
 		<img src="../upload/${productList.pp_title }">
