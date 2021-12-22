@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="delinquiry">
+<form method="post" action="inquiryList.jsp">
 삭제할 등록번호 입력<input type="text" name="num"><br>
 <input type="submit" value="삭제">
 </body>
