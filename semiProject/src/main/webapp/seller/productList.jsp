@@ -19,7 +19,7 @@
 		<th>상품가격</th>
 		<th>상품등록일</th>
 		<th>수정</th>
-		<th>삭제</th>
+		<th>삭제</th>		
 	</tr>
 	<c:forEach var="productList" items="${requestScope.productList }">
 		
@@ -33,10 +33,11 @@
 		<td>${productList.pd_count }</td>
 		<td>${productList.pi_price }원</td>
 		<td>${productList.pi_date }</td>
-		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a></td>
-		<td><a href="${pageContext.request.contextPath }/seller/productDelete?pi_num=${productList.pi_num}">삭제</a></td>
+		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a>
+		<td><a href="${pageContext.request.contextPath }/seller/productDelete?pi_num=${productList.pi_num}">삭제</a>
 	</tr>
 	</c:forEach>
 
 </table>
+
 </form>

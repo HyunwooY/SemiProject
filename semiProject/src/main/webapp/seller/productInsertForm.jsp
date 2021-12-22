@@ -68,5 +68,11 @@
 		<input type="text" name="t_name" value="#" id="tp"><br>
 		
 		<input type="submit" value="등록" onclick="return checkBox()">
-		<input type="submit" value="취소" onclick="home()"><br>
+		<input type="submit" value="취소" onclick="cansel()"><br>
 	</form>
+	
+	<script>
+		function cansel(){
+			location.href="${pageContext.request.contextPath}/seller/sellerpage.jsp"
+		}
+	</script>
