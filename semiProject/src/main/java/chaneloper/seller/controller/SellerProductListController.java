@@ -15,16 +15,18 @@ import chaneloper.vo.ProductVo;
 @WebServlet("/seller/productList")
 public class SellerProductListController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-
-		String si_id = req.getParameter("si_id");
-		System.out.println(si_id);
-		SellerDao dao = SellerDao.getInstance();
-		ArrayList<ProductVo> productList = dao.productList(si_id);				
-		System.out.println(productList);
-		req.setAttribute("productList", productList);
-		req.setAttribute("detailmain", "/seller/productList.jsp");
-		req.getRequestDispatcher("/seller/sellerpage").forward(req, resp);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute(", resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		req.setCharacterEncoding("UTF-8");
+//		String si_id = (String)req.getSession().getAttribute("id");
+//		System.out.println(si_id);
+//		SellerDao dao = SellerDao.getInstance();
+//		ArrayList<ProductVo> productList = dao.productList(si_id);
+//		req.setAttribute("productList", productList);
+//		req.setAttribute("main", "/seller/sellerpage.jsp");
+		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }

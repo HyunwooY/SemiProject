@@ -5,20 +5,20 @@
 
 
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	li {
-		list-style: none;
-	}
-	.clear {
-		clear: both;
-	}
-	.box {
-		width: 1320px; 
-		margin: 0 auto;
-	}
+* {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+.clear {
+	clear: both;
+}
+.box {
+	width: 1320px; 
+	margin: 0 auto;
+}
 #content_box h3 {				/* 후손 선택자 */
 	flaot: left;
 	margin-left: 0px;
@@ -37,9 +37,9 @@
 		<div class="clear"></div>
 		<ul class="items">
 		<c:forEach var="list" items="${requestScope.list }">	
-			<!-- 이미지 클릭 시 상세페이지로 이동해야 함 -->
 	
 		
+			<!-- 이미지 클릭 시 상세페이지로 이동해야 함 -->
 			<div class="box">
 				<img src="../upload/${list.pp_title }" onclick="location.href='https://www.naver.com'">			
 			</div>
