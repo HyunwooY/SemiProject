@@ -20,8 +20,10 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
+			}
 		}
-	}
+//		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+	
 	function showText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
@@ -48,7 +50,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
-h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
+#mainTitle{font-family: 'KoPub Batang', serif;font-size:2.5em}
 </style>
 </head>
 <body>
@@ -78,7 +80,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 </ul>
 </div>
 <div id="header">
-<h1>CHANELOPER</h1>
+<a href="${cp }/layout"><span id="mainTitle">CHANELOPER</span></a>
 <ul id="menu">
 	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
 	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>

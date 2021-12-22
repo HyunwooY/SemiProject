@@ -16,7 +16,7 @@ public class JoinLayoutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("main", "/joinlayout.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	
 }

@@ -18,6 +18,8 @@ public class CategoryController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String home=req.getParameter("home");
+		System.out.println(home); // 안날리면 null 이거나 ""
 		String keyword = req.getParameter("keyword");
 		System.out.println("1" + keyword); // 여기서 keyword=""
 		req.setAttribute("keyword", keyword);
@@ -42,6 +44,7 @@ public class CategoryController extends HttpServlet{
 		System.out.println("5" + sort); // sort=null
 		Search_ResultDao dao=new Search_ResultDao();
 		ArrayList<Search_ProductVo> list=null;
+		ArrayList<Search_ProductVo> bestList=null;
 		String spageNum=req.getParameter("pageNum"); // **
 		System.out.println(spageNum);
 		int pageNum=1;
@@ -57,6 +60,7 @@ public class CategoryController extends HttpServlet{
 			if(category==null&&sort==null) { 
 				System.out.println("ok");
 				list=dao.search_product(keyword, null, null, startRow, endRow);
+				if(home==null) bestList=dao.bestProduct(keyword, category);
 				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, null, null);
 				ArrayList<ColorVo> color = dao.get_color();
@@ -64,9 +68,11 @@ public class CategoryController extends HttpServlet{
 				req.setAttribute("color", color);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("list", list);
+				req.setAttribute("bestList", bestList);
 			//카테고리만 없다면
 			}else if(category==null) {
 				list=dao.search_product(keyword, null, sort, startRow, endRow);
+				if(home==null) bestList=dao.bestProduct(keyword, category);
 				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, null, sort);
 				ArrayList<ColorVo> color = dao.get_color();
@@ -75,9 +81,11 @@ public class CategoryController extends HttpServlet{
 				req.setAttribute("sort", sort);
 				req.setAttribute("color", color);
 				req.setAttribute("list", list);
+				req.setAttribute("bestList", bestList);
 			//정렬만 없다면
 			}else if(sort==null) {
 				list=dao.search_product(keyword, category, null, startRow, endRow);
+				if(home==null) bestList=dao.bestProduct(keyword, category);
 				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
 				ArrayList<ColorVo> color = dao.get_color();
@@ -86,9 +94,11 @@ public class CategoryController extends HttpServlet{
 				req.setAttribute("color", color);
 				req.setAttribute("CATEGORY", category);
 				req.setAttribute("list", list);
+				req.setAttribute("bestList", bestList);
 			// 둘다 있을때
 			}else if(category!=null&&sort!=null) {
 				list=dao.search_product(keyword, category, sort, startRow, endRow);
+				if(home==null) bestList=dao.bestProduct(keyword, category);
 				ccc=dao.search_productCount(keyword, category, sort);
 				ArrayList<TagVo> tag = dao.get_tag(keyword, category, sort);
 				ArrayList<ColorVo> color = dao.get_color();
@@ -98,10 +108,12 @@ public class CategoryController extends HttpServlet{
 				req.setAttribute("color", color);
 				req.setAttribute("sort", sort);
 				req.setAttribute("list", list);
+				req.setAttribute("bestList", bestList);
 			}
 		}else {	
 			keyword=null;
 			list=dao.search_product(keyword, category, null, startRow, endRow);
+			if(home==null) bestList=dao.bestProduct(keyword, category);
 			ArrayList<TagVo> tag = dao.get_tag(keyword, category, null);
 			ArrayList<ColorVo> color = dao.get_color();
 			req.setAttribute("tag", tag);
@@ -109,6 +121,7 @@ public class CategoryController extends HttpServlet{
 			req.setAttribute("color", color);
 			req.setAttribute("CATEGORY", category);
 			req.setAttribute("list", list);
+			req.setAttribute("bestList", bestList);
 		}
 	
 		int totalPage1=(int)Math.ceil(ccc/10.0);	// 전체페이지 갯수
@@ -123,7 +136,11 @@ public class CategoryController extends HttpServlet{
 		req.setAttribute("ccc", ccc);
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("main", "/search/category.jsp");
+		if(home==null) {
+			req.setAttribute("main", "/search/category.jsp");
+		}else {
+			req.setAttribute("main", "/home.jsp");
+		}
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

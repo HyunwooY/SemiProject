@@ -80,8 +80,6 @@ public class SearchDetailController extends HttpServlet{
 			req.setAttribute("img", img);
 			req.setAttribute("pi_num", pi_num);
 			
-			
-			
 			req.setAttribute("main","/search/searchDetail.jsp");
 			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
 		}
