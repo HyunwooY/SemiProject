@@ -82,7 +82,7 @@
 </ul>
 </div>
 <div id="header">
-<a href="${cp }/layout"><span id="mainTitle">CHANELOPER</span></a>
+<a href="${cp }/layout.jsp"><span id="mainTitle">CHANELOPER</span></a>
 <ul id="menu">
 	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
 	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>
