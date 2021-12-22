@@ -24,8 +24,8 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-			<span class="l">입금전 ${requestScope.bPayCom }</span>
-			<span class="l">입금완료 ${requestScope.aPayCom }</span>
+			<span class="l">결제전 ${requestScope.bPayCom }</span>
+			<span class="l">결제완료 ${requestScope.aPayCom }</span>
 			<span class="l">배송준비중 ${requestScope.preparingP }</span>
 			<span class="l">배송중 ${requestScope.beingDelivery }</span>
 			<span class="l">배송완료 ${requestScope.compDelivery }</span>
