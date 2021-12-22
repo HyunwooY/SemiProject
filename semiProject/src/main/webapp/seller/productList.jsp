@@ -34,7 +34,7 @@
 		<td>${productList.pi_price }원</td>
 		<td>${productList.pi_date }</td>
 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a></td>
-		<td><a href="${pageContext.request.contextPath }/seller/productDelete?pi_num=${productList.pi_num}">수정</a></td>
+		<td><a href="${pageContext.request.contextPath }/seller/productDelete?pi_num=${productList.pi_num}">삭제</a></td>
 	</tr>
 	</c:forEach>
 
