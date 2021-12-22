@@ -16,17 +16,17 @@ import chaneloper.vo.ProductVo;
 public class SellerProductListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute(", resp);
+		req.setCharacterEncoding("UTF-8");
+		String si_id = (String)req.getSession().getAttribute("id");
+		System.out.println(si_id);
+		SellerDao dao = SellerDao.getInstance();
+		ArrayList<ProductVo> productList = dao.productList(si_id);
+		req.setAttribute("productList", productList);
+		req.setAttribute("main", "/seller/productList.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		req.setCharacterEncoding("UTF-8");
-//		String si_id = (String)req.getSession().getAttribute("id");
-//		System.out.println(si_id);
-//		SellerDao dao = SellerDao.getInstance();
-//		ArrayList<ProductVo> productList = dao.productList(si_id);
-//		req.setAttribute("productList", productList);
-//		req.setAttribute("main", "/seller/sellerpage.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		
 	}
 }
