@@ -79,7 +79,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 </ul>
 </div>
 <div id="header">
-<a href=""><h1>CHANELOPER</h1></a>
+<h1>CHANELOPER</h1>
 <ul id="menu">
 	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
 	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>
