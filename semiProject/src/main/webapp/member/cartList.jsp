@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
 
-</script>
 <style>
 #cartlist{position:relative;top:50px;left:100px;width:70%;
 		height:1000px;margin:0px;padding:0px;text-align:left;margin:auto;
@@ -19,14 +17,26 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 .up{margin:0px;margin-bottom:2px}
 .up img{width:20px;height:20px}
 .down img{width:20px;height:20px;position:relative;left:}
+#cartlist ul{display:inline-block;list-style:none}
+.chips{width:15px;height:15px;border:0.5px solid #ddd;position:relative;top:5px}
+#gobuybtn{position:relative;top:20px;height:30px;font-size:1.005em;text-align:center}
+
 
 </style>
+<script>
+	var param="";
+	var checkcount=0;
+	function checked(pd_num,count){
+		checkcount++;
+		param+="&pd_num"+checkcount+"="+pd_num+"&count="+checkcount+"="+count;
+	}
+	function gobuy(){
+		console.log(param);
+	}
+</script>
 <div id="cartlist">
-
+	<form method="post" action="${pageContext.request.contextPath}/member/cartlist">
 	<table>
-		<c:forEach var="so" items="${Cookielist }">
-			<c:if test="${so.name !='JSESSIONID'}">${so.value }</c:if>
-		</c:forEach>
 		<c:forEach var="vo" items="${cartlist}">
 			<c:if test="${vo.si_name!=siname}">
 				<c:set var="siname" value="${vo.si_name }"/>
@@ -34,28 +44,30 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 					<th colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
 				</tr>
 				<tr>
+					<th width="30px"></th>
 					<th width="140px">사진</th>
 					<th width="250px">상품명</th>
 					<th width="100px">색상</th>
 					<th width="50px">사이즈</th>
 					<th width="100px">구매수량</th>
-					<th width="160px">가격</th>
+					<th width="130px">가격</th>
 				</tr>
 			</c:if>
 				<tr>
+					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
-					<td>${vo.pd_color }</td>
+					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
 					<td>${vo.pd_size }</td>		
 					<td>
 						<div class="count">${vo.purchase_count}</div>
 						<div class="up">
-							<a href="">
+							<a href="${pageContext.request.contextPath}/cart/count?what=up&pd_num=${vo.pd_num}">
 								<img src="${pageContext.request.contextPath}/images/up.png">
 							</a>
 						</div>
 						<div class="down">
-							<a href="">
+							<a href="${pageContext.request.contextPath}/cart/count?what=down&pd_num=${vo.pd_num}">
 								<img src="${pageContext.request.contextPath}/images/down.png">
 							</a>
 						</div>
@@ -64,4 +76,14 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 				</tr>
 		</c:forEach>
 	</table>
+	
+	<div id="gobuy">
+		<input type="submit" value="선택상품 구매하기	" id="gobuybtn">
+	</div>
+	</form>
 </div>
+
+
+
+
+

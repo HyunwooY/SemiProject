@@ -194,25 +194,23 @@ public class MemberDetailDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
-	public ArrayList<OrderHistoryVo> showOrder(String id,Date start,Date end) {
+	public ArrayList<OrderHistoryVo> showOrder(int ph_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			ps=con.prepareStatement("select ph.ph_num ph_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price "
-					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
-					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? "
-					+ "and ph_regdate>=? and ph_regdate<=? and "
+			ps=con.prepareStatement("select ph.ph_num ph_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price, pp_title "
+					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi, product_photo pp "
+					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and pp.pi_num=pi.pi_num "
+					+ "and ph.ph_num=? and"
 					+ "(ph_state='결제전'or ph_state='결제완료' or ph_state='상품준비중' or ph_state='배송중' or ph_state='배송완료')");
-			ps.setString(1, id);
-			ps.setDate(2, start);
-			ps.setDate(3, end);
+			ps.setInt(1, ph_num);
 			rs=ps.executeQuery();
 			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
 			while(rs.next()) {
-				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs.getString("ph_type"), rs.getString("ph_state"), 
-						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0);
+				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), null, rs.getString("ph_type"), rs.getString("ph_state"), 
+						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,rs.getString("pp_title"));
 				list.add(vo);
 			}
 			return list;
@@ -221,27 +219,42 @@ public class MemberDetailDao {
 			return null;
 		}
 	}
-	public ArrayList<OrderHistoryVo> getPhcount(String id,Date start,Date end) {
+	public ArrayList<OrderHistoryVo> getPhlist(String id,Date start,Date end) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		PreparedStatement ps1 = null;
+		ResultSet rs1 = null;
 		try {
 			con = JDBC.getCon();
-			ps=con.prepareStatement("select ph_num, count(ph_num) count, sum(p_count*pi_price) priceall "
-					+ "from (select ph.ph_num ph_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price "
-					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
-					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? "
+			ps=con.prepareStatement("select ph_regdate,ph_num,si_id, ph_state, count(ph_num) count, sum(p_count*pi_price) priceall "
+					+ "from (select ph.ph_num ph_num,pi.si_id si_id, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price "
+					+ "from purchase_history ph, packaging p,product_detail pd ,product_infomation pi,seller_infomation si "
+					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and ph.mi_id=? and si.si_id=pi.si_id "
 					+ "and ph_regdate>=? and ph_regdate<=? and "
-					+ "(ph_state='결제전'or ph_state='결제완료' or ph_state='상품준비중' or ph_state='배송중' or ph_state='배송완료')) group by ph_num");
+					+ "(ph_state='결제전'or ph_state='결제완료' or ph_state='상품준비중' or ph_state='배송중' or ph_state='배송완료')) "
+					+ "group by ph_regdate, ph_num,si_id,ph_state "
+					+ "order by ph_regdate desc");
 			ps.setString(1, id);
 			ps.setDate(2, start);
 			ps.setDate(3, end);
 			rs=ps.executeQuery();
 			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
 			while(rs.next()) {
-				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, null, null, null, null,
-						0, 0, rs.getInt("count"), rs.getInt("priceall"));
-				list.add(vo);
+			ps1=con.prepareStatement("select ph.ph_num ph_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price "
+					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi "
+					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num "
+					+ "and ph_regdate>=? and ph_regdate<=? and ph.ph_num=? and"
+					+ "(ph_state='결제전'or ph_state='결제완료' or ph_state='상품준비중' or ph_state='배송중' or ph_state='배송완료')");
+			
+			ps1.setDate(1, start);
+			ps1.setDate(2, end);
+			ps1.setInt(3, rs.getInt("ph_num"));
+			rs1=ps1.executeQuery();
+			rs1.next();
+			OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs1.getString("ph_type"), rs.getString("ph_state"), 
+					rs.getDate("ph_regdate"), rs1.getString("pi_name"), 0, 0, rs.getInt("count"), rs.getInt("priceall"),null);
+			list.add(vo);
 			}
 			return list;
 		}catch(SQLException se) {
@@ -267,7 +280,7 @@ public class MemberDetailDao {
 			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
 			while(rs.next()) {
 				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs.getString("ph_type"), rs.getString("ph_state"), 
-						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0);
+						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,null);
 				list.add(vo);
 			}
 			return list;

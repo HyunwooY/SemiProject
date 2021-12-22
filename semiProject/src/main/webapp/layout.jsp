@@ -19,9 +19,17 @@
 		var keyword=document.getElementById("keyword");
 		hideText();
 		if(${requestScope.lcode==false}){
-			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
+			alert('${errMsg}')
 		}
+<<<<<<< HEAD
 //		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+=======
+<<<<<<< HEAD
+		
+=======
+// 		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		
 	}
 	function showText() {
@@ -94,7 +102,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 	<input type="text" id="keyword" onkeypress="search(event)" onmouseout="delayText()">
 </div>
 <div id="main">
-	<jsp:include page="${requestScope.main }"/> 
+	<jsp:include page="${requestScope.main }"/> 	
 </div>
 <div id="footer">
 </div>

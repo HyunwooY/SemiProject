@@ -74,7 +74,8 @@ public class PurchaseDao {
 			rs=ps.executeQuery();
 			if(rs.next()) {
 				return new ShowPurchaseListVo(rs.getString("pp_title"), rs.getString("pi_name"),
-						rs.getString("pd_size"), rs.getString("pd_color"), rs.getInt("pi_price"), rs.getString("si_name"),count,pd_num);
+						rs.getString("pd_size"), rs.getString("pd_color"), rs.getInt("pi_price"), rs.getString("si_name"),
+						count,pd_num);
 			}
 			return null;
 		}catch(SQLException se) {

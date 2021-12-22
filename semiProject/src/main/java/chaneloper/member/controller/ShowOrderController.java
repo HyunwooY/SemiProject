@@ -43,10 +43,8 @@ public class ShowOrderController extends HttpServlet {
 			req.setAttribute("end", sEnd);
 		}
 		MemberDetailDao dao=MemberDetailDao.getInstance();
-		ArrayList<OrderHistoryVo> list=dao.showOrder(id,start,end);
-		ArrayList<OrderHistoryVo> phList=dao.getPhcount(id, start, end);
+		ArrayList<OrderHistoryVo> phList=dao.getPhlist(id, start, end);
 		req.setAttribute("phList", phList);
-		req.setAttribute("list", list);
 		req.setAttribute("start", start);
 		req.setAttribute("detailmain", "/member/showOrder.jsp");
 		req.setAttribute("detailtitle", "나의 주문내역");
