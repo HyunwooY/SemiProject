@@ -40,7 +40,6 @@ public class CartListController extends HttpServlet{
 //			}
 //			
 //		}
-		
 		for(int i=0;;i++) {
 			if(c.length==0) {
 				System.out.println("정보없음");
@@ -48,7 +47,6 @@ public class CartListController extends HttpServlet{
 			}
 			System.out.println(i);
 			if(i>=c.length) i=0;
-			
 			if(c[i].getName().equals("JSESSIONID")) {
 			}else {
 				if(c[i].getName().startsWith("name"+loopcount)) {
@@ -79,9 +77,7 @@ public class CartListController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		String[] param=req.getParameterValues("product");
-		req.setAttribute("product", param);
+		
 	}
 }
 

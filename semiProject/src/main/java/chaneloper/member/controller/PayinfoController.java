@@ -26,7 +26,8 @@ public class PayinfoController extends HttpServlet {
 		String radio=(String)req.getSession().getAttribute("radio");
 		req.getSession().invalidate();
 		req.getSession().setAttribute("id", id);
-		req.getSession().setAttribute("radio",radio);				
+		req.getSession().setAttribute("radio",radio);	
+		String[] product=req.getParameterValues("product");
 		Search_ResultDao dao = new Search_ResultDao();
 		String param="";
 		ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
@@ -44,12 +45,16 @@ public class PayinfoController extends HttpServlet {
                 ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]),pi_num);
                 purchaseList.add(svo);
             }
-        }else {
-            int count=Integer.parseInt(req.getParameter("count"));
-            int pd_num =Integer.parseInt(req.getParameter("pd_num")) ;
-            PurchaseDao pdao=PurchaseDao.getInstance();
-            ShowPurchaseListVo svo=pdao.selectProduct(pd_num,count,-1);
-            purchaseList.add(svo);
+        }else if(product!=null){
+    		for(String s:product) {
+    			String[] purchase=s.split(",");
+    			int pd_num=Integer.parseInt(purchase[0]);
+    			int ph_count=Integer.parseInt(purchase[1]);
+    			int pi_num=Integer.parseInt(purchase[2]);
+    			PurchaseDao pdao=PurchaseDao.getInstance();
+                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,ph_count,pi_num);
+                purchaseList.add(svo);
+    		}    
         }
 		MemberDao mdao=MemberDao.getInstance();
 		MemberVo membervo=mdao.select(id);

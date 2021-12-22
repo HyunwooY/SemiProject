@@ -15,6 +15,8 @@
 		addrList.style.display="none"
 		select="input";
 		console.log(select);
+		let chooseaddr=document.getElementById("chooseaddr");
+		chooseaddr.selected=true;
 	}
 	function changeDefault(){
 		let addr=document.getElementsByClassName("input")[0]
@@ -27,6 +29,8 @@
 		addrList.style.display="none"
 		select="default";
 		console.log(select);
+		let chooseaddr=document.getElementById("chooseaddr");
+		chooseaddr.selected=true;
 	}
 	function selectList(){
 		let addrList=document.getElementById("addrList");
@@ -161,12 +165,14 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 #purchaseType input{margin-right:25px;margin-bottom:10px}
 #purchaseType{position:relative;font-size:1.1em;}
 #purchasebtn{widht:100px;height:30px;font-size:1.05em}
+#name,#addr,#first,#mid,#last{height:25px}
+#input,#myAddr,#changeAddr,#idinfo th,td{width:}
 </style>    
 <div id="purchase">
 	<h2>주문결제</h2>
 	<div id="buyinfo" class="div">
 		<h3>구매자정보</h3>
-		<table>
+		<table id="idinfo">
 			<tr>
 				<th width="200px">이름</th>
 				<td>${vo.name }</td>
@@ -188,6 +194,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<label for="selectList">배송지선택</label>
 		<input type="radio" name="selectAddr" id="selectList" onclick="selectList()">
 		<select name="addrList" id="addrList" onchange="changeAddr(this.options[this.selectedIndex].text)">
+			<option selected id="chooseaddr">배송지선택</option>
 			<c:forEach var="addr" items="${addr }">
 				<option value="${addr.nickname }">${addr.nickname }</option>
 			</c:forEach>
@@ -197,7 +204,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table class="input">
 			<tr>
 				<th width="200px">이름</th>
-				<td><input type="text" name="name" id="name"></td>
+				<td width="600px"><input type="text" name="name" id="name"></td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -218,7 +225,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table id="myAddr">
 			<tr>
 				<th width="200px">이름</th>
-				<td>${avo.name }</td>
+				<td width="600px">${avo.name }</td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -232,7 +239,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table id="changeAddr">
 			<tr>
 				<th width="200px">이름</th>
-				<td class="selected"></td>
+				<td class="selected" width="600px"></td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -251,7 +258,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 				<c:if test="${vo.si_name!=siname}">
 					<c:set var="siname" value="${vo.si_name }"/>
 					<tr>
-						<th colspan="4">${siname }</th>
+						<th colspan="6">${siname }</th>
 					</tr>
 					<tr>
 						<th>사진</th>
