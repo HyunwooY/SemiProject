@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.Inquiry_historyDao;
 import chaneloper.vo.Inquiry_historyVo;
-@WebServlet("/mypage/insertinquire")
+@WebServlet("/mypage/insertinquiry")
 public class InquireInsertController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath() + "/member/memberDetail");
+		req.setAttribute("detailmain","/member/inquiryInsert.jsp");
+		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +32,7 @@ public class InquireInsertController extends HttpServlet{
 		}else {
 			req.setAttribute("code", "fail");
 		}
-		req.setAttribute("detailmain","/member/inquiryinsert.jsp");
+		req.setAttribute("detailmain","/member/inquiryInsert.jsp");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }

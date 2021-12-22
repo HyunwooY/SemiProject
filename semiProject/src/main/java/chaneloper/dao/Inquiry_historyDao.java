@@ -21,13 +21,12 @@ public class Inquiry_historyDao {
 		PreparedStatement pstmt = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO INQUIRY_HISTORY VALUES(INQURI_SEQ.NEXTVAL, ?, ?, ?, ?, null)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getMi_id());
 			pstmt.setInt(2, vo.getPi_num());
 			pstmt.setString(3, vo.getIh_title());
 			pstmt.setString(4, vo.getIh_question());
-			pstmt.setString(5, vo.getIh_answer());
 			
 			return pstmt.executeUpdate();
 		} catch(SQLException se) {
