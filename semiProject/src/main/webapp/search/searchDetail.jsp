@@ -8,7 +8,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-#maindiv {position: relative; padding:50px}
+#maindiv {position: relative; padding:50px;}
 #mainimg{position: relative; width:400px; height:500px; border:1px solid red; float:left;margin-top:21px ; width: 40%;margin-left:50px; margin-right:50px;margin-bottom:80px;}
 #maintable{position: relative; float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
 #pubutton{position: relative; float: right; width: 40%;text-align: left; margin-right:50px;}
@@ -624,7 +624,6 @@
 				<input type="hidden" value="0" name="adbt">
 				<input type="file" name="file0"><br>
 				<input type="button" value="이미지추가" onclick="addbutton()"  name="adimg"><br>
-				
 				<input type="submit" value="등록">
 			</form>
 		</div>
