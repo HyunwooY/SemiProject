@@ -1,14 +1,12 @@
 package chaneloper.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import chaneloper.vo.Inquiry_historyVo;
-import chaneloper.vo.ProductVo;
 import db.JDBC;
 
 public class Inquiry_historyDao {
@@ -40,18 +38,57 @@ public class Inquiry_historyDao {
 		}
 	}
 	
-	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow){
+//	public Inquiry_historyVo select(int ih_num) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql ="select * from Inquiry_history where ih_num=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, ih_num);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				String mi_id = rs.getString("mi_id");
+//				int pi_num = rs.getInt("pi_num");
+//				String ih_title = rs.getString("ih_title");
+//				String ih_question = rs.getString("ih_question");
+//				String ih_answer = rs.getString("ih_answer");
+//				Inquiry_historyVo Inquiry_history = new Inquiry_historyVo(ih_num,mi_id,pi_num,ih_title,ih_question,ih_answer);
+//				return Inquiry_history;
+//			}
+//			return null;
+//		}catch(SQLException s) {
+//			s.printStackTrace();
+//			return null;
+//		}finally {
+//			JDBC.close(con, pstmt, rs);
+//		}
+//	}
+	
+	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = "";
 		try {
-			String sql = "select * from "
-					+ "("
-					+ "		select ih.*, rownum rnum from"
-					+ "	    ("
-					+ "        select * from inquiry_history order by ih_num desc"
-					+ "     ) ih"
-					+ ") where rnum>=? and rnum<=?";
+			if(field==null || field.equals("")) {
+				sql = "select * from "
+						+ "("
+						+ "		select ih.*, rownum rnum from"
+						+ "	    ("
+						+ "        select * from inquiry_history order by ih_num desc"
+						+ "     ) ih"
+						+ ") where rnum>=? and rnum<=?";
+			}else {
+				sql = "select * from "
+						+ "("
+						+ "		select ih.*, rownum rnum from"
+						+ "	    ("
+						+ "        select * from inquiry_history where " + field + " like '%" + keyword + "%'"
+						+ "     ) ih"
+						+ ") where rnum>=? and rnum<=?";
+			}
 			con = JDBC.getCon();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -66,9 +103,7 @@ public class Inquiry_historyDao {
 				String ih_question = rs.getString("ih_question");
 				String ih_answer = rs.getString("ih_answer");
 				Inquiry_historyVo vo = new Inquiry_historyVo(ih_num, mi_id, pi_num, ih_title, ih_question, ih_answer);
-				System.out.println(vo);
 				list.add(vo);
-				System.out.println(list);
 			}
 			return list;
 		} catch(SQLException se) {
@@ -147,23 +182,47 @@ public class Inquiry_historyDao {
 		}
 	
 	// 전체 글의 개수
-	public int getCount() {
+	public int getCount(String field, String keyword) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
 			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history";
+			if(field!=null && !field.equals("")) {
+				sql += " where " + field + " like '%" + keyword + "%'";
+			}
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			rs.next();
-			int maxnum = rs.getInt("cnt");
-			return maxnum;
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return -1;
 		} catch(SQLException se) {
 			se.printStackTrace();
-			return -1;
+			return -1; 
 		} finally {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	//가장 큰 글번호
+		public int getMaxNum() {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history";
+			ResultSet rs = null;
+			try {
+				con = JDBC.getCon();
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				rs.next();
+				int maxnum = rs.getInt("cnt");
+				return maxnum;
+			}catch(SQLException s) {
+				s.printStackTrace();
+				return -1;
+			}finally {
+				JDBC.close(con, pstmt, rs);
+			}
+		}
 }

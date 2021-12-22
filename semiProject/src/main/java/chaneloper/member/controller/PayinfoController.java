@@ -30,7 +30,7 @@ public class PayinfoController extends HttpServlet {
 		Search_ResultDao dao = new Search_ResultDao();
 		String param="";
 		ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
-        if(req.getParameter("count")!=null && req.getParameter("pi_num")!=null&&(!req.getParameter("pi_num").equals(""))) {
+        if(req.getParameter("count")!=null && (req.getParameter("pi_num")!=null||(!req.getParameter("pi_num").equals("")))) {
             int count =Integer.parseInt(req.getParameter("count")) ;
             int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
             for(int i=1 ;i<=count; i++) {
@@ -41,14 +41,14 @@ public class PayinfoController extends HttpServlet {
                 param+="&name"+i+"="+pd;
                 System.out.println(pd_num);
                 PurchaseDao pdao=PurchaseDao.getInstance();
-                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]));
+                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]),pi_num);
                 purchaseList.add(svo);
             }
         }else {
             int count=Integer.parseInt(req.getParameter("count"));
             int pd_num =Integer.parseInt(req.getParameter("pd_num")) ;
             PurchaseDao pdao=PurchaseDao.getInstance();
-            ShowPurchaseListVo svo=pdao.selectProduct(pd_num,count);
+            ShowPurchaseListVo svo=pdao.selectProduct(pd_num,count,-1);
             purchaseList.add(svo);
         }
 		MemberDao mdao=MemberDao.getInstance();
