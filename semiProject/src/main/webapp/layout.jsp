@@ -69,7 +69,7 @@
 			<li><a href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
 			<c:choose>
 				<c:when test="${sessionScope.radio=='일반사용자' }">
-					<li><a href="${pageContext.request.contextPath }/member/memberDetail">마이페이지</a></li>
+					<li><a href="${pageContext.request.contextPath }/member/showorder">마이페이지</a></li>
 				</c:when>
 				<c:when test="${sessionScope.radio=='판매사업자' }">
 					<li><a href="${pageContext.request.contextPath }/seller/sellerpage">마이페이지</a></li>
