@@ -217,6 +217,18 @@ public class SellerDao {
 		}
 	}
 	
+	public int sellerDelete(int pi_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();
+			String sql = "DELTE FROM "
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}
+	}
+	
 }
 
 
