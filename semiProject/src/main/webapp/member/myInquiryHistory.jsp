@@ -29,9 +29,9 @@
 		<tr>
 			<td>${vo.ih_num }</td>
 			<td>${vo.pi_num }</td>
-			<td>${vo.mi_id }</td>
+			<td>${vo.mi_id }</td> 
 			<td>${vo.ih_title }</td>
-			<td><a href="${cp }/mypage/ihdetail?ih_num=${vo.ih.num }">${vo.ih_question }</a></td>
+			<td><a href="${cp }/mypage/ihdetail?ih_num=${vo.ih_num }">${vo.ih_question }</a></td>
 		</tr>
 	</c:forEach>
 </table>
@@ -62,9 +62,9 @@
 <div>
 	<form method="post" action="${cp }/mypage/history">
 		<select name="field">
-			<option value="writer" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
-			<option value="title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
-			<option value="content" <c:if test="${field=='ih_question ' }">selected</c:if>>내용</option>
+			<option value="mi_id" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
+			<option value="ih_title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
+			<option value="ih_question" <c:if test="${field=='ih_question ' }">selected</c:if>>내용</option>
 		</select>
 		<input type="text" name="keyword" value="${keyword }">
 		<input type="submit" value="검색">
