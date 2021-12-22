@@ -20,8 +20,8 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 #cartlist ul{display:inline-block;list-style:none}
 .chips{width:15px;height:15px;border:0.5px solid #ddd;position:relative;top:5px}
 #gobuybtn{position:relative;top:20px;height:30px;font-size:1.005em;text-align:center}
-
-
+.throw{padding-top:10px;font-size:1.1em}
+#isnull{padding-top:10px;padding-bottom:10px}
 </style>
 <script>
 	var param="";
@@ -35,13 +35,32 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 	}
 </script>
 <div id="cartlist">
+	<c:if test="${result0!=null }">
+		<table>
+			<tr>
+				<th class="throw" colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
+			</tr>
+			<tr>
+				<th width="30px"></th>
+				<th width="140px">사진</th>
+				<th width="250px">상품명</th>
+				<th width="100px">색상</th>
+				<th width="50px">사이즈</th>
+				<th width="100px">구매수량</th>
+				<th width="130px">가격</th>
+			</tr>
+			<tr>
+				<td colspan="7" id="isnull">${result0 }</td>
+			</tr>
+		</table>
+	</c:if>
 	<form method="post" action="${pageContext.request.contextPath}/member/cartlist">
 	<table>
-		<c:forEach var="vo" items="${cartlist}">
+		<c:forEach var="vo" items="${cartlist}" varStatus="status">
 			<c:if test="${vo.si_name!=siname}">
 				<c:set var="siname" value="${vo.si_name }"/>
 				<tr>
-					<th colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
+					<th class="throw" colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
 				</tr>
 				<tr>
 					<th width="30px"></th>
@@ -54,7 +73,7 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 				</tr>
 			</c:if>
 				<tr>
-					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count}"></td>
+					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count},${vo.pi_num}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
 					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
@@ -62,12 +81,12 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 					<td>
 						<div class="count">${vo.purchase_count}</div>
 						<div class="up">
-							<a href="${pageContext.request.contextPath}/cart/count?what=up&pd_num=${vo.pd_num}">
+							<a href="${pageContext.request.contextPath}/cart/count?how=up&cookie_num=${status.count}">
 								<img src="${pageContext.request.contextPath}/images/up.png">
 							</a>
 						</div>
 						<div class="down">
-							<a href="${pageContext.request.contextPath}/cart/count?what=down&pd_num=${vo.pd_num}">
+							<a href="${pageContext.request.contextPath}/cart/count?how=down&cookie_num=${status.count}">
 								<img src="${pageContext.request.contextPath}/images/down.png">
 							</a>
 						</div>
@@ -76,10 +95,11 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 				</tr>
 		</c:forEach>
 	</table>
-	
-	<div id="gobuy">
-		<input type="submit" value="선택상품 구매하기	" id="gobuybtn">
-	</div>
+	<c:if test="${result0==null }">
+		<div id="gobuy">
+			<input type="submit" value="선택상품 구매하기	" id="gobuybtn">
+		</div>
+	</c:if>
 	</form>
 </div>
 

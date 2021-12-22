@@ -21,7 +21,7 @@
 	<form method="post" action="${pageContext.request.contextPath }/member/login" id="form">
 	<label for="member">일반사용자</label>
 	<label for="seller">판매사업자</label><br>
-	<input type="radio" name="type" value="일반사용자" id="member" class="radio" onclick="mclick()">
+	<input type="radio" name="type" value="일반사용자" id="member" class="radio" onclick="mclick()" checked="checked">
 	<input type="radio" name="type" value="판매사업자" id="seller" class="radio" onclick="sclick()"><br>
 	
 		<label for="id" id="id">아이디</label>
