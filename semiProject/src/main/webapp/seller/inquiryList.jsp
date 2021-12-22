@@ -24,18 +24,12 @@
 			<tr>			
 			<td></td>			
 			<td></td>
-				<td>
-					-re:${vo.ih_answer }
-				</td>
 			</tr>	
 		</c:if>
 		<hr>
 	</c:forEach>
 	</tr>
 	</table>
-	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/inquiryListReplyForm.jsp">
-	<input type="submit" value="글쓰기">
-	</form>
 	
 	<!-- 페이징 처리 -->
   	<div>

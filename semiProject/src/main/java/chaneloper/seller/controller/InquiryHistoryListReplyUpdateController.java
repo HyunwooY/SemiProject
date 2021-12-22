@@ -24,7 +24,7 @@ public class InquiryHistoryListReplyUpdateController extends HttpServlet{
 		Inquiry_historyVo vo = new Inquiry_historyVo(0,null,0,null,null,ih_answer);
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
 		int n = dao.SellerInquiryUpdate(vo);
-		resp.sendRedirect(req.getContextPath() + "/seller/inquiry_history");
+		resp.sendRedirect(req.getContextPath() + "/seller/inquiryList");
 		
 	}
 

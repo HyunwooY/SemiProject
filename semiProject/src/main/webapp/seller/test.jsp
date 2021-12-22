@@ -19,15 +19,14 @@
 				<textarea rows="20" cols="60" id='content' name='content' disabled>${vo.ih_question}</textarea>
 			</td>
 		</tr>
-		<tr id="modBtn" style='display:none;'>
-	    	<td colspan="2"   align="center" >
-	    	<form action="${pageContext.request.contextPath }/inquiryList">
-	        <input type=button id='mod' value="수정 완료" >
-	        <a href="${pageContext.request.contextPath }/inquiryList">inquiryList.jsp</a>
-	        </form>
-         	<input type=button id='back' value="취소">
-	   		</td>   
- 		</tr>
-
-</body>
-</html>
+		</table>
+		<td>
+			-답변:${vo.ih_answer }
+		</td>
+	</form>
+	<form method="post" action="${pageContext.request.contextPath }/seller/inquiryListReplyForm.jsp">
+		<c:if test="${sessionScope.radio=='판매사업자' }">
+		<input type="submit" value="글쓰기">
+			</c:if>
+			</form>
+		
