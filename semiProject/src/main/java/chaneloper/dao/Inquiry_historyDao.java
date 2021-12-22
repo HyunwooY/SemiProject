@@ -172,7 +172,7 @@ public class Inquiry_historyDao {
 			return -1;
 		} catch(SQLException se) {
 			se.printStackTrace();
-			return -1;
+			return -1; 
 		} finally {
 			JDBC.close(con, pstmt, rs);
 		}

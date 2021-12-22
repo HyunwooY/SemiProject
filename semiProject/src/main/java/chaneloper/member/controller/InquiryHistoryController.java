@@ -21,7 +21,7 @@ public class InquiryHistoryController extends HttpServlet{
 		String keyword = req.getParameter("keyword");
 		
 		int pageNum = 1;
-		if(spageNum!=null) {
+		if(spageNum!=null) { 
 			pageNum = Integer.parseInt(spageNum);
 		}
 		
