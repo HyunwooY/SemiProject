@@ -2,19 +2,16 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">
-		
-		
+	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">	
 		상품명<br>
 		<input type="text" name="pi_name"><br>
 		가격<br>
 		<input type="text" name="pi_price"><br>	
 		분류<br>
-		<input type="text" name="pi_category"><br>	
-		태그명<br>
-		<input type="text" name="t_name" value="#"><br>
+		<input type="text" name="pi_category"><br>			
 		이미지<br>	
 		<input type="file" name="pp_title"><br><br><br>
 		
@@ -37,7 +34,7 @@
 		
 		
 		<label for="pd_color" id="red">
-			<input type="checkbox" name="pd_color" value="RED">레드		
+			<input type="checkbox" name="pd_color" value="RED">레드
 		</label>
 		<label>
 			<input type="checkbox" name="pd_color" value="YELLOW">옐로우
@@ -65,6 +62,10 @@
 <!-- 		</select><br><br><br> -->
 		재고수<br>
 		<input type="text" name="pd_count"><br><br>
+		
+
+		태그<br>
+		<input type="text" name="t_name" value="#" id="tp"><br>
 		
 		<input type="submit" value="등록" onclick="return checkBox()">
 		<input type="submit" value="취소" onclick="home()"><br>

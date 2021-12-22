@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#keyword {
-		width : 200px; height: 20px;
+		width : 160px; height: 20px;
 		position: absolute; 
-		left: 1100px;
+		left: 1200px;
 		top: 200px;
 	}
 </style>
@@ -19,16 +19,18 @@
 		var keyword=document.getElementById("keyword");
 		hideText();
 		if(${requestScope.lcode==false}){
-			alert('아이디 혹은 비밀번호가 맞지 않습니다.')
+			alert('${errMsg}')
 		}
 		
-		
 	}
-	function showText(e) {
+	function showText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
 	}
-	function hideText(e) {
+	function delayText() {
+		setTimeout(hideText,100);		
+	}
+	function hideText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="none";
 	}
@@ -79,19 +81,19 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 <div id="header">
 <h1>CHANELOPER</h1>
 <ul id="menu">
-	<li><a href="">상의</a></li>
-	<li><a href="">하의</a></li>
-	<li><a href="">원피스</a></li>
-	<li><a href="">아우터</a></li>
-	<li><a href="">악세서리</a></li>
+	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
+	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>
+	<li><a href="${cp }/search/category?CATEGORY=원피스&keyword=&sort=&pageNum=1">원피스</a></li>
+	<li><a href="${cp }/search/category?CATEGORY=아우터&keyword=&sort=&pageNum=1">아우터</a></li>
+	<li><a href="${cp }/search/category?CATEGORY=악세사리&keyword=&sort=&pageNum=1">악세서리</a></li>
 	<li><a href="${cp }/seller/notice" >공지사항 </a></li>
-	<li id="search"  onmouseover="showText(event)" onmouseout="hideText(event)">
+	<li id="search"  onmouseover="showText()" >
 		<a href="${cp }/search/search" >검색 </a></li>
 </ul>
-	<input type="text" id="keyword" onkeypress="search(event)">
+	<input type="text" id="keyword" onkeypress="search(event)" onmouseout="delayText()">
 </div>
 <div id="main">
-	<jsp:include page="${requestScope.main }"/> 
+	<jsp:include page="${requestScope.main }"/> 	
 </div>
 <div id="footer">
 </div>

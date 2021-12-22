@@ -24,22 +24,23 @@ public class SearchController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String keyword = req.getParameter("keyword");
 		req.setAttribute("keyword", keyword);
+		System.out.println(keyword);
 		String category =req.getParameter("CATEGORY");
 		req.setAttribute("category", category);
 		if(category!=null) {
-			if(category.equals("1")) {
+			if(category.equals("1") || category=="") {
 				category=null;
 			}
 		}
-		System.out.println(category);
+//		System.out.println(category);
 		String sort = req.getParameter("sort");
 		req.setAttribute("sort", sort);
 		if(sort!=null) {
-			if(sort.equals("1")) {
+			if(sort.equals("1") || sort=="") {
 				sort=null;
 			}
 		}
-		System.out.println(sort + "," + keyword);
+//		System.out.println(sort + "," + keyword);
 		
 		Search_ResultDao dao=new Search_ResultDao();
 		ArrayList<Search_ProductVo> list=null;

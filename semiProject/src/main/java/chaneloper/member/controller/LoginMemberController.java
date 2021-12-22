@@ -38,6 +38,8 @@ public class LoginMemberController extends HttpServlet {
 			}else {
 				req.setAttribute("lcode", false);
 				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); 
+				req.setAttribute("main", "/member/login.jsp");
+				req.getRequestDispatcher("/layout").forward(req, resp);
 			}
 			if(check.equals("go")) {
 				resp.sendRedirect(req.getContextPath()+"/member/buyProduct?count="+req.getSession().getAttribute("count")
