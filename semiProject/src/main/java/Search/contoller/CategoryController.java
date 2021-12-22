@@ -123,7 +123,7 @@ public class CategoryController extends HttpServlet{
 		req.setAttribute("ccc", ccc);
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("main", "/search/searchResult.jsp");
+		req.setAttribute("main", "/search/category.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
