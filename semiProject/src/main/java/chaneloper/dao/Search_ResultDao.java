@@ -18,7 +18,7 @@ import chaneloper.vo.TagVo;
 import db.JDBC;
 
 public class Search_ResultDao {
-	
+	// 검색값의 총 갯수 가져오기
 	public int search_productCount(String keyword, String CATEGORY, String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -191,17 +191,19 @@ public class Search_ResultDao {
 				sql = "SELECT a.PI_NUM , d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = ?";
+						+ " AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'";
+//						+ "AND a.PI_CATEGORY = ?";
 				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, CATEGORY);
+//				pstmt.setString(1, CATEGORY);
 			}else if(CATEGORY!=null&&sort!=null) {
 				sql = "SELECT a.PI_NUM ,d.t_name FROM PRODUCT_INFOMATION a "
 						+ "INNER JOIN TAG d ON(a.PI_NUM = d.PI_NUM) "
 						+ "WHERE a.PI_NAME like "+"\'%"+keyword+"%\' "
-						+ "AND a.PI_CATEGORY = ?"
+						+ " AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'"
+//						+ "AND a.PI_CATEGORY = ?"
 						+ " ORDER BY a." + sort;
 				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, CATEGORY);
+//				pstmt.setString(1, CATEGORY);
 			}
 			
 			rs = pstmt.executeQuery();
