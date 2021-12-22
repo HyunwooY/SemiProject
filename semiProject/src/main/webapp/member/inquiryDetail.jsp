@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 	h1{
 		position:relative;
@@ -31,7 +32,14 @@
 			<td>${vo.pi_num }</td>
 			<td>${vo.ih_title}</td>
 			<td>${vo.ih_question }</td>
-			<td>${vo.ih_answer }</td>
+			<c:choose>
+				<c:when test="${vo.ih_answer==null }">
+					<td>아직 답변이 없습니다.</td>
+				</c:when>
+				<c:otherwise>
+					<td>${vo.ih_answer }</td>
+				</c:otherwise>
+			</c:choose>
 		</tr>
 </table>
 <a href="${pageContext.request.contextPath }/mypage/history">전체 내역 보기</a>
