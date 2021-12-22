@@ -20,7 +20,6 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
-		
 		}
 //		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
 	}
@@ -80,7 +79,7 @@ h1{font-family: 'KoPub Batang', serif;font-size:2.5em}
 </ul>
 </div>
 <div id="header">
-<h1>CHANELOPER</h1>
+<a href=""><h1>CHANELOPER</h1></a>
 <ul id="menu">
 	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
 	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>
