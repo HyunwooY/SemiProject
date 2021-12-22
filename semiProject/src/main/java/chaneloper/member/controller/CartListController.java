@@ -63,7 +63,7 @@ public class CartListController extends HttpServlet{
 	                PurchaseDao pdao=PurchaseDao.getInstance();
 	                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]),pi_num);
 	                purchaseList.add(svo);
-	                ppp+="&pd_num"+loopcount+"="+pd_num+"&count="+Integer.parseInt(str[4]);
+	                ppp+=""+loopcount+"="+pd_num+""+Integer.parseInt(str[4]);
 	                loopcount++;
 				}
 			}

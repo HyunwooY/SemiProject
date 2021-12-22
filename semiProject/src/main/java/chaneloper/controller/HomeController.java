@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/search/category?CATEGORY=&keyword=&sort=pi_count&pageNum=1&home=a").forward(req, resp);
 	}
 }
  

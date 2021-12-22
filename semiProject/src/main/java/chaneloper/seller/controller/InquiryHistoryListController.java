@@ -47,6 +47,6 @@ public class InquiryHistoryListController extends HttpServlet{
 		req.setAttribute("detailtitle", "문의내역");
 		req.setAttribute("detailmain", "/seller/inquiryList.jsp");
 		req.setAttribute("main", "/seller/sellerpage.jsp");
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

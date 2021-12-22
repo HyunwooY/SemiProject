@@ -46,6 +46,14 @@
 			</tr>
 			<tr>
 				<th>
+					<label for="pi_num">상품번호</label>
+				</th>
+				<td>
+					<input type="text" name="pi_num" id="pi_num" class="iqyinput">
+				</td>
+			</tr>
+			<tr>
+				<th>
 					<label for="content">내용</label>
 				</th>
 				<td>
