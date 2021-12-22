@@ -10,54 +10,44 @@
 	margin: auto; display: table; 
 }
 .searchbox{ width:600px; height: 300px;}
-.searchResult{ width:600px; height: 80px; border: 1px solid #666; text-align: center;}
-.searchResult strong {font-size: 30px; font-weight: bold; padding: 5px 5px;}
-.searchResult .record {margin: 15px auto 10px; padding: 2px 0 2px 8px;}
-.searchProducts{ width: 1100px; height: 1000px; text-align: center; margin: auto;}
-.searchPaging{ width:600px; height: 100px;}
-.searchbox .items{
-	width:500px; height: 40px; margin-bottom: 10px;
-}
+.searchbox .items{width:500px; height: 40px; margin-bottom: 10px;}
 .searchbox #CATEGORY,#keyword1,#sort{
 	width: 410px; margin-bottom: 5px; 
 	border: 1px solid #ddd; height: 40px!important;
 }
+.searchResult{ width:600px; height: 80px; border: 1px solid #666; text-align: center;}
+.searchResult strong {font-size: 30px; font-weight: bold; padding: 5px 5px;}
+.searchResult .record {margin: 15px auto 10px; padding: 2px 0 2px 8px;}
+.searchProducts{ width: 1100px; height: 950px;}
+.searchPaging{ width:600px; height: 100px; color: #757575;font-style: italic}
+
 li {list-style: none; }
 ul.list{
     width: 200px;
     float : left;
     margin : 5px;
+    height: 470px;
 }
-li .chips{
+li .chips{					/*색상*/
 	float: left;
 	width: 15px;
     height: 15px;
     margin: 10px 4px 4px 0;
     border: 1px solid #ddd;
-    line-height: 0;
 }
 ul.list li.item{
-    display: inline-block;
+	display: table-cell, inline-block;
     margin: 20px 0px 70px;
-    width: 100%;
     border-right: 0px solid rgba(255,255,255,0);
     border-left: 0px solid rgba(255,255,255,0);
     box-sizing: border-box;
     color: #757575;
     vertical-align: top;
 }
-#searchBar {width: 175px; height: 50px; margin-top: 60px }
+#searchBar {width: 175px; height: 50px; margin-top: 45px }
 .color{width:100px; height: 10px; list-style: none; float:left; }
 .imgDiv{ width: 100%; height: 300px;}
-.imgDiv img{width:100%; height: 100%;
-}
-/*
-<!--img{
-  width: 250px;
-  height: 300px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}-->*/
+.imgDiv img{width:100%; height: 100%;}
 .price{margin-top: 4px; }
 .color li{
 	display:inline;
@@ -71,6 +61,9 @@ ul.list li.item{
 		if(category==1 && sort==1 && keyword==""){
 			alert("검색어를 입력해주세요");
 		}
+	}
+	function none() {
+		
 	}
 </script>
 <c:choose>
@@ -119,7 +112,7 @@ ul.list li.item{
 </div>
 
 <div class="searchProducts"> <!-- 조회된 제품들 10개씩-->
-	<c:forEach var="vo" items="${requestScope.list }" varStatus="status"> 
+	<c:forEach var="vo" items="${requestScope.list }"> 
 	<ul class="list">
 		<li class="item"> <!-- 상품 1 -->
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
@@ -140,7 +133,7 @@ ul.list li.item{
 							<c:if test="${t.pi_num==vo.pi_num }">
 								<c:choose >
 									<c:when test="${t.tag!=null}">
-										${t.tag }
+										[${t.tag }]
 									</c:when>
 									<c:otherwise>
 										<span></span>
@@ -171,8 +164,14 @@ ul.list li.item{
 	<c:if test="${startPage>10 }">
 		<a href="${cp }/search/search?pageNum=${startPage-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><<</a>
 	</c:if>
-	<a href="${cp }/search/search?pageNum=${pageNum-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><</a>
-	
+	<c:choose>
+		<c:when test="${pageNum!=1 }">
+			<a href="${cp }/search/search?pageNum=${pageNum-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><</a>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:none()"><</a>
+		</c:otherwise>
+	</c:choose>
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }"> <%-- 현재 페이지 링크색상 다르게 표시하기위해 --%>
