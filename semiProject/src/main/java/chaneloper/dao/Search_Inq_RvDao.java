@@ -228,4 +228,82 @@ public class Search_Inq_RvDao {
 			JDBC.close(con, pstmt, rs);
 		}		
 	}
+	
+	public int insertrv(int pi_num, String mi_id, String r_title, int r_hit, String r_content, String rp_title) {
+		Connection con=null;
+		PreparedStatement pstmt=null;		
+		PreparedStatement pstmt2=null;	
+		PreparedStatement pstmt3=null;
+		PreparedStatement pstmt4=null;
+		ResultSet rs = null;
+		int ph_num = 0;
+		int rnum = 0;
+		try {
+			con=JDBC.getCon();
+			String sql4 = "select ph_num from purchase_history where pi_num=? and mi_id=?";
+			pstmt4=con.prepareStatement(sql4);
+			pstmt4.setInt(1, pi_num);
+			pstmt4.setString(2, mi_id);
+			rs = pstmt4.executeQuery();
+			if(rs.next()) {
+				ph_num = rs.getInt("ph_num");
+				System.out.println(ph_num+"ph_num셀렉트");
+			}
+			
+			String sql ="INSERT INTO REVIEW VALUES (rv_seq.nextval, ?, ?, sysdate, ?, ?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, ph_num);
+			pstmt.setString(2, r_title);
+			pstmt.setInt(3, r_hit);
+			pstmt.setString(4, r_content);
+			int updatecheck= pstmt.executeUpdate();
+			if(updatecheck>0) {
+				System.out.println("리뷰테이블 저장완료");
+			}
+
+			String sql2 ="select * from REVIEW where ph_num=? and r_title=? and r_hit=? and r_content=?";
+			pstmt2=con.prepareStatement(sql2);
+			pstmt2.setInt(1, ph_num);
+			pstmt2.setString(2, r_title);
+			pstmt2.setInt(3, r_hit);
+			pstmt2.setString(4, r_content);
+			rs = pstmt2.executeQuery();
+			if(rs.next()) {
+				rnum = rs.getInt("r_num");
+				System.out.println(rnum+"rnum셀렉트");
+			}
+			String sql3 ="INSERT INTO REVIEW_PHOTO VALUES (?, ?)";
+			pstmt3=con.prepareStatement(sql3);
+			pstmt3.setString(1, rp_title);
+			pstmt3.setInt(2, rnum);
+			return pstmt3.executeUpdate();
+	
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
+	public int delrv(int r_num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		try {
+			con=JDBC.getCon();
+			String sql="delete review_photo where r_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, r_num);
+			pstmt.executeUpdate();
+			String sql2="delete review where r_num=?";
+			pstmt2=con.prepareStatement(sql2);
+			pstmt2.setInt(1, r_num);
+			return pstmt2.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
 }

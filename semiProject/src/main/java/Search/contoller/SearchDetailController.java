@@ -94,7 +94,7 @@ public class SearchDetailController extends HttpServlet{
 			req.setAttribute("pi_num", pi_num);
 			
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
+			req.getRequestDispatcher("../layout.jsp").forward(req, resp);
 		}
 		
 		
@@ -102,7 +102,7 @@ public class SearchDetailController extends HttpServlet{
 			String get_color = req.getParameter("get_color");
 			req.setAttribute("post_color", get_color);
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
+			req.getRequestDispatcher("../layout.jsp").forward(req, resp);
 		}
 
 	}
