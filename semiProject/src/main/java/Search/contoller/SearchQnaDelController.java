@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.AddInterestDao;
+import chaneloper.dao.InterestDao;
 import chaneloper.dao.Search_inqDao;
 @WebServlet("/search/inqdel")
 public class SearchQnaDelController extends HttpServlet{
