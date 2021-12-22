@@ -24,7 +24,9 @@ public class GetAddrController extends HttpServlet {
 		JSONObject json=new JSONObject();
 		resp.setContentType("text/plain;charset=utf-8");
 		PrintWriter pw=resp.getWriter();
-		json.put("avo", vo);
+		json.put("name", vo.getName());
+		json.put("addr", vo.getAddr());
+		json.put("phone", vo.getPhone());
 		pw.print(json);
 	}
 }

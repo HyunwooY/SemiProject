@@ -70,7 +70,7 @@ public class MemberDetailDao {
 		try {
 			con = JDBC.getCon();
 			String sql = "select count(ph_state) cstate from member_infomation m, purchase_history p "
-					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='상품준비중'";
+					+ "where m.mi_id=? and m.mi_id=p.mi_id and p.ph_state='배송준비중'";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -320,55 +320,19 @@ public class MemberDetailDao {
 			JDBC.close(con,ps,rs);
 		}
 	}
-	
-	public int purchaseCancel(int p_num, int ph_num) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		PreparedStatement ps1 = null;
-		PreparedStatement ps2 =null;
-		ResultSet rs=null;
-		try {
-			con = JDBC.getCon();
-			ps=con.prepareStatement("delete from packaging where p_num=?");
-			ps.setInt(1, p_num);
-			ps.executeUpdate();
-			ps1=con.prepareStatement("select * from packaging where ph_num=?");
-			ps1.setInt(1, ph_num);
-			rs=ps1.executeQuery();
-			if(!rs.next()) {
-				ps2=con.prepareStatement("delete from purchase_history where ph_num=?");
-				ps2.setInt(1, ph_num);
-				return ps2.executeUpdate();
-			}
-			
-			return -2;
-		}catch(SQLException se) {
-			se.printStackTrace();
-			return -1;
-		}finally {
-			JDBC.close(ps2);
-			JDBC.close(ps1);
-			JDBC.close(con,ps,rs);
-		}
-	}
 	public int purchaseCancelAll(int ph_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		PreparedStatement ps1 = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			ps=con.prepareStatement("delete from packaging where ph_num=?");
+			ps=con.prepareStatement("update purchase_history set ph_state='취소' where ph_num=?");
 			ps.setInt(1, ph_num);
-			ps.executeUpdate();
-			ps1=con.prepareStatement("delete from purchase_history where ph_num=?");
-			ps1.setInt(1, ph_num);
 			return ps.executeUpdate();
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;
 		}finally {
-			JDBC.close(ps1);
 			JDBC.close(con,ps,rs);
 		}
 	}
@@ -392,6 +356,16 @@ public class MemberDetailDao {
 			JDBC.close(con,ps,rs);
 		}
 	}
+//	public int getRefundChange() {
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		ResultSet rs=null;
+//		try {
+//			
+//		}catch() {
+//			
+//		}
+//	}
 }
 
 

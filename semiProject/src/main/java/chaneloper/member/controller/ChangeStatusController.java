@@ -23,20 +23,13 @@ public class ChangeStatusController extends HttpServlet {
 		if(sph_num!=null) ph_num=Integer.parseInt(sph_num);
 		MemberDetailDao dao=MemberDetailDao.getInstance();
 		if(status.equals("cancel")) {
-			System.out.println(dao.purchaseCancel(pd_num,ph_num));
-			resp.sendRedirect(req.getContextPath()+"/member/showorder");
-		}else if(status.equals("change")||status.equals("refund")) {
-			req.setAttribute("pd_num", pd_num);
-			req.setAttribute("detailtitle", "나의 주문내역");
-			req.setAttribute("detailmain", "/member/inquiryInsert.jsp");
-			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
-		}else if(status.equals("cancelAll")) {
 			dao.purchaseCancelAll(ph_num);
 			resp.sendRedirect(req.getContextPath()+"/member/showorder");
-		}else if(status.equals("changeAll")||status.equals("refundAll")) {
-			req.setAttribute("ph_num", ph_num);
-			req.setAttribute("detailtitle", "나의 주문내역");
+		}else if(status.equals("inquiry")) {
+			req.setAttribute("pd_num", pd_num);
+			req.setAttribute("detailtitle", "상품문의");
 			req.setAttribute("detailmain", "/member/inquiryInsert.jsp");
+			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 		}
 		
 	}
