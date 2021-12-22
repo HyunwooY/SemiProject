@@ -25,25 +25,35 @@ public class GoCartController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Search_ResultDao dao = new Search_ResultDao();
 		//String param="";
-		String lastCookieNum="0";
+		int lastCookieNum=0;
 		//ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
 		JSONObject json=new JSONObject();
+		resp.setContentType("text/plain;charset=utf-8");
+	    PrintWriter pw=resp.getWriter();
         if(req.getParameter("count")!=null) {
             int count =Integer.parseInt(req.getParameter("count")) ;
             String pi_num =req.getParameter("pi_num");
             System.out.println(pi_num);
             Cookie[] clist=req.getCookies();
+            if(clist.length==11) {
+            	json.put("errMsg", "장바구니는 최대 10개의 상품만 담을 수 있습니다.");
+            	pw.print(json);
+            	return;
+            }
             for(Cookie cl:clist) {
             	if(cl.getName().equals("JSESSIONID")) {	
             	}else {
             		URLDecoder.decode(cl.getValue(),"utf-8");
-	            	lastCookieNum=cl.getName().substring(4,cl.getName().indexOf("_"));
+	            	if(lastCookieNum<Integer.parseInt(cl.getName().substring(4,cl.getName().indexOf("_")))) {
+	            		lastCookieNum=Integer.parseInt(cl.getName().substring(4,cl.getName().indexOf("_")));
+	            	}
             	}
             }
-            for(int i=Integer.parseInt(lastCookieNum)+1;i<=Integer.parseInt(lastCookieNum)+count;i++) {
+            System.out.println(lastCookieNum);
+            for(int i=lastCookieNum+1;i<=lastCookieNum+count;i++) {
             	boolean check=false;
             	int minus=0;
-                String pd = req.getParameter("name"+(i-Integer.parseInt(lastCookieNum)));
+                String pd = req.getParameter("name"+(i-lastCookieNum));
                 for(Cookie cl:clist) {
                 	if(cl.getName().equals("JSESSIONID")) {
                 	}else {
@@ -56,7 +66,9 @@ public class GoCartController extends HttpServlet {
                 					+Integer.parseInt(Character.toString(pd.charAt(pd.length()-1)));
                 			String npd=pd.substring(0, pd.length()-1).concat(Integer.toString(a));
                 			System.out.println(npd);
+                			
                 			Cookie c=new Cookie(cl.getName(),URLEncoder.encode(npd,"utf-8"));
+                			c.setPath("/");
                 			c.setMaxAge(60*60*24*30); //30일 저장
                             resp.addCookie(c);  
                             check=true;
@@ -70,6 +82,7 @@ public class GoCartController extends HttpServlet {
                 }else {
                 	System.out.println(pd);
         			Cookie c=new Cookie(("name"+(i-minus)).concat("_"+pi_num),URLEncoder.encode(pd,"utf-8"));
+        			c.setPath("/");
         			c.setMaxAge(60*60*24*30); //30일 저장
                     resp.addCookie(c);  
                 }
@@ -80,8 +93,7 @@ public class GoCartController extends HttpServlet {
             System.out.println("연결오류");
             json.put("checkcart", false);
         }
-        resp.setContentType("text/plain;charset=utf-8");
-        PrintWriter pw=resp.getWriter();
+       
         pw.print(json);
 	}
 }

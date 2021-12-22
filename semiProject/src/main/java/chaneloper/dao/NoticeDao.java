@@ -22,10 +22,11 @@ public class NoticeDao {
 		
 		try {
 			con = JDBC.getCon();
-			String sql = "INSERT INTO NOTICE VALUESE(NOTICE_SEQ.NEXTVAL,?)";
+			String sql = "INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,?)";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getN_context());
-			
+			System.out.println("insert");
 			return pstmt.executeUpdate();
 		} catch(SQLException se) {
 			se.printStackTrace();

@@ -8,10 +8,6 @@
 <td><input type="text" size="5" value="관리자" disabled/></td>
 </tr>
 <tr>
-<td align="right">글제목:&nbsp;</td>
-<td><input type="text" size="67" maxlength="100" name="title"/></td>
-</tr>
-<tr>
 <td align="right" valign="top"><br>글내용:&nbsp;</td>
 <td><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea></td>
 </tr>

@@ -12,36 +12,80 @@ th, tr{padding-left:0px;padding-right:0px;}
 td{padding-bottom:0px}
 tr, td{border-bottom:1px solid black;border-collapse:collapse}
 .imgs{width:140px;height:190px;padding:0px}
-.count{position:relative;top:10px;left:20px;float:left;padding:0px;}
-.down{clear:both;padding:0px;position:relative;left:4px}
+.count{position:relative;top:10px;left:20px;float:left;padding:0px;width:20px}
+.down{clear:both;padding:0px;position:relative;left:1px}
 .up{margin:0px;margin-bottom:2px}
 .up img{width:20px;height:20px}
 .down img{width:20px;height:20px;position:relative;left:}
 #cartlist ul{display:inline-block;list-style:none}
 .chips{width:15px;height:15px;border:0.5px solid #ddd;position:relative;top:5px}
 #gobuybtn{position:relative;top:20px;height:30px;font-size:1.005em;text-align:center}
-
-
+.throw{padding-top:10px;font-size:1.1em}
+#isnull{padding-top:10px;padding-bottom:10px}
+#countControll{width:21px;height:50px;text-align:center;position:relative;float:left;left:40px}
 </style>
 <script>
 	var param="";
 	var checkcount=0;
-	function checked(pd_num,count){
-		checkcount++;
-		param+="&pd_num"+checkcount+"="+pd_num+"&count="+checkcount+"="+count;
-	}
 	function gobuy(){
 		console.log(param);
 	}
+	function countUp(cookieNum){
+		let xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				let count=document.getElementsByClassName("count")
+				count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)+1;
+				let data=xhr.responseText;
+				let json=JSON.parse(data);
+				
+			}
+		}
+		xhr.open('get','${pageContext.request.contextPath}/cart/count?how=up&cookie_num='+cookieNum,true);
+		xhr.send();
+	}
+	function countDown(cookieNum){
+		let xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				let count=document.getElementsByClassName("count")
+				count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)-1;
+				let data=xhr.responseText;
+				let json=JSON.parse(data);
+				
+			}
+		}
+		xhr.open('get','${pageContext.request.contextPath}/cart/count?how=down&cookie_num='+cookieNum,true);
+		xhr.send();
+	}
 </script>
 <div id="cartlist">
-	<form method="post" action="${pageContext.request.contextPath}/member/cartlist">
+	<c:if test="${result0!=null }">
+		<table>
+			<tr>
+				<th class="throw" colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
+			</tr>
+			<tr>
+				<th width="30px"></th>
+				<th width="140px">사진</th>
+				<th width="250px">상품명</th>
+				<th width="100px">색상</th>
+				<th width="50px">사이즈</th>
+				<th width="100px">구매수량</th>
+				<th width="130px">가격</th>
+			</tr>
+			<tr>
+				<td colspan="7" id="isnull">${result0 }</td>
+			</tr>
+		</table>
+	</c:if>
+	<form method="get" action="${pageContext.request.contextPath}/member/buyProduct">
 	<table>
-		<c:forEach var="vo" items="${cartlist}">
+		<c:forEach var="vo" items="${cartlist}" varStatus="status">
 			<c:if test="${vo.si_name!=siname}">
 				<c:set var="siname" value="${vo.si_name }"/>
 				<tr>
-					<th colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
+					<th class="throw" colspan="4" style="text-align:left;padding-bottom:10px;">${siname }</th>
 				</tr>
 				<tr>
 					<th width="30px"></th>
@@ -49,37 +93,40 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 					<th width="250px">상품명</th>
 					<th width="100px">색상</th>
 					<th width="50px">사이즈</th>
-					<th width="100px">구매수량</th>
+					<th width="100px">수량</th>
 					<th width="130px">가격</th>
 				</tr>
 			</c:if>
 				<tr>
-					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count}"></td>
+					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count},${vo.pi_num}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
 					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
 					<td>${vo.pd_size }</td>		
 					<td>
-						<div class="count">${vo.purchase_count}</div>
+					<div class="count">${vo.purchase_count}</div>
+					<div id="countControll">
 						<div class="up">
-							<a href="${pageContext.request.contextPath}/cart/count?what=up&pd_num=${vo.pd_num}">
+							<a href="javascript:countUp(${status.count})">
 								<img src="${pageContext.request.contextPath}/images/up.png">
 							</a>
 						</div>
 						<div class="down">
-							<a href="${pageContext.request.contextPath}/cart/count?what=down&pd_num=${vo.pd_num}">
-								<img src="${pageContext.request.contextPath}/images/down.png">
+							<a href="javascript:countDown(${status.count})">
+								<img src="${pageContext.request.contextPath}/images/down.png" >
 							</a>
 						</div>
+					</div>
 					</td>
 					<td>${vo.pi_price * vo.purchase_count}</td>
 				</tr>
 		</c:forEach>
 	</table>
-	
-	<div id="gobuy">
-		<input type="submit" value="선택상품 구매하기	" id="gobuybtn">
-	</div>
+	<c:if test="${result0==null }">
+		<div id="gobuy">
+			<input type="submit" value="선택상품 구매하기	" id="gobuybtn">
+		</div>
+	</c:if>
 	</form>
 </div>
 

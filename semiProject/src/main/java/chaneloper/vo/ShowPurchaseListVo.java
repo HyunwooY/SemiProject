@@ -9,9 +9,10 @@ public class ShowPurchaseListVo {
 	private String si_name;
 	private int purchase_count;
 	private int pd_num;
+	private int pi_num;
 	public ShowPurchaseListVo() {}
 	public ShowPurchaseListVo(String pp_title, String pi_name, String pd_size, String pd_color, int pi_price,
-			String si_name,int purchase_count,int pd_num) {
+			String si_name,int purchase_count,int pd_num, int pi_num) {
 		super();
 		this.pp_title = pp_title;
 		this.pi_name = pi_name;
@@ -21,6 +22,14 @@ public class ShowPurchaseListVo {
 		this.si_name = si_name;
 		this.purchase_count=purchase_count;
 		this.pd_num=pd_num;
+		this.pi_num=pi_num;
+	}
+	
+	public int getPi_num() {
+		return pi_num;
+	}
+	public void setPi_num(int pi_num) {
+		this.pi_num = pi_num;
 	}
 	public String getPp_title() {
 		return pp_title;

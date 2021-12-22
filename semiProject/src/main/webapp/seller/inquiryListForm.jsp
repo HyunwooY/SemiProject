@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <h1 style="text-align:center">문의내역작성</h1>
 <form name="notice" method="post" action="${contextPath }" enctype="multipart/form-data">
 <table align="center">
@@ -24,5 +23,4 @@
 </td>
 </tr>
 </table>
-</body>
-</html>
+</form>
