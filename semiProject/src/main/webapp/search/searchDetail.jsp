@@ -346,7 +346,104 @@
 
 <script type="text/javascript">
 	function inqck(e){
-		alert(e.target.parentElement.parentElement.parentElement.innerHTML);
+		let t_id = e.target.parentElement.parentElement.children[1].innerHTML
+		let t_title = e.target.innerHTML;
+		if(t_id=="${sessionScope.id}"){
+			let p1 = document.getElementById("p1");
+			let p2 = document.getElementById("p2");
+			let p3 = document.getElementById("p3");
+			let p3_a = document.getElementById("p3_a");
+			let p3_q = document.getElementById("p3_q");
+			let p3_t = document.getElementById("p3_t");
+			
+			let xhr = new XMLHttpRequest();
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					let xml=xhr.responseXML;
+					let ans=xml.getElementsByTagName("ans")[0].textContent;
+					let que=xml.getElementsByTagName("que")[0].textContent;
+					let tit=xml.getElementsByTagName("tit")[0].textContent;
+					p3_q.value = que;
+					p3_a.value = ans;
+					p3_t.value = tit;
+				}
+			}
+			xhr.open('get','${pageContext.request.contextPath}/search/inq?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}&title='+e.target.innerHTML,true);
+			xhr.send();
+			
+			p1.style.display="none";
+			p2.style.display="none";
+			p3.style.display="block";
+		}else{
+			alert("권한이 없습니다.");
+		}
+	}
+	
+	function c1(){
+		let p1 = document.getElementById("p1");
+		let p2 = document.getElementById("p2");
+		let p3 = document.getElementById("p3");
+		p1.style.display="block";
+		p2.style.display="block";
+		p3.style.display="none";
+	}
+	
+	function c2(){
+		let p1 = document.getElementById("p1");
+		let p2 = document.getElementById("p2");
+		let p3 = document.getElementById("p3");
+		p1.style.display="block";
+		p2.style.display="block";
+		p3.style.display="none";
+		let p3_t = document.getElementById("p3_t");
+		window.location.href="${pageContext.request.contextPath}/search/inqdel?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}&title="+p3_t.value;
+		
+	}
+	
+	function c3(){
+		let p1 = document.getElementById("p1");
+		let p2 = document.getElementById("p2");
+		let p3 = document.getElementById("p3");
+		p1.style.display="block";
+		p2.style.display="block";
+		p3.style.display="none";
+		let p3_t = document.getElementById("p3_t");
+		let p3_q = document.getElementById("p3_q");
+		window.location.href="${pageContext.request.contextPath}/search/inqalt?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}&title="+p3_t.value+"&qu="+p3_q.value;
+	}
+	
+	function c4(){
+		let p1 = document.getElementById("p1");
+		let p2 = document.getElementById("p2");
+		let p3 = document.getElementById("p3");
+		let c1 = document.getElementById("c1");
+		p1.style.display="none";
+		p2.style.display="none";
+		p3.style.display="block";
+		c1.style.display="none";
+		let p3_tr = document.getElementById("p3_tr");
+		p3_tr.style.display="none";
+
+		let p3_t = document.getElementById("p3_t");
+		let p3_q = document.getElementById("p3_q");
+		p3_t.value="";
+		p3_q.value="";
+		p3_t.readOnly=false;
+		let c5 = document.getElementById("c5");
+		c5.style.display="block";
+	}
+	
+	function c5(){
+		let p3_t = document.getElementById("p3_t");
+		let p3_q = document.getElementById("p3_q");
+		let p1 = document.getElementById("p1");
+		let p2 = document.getElementById("p2");
+		let p3 = document.getElementById("p3");
+		p1.style.display="block";
+		p2.style.display="block";
+		p3.style.display="none";
+		
+		window.location.href="${pageContext.request.contextPath}//search/inqins?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}&title="+p3_t.value+"&qu="+p3_q.value;
 	}
 
 </script>
@@ -354,53 +451,66 @@
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 
 
-<div>
+<div id="p1">
 	<table border="1" width="500">
 		<tr>
 			<th>글번호</th>
 			<th>작성자</th>
 			<th>제목</th>
-		</tr>
+		</tr >
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.ih_num }</td>
 					<td>${vo.mi_id }</td>
 					<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
 				</tr>
-				<tr style="display:;">
-					<td>문의</td>
-					<td>${vo.ih_question }</td>
-					<td>
-					<input type="button" value="삭제" onclick="">
-					<input type="button" value="수정" onclick="">
-					</td>
-				</tr>
-				<tr style="display:;">
-					<td>답변</td>
-					<td colspan=2>${vo.ih_answer }</td>
-				</tr>
-					
-
 			</c:forEach>
 	</table>
-	<a href="#">문의하기</a>
 </div>
 
-<div><!-- 페이징처리 -->
+<div id="p2"><!-- 페이징처리 -->
 	<c:forEach var="i" begin="${startPage }" end="${endPage}">
 		<c:choose>
 			<c:when test="${i==pageNum }">
-				<a href="${cp }/search/searchdetail?pageNum=${i}">
+				<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
 					<span style="color:red">${i }</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/search/searchdetail?pageNum=${i}">
+				<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
 					<span style="gray">${i }</span>
 				</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
+	<input type="button" value="문의하기" onclick="c4()">
+</div>
+
+<div id="p3" style="display:none">
+	<table>
+		<tr>
+			<td>제목</td>
+			<td><input id="p3_t" type="text" name="title" readonly></td>
+		</tr>
+		<tr>
+			<td>문의</td>
+			<td ><input id="p3_q" type="text" name="question"></td>
+		</tr>
+		<tr id="p3_tr">
+			<td>답변</td>
+			<td ><input id="p3_a" type="text" name="answer" readonly></td>
+		</tr>
+		<tr>
+			<td id="c1">
+				<input type="button" value="목록" onclick="c1()">
+				<input type="button" value="삭제" onclick="c2()">
+				<input type="button" value="수정" onclick="c3()">
+			</td>
+			<td id="c5" style="display:none">
+				<input type="button" value="등록" onclick="c5()">
+			</td>
+		</tr>
+	</table>
 </div>
 
 <!-- 이미지 -->
