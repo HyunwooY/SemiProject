@@ -356,16 +356,79 @@ public class MemberDetailDao {
 			JDBC.close(con,ps,rs);
 		}
 	}
-//	public int getRefundChange() {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs=null;
-//		try {
-//			
-//		}catch() {
-//			
-//		}
-//	}
+	public int getRefundChange(int ph_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con=JDBC.getCon();
+			ps=con.prepareStatement("update purchase_history set ph_state='문의' where ph_num=?");
+			ps.setInt(1, ph_num);
+			return ps.executeUpdate();
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,ps,null);
+		}
+	}
+	public int getPi_num(int pd_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con=JDBC.getCon();
+			ps=con.prepareStatement("select pi.pi_num from product_infomation pi,product_detail pd "
+									+ "where pi.pi_num=pd.pi_num and pi.pi_num=?");
+			ps.setInt(1, pd_num);
+			return ps.executeUpdate();
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,ps,null);
+		}
+	}
+	public int getPd_num(int ph_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			ps=con.prepareStatement("select pd_num from purchase_history ph, packaging p "
+					+ "where ph.ph_num=? and ph.ph_num=p.ph_num");
+			ps.setInt(1, ph_num);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("pd_num");
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,ps,rs);
+		}
+	}
+	public int getid_num(int pd_num) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBC.getCon();
+			ps=con.prepareStatement("select pi.pi_num from product_infomation pi,product_detail pd "
+					+ "where pi.pi_num=pd.pi_num and pi.pi_num=?");
+			ps.setInt(1, pd_num);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("pi_num");
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,ps,rs);
+		}
+	}
 }
 
 

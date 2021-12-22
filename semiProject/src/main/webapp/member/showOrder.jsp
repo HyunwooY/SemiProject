@@ -273,8 +273,8 @@ th, td{padding-top:5px;padding-bottom:5px}
 			
 		}
 	}
-	function pInquiry(pd_num){
-		location.href="${pageContext.request.contextPath }/member/change/status?status=inquiry&pd_num="+pd_num;
+	function pInquiry(ph_num){
+		location.href="${pageContext.request.contextPath }/member/change/status?status=inquiry&ph_num="+ph_num;
 	}
 </script>
 
