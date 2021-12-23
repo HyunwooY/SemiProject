@@ -2,10 +2,19 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	table{width:990px}
+	    table, th, td {
+    border: 1px solid #bcbcbc;
+  }
+  table {
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
-	<!-- <h1>문의 내역</h1> -->
+	<h1>문의 내역</h1>
+	<br>
 	<table>
 		<tr>
 			<th>문의번호</th>
