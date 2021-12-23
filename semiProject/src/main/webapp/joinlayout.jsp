@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+#main{padding-top: 80px;padding-bottom:80px}
 #join{
 	position:relative;
-	top:150px;
-	left:450px;
 	margin:auto;
 	color:white;
+	width:500px
 }
-#text{position:relative;top:-50px;}
-#join {text-align:left;}
+#join {height:auto;text-align:left}
+#text{position:relative;margin-bottom:20px}
 #join form .input{width:200px}
 #join form input,select{font-size:1.3em;margin:10px}
 .phone{width:150px}

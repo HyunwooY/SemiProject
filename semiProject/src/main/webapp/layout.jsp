@@ -18,7 +18,7 @@
 	#header #menu li{display:inline;position:relative;top:50px;font-size:1.2em;margin:40px}
 	#main{width:100%;overflow:hidden;background-color:#BDBDBD;text-align:center;} /* 혹시 text-align 주신분...?*/
 	#footer{width:100%;height:10%;background-color:gray}
-	#footer #foot{text-align:center;padding-top:10px;padding-bottom:10px}
+	#footer #foot{text-align:center;padding-top:50px;padding-bottom:50px}
 	#footer #foot h3{margin-bottom:10px}
 	#com1, #com2, #com3{margin-bottom:10px}
 	#keyword {

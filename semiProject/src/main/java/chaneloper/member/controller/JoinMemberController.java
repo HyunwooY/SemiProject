@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chaneloper.dao.MemberDao;
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.MemberVo;
 
 @WebServlet("/member/mjoin")
@@ -26,11 +27,12 @@ public class JoinMemberController extends HttpServlet {
 		String pwd=req.getParameter("pwd");
 		String email=req.getParameter("email");
 		String phone=req.getParameter("first")+"-"+req.getParameter("mid")+"-"+req.getParameter("back");
+		String addr=req.getParameter("addr");
 		MemberVo vo=new MemberVo(id, pwd, name, email, phone);
-		   
+		AddressVo avo=new AddressVo(0, id, name, "기본배송지", phone, addr);
 		MemberDao dao=MemberDao.getInstance();
-		int n=dao.insert(vo);
-		if(n>0) {
+		int n=dao.insert(vo)+dao.insertaddr(avo);
+		if(n>1) {
 			req.setAttribute("joincode", "success");
 			req.setAttribute("main", "result.jsp");
 		}else {

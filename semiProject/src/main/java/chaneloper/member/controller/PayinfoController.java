@@ -1,11 +1,14 @@
 package chaneloper.member.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +25,14 @@ public class PayinfoController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("gdg");
 		String id=(String)req.getSession().getAttribute("id");
 		String radio=(String)req.getSession().getAttribute("radio");
+		
 		req.getSession().invalidate();
 		req.getSession().setAttribute("id", id);
 		req.getSession().setAttribute("radio",radio);	
-		String[] product=req.getParameterValues("product");
+		
 		Search_ResultDao dao = new Search_ResultDao();
 		String param="";
 		ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
@@ -35,6 +40,7 @@ public class PayinfoController extends HttpServlet {
             int count =Integer.parseInt(req.getParameter("count")) ;
             int pi_num =Integer.parseInt(req.getParameter("pi_num")) ;
             for(int i=1 ;i<=count; i++) {
+            	System.out.println("야잉 개");
                 String pd = req.getParameter("name"+i);
                 System.out.println(pd);
                 String[] str = pd.split("\s+");
@@ -45,18 +51,33 @@ public class PayinfoController extends HttpServlet {
                 ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]),pi_num);
                 purchaseList.add(svo);
             }
-        }else if(product!=null){
-    		for(String s:product) {
-    			String[] purchase=s.split(",");
-    			int pd_num=Integer.parseInt(purchase[0]);
-    			int cookieNum=Integer.parseInt(purchase[1]);
-    			int pi_num=Integer.parseInt(purchase[2]);
-    			System.out.println(cookieNum);
-    			
-    			int ph_count=Integer.parseInt(req.getParameter("count"+cookieNum));
-    			PurchaseDao pdao=PurchaseDao.getInstance();
-                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,ph_count,pi_num);
-                purchaseList.add(svo);
+        }else{
+//				int ph_count=Integer.parseInt("count,,,"+scount[i]);
+//    			System.out.println(ph_count); //상품개수
+//    			PurchaseDao pdao=PurchaseDao.getInstance();
+//              ShowPurchaseListVo svo=pdao.selectProduct(pd_num,ph_count,pi_num);
+//              purchaseList.add(svo);
+        	String[] product=req.getParameterValues("product");
+    		for(String scookieNum:product) {
+    			int cookieNum=Integer.parseInt(scookieNum);
+    			Cookie[] c=req.getCookies();
+    			for(int i=1;i<=c.length;i++) {
+	    			if(c[i-1].getName().equals("JSESSIONID")) {
+	    			}else {
+	    				if(Integer.parseInt(c[i-1].getName().substring(4,c[i-1].getName().indexOf("_")))==cookieNum) {
+	    					int pi_num=Integer.parseInt(c[i-1].getName().substring(c[i-1].getName().indexOf("_")+1));
+	    					String pd=URLDecoder.decode(c[i-1].getValue(),"utf-8");
+	    					System.out.println(pd);
+	    					String[] str = pd.split("\s+");
+	    	                int pd_num = dao.get_pd_num(pi_num,str[1],str[2]);
+	    	                param+="&name"+(i-1)+"="+pd;
+	    	                System.out.println(pd_num);
+	    	                PurchaseDao pdao=PurchaseDao.getInstance();
+	    	                ShowPurchaseListVo svo=pdao.selectProduct(pd_num,Integer.parseInt(str[4]),pi_num);
+	    	                purchaseList.add(svo);
+	    				}
+	    			}
+    			}
     		}    
         }
 		MemberDao mdao=MemberDao.getInstance();

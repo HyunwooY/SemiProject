@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	#puchaseResult{width:80%;text-align:center;margin:auto;}
-	#thanksMsg{text-align:center;position:relative;top:200px}
-	#imgthanks{position:relative;text-align:center;width:300px;height:250px;left:33%}
+	#purchaseResult{width:80%;text-align:center;margin:auto;margin-bottom:50px}
+	#thanksMsg{text-align:center;position:relative;}
+	#imgthanks{position:relative;text-align:center;width:600px;height:auto;margin:auto}
+	#imgthanks img{margin:auto;}
 	#tomain{margin:auto;border-radius:20px;width:150px;height:30px;font-size:1.1em}
 </style>
 <div id="purchaseResult">
