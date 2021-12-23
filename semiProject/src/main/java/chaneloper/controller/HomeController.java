@@ -16,4 +16,3 @@ public class HomeController extends HttpServlet {
 		req.getRequestDispatcher("/search/category?CATEGORY=&keyword=&sort=pi_count&pageNum=1&home=a").forward(req, resp);
 	}
 }
- 
