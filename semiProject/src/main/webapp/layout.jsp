@@ -24,7 +24,7 @@
 	#keyword {
 		width : 160px; height: 20px;
 		position: absolute; 
-		left: 1200px;
+		left: 1100px;
 		top: 200px;
 	}
 </style>
