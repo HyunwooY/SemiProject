@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!-- <script type="text/javascript"> -->
-<!-- 	function modify(){ -->
-<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductUpdateForm"; --%>
-<!-- 	} -->
-<!-- 	function remove(){ -->
-<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductDelete"; --%>
-<!-- 	} -->
-<!-- </script> -->
+<style>
+  table {
+    width: 1000px;
+    height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
 
 <form method="post" action="${pageContext.request.contextPath }/seller/sellerProductListForm">
 <table border="1" width="1000">
@@ -35,7 +36,7 @@
 		<td>${productList.pd_color }</td>
 		<td>${productList.pi_category }</td>
 		<td>${productList.pd_count }</td>
-		<td>${productList.pi_price }원</td>
+		<td><fmt:formatNumber value="${productList.pi_price }"/>원</td>
 		<td>${productList.pi_date }</td>
 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a>
 		<td><a href="${pageContext.request.contextPath }/productDelete?pi_num=${productList.pi_num}">삭제</a>
@@ -43,28 +44,6 @@
 	</c:forEach>
 
 </table>
-
-
-
-
-	
-<%-- 		<c:forEach var="productList" items="${requestScope.productList }">	 --%>
-		
-<%-- 			<hr><img src="${pageContext.request.contextPath }/upload/${productList.pp_title }" alt="" width="100px" height="100px" >								 --%>
-<%-- 			<h3>${productList.pi_name }</h3> --%>
-<%-- 			<p>${productList.pi_num } --%>
-<%-- 			<p>${productList.pd_size } --%>
-<%-- 			<p>${productList.pd_color } --%>
-<%-- 			<p>${productList.pi_category } --%>
-<%-- 			<p>${productList.pd_count } --%>
-<%-- 			<p>${productList.pi_price }원 --%>
-<%-- 			<p>${productList.pi_date } --%>
-		
-<!-- 			<input type="button" class="btn btn-secondary" value="수정" onclick="modify()"> -->
-<!-- 			<input type="button" class="btn btn-secondary" value="삭제" onclick="remove()"> -->
-				
-<%-- 		</c:forEach> --%>
-		
 <div>
 	<c:if test="${requestScope.startPage>10 }">
 		<a href="${pageContext.request.contextPath }/seller/productList?pageNum=${requestScope.startPage-1}">[이전 페이지]</a>

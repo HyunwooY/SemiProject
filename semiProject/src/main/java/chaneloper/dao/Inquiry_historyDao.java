@@ -65,7 +65,7 @@ public class Inquiry_historyDao {
 //		}
 //	}
 	
-	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword){
+	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword, String id){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -76,7 +76,7 @@ public class Inquiry_historyDao {
 						+ "("
 						+ "		select ih.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from inquiry_history order by ih_num desc"
+						+ "        select * from inquiry_history where mi_id=? order by ih_num desc"
 						+ "     ) ih"
 						+ ") where rnum>=? and rnum<=?";
 			}else {
@@ -84,14 +84,16 @@ public class Inquiry_historyDao {
 						+ "("
 						+ "		select ih.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from inquiry_history where " + field + " like '%" + keyword + "%'"
+						+ "        select * from inquiry_history where mi_id=? and " + field + " like '%" + keyword + "%'"
 						+ "     ) ih"
 						+ ") where rnum>=? and rnum<=?";
 			}
 			con = JDBC.getCon();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rs = pstmt.executeQuery();
 			ArrayList<Inquiry_historyVo> list = new ArrayList<Inquiry_historyVo>();
 			while(rs.next()) {
@@ -202,17 +204,18 @@ public class Inquiry_historyDao {
 		}
 	
 	// 전체 글의 개수
-	public int getCount(String field, String keyword) {
+	public int getCount(String field, String keyword, String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history";
+			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history where mi_id=?";
 			if(field!=null && !field.equals("")) {
-				sql += " where " + field + " like '%" + keyword + "%'";
+				sql += " and " + field + " like '%" + keyword + "%'";
 			}
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt(1);

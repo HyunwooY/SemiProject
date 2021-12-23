@@ -20,7 +20,7 @@
 	<div id="membermenu">
 		<div id="order" class="menu">
 			<h4>ORDER</h4>
-			<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br>
+			<a href="${pageContext.request.contextPath }/seller/orderListAll">고객주문내역</a><br>
 		</div>
 		
 		<div id="modify" class="menu">
@@ -43,9 +43,9 @@
 			<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>	
 		</div>		
 	</div>
-	<div id="showtitle">
+	<!-- <div id="showtitle">
 		<span>${requestScope.detailtitle }</span>
-	</div>
+	</div> -->
 	<div id="show">
 		<jsp:include page="${requestScope.detailmain }"></jsp:include>
 	</div>		

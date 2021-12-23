@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <c:set var="keyword" value="${keyword }"></c:set>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
@@ -62,7 +63,7 @@ li .chips{					/*색상*/
 						<span>${vo.pi_name }</span>
 						</a>
 					</p>
-					<p class="price">${vo.pi_price }</p>
+					<p class="price"><fmt:formatNumber value="${vo.pi_price }" pattern="#,###"/>원</p>
 					<p class="tag">
 						<c:forEach var="t" items="${tag }" >
 							<c:if test="${t.pi_num==vo.pi_num }">

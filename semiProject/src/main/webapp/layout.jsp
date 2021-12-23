@@ -57,7 +57,7 @@
 			if(keyword==""){
 				alert('검색어를 입력해주세요');
 			}else {
-				window.location.href = '${pageContext.request.contextPath}/search/search?keyword='+e.target.value;
+				window.location.href = '${pageContext.request.contextPath}/search/search?CATEGORY=&keyword='+e.target.value;
 			}
 		}	
 	}
@@ -104,7 +104,7 @@
 	<li><a href="${cp }/search/category?CATEGORY=악세사리&keyword=&sort=&pageNum=1">악세서리</a></li>
 	<li><a href="${cp }/seller/notice" >공지사항 </a></li>
 	<li id="search"  onmouseover="showText()" >
-		<a href="${cp }/search/search" >검색 </a></li>
+		<a href="${cp }/search/search?CATEGORY=" >검색 </a></li>
 </ul>
 	<input type="text" id="keyword" onkeypress="search(event)" onmouseout="delayText()">
 </div>
@@ -116,7 +116,7 @@
 		<h3>CHANELOPER(주)</h3>
 		<p id="com1">서울특별시 종로구 율곡로10길 105 디아망 4F(봉익동 10-1 디아망 4F) TEL : 070-8240-3211~3 FAX : 02-777-5407</p>
 		<p id="com2">사업자등록번호 : 104-81-59383 통신판매업신고번호 : 중구 065325 중앙HTA㈜</p><br>
-		<p id="com3">COPYRIGHT(C) HTA CO., LTD. ALL RIGHTS RESERVED.</p>
+		<p id="com3">&copy;COPYRIGHT(C) HTA CO., LTD. ALL RIGHTS RESERVED.</p>
 	</div>
 </div>
 </div>

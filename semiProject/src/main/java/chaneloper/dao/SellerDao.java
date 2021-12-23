@@ -181,6 +181,7 @@ public class SellerDao {
 			JDBC.close(con,pstmt,null);
 		}
 	}
+	
 	//판매자 상품 리스트
 	public ArrayList<ProductVo> list(String si_id, int startRow, int endRow){
 		Connection con = null;
@@ -191,10 +192,12 @@ public class SellerDao {
 			con = JDBC.getCon();
 			String sql = "SELECT PI.PI_NAME, PI.PI_NUM, PP.PP_TITLE, PI.PI_DATE, ROWNUM  FROM PRODUCT_INFOMATION PI"
 					+ " INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
-					+ " WHERE ROWNUM>=? AND ROWNUM<=?";
-			pstmt = con.prepareStatement(sql);			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+					+ " INNER JOIN SELLER_INFOMATION SI ON PI.SI_ID = SI.SI_ID"
+					+ " WHERE SI.SI_ID = ? AND ROWNUM>=? AND ROWNUM<=?";
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setString(1, si_id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int pi_num = rs.getInt("pi_num");

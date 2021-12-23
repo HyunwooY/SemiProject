@@ -24,17 +24,17 @@ public class ProductDeleteController extends HttpServlet{
 		
 		ProductDao dao = ProductDao.getInstance();
 		SellerDao dao1 = SellerDao.getInstance();
-		ArrayList<ProductVo> productList = dao1.productList(si_id, 0, 0);
+		ArrayList<ProductVo> productList = dao1.productList(si_id, pi_num, 0, 0);
 		
 		int n= dao.productDelete(pi_num);
 		if(n>0) {
 			req.setAttribute("productcode", "success");
 			req.setAttribute("productList", productList);
-			req.setAttribute("main", "/seller/productList");
+			req.setAttribute("main", "/seller/productInfoList?pageNum=1");
 		}else {
 			req.setAttribute("productcode", "fail");
 			req.setAttribute("productList", productList);
-			req.setAttribute("main", "/seller/productList");
+			req.setAttribute("main", "/seller/productInfoList?pageNum=1");
 		}
 		
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);

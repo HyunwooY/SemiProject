@@ -8,7 +8,7 @@
 		}else if(${requestScope.code=='fail'}){
 			alert("문의 등록 실패");
 		}
-} 
+}        
 </script>
 <style>
 	#inquiryinsert{width: 1000px; margin: auto;}
@@ -18,7 +18,7 @@
 	.fbtn{position: relative; left: 120px; margin-top:20px; margin-right: 20px; width: 50px; height: 25px; border-radius: 10px;}
 </style>
 <div id="inquiryinsert">
-	<div id="inquiryform">
+	<div id="inquiryform"> 
 	<c:choose>
 	<c:when test="${pd_num==null }">
 		<form method="post" action="${pageContext.request.contextPath }/mypage/insertinquiry">
@@ -60,7 +60,7 @@
 						<label for="content">내용</label>
 					</th>
 					<td>
-						<textarea rows="5" cols="50" name="content"></textarea>
+						<textarea rows="5" cols="50" name="content" style="width: 400px; height: 200px;"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -112,7 +112,7 @@
 					<label for="content">내용</label>
 				</th>
 				<td>
-					<textarea rows="5" cols="50" name="content">주문번호:${ph_num }</textarea>
+					<textarea rows="5" cols="50" name="content" style="width: 400px; height: 200px;">주문번호:${ph_num }</textarea>
 				</td>
 			</tr>
 		</table>

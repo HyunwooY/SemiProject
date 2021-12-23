@@ -10,12 +10,40 @@
 		<input type="text" name="pi_name"><br>
 		가격<br>
 		<input type="text" name="pi_price"><br>	
-		분류<br>
-		<input type="text" name="pi_category"><br>			
+<!-- 		분류<br> -->
+<!-- 		<input type="text" name="pi_category"><br>			 -->		
 		이미지<br>	
 		<input type="file" name="pp_title"><br><br><br>
 		
+		
 		상세 정보<br>
+		<label>
+			<input type="checkbox" name="pi_category" value="상의" onclick='checkOnlyOne(this)'/>상의
+		</label>
+		<label>
+			<input type="checkbox" name="pi_category" value="하의" onclick='checkOnlyOne(this)'/>하의
+		</label>
+		<label>
+			<input type="checkbox" name="pi_category" value="원피스" onclick="checkOnlyOne(this)"/>원피스
+		</label>
+		<label>
+			<input type="checkbox" name="pi_category" value="아우터" onclick="checkOnlyOne(this)"/>아우터
+		</label>
+		<label>
+			<input type="checkbox" name="pi_category" value="악세서리" onclick="checkOnlyOne(this)"/>악세서리
+		</label>
+		<br>
+		
+		<script>
+			function checkOnlyOne(target){
+				document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+				
+				target.checked = true;
+			}
+		</script>
+		
+		
+		
 		<label>
 			<input type="checkbox" name="pd_size" value="S">S
 		</LABEL>
@@ -31,9 +59,9 @@
 		<label>
 			<input type="checkbox" name="pd_size" value="free">Free<br>
 		</label>
+		<br>
 		
-		
-		<label for="pd_color" id="red">
+		<label>
 			<input type="checkbox" name="pd_color" value="RED">레드
 		</label>
 		<label>
@@ -51,21 +79,13 @@
 		<label>
 			<input type="checkbox" name="pd_color" value="BLACK">블랙<br>
 		</label>		
-<!-- 		분류<br> -->
-<!-- 		<select> -->
-<!-- 			<option>상의</option> -->
-<!-- 			<option>하의</option> -->
-<!-- 			<option>원피스</option> -->
-<!-- 			<option>아우터</option> -->
-<!-- 			<option>악세서리</option> -->
-<!-- 			<option> -->
-<!-- 		</select><br><br><br> -->
+
 		재고수<br>
 		<input type="text" name="pd_count"><br><br>
 		
 
 		태그<br>
-		<input type="text" name="t_name" value="#" id="tp"><br>
+		<input type="text" name="t_name" value="#" id="tp"><br><br>
 		
 		<input type="submit" value="등록" onclick="return checkBox()">
 		<input type="submit" value="취소" onclick="cansel()"><br>

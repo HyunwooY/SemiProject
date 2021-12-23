@@ -16,6 +16,7 @@ public class InquiryHistoryController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		String id = (String)req.getSession().getAttribute("id");
 		String spageNum = req.getParameter("pageNum");
 		String field = req.getParameter("field");
 		String keyword = req.getParameter("keyword");
@@ -29,15 +30,15 @@ public class InquiryHistoryController extends HttpServlet{
 		int endRow = startRow+9;
 		
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
-		dao.list(startRow, endRow, field, keyword);
+		dao.list(startRow, endRow, field, keyword, id);
 		
-		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow, field, keyword);
-		int pageCount = (int)Math.ceil(dao.getCount(field, keyword)/10.0); 
+		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow, field, keyword, id);
+		int pageCount = (int)Math.ceil(dao.getCount(field, keyword, id)/10.0); 
 		int startPageNum = ((pageNum-1)/10*10)+1; 
 		int endPageNum = startPageNum+9;
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;
-		}
+		}     
 		req.setAttribute("list", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPage", startPageNum);

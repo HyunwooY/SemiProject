@@ -2,19 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
-	#addaddress{display:none; position:relative; left: 300px;}
-	#text{position:relative; left: 450px;}
-</style>
+	#addaddress{display:none; position:relative; left: 400px;}
+	#text{position:relative; left: 480px;}
+	#addaddress2{margin-top: 30px;}
+	#addaddrtable{position:relative; right: 180px;}
+	#addaddrtable tr{margin-top: 30px;}
+	.addaddrth{margin-right: 15px; margin-top: 10px;}
+	.addaddrtd{width: 380px; height: 30px; margin-bottom: 10px;}
+	.addrinputbtn{width: 50px; height: 30px; position: relative; left: 15px; margin-top: 20px; margin-right: 10px;}
+</style> 
 <script>
 	function showForm(n){
 		const addaddress = document.getElementById("addaddress");
 		const text = document.getElementById("text");
+		const showaddress = document.getElementById("showaddress");
 		if(n==1){
 			addaddress.style.display="block";
 			text.style.display="none";
+			showaddress.style.display="none";
 		}else{
 			addaddress.style.display="none";
 			text.style.display="block";
+			showaddress.style.display="block";
 		}
 	}
 	window.onload = function(){
@@ -49,16 +58,27 @@
 <div id="text"><a href="javascript:showForm(1)">배송지 등록하기</a></div><br>
 <div id="addaddress">
 	<h2>배송지 등록</h2>
-	<form method="post" action="${pageContext.request.contextPath }/member/insertaddr">
-		<label for="addrname">배송지명</label>
-		<input type="text" name="addrname" id="addrname"><br>
-		<label for="name">수령인</label>
-		<input type="text" name="name" id="name"><br>
-		<label for="phone">전화번호</label>
-		<input type="text" name="phone" id="phone"><br>
-		<label for="addr">주소</label>
-		<input type="text" name="addr" id="addr"><br>
-		<input type="submit" value="등록"> 
-		<input type="button" value="취소" onclick="showForm(2)"> 
-	</form>
+	<div id="addaddress2">
+		<form method="post" action="${pageContext.request.contextPath }/member/insertaddr">
+			<table id="addaddrtable">
+				<tr>
+					<th><label for="addrname" class="addaddrth">배송지명</label></th>
+					<td><input type="text" name="addrname" id="addrname" class="addaddrtd"></td>
+				</tr>
+				<tr>
+					<th><label for="name" class="addaddrth">수령인</label></th>
+					<td><input type="text" name="name" id="name" class="addaddrtd"></td>
+				</tr>
+				<tr>
+					<th><label for="phone" class="addaddrth">전화번호</label></th>
+					<td><input type="text" name="phone" id="phone" class="addaddrtd"></td>
+				</tr>
+				<tr>
+					<th><label for="addr" class="addaddrth">주소</label></th>
+					<td><input type="text" name="addr" id="addr" class="addaddrtd"></td>
+				</tr>
+			</table>
+			<input type="submit" value="등록" class="addrinputbtn"> <input type="button" value="취소" onclick="showForm(2)" class="addrinputbtn"> 
+		</form>
+	</div>
 </div>
