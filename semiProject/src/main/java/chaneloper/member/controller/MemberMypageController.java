@@ -17,3 +17,4 @@ public class MemberMypageController extends HttpServlet{
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }
+      

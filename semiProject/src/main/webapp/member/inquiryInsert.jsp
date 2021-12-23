@@ -8,7 +8,7 @@
 		}else if(${requestScope.code=='fail'}){
 			alert("문의 등록 실패");
 		}
-} 
+}        
 </script>
 <style>
 	#inquiryinsert{width: 1000px; margin: auto;}

@@ -28,3 +28,4 @@ public class AddrManagementController extends HttpServlet{
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }
+       

@@ -12,16 +12,17 @@
 	<div>
 		<table width="1000" border="1" style="text-align: center; margin: auto;">
 			<tr>
-				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th>
+				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th><th>삭제</th>
 			</tr>
-			<c:forEach var="vo" items="${rvlist }">
+			<c:forEach var="vo" items="${list }">
 		<tr>
 			<td>${vo.r_num }</td>
 			<td>${vo.ph_num }</td>
 			<td></td> 
 			<td>${vo.r_title }</td>
-			<td>${vo.r.title }</td>
+			<td>${vo.r_content }</td>
 			<td>${vo.r_hit }</td>
+			<td><a href="${cp }/mypage/reviewlist?r_num=${vo.r_num }">삭제</a></td>
 		</tr>
 	</c:forEach>
 		</table>
@@ -48,17 +49,5 @@
 		<c:if test="${endPage<pageCount }">
 			<a href="${cp }/mypage/reviewlist?pageNum=${endPage+1}">[다음]</a>
 		</c:if>
-	</div>
-	<!-- 검색창 -->
-	<div style="padding-top: 30px; padding-left: 350px;" id="screview">
-		<form method="post" action="${cp }/mypage/reviewlist">
-			<select name="field" style="height: 25px;">
-				<option value="ph_num" <c:if test="${field=='ph_num' }">selected</c:if>>상품번호</option>
-				<option value="r_title" <c:if test="${field=='r_title' }">selected</c:if>>제목</option>
-				<option value="r_content" <c:if test="${field=='r_content ' }">selected</c:if>>내용</option>
-			</select>
-			<input type="text" name="keyword" value="${keyword }" style="height: 23px;">
-			<input type="submit" value="검색" style="width: 40px; height: 28px;">
-		</form>
 	</div>
 </div>

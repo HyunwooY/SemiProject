@@ -17,34 +17,30 @@ public class ReviewListController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String spageNum = req.getParameter("pageNum");
-		String field = req.getParameter("field");
-		String keyword = req.getParameter("keyword");
 		
 		int pageNum = 1;
 		if(spageNum!=null) { 
 			pageNum = Integer.parseInt(spageNum);
 		}
-		
+		       
 		int startRow = (pageNum-1)*10+1;
 		int endRow = startRow+9;
 		
 		ReviewDao dao = ReviewDao.getInstance();
-		dao.rvlist(startRow, endRow, field, keyword);
+		dao.list(startRow, endRow);
 		
-		ArrayList<ReviewVo> rvlist = dao.rvlist(startRow, endRow, field, keyword);
-		int pageCount = (int)Math.ceil(dao.getCount(field, keyword)/10.0); 
+		ArrayList<ReviewVo> list = dao.list(startRow, endRow);
+		int pageCount = (int)Math.ceil(dao.getCount()/10.0); 
 		int startPageNum = ((pageNum-1)/10*10)+1; 
 		int endPageNum = startPageNum+9;
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;
 		}
-		req.setAttribute("rvlist", rvlist);
+		req.setAttribute("list", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPage", startPageNum);
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("keyword", keyword);
-		req.setAttribute("field", field);
 		req.setAttribute("detailmain", "/member/reviewList.jsp");
 		req.setAttribute("detailtitle", "나의 리뷰");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);

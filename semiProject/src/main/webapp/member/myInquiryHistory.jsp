@@ -35,7 +35,7 @@
 				<a href="${cp }/mypage/history?pageNum=${i}&keyword=${keyword}&field=${field}">
 				<span>${i }</span>
 				</a>
-			</c:when>
+			</c:when> 
 			<c:otherwise>
 				<a href="${cp }/mypage/history?pageNum=${i}&keyword=${keyword}&field=${field}">
 				<span>${i }</span>

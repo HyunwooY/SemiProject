@@ -10,7 +10,7 @@
 	.addaddrth{margin-right: 15px; margin-top: 10px;}
 	.addaddrtd{width: 380px; height: 30px; margin-bottom: 10px;}
 	.addrinputbtn{width: 50px; height: 30px; position: relative; left: 15px; margin-top: 20px; margin-right: 10px;}
-</style>
+</style> 
 <script>
 	function showForm(n){
 		const addaddress = document.getElementById("addaddress");

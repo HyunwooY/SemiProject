@@ -40,7 +40,7 @@ public class PwdCheckController extends HttpServlet{
 			
 			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 		}
-	}
+	}            
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("detailmain", "/member/pwdcheck.jsp");

@@ -10,7 +10,7 @@
 		position: relative;
 		left: 40px;
 		width: 50px;
-	}
+	} 
 </style>
 <script>
 /*	function checkpwd(){
