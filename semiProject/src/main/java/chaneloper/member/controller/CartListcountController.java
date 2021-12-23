@@ -41,34 +41,16 @@ public class CartListcountController extends HttpServlet {
 			int loopcount=1;
 			Cookie[] c=req.getCookies();
 			for(int i=0;;i++) {
-				if(i==c.length) i=0;
+				if(i>=c.length) i=0;
 				if(c[i].getName().equals("JSESSIONID")) {
 				}else {
-					System.out.println(Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8")
-							.substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1);
+//					System.out.println(Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8")
+//							.substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1);
 					if(Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8")
 							.substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1==0) { // 상품개수가 0일 때
 						if(Integer.parseInt(c[i].getName().substring(4,c[i].getName().indexOf("_")))==cookieNum) {
-							Cookie cookie=new Cookie(c[i].getName(),"");
-							cookie.setPath("/");
-							cookie.setMaxAge(0);
-							resp.addCookie(cookie);
-							loopcount++;
-							System.out.println("으에어어");
-							continue;
-						}else {
-							int cnum=Integer.parseInt(c[i].getName().substring(4,c[i].getName().indexOf("_"))); //쿠키번호
-							if(cnum>cookieNum) {
-								String newname="name"+(cnum-1)+c[i].getName().substring(c[i].getName().indexOf("_"));
-								Cookie cookie=new Cookie(newname, c[i].getValue());
-								cookie.setPath("/");
-								cookie.setMaxAge(60*60*24*30);
-								resp.addCookie(cookie);
-								loopcount++;
-							}
+							break;
 						}
-						if(loopcount==c.length) break;
-						System.out.println("에러");
 					}else {//0이 아닐 때
 						if(Integer.parseInt(c[i].getName().substring(4,c[i].getName().indexOf("_")))==cookieNum) { 
 							int downcount=Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8").substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1;
@@ -81,7 +63,6 @@ public class CartListcountController extends HttpServlet {
 						}
 					}
 				}
-				
 			}
 		}
 		PrintWriter pw=resp.getWriter();
