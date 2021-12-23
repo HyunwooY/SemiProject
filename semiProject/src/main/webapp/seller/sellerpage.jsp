@@ -20,7 +20,7 @@
 	<div id="membermenu">
 		<div id="order" class="menu">
 			<h4>ORDER</h4>
-			<a href="${pageContext.request.contextPath }/seller/orderlist">고객주문내역</a><br>
+			<a href="${pageContext.request.contextPath }/seller/orderListAll">고객주문내역</a><br>
 		</div>
 		
 		<div id="modify" class="menu">

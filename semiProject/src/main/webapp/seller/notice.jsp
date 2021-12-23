@@ -21,7 +21,7 @@
 	</c:forEach>
 	<hr>
 	</table>
-	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/noticeForm.jsp">
+	<form name="notice" method="get" action="${pageContext.request.contextPath }/seller/notice1">
 		<c:if test="${sessionScope.radio=='판매사업자' }">
 		<input type="submit" value="글쓰기">
 		</c:if>

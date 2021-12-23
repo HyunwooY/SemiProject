@@ -116,7 +116,7 @@
 		<h3>CHANELOPER(주)</h3>
 		<p id="com1">서울특별시 종로구 율곡로10길 105 디아망 4F(봉익동 10-1 디아망 4F) TEL : 070-8240-3211~3 FAX : 02-777-5407</p>
 		<p id="com2">사업자등록번호 : 104-81-59383 통신판매업신고번호 : 중구 065325 중앙HTA㈜</p><br>
-		<p id="com3">COPYRIGHT(C) HTA CO., LTD. ALL RIGHTS RESERVED.</p>
+		<p id="com3">&copy;COPYRIGHT(C) HTA CO., LTD. ALL RIGHTS RESERVED.</p>
 	</div>
 </div>
 </div>
