@@ -15,6 +15,8 @@
 		addrList.style.display="none"
 		select="input";
 		console.log(select);
+		let chooseaddr=document.getElementById("chooseaddr");
+		chooseaddr.selected=true;
 	}
 	function changeDefault(){
 		let addr=document.getElementsByClassName("input")[0]
@@ -27,6 +29,8 @@
 		addrList.style.display="none"
 		select="default";
 		console.log(select);
+		let chooseaddr=document.getElementById("chooseaddr");
+		chooseaddr.selected=true;
 	}
 	function selectList(){
 		let addrList=document.getElementById("addrList");
@@ -35,84 +39,88 @@
 		console.log(select);
 	}
 	function go(){
-		let form = document.createElement('form');
-		form.setAttribute('method','post');
-		form.setAttribute('action','${pageContext.request.contextPath}/member/buyProduct');
-		document.charset="utf-8";
-		/*input생성*/
-		let hiddenField1=document.createElement('input');
-		hiddenField1.setAttribute('type','hidden');
-		hiddenField1.setAttribute('name','type');
-		hiddenField1.setAttribute('value',type);
-		console.log('type:'+type)
-		
-		form.appendChild(hiddenField1);
-		if(select=="input"){
-			let hiddenField2=document.createElement('input');
-			hiddenField2.setAttribute('type','hidden');
-			hiddenField2.setAttribute('name','name');
-			hiddenField2.setAttribute('value',document.getElementById("name").value);
+		if(type==null||type==""){
+			alert("결제방법을 선택해주세요")
+		}else{
+			let form = document.createElement('form');
+			form.setAttribute('method','post');
+			form.setAttribute('action','${pageContext.request.contextPath}/member/buyProduct');
+			document.charset="utf-8";
+			/*input생성*/
+			let hiddenField1=document.createElement('input');
+			hiddenField1.setAttribute('type','hidden');
+			hiddenField1.setAttribute('name','type');
+			hiddenField1.setAttribute('value',type);
+			console.log('type:'+type)
 			
-			form.appendChild(hiddenField2);
-			
-			let hiddenField3=document.createElement('input');
-			hiddenField3.setAttribute('type','hidden');
-			hiddenField3.setAttribute('name','addr');
-			hiddenField3.setAttribute('value',document.getElementById("addr").value);
-			form.appendChild(hiddenField3);
-			
-			let hiddenField4=document.createElement('input');
-			hiddenField4.setAttribute('type','hidden');
-			hiddenField4.setAttribute('name','phone');
-			let first=document.getElementById("first");
-			hiddenField4.setAttribute('value',first.options[first.selectedIndex].text+'-'+document.getElementById("mid").value+
-										'-'+document.getElementById("last").value);
-			form.appendChild(hiddenField4);
-			
-		}else if(select=='default'){
-			let hiddenField2=document.createElement('input');
-			hiddenField2.setAttribute('type','hidden');
-			hiddenField2.setAttribute('name','name');
-			hiddenField2.setAttribute('value','${avo.name}');
-			form.appendChild(hiddenField2);
-
-			let hiddenField3=document.createElement('input');
-			hiddenField3.setAttribute('type','hidden');
-			hiddenField3.setAttribute('name','addr');
-			hiddenField3.setAttribute('value','${avo.addr}');
-			form.appendChild(hiddenField3);
-
-			let hiddenField4=document.createElement('input');
-			hiddenField4.setAttribute('type','hidden');
-			hiddenField4.setAttribute('name','phone');
-			hiddenField4.setAttribute('value','${avo.phone}');			
-			form.appendChild(hiddenField4);
-
-		}else if(select=='addrList'){
-			let addrselect=document.getElementsByClassName("selected");
-			
-			let hiddenField2=document.createElement('input');
-			hiddenField2.setAttribute('type','hidden');
-			hiddenField2.setAttribute('name','name');
-			hiddenField2.setAttribute('value',addrselect[0].innerText);
-			form.appendChild(hiddenField2);
-
-			
-			let hiddenField3=document.createElement('input');
-			hiddenField3.setAttribute('type','hidden');
-			hiddenField3.setAttribute('name','addr');
-			hiddenField3.setAttribute('value',addrselect[1].innerText);
-			form.appendChild(hiddenField3);
-
-			let hiddenField4=document.createElement('input');
-			hiddenField4.setAttribute('type','hidden');
-			hiddenField4.setAttribute('name','phone');
-			hiddenField4.setAttribute('value',addrselect[2].innerText);
-			form.appendChild(hiddenField4);
-
+			form.appendChild(hiddenField1);
+			if(select=="input"){
+				let hiddenField2=document.createElement('input');
+				hiddenField2.setAttribute('type','hidden');
+				hiddenField2.setAttribute('name','name');
+				hiddenField2.setAttribute('value',document.getElementById("name").value);
+				
+				form.appendChild(hiddenField2);
+				
+				let hiddenField3=document.createElement('input');
+				hiddenField3.setAttribute('type','hidden');
+				hiddenField3.setAttribute('name','addr');
+				hiddenField3.setAttribute('value',document.getElementById("addr").value);
+				form.appendChild(hiddenField3);
+				
+				let hiddenField4=document.createElement('input');
+				hiddenField4.setAttribute('type','hidden');
+				hiddenField4.setAttribute('name','phone');
+				let first=document.getElementById("first");
+				hiddenField4.setAttribute('value',first.options[first.selectedIndex].text+'-'+document.getElementById("mid").value+
+											'-'+document.getElementById("last").value);
+				form.appendChild(hiddenField4);
+				
+			}else if(select=='default'){
+				let hiddenField2=document.createElement('input');
+				hiddenField2.setAttribute('type','hidden');
+				hiddenField2.setAttribute('name','name');
+				hiddenField2.setAttribute('value','${avo.name}');
+				form.appendChild(hiddenField2);
+	
+				let hiddenField3=document.createElement('input');
+				hiddenField3.setAttribute('type','hidden');
+				hiddenField3.setAttribute('name','addr');
+				hiddenField3.setAttribute('value','${avo.addr}');
+				form.appendChild(hiddenField3);
+	
+				let hiddenField4=document.createElement('input');
+				hiddenField4.setAttribute('type','hidden');
+				hiddenField4.setAttribute('name','phone');
+				hiddenField4.setAttribute('value','${avo.phone}');			
+				form.appendChild(hiddenField4);
+	
+			}else if(select=='addrList'){
+				let addrselect=document.getElementsByClassName("selected");
+				
+				let hiddenField2=document.createElement('input');
+				hiddenField2.setAttribute('type','hidden');
+				hiddenField2.setAttribute('name','name');
+				hiddenField2.setAttribute('value',addrselect[0].innerText);
+				form.appendChild(hiddenField2);
+	
+				
+				let hiddenField3=document.createElement('input');
+				hiddenField3.setAttribute('type','hidden');
+				hiddenField3.setAttribute('name','addr');
+				hiddenField3.setAttribute('value',addrselect[1].innerText);
+				form.appendChild(hiddenField3);
+	
+				let hiddenField4=document.createElement('input');
+				hiddenField4.setAttribute('type','hidden');
+				hiddenField4.setAttribute('name','phone');
+				hiddenField4.setAttribute('value',addrselect[2].innerText);
+				form.appendChild(hiddenField4);
+	
+			}
+			document.body.appendChild(form);
+			form.submit();
 		}
-		document.body.appendChild(form);
-		form.submit();
 	}
 	function changeAddr(selected){
 		xhr=new XMLHttpRequest();
@@ -161,12 +169,14 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 #purchaseType input{margin-right:25px;margin-bottom:10px}
 #purchaseType{position:relative;font-size:1.1em;}
 #purchasebtn{widht:100px;height:30px;font-size:1.05em}
+#name,#addr,#first,#mid,#last{height:25px}
+#input,#myAddr,#changeAddr,#idinfo th,td{width:}
 </style>    
 <div id="purchase">
 	<h2>주문결제</h2>
 	<div id="buyinfo" class="div">
 		<h3>구매자정보</h3>
-		<table>
+		<table id="idinfo">
 			<tr>
 				<th width="200px">이름</th>
 				<td>${vo.name }</td>
@@ -188,6 +198,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<label for="selectList">배송지선택</label>
 		<input type="radio" name="selectAddr" id="selectList" onclick="selectList()">
 		<select name="addrList" id="addrList" onchange="changeAddr(this.options[this.selectedIndex].text)">
+			<option selected id="chooseaddr">배송지선택</option>
 			<c:forEach var="addr" items="${addr }">
 				<option value="${addr.nickname }">${addr.nickname }</option>
 			</c:forEach>
@@ -197,7 +208,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table class="input">
 			<tr>
 				<th width="200px">이름</th>
-				<td><input type="text" name="name" id="name"></td>
+				<td width="600px"><input type="text" name="name" id="name"></td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -218,7 +229,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table id="myAddr">
 			<tr>
 				<th width="200px">이름</th>
-				<td>${avo.name }</td>
+				<td width="600px">${avo.name }</td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -232,7 +243,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 		<table id="changeAddr">
 			<tr>
 				<th width="200px">이름</th>
-				<td class="selected"></td>
+				<td class="selected" width="600px"></td>
 			</tr>
 			<tr>
 				<th>배송주소</th>
@@ -251,7 +262,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 				<c:if test="${vo.si_name!=siname}">
 					<c:set var="siname" value="${vo.si_name }"/>
 					<tr>
-						<th colspan="4">${siname }</th>
+						<th colspan="6">${siname }</th>
 					</tr>
 					<tr>
 						<th>사진</th>

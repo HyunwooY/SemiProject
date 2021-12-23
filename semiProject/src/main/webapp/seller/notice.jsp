@@ -22,24 +22,7 @@
 	<hr>
 	</table>
 	<form name="notice" method="post" action="${pageContext.request.contextPath }/seller/noticeForm.jsp">
-	<input type="submit" value="글쓰기">
-	</form>
-	<!-- 페이징 처리 -->
-  	<div>
-		<c:if test="${requestScope.startPage>10 }">
-			<a href="${cp }/seller/notice?pageNum=${requestScope.startPage-1}">[이전 페이지]</a>
-		</c:if>		
-		<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }">
-			<c:choose>
-				<c:when test="${requestScope.pageNum == i }">
-					<a href="${cp }/seller/notice.jsp?pageNum=${i}"><span style="color:req">${i }</span></a>			
-				</c:when>
-				<c:otherwise>
-					<a href="${cp }/seller/notice?pageNum=${i}"><span style="color:gray">${i }</span></a>			
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${requestScope.endPage < requestScope.pageCount }">
-			<a href="${cp }/seller/notice?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
+		<c:if test="${sessionScope.radio=='판매사업자' }">
+		<input type="submit" value="글쓰기">
 		</c:if>
-	</div> 
+	</form>

@@ -10,8 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.AddInterestDao;
+
+
 import chaneloper.dao.Search_Inq_RvDao;
+
+import chaneloper.dao.InterestDao;
+
+
 @WebServlet("/search/inq")
 public class SearchQnaController extends HttpServlet{
 	@Override

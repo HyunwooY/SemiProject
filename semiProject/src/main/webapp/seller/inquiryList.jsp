@@ -24,14 +24,11 @@
 			<tr>			
 			<td></td>			
 			<td></td>
-				<td>
-					-re:${vo.ih_answer }
-				</td>
 			</tr>	
 		</c:if>
-		
+		<hr>
 	</c:forEach>
-	<hr>
+	</tr>
 	</table>
 	
 	<!-- 페이징 처리 -->

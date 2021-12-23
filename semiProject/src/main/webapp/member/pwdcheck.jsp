@@ -4,7 +4,7 @@
 	#form1{
 		position:relative;
 		left: 40px;
-		bottom: 30px;
+		bottom: 20px;
 		margin: auto;
 	}
 	#pwd{

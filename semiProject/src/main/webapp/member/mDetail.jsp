@@ -24,8 +24,8 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-			<span class="l">입금전 ${requestScope.bPayCom }</span>
-			<span class="l">입금완료 ${requestScope.aPayCom }</span>
+			<span class="l">결제전 ${requestScope.bPayCom }</span>
+			<span class="l">결제완료 ${requestScope.aPayCom }</span>
 			<span class="l">배송준비중 ${requestScope.preparingP }</span>
 			<span class="l">배송중 ${requestScope.beingDelivery }</span>
 			<span class="l">배송완료 ${requestScope.compDelivery }</span>
@@ -49,11 +49,11 @@
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
-				<a href="${pageContext.request.contextPath }">찜목록</a>
+				<a href="${pageContext.request.contextPath }/member/gointerest">찜목록</a>
 			</div>
 			<div id="myboard" class="menu">
 				<h4>MY BOARD</h4>
-				<a href="${pageContext.request.contextPath }/mypage/insertinquire">문의하기</a><br>
+				<a href="${pageContext.request.contextPath }/mypage/insertinquiry">문의하기</a><br>
 				<a href="${pageContext.request.contextPath }/mypage/history">문의내역 확인</a><br>
 				<a href="">리뷰관리</a>
 			</div>

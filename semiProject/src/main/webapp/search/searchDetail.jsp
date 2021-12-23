@@ -15,8 +15,8 @@
 #showimg{position: relative; width:100%; height:300px; border:1px solid red; clear:both; margin-bottom:40px;}
 #showimg img{width:290px; height:290px; border:1px solid red; padding-right:100px}
 #inqtable{position: relative; width:49%; height:500px; border:1px solid red; float: left;}
-#inqt{width: 100%; height:400px; border-top: 1px solid #444444; border-collapse: collapse;}
-#inqt .td{border-bottom: 1px solid #444444;padding: 10px;}
+#inqt{width: 100%;  border-top: 1px solid #444444; border-collapse: collapse;}
+#inqt .td{min-height:25px;border-bottom: 1px solid #444444;padding: 10px;}
 #inqt .th{border-bottom: 1px solid #444444;padding: 10px;}
 #rvttable{position: relative; width:49%; height:500px; border:1px solid red; float: right;}
 #myform fieldset{
@@ -508,19 +508,19 @@
 
 <!-- 문의 페이징 -->
 	<div id="inqtable">
-	<h2>문의사항</h2>
+	<h2>문의사항</h2><br>
 		<div id="p1">
 			<table id="inqt">
 				<tr>
-					<th>글번호</th>
-					<th>작성자</th>
+					<th width="20%">글번호</th>
+					<th width="20%">작성자</th>
 					<th>제목</th>
 				</tr >
 					<c:forEach var="vo" items="${list }">
 						<tr>
-							<td>${vo.ih_num }</td>
-							<td>${vo.mi_id }</td>
-							<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
+							<td height="38px">${vo.ih_num }</td>
+							<td height="38px">${vo.mi_id }</td>
+							<td height="38px"><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -548,18 +548,18 @@
 			<table>
 				<tr>
 					<td>제목</td>
-					<td><input id="p3_t" type="text" name="title" readonly></td>
+					<td><input id="p3_t" type="text" name="title" readonly size="60" style="height:30px"></td>
 				</tr>
 				<tr>
 					<td>문의</td>
-					<td ><input id="p3_q" type="text" name="question"></td>
+					<td ><input id="p3_q" type="textarea" name="question" size="60" style="height:250px"></td>
 				</tr>
 				<tr id="p3_tr">
 					<td>답변</td>
-					<td ><input id="p3_a" type="text" name="answer" readonly></td>
+					<td ><input id="p3_a" type="text" name="answer" readonly size="60" style="height:100px"></td>
 				</tr>
 				<tr>
-					<td id="c1">
+					<td id="c1" >
 						<input type="button" value="목록" onclick="c1()">
 						<input type="button" value="삭제" onclick="c2()">
 						<input type="button" value="수정" onclick="c3()">

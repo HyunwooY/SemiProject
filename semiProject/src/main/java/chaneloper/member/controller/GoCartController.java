@@ -28,11 +28,18 @@ public class GoCartController extends HttpServlet {
 		int lastCookieNum=0;
 		//ArrayList<ShowPurchaseListVo> purchaseList=new ArrayList<ShowPurchaseListVo>();; 
 		JSONObject json=new JSONObject();
+		resp.setContentType("text/plain;charset=utf-8");
+	    PrintWriter pw=resp.getWriter();
         if(req.getParameter("count")!=null) {
             int count =Integer.parseInt(req.getParameter("count")) ;
             String pi_num =req.getParameter("pi_num");
             System.out.println(pi_num);
             Cookie[] clist=req.getCookies();
+            if(clist.length==11) {
+            	json.put("errMsg", "장바구니는 최대 10개의 상품만 담을 수 있습니다.");
+            	pw.print(json);
+            	return;
+            }
             for(Cookie cl:clist) {
             	if(cl.getName().equals("JSESSIONID")) {	
             	}else {
@@ -74,7 +81,7 @@ public class GoCartController extends HttpServlet {
                 	continue;
                 }else {
                 	System.out.println(pd);
-        			Cookie c=new Cookie(("name"+(i-minus-1)).concat("_"+pi_num),URLEncoder.encode(pd,"utf-8"));
+        			Cookie c=new Cookie(("name"+(i-minus)).concat("_"+pi_num),URLEncoder.encode(pd,"utf-8"));
         			c.setPath("/");
         			c.setMaxAge(60*60*24*30); //30일 저장
                     resp.addCookie(c);  
@@ -86,8 +93,7 @@ public class GoCartController extends HttpServlet {
             System.out.println("연결오류");
             json.put("checkcart", false);
         }
-        resp.setContentType("text/plain;charset=utf-8");
-        PrintWriter pw=resp.getWriter();
+       
         pw.print(json);
 	}
 }

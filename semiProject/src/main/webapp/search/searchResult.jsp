@@ -62,9 +62,7 @@ ul.list li.item{
 			alert("검색어를 입력해주세요");
 		}
 	}
-	function none() {
-		
-	}
+	function none() {}
 </script>
 <c:choose>
 	<c:when test="${empty requestScope.keyword }"> <!-- 검색탭으로 들어온경우 -->
@@ -182,8 +180,14 @@ ul.list li.item{
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
-	
-	<a href="${cp }/search/search?pageNum=${pageNum+1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}">></a>
+	<c:choose>
+		<c:when test="${pageNum!=endPage }">
+			<a href="${cp }/search/search?pageNum=${pageNum+1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}">></a>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:none()">></a>
+		</c:otherwise>
+	</c:choose>
 	<c:if test="${endPage<totalPage1 }">
 		<a href="${cp }/search/search?pageNum=${endPage+1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}">>></a>
 	</c:if>
