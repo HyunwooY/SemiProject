@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="chaneloper.vo.Search_ProductVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="chaneloper.vo.Inquiry_historyVo"%>
@@ -5,13 +8,49 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-#maindiv {position: relative; padding:50px}
-#mainimg{width:400px; height:500px; border:1px solid red; float:left;margin-top:21px ; width: 40%;margin-left:50px; margin-right:50px;margin-bottom:200px;}
-#maintable{float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
-#pubutton{float: right; width: 40%;text-align: left; margin-right:50px}
-#showimg{}
-</style>
+#maindiv {position: relative; padding:50px;}
+#mainimg{position: relative; width:400px; height:500px; border:1px solid red; float:left;margin-top:21px ; width: 40%;margin-left:50px; margin-right:50px;margin-bottom:80px;}
+#maintable{position: relative; float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
+#pubutton{position: relative; float: right; width: 40%;text-align: left; margin-right:50px;}
+#showimg{position: relative; width:100%; height:300px; border:1px solid red; clear:both; margin-bottom:40px;}
+#showimg img{width:290px; height:290px; border:1px solid red; padding-right:100px}
+#inqtable{position: relative; width:49%; height:500px; border:1px solid red; float: left;}
+#inqt{width: 100%;  border-top: 1px solid #444444; border-collapse: collapse;}
+#inqt .td{min-height:25px;border-bottom: 1px solid #444444;padding: 10px;}
+#inqt .th{border-bottom: 1px solid #444444;padding: 10px;}
+#rvttable{position: relative; width:49%; height:500px; border:1px solid red; float: right;}
+#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#myform label{
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#myform label:hover{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+}
 
+#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform fieldset legend{
+    text-align: left;
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+}
+</style>
+<c:set var="cp" value="${pageContext.request.contextPath }"/>
 
 <script type="text/javascript">
 	let select_color = '';
@@ -269,82 +308,6 @@
 		xhr.open('get','${pageContext.request.contextPath}/search/interest?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}',true);
 		xhr.send();
 	}
-
-	
-</script>
-
-<div id="maindiv">
-	<div id="mainimg">
-		<img src="images/"+ ${img[0]}>
-	</div>
-	<div id="maintable">
-	    <table id="showtable" >
-			<th colspan=4>${name}</th>
-			<tr>
-			    <td colspan=4><br>
-				    가격 :  ${price}원<br>
-				    적립금 :  ${Math.round(price*0.01)}원
-			    </td>
-			</tr>
-			<tr>
-			    <td colspan=4><br>
-				    사이즈 정보<br>
-				    M - 어깨 50 / 가슴 44 / 팔길이 63 / 총길이 82<br>
-					L - 어깨 52 / 가슴 46 / 팔길이 65 / 총길이 84
-				</td>
-			</tr>
-			<tr>
-				<td colspan=4><br><br>
-					*실측 사이즈는 단면(cm)으로 측정되며, 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다.<br>
-					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.<br><br>
-				</td>
-			</tr>
-			<tr>
-
-				<td colspan=4>
-<%  
-	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
-	for(int i =0 ;i<color.size();i++){
-%>
-					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
-
-<%		
-	}
-%>
-<br>
-				</td>
-			</tr>
-			<tr><br>
-				<td colspan=4; id="size">
-				</td>
-			</tr>
-	    </table>
-	</div>
-	<div id="pubutton">
-	    <table >
-	    	<tr>
-	    		<td>
-	    			<a href="#" onclick="postdata(event)">구매하기</a>&nbsp;&nbsp;
-	    		</td>
-
-	    		<td>
-	    			<a href="#" onclick="goods1()">찜하기</a>&nbsp;&nbsp;
-	    		</td>
-
-	    		<td>
-	    			<a href="#" onclick="testscript()">장바구니 담기</a>&nbsp;&nbsp;
-	    		</td>
-	    	</tr>
-	    </table>
-		<div id="showimg">
-<c:forEach var="i" begin="0" end="2">
-			<img src="images/"+ ${img[i]} class="showimg" width=40% height=400px border="1px solid red">
-</c:forEach>
-	    </div>
-	</div>
-</div>
-
-<script type="text/javascript">
 	function inqck(e){
 		let t_id = e.target.parentElement.parentElement.children[1].innerHTML
 		let t_title = e.target.innerHTML;
@@ -446,90 +409,228 @@
 		window.location.href="${pageContext.request.contextPath}//search/inqins?pi_num=${requestScope.pi_num }&mi_id=${sessionScope.id}&title="+p3_t.value+"&qu="+p3_q.value;
 	}
 
+	function addrv(){
+		var rvtable = document.getElementById("rvtable");
+		rvtable.style.display = "none";
+		var input_lv = document.getElementById("input_lv");
+		input_lv.style.display ="block";
+	}
+	var adbt=0;
+	function addbutton(){
+		adbt = adbt+1;
+		var inputfile= document.createElement("input");
+		var inputspan= document.createElement("span");
+		inputfile.type="file";
+		inputfile.name="file"+adbt;
+		inputspan.innerHTML ="<br>";
+		let myform = document.getElementById("myform");
+		let adimg = document.getElementsByName("adimg")[0];
+		myform.insertBefore(inputfile,adimg);
+		myform.insertBefore(inputspan,adimg);
+		let adbt2 = document.getElementsByName("adbt")[0];
+		adbt2.value=adbt;
+	}
 </script>
-
-<c:set var="cp" value="${pageContext.request.contextPath }"/>
-
-
-<div id="p1">
-	<table border="1" width="500">
-		<tr>
-			<th>글번호</th>
-			<th>작성자</th>
-			<th>제목</th>
-		</tr >
-			<c:forEach var="vo" items="${list }">
-				<tr>
-					<td>${vo.ih_num }</td>
-					<td>${vo.mi_id }</td>
-					<td><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
-				</tr>
-			</c:forEach>
-	</table>
-</div>
-
-<div id="p2"><!-- 페이징처리 -->
-	<c:forEach var="i" begin="${startPage }" end="${endPage}">
-		<c:choose>
-			<c:when test="${i==pageNum }">
-				<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
-					<span style="color:red">${i }</span>
-				</a>
-			</c:when>
-			<c:otherwise>
-				<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
-					<span style="gray">${i }</span>
-				</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	<input type="button" value="문의하기" onclick="c4()">
-</div>
-
-<div id="p3" style="display:none">
-	<table>
-		<tr>
-			<td>제목</td>
-			<td><input id="p3_t" type="text" name="title" readonly></td>
-		</tr>
-		<tr>
-			<td>문의</td>
-			<td ><input id="p3_q" type="text" name="question"></td>
-		</tr>
-		<tr id="p3_tr">
-			<td>답변</td>
-			<td ><input id="p3_a" type="text" name="answer" readonly></td>
-		</tr>
-		<tr>
-			<td id="c1">
-				<input type="button" value="목록" onclick="c1()">
-				<input type="button" value="삭제" onclick="c2()">
-				<input type="button" value="수정" onclick="c3()">
-			</td>
-			<td id="c5" style="display:none">
-				<input type="button" value="등록" onclick="c5()">
-			</td>
-		</tr>
-	</table>
-</div>
-
+<div id="maindiv">
 <!-- 이미지 -->
-<!-- 제품명 -->
-<!-- 가격 -->
+	<div id="mainimg">
+		<img src="images/"+ ${img[0]}>
+	</div>
+<!-- 제품상세 -->
+	<div id="maintable">
+	    <table id="showtable" >
+			<th colspan=4>${name}</th>
+			<tr>
+			    <td colspan=4><br>
+				    가격 :  ${price}원<br>
+				    적립금 :  ${Math.round(price*0.01)}원
+			    </td>
+			</tr>
+			<tr>
+			    <td colspan=4><br>
+				    사이즈 정보<br>
+				    M - 어깨 50 / 가슴 44 / 팔길이 63 / 총길이 82<br>
+					L - 어깨 52 / 가슴 46 / 팔길이 65 / 총길이 84
+				</td>
+			</tr>
+			<tr>
+				<td colspan=4><br>
+					*실측 사이즈는 단면(cm)으로 측정되며, 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다.<br>
+					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.<br><br>
+				</td>
+			</tr>
+			<tr>
 
-<!-- 색상(클릭) -->
+				<td colspan=4>
+<%  
+	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
+	for(int i =0 ;i<color.size();i++){
+%>
+					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
+<%		
+	}
+%>
+<br>
+				</td>
+			</tr>
+			<tr><br>
+				<td colspan=4; id="size">
+				</td>
+			</tr>
+	    </table>
+	</div>
+	<!-- 제품결제 -->
+	<div id="pubutton">
+	    <table >
+	    	<tr>
+	    		<td>
+	    			<a href="#" onclick="postdata(event)">구매하기</a>&nbsp;&nbsp;
+	    		</td>
 
-<!-- 선택한 색상의 사이즈 카운트가 없으면 매진 -->
-<!-- 사이즈(클릭) -->
+	    		<td>
+	    			<a href="#" onclick="goods1()">찜하기</a>&nbsp;&nbsp;
+	    		</td>
 
-<!-- 구매버튼 -->
-<!-- 찜하기 -->
-<!-- 장바구니 추가 -->
-
+	    		<td>
+	    			<a href="#" onclick="testscript()">장바구니 담기</a>&nbsp;&nbsp;
+	    		</td>
+	    	</tr>
+	    </table>
+	</div>
+	
 <!-- 상품이미지 출력 -->
+	<div id="showimg">
+			<c:forEach var="i" begin="0" end="2">
+						<img src="images/"+ ${img[i]}>
+			</c:forEach>
+	 </div>
 
-<!-- 안내 문구 -->
-
-<!-- 리뷰 페이징 -->
 
 <!-- 문의 페이징 -->
+	<div id="inqtable">
+	<h2>문의사항</h2><br>
+		<div id="p1">
+			<table id="inqt">
+				<tr>
+					<th width="20%">글번호</th>
+					<th width="20%">작성자</th>
+					<th>제목</th>
+				</tr >
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td height="38px">${vo.ih_num }</td>
+							<td height="38px">${vo.mi_id }</td>
+							<td height="38px"><a href="#" onclick="inqck(event)">${vo.ih_title }</a></td>
+						</tr>
+					</c:forEach>
+			</table>
+		</div>
+	
+		<div id="p2"><!-- 페이징처리 -->
+			<c:forEach var="i" begin="${startPage }" end="${endPage}">
+				<c:choose>
+					<c:when test="${i==pageNum }">
+						<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
+							<span style="color:red">${i }</span>
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${cp }/search/searchdetail?pageNum=${i}&pi_num=${pi_num}">
+							<span style="gray">${i }</span>
+						</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<input type="button" value="문의하기" onclick="c4()">
+		</div>
+	
+		<div id="p3" style="display:none">
+			<table>
+				<tr>
+					<td>제목</td>
+					<td><input id="p3_t" type="text" name="title" readonly size="60" style="height:30px"></td>
+				</tr>
+				<tr>
+					<td>문의</td>
+					<td ><input id="p3_q" type="textarea" name="question" size="60" style="height:250px"></td>
+				</tr>
+				<tr id="p3_tr">
+					<td>답변</td>
+					<td ><input id="p3_a" type="text" name="answer" readonly size="60" style="height:100px"></td>
+				</tr>
+				<tr>
+					<td id="c1" >
+						<input type="button" value="목록" onclick="c1()">
+						<input type="button" value="삭제" onclick="c2()">
+						<input type="button" value="수정" onclick="c3()">
+					</td>
+					<td id="c5" style="display:none">
+						<input type="button" value="등록" onclick="c5()">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+<!-- 리뷰 페이징 -->
+	<div id="rvttable">
+	<h2>리뷰</h2>
+		<div id="rvtable">
+			<c:forEach var="vo" items="${list_rv }">
+				<div>
+					<span>${vo.getMI_ID() }</span> 
+					<c:forEach var="i" begin="0" end="${vo.getR_HIT()-1 }">
+					<span>★</span>
+					</c:forEach>
+					<span>${vo.getR_DATE() }</span> <a href="${cp }/search/reviewdel?r_num=${vo.getR_NUM()}&pi_num=${pi_num}">삭제</a><br>
+					<span>${vo.getR_TITLE() }</span><br>
+					<span>${vo.getR_CONTENT() }</span><br>
+				</div>
+				<c:forEach var="vo2" items="${list_pt}">
+					<c:if test="${vo2.getR_num() eq vo.getR_NUM() }">
+							<div>
+								<img src="${vo2.getTitle() }">
+							</div>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+			<div>
+				<a href="#" onclick="addrv()">후기작성</a>
+			</div>
+		</div>
+	
+	
+	
+	<% 
+		Date date = new Date();
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dates = transFormat.format(date);
+		
+	%>
+		<div id="input_lv" style="display:none">
+			<form name="myform" id="myform" action="${cp }/search/upload?pi_num=${pi_num}" method="post" enctype="multipart/form-data">
+		    <fieldset>
+		        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+		        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+		        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+		        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+		        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+		    </fieldset><br>
+		    	아이디 <input type="text" name="mi_id" value="${sessionScope.id}" readonly>
+		    	날짜 <input type="text" name="date" value=<%=dates %> readonly><br>
+				제목 <input type="text" name="title"><br>
+				내용 <input type="text" name="context"><br>
+				<input type="hidden" value="0" name="adbt">
+				<input type="file" name="file0"><br>
+				<input type="button" value="이미지추가" onclick="addbutton()"  name="adimg"><br>
+				<input type="submit" value="등록">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
