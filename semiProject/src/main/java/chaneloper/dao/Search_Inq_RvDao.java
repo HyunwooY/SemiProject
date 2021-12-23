@@ -187,10 +187,11 @@ public class Search_Inq_RvDao {
 		
 		try {
 			con=JDBC.getCon();
-			String sql="SELECT ph.ph_num, ph.MI_ID ,r.R_HIT,r.R_DATE , r.R_TITLE,r.R_CONTENT,r.R_NUM FROM PURCHASE_HISTORY ph ,PACKAGING p ,PRODUCT_DETAIL pd ,PRODUCT_INFOMATION pi2, REVIEW r"
+			String sql="SELECT distinct ph.ph_num, ph.MI_ID ,r.R_HIT,r.R_DATE , r.R_TITLE,r.R_CONTENT,r.R_NUM FROM PURCHASE_HISTORY ph ,PACKAGING p ,PRODUCT_DETAIL pd ,PRODUCT_INFOMATION pi2, REVIEW r"
 					+" WHERE pi2.PI_NUM =pd.PI_NUM"
 					+" AND pd.PD_NUM = p.PD_NUM"
 					+" AND p.PH_NUM  = ph.PH_NUM"
+					+" AND R.PH_NUM = ph.PH_NUM"
 					+" AND pi2.PI_NUM = ?";
 					
 			pstmt=con.prepareStatement(sql);
