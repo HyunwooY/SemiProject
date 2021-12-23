@@ -34,9 +34,11 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
-			}
 		}
+	}
+
 //		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+
 	function showText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";

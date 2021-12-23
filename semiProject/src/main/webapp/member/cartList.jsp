@@ -3,8 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-#cartlist{position:relative;top:50px;left:100px;width:70%;
-		height:1000px;margin:0px;padding:0px;text-align:left;margin:auto;
+#main{padding-top:50px;padding-bottom:90px}
+#cartlist{position:relative;left:100px;width:70%;
+		height:auto;margin:0px;padding:0px;text-align:left;margin:auto;
 		}
 table{width:800px;position:relative;top:10px;}
 table {margin:0px;padding:0px;text-align:center;border-bottom:1px solid black;border-collapse:collapse}

@@ -117,7 +117,7 @@ ul.list li.item{
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
 				<div class="imgDiv">
 					<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
-						<img src="${cp }/${vo.pp_title}">
+						<img src="${cp }/upload/${vo.pp_title}">
 					</a>
 				</div>
 				<div class="prdInfo"> <!-- 상품 세부정보 -->

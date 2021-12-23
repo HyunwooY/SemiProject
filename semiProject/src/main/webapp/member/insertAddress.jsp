@@ -30,7 +30,6 @@
 	} 
 </script>
 <div id="showaddress">
-		<h1 style="position:relative; left: 400px; bottom: 30px; margin: auto;">배송지 관리</h1>
 		<table width="1000" border="1" style="text-align: center; margin: auto; margin-bottom: 30px;">
 			<tr>
 				<th>배송지명</th><th>수령인</th><th>전화번호</th><th>주소</th><th>수정</th><th>삭제</th>
