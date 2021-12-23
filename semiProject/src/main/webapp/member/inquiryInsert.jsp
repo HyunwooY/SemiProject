@@ -60,7 +60,7 @@
 						<label for="content">내용</label>
 					</th>
 					<td>
-						<textarea rows="5" cols="50" name="content"></textarea>
+						<textarea rows="5" cols="50" name="content" style="width: 400px; height: 200px;"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -112,7 +112,7 @@
 					<label for="content">내용</label>
 				</th>
 				<td>
-					<textarea rows="5" cols="50" name="content">주문번호:${ph_num }</textarea>
+					<textarea rows="5" cols="50" name="content" style="width: 400px; height: 200px;">주문번호:${ph_num }</textarea>
 				</td>
 			</tr>
 		</table>

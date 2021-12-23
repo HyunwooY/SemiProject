@@ -18,7 +18,11 @@
 		xhr.open('get','${pageContext.request.contextPath}/check/id?id='+id,true);
 		xhr.send();
 	}
-</script>    
+</script>  
+<style>
+#joinForm{margin:auto;text-align:left}
+</style>  
+<div id="joinForm">
 <form method="post" action="${pageContext.request.contextPath }/member/mjoin">
 	<label for="id" class="label">아이디</label><br>
 	<input type="text" name="id" class="input" id="id">
@@ -29,13 +33,17 @@
 	<input type="text" name="name" class="input"><br>
 	<label for="email" class="label">이메일</label><br>
 	<input type="text" name="email" class="input"><br>
-	<label class="label">전화번호</label>
+	<label class="label">전화번호</label><br>
 	<select name="first">
 		<option>010</option>
 		<option>011</option>
 	</select><span>-</span>
 	<input type="text" name="mid" class="phone"><span>-</span>
 	<input type="text" name="back" class="phone"><br>
+	<label class="label">주소</label><br>
+	<input type="text" name="addr"><br>
+	
 	<input type="submit" value="회원가입" class="btn">
 	<input type="reset"	value="취소" class="btn">
 </form>
+</div>

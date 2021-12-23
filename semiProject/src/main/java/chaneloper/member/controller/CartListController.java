@@ -22,7 +22,6 @@ public class CartListController extends HttpServlet{
 		int loopcount=1;
 		Cookie[] c=req.getCookies();
 		if(c!=null) {
-			
 			System.out.println(c.length);
 		}
 		Search_ResultDao dao = new Search_ResultDao();

@@ -17,6 +17,8 @@ public class ReviewListController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String spageNum = req.getParameter("pageNum");
+		String id = (String)req.getSession().getAttribute("id");
+		String id1 = req.getParameter("id1");
 		
 		int pageNum = 1;
 		if(spageNum!=null) { 
@@ -27,6 +29,7 @@ public class ReviewListController extends HttpServlet{
 		int endRow = startRow+9;
 		
 		ReviewDao dao = ReviewDao.getInstance();
+		if(dao.reviewSelect(id1)==id)
 		dao.list(startRow, endRow);
 		
 		ArrayList<ReviewVo> list = dao.list(startRow, endRow);

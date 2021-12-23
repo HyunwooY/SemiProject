@@ -33,7 +33,7 @@
 	<input type="text" name="snum" class="input"><br>
 	<label for="email" class="label">이메일</label><br>
 	<input type="text" name="email" class="input"><br>
-	<label class="label">연락처</label>
+	<label class="label">연락처</label><br>
 	<select name="first">
 		<option>010</option>
 		<option>011</option>
