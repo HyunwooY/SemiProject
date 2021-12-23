@@ -234,57 +234,89 @@ public class Search_Inq_RvDao {
 		}		
 	}
 	
-	public int insertrv(int pi_num, String mi_id, String r_title, int r_hit, String r_content, String rp_title) {
+	public int insertrv(int ph_num, String r_title, int r_hit, String r_content) {
 		Connection con=null;
-		PreparedStatement pstmt=null;		
-		PreparedStatement pstmt2=null;	
-		PreparedStatement pstmt3=null;
-		PreparedStatement pstmt4=null;
-		ResultSet rs = null;
-		int ph_num = 0;
-		int rnum = 0;
+		PreparedStatement pstmt=null;
 		try {
-			con=JDBC.getCon();
-			String sql4 = "SELECT ph.PH_NUM FROM PURCHASE_HISTORY ph ,PACKAGING p ,PRODUCT_DETAIL pd ,PRODUCT_INFOMATION pi2 "
-					+ "WHERE pi2.PI_NUM =pd.PI_NUM "
-					+ "AND pd.PD_NUM = p.PD_NUM "
-					+ "AND p.PH_NUM  = ph.PH_NUM "
-					+ "AND pi2.PI_NUM = ? "
-					+ "AND ph.MI_ID = ?";
-			pstmt4=con.prepareStatement(sql4);
-			pstmt4.setInt(1, pi_num);
-			pstmt4.setString(2, mi_id);
-			rs = pstmt4.executeQuery();
-			if(rs.next()) {
-				ph_num = rs.getInt("ph_num");
-			}
-			
 			String sql ="INSERT INTO REVIEW VALUES (rv_seq.nextval, ?, ?, sysdate, ?, ?)";
+			con=JDBC.getCon();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, ph_num);
 			pstmt.setString(2, r_title);
 			pstmt.setInt(3, r_hit);
 			pstmt.setString(4, r_content);
-			int updatecheck= pstmt.executeUpdate();
-			if(updatecheck>0) {
-			}
+			return pstmt.executeUpdate();
 
-			String sql2 ="select * from REVIEW where ph_num=? and r_title=? and r_hit=? and r_content=?";
-			pstmt2=con.prepareStatement(sql2);
-			pstmt2.setInt(1, ph_num);
-			pstmt2.setString(2, r_title);
-			pstmt2.setInt(3, r_hit);
-			pstmt2.setString(4, r_content);
-			rs = pstmt2.executeQuery();
-			if(rs.next()) {
-				rnum = rs.getInt("r_num");
-			}
-			String sql3 ="INSERT INTO REVIEW_PHOTO VALUES (?, ?)";
-			pstmt3=con.prepareStatement(sql3);
-			pstmt3.setString(1, rp_title);
-			pstmt3.setInt(2, rnum);
-			return pstmt3.executeUpdate();
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}
+
+	}
 	
+	public int getph_num(int pi_num, String mi_id) {
+		Connection con=null;
+		PreparedStatement pstmt=null;		
+		ResultSet rs = null;
+		int ph_num = -1;
+		try {
+			con=JDBC.getCon();
+			String sql = "SELECT ph.PH_NUM FROM PURCHASE_HISTORY ph ,PACKAGING p ,PRODUCT_DETAIL pd ,PRODUCT_INFOMATION pi2 "
+					+ "WHERE pi2.PI_NUM =pd.PI_NUM "
+					+ "AND pd.PD_NUM = p.PD_NUM "
+					+ "AND p.PH_NUM  = ph.PH_NUM "
+					+ "AND pi2.PI_NUM = ? "
+					+ "AND ph.MI_ID = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			pstmt.setString(2, mi_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ph_num = rs.getInt("ph_num");
+			}
+			return ph_num;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return ph_num;
+		}finally {
+			
+		}
+	}
+	public int getr_num() {
+		Connection con=null;
+		PreparedStatement pstmt=null;		
+		ResultSet rs = null;
+		int rnum = -1;
+		try {
+			con=JDBC.getCon();
+
+			String sql ="SELECT max(r_num) FROM REVIEW";
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rnum = rs.getInt("max(r_num)");
+			}
+			return rnum;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}	
+	public int insertrvp(int r_num, String rp_title) {
+		Connection con=null;
+		PreparedStatement pstmt=null;		
+		try {
+			con=JDBC.getCon();
+
+			String sql ="INSERT INTO REVIEW_PHOTO VALUES (?, ?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, rp_title);
+			pstmt.setInt(2, r_num);
+			return pstmt.executeUpdate();
 		}catch(SQLException s) {
 			s.printStackTrace();
 			return -1;
