@@ -1,18 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<<<<<<< HEAD
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!-- <script type="text/javascript"> -->
-<!-- 	function modify(){ -->
-<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductUpdateForm"; --%>
-<!-- 	} -->
-<!-- 	function remove(){ -->
-<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductDelete"; --%>
-<!-- 	} -->
-<!-- </script> -->
 
-=======
 <style>
   table {
     width: 1000px;
@@ -21,7 +11,7 @@
     margin-right: auto;
   }
 </style>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+
 <form method="post" action="${pageContext.request.contextPath }/seller/sellerProductListForm">
 <table border="1" width="1000">
 	<tr>
