@@ -29,7 +29,7 @@ public class ProductDao {
 		try {
 			con = JDBC.getCon();
 			String sql = "INSERT "
-					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?)";			
+					+ " INTO PRODUCT_INFOMATION VALUES(PRO_SEQ.NEXTVAL,?,?,?,?,SYSDATE,?)";			
 			pstmt1 = con.prepareStatement(sql);
 			pstmt1.setString(1, vo.getSi_id());
 			pstmt1.setString(2, vo.getPi_name());

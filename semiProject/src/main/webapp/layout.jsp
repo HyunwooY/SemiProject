@@ -19,19 +19,10 @@
 		var keyword=document.getElementById("keyword");
 		hideText();
 		if(${requestScope.lcode==false}){
-<<<<<<< HEAD
 			alert('${errMsg}')
 			}
-=======
-			alert('${errMsg}')
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 		}
 //		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
-<<<<<<< HEAD
-	
-=======
-	}
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 	function showText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
@@ -88,11 +79,7 @@
 </ul>
 </div>
 <div id="header">
-<<<<<<< HEAD
 <a href="${cp }/layout"><span id="mainTitle">CHANELOPER</span></a>
-=======
-<a href=""><h1>CHANELOPER</h1></a>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 <ul id="menu">
 	<li><a href="${cp }/search/category?CATEGORY=상의&keyword=&sort=&pageNum=1">상의</a></li>
 	<li><a href="${cp }/search/category?CATEGORY=하의&keyword=&sort=&pageNum=1">하의</a></li>
