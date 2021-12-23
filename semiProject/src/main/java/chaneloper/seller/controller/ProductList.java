@@ -28,11 +28,10 @@ public class ProductList extends HttpServlet {
 				int startRow = (pageNum-1)*10+1;
 				int endRow = startRow + 9;
 	
-		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		String si_id = (String)req.getSession().getAttribute("id");
 		System.out.println("si_id:" + si_id);
 		SellerDao dao = SellerDao.getInstance();
-		ArrayList<ProductVo> list = dao.list(pi_num, si_id, startRow, endRow);
+		ArrayList<ProductVo> list = dao.list(si_id, startRow, endRow);
 		
 		int count = dao.getCountProduct();		// 전체 글의 수
 		int pageCount = (int)Math.ceil(count / 10.0);		// 전체 페이지 수

@@ -29,9 +29,10 @@ public class SellerProductListController extends HttpServlet {
 		
 		
 		String si_id = (String)req.getSession().getAttribute("id");
+		int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 		System.out.println("si_id:" + si_id);
 		SellerDao dao = SellerDao.getInstance();
-		ArrayList<ProductVo> productList = dao.productList(si_id, startRow, endRow);	
+		ArrayList<ProductVo> productList = dao.productList(si_id, pi_num, startRow, endRow);	
 	
 		
 		

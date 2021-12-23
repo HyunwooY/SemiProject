@@ -182,24 +182,26 @@ public class SellerDao {
 		}
 	}
 	//판매자 상품 리스트
-	public ArrayList<ProductVo> list(int pi_num, String si_id, int startRow, int endRow){
+	public ArrayList<ProductVo> list(String si_id, int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<ProductVo> list1 = new ArrayList<ProductVo>();
 		try {
 			con = JDBC.getCon();
-			pstmt = con.prepareStatement("SELECT PI.PI_NAME, PI.PI_NUM,PP.PP_TITLE, ROWNUM  FROM PRODUCT_INFOMATION PI"
-					+ "INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
-					+ "WHERE PI.PI_NUM = ? AND PI.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?");
+			String sql = "SELECT PI.PI_NAME, PI.PI_NUM, PP.PP_TITLE, PI.PI_DATE, ROWNUM  FROM PRODUCT_INFOMATION PI"
+					+ " INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
+					+ " WHERE ROWNUM>=? AND ROWNUM<=?";
+			pstmt = con.prepareStatement(sql);			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
-			pstmt.setInt(1, pi_num);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
 			while(rs.next()) {
+				int pi_num = rs.getInt("pi_num");
 				String pi_name = rs.getString("pi_name");
 				String pp_title = rs.getString("pp_title");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, 0, 0, null, null, null, null, 0, pp_title, null);
+				Date pi_date = rs.getDate("pi_date");
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, 0, 0, pi_date, null, null, null, 0, pp_title, null);
 				list1.add(vo);
 			}
 			return list1;
@@ -212,7 +214,7 @@ public class SellerDao {
 	}
 	
 	// 판매자 상품 세부 리스트
-	public ArrayList<ProductVo> productList(String si_id, int startRow, int endRow){
+	public ArrayList<ProductVo> productList(String si_id, int pi_num, int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -221,15 +223,15 @@ public class SellerDao {
 			con = JDBC.getCon();
 			String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP.PP_TITLE, PI.PI_DATE, PI.PI_CATEGORY, ROWNUM FROM"
 					+ " SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_PHOTO PP, PRODUCT_DETAIL PD"
-					+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID AND PI.PI_NUM = PD.PI_NUM AND PD.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?"
+					+ " WHERE SI.SI_ID = ? AND PI.PI_NUM = ? AND SI.SI_ID = PI.SI_ID AND PI.PI_NUM = PD.PI_NUM AND PI.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?"
 					+ " ORDER BY PI.PI_NUM ASC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, si_id);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(2, pi_num);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int pi_num = rs.getInt("pi_num");
 				String pi_name = rs.getString("pi_name");
 				int pi_price = rs.getInt("pi_price");
 				Date pi_date = rs.getDate("pi_date");
