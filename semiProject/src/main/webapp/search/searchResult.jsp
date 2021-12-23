@@ -55,12 +55,14 @@ ul.list li.item{
 }
 </style>
 <script>
+	
 	function checkNull() {
 		let keyword=document.getElementById("keyword1").value;
 		let category=document.getElementById("CATEGORY").value;
 		let sort=document.getElementById("sort").value;
 		if(category==1 && sort==1 && keyword==""){
 			alert("검색어를 입력해주세요");
+			event.preventDefault();
 		}
 	}
 	function none() {}
@@ -77,11 +79,12 @@ ul.list li.item{
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <div class="searchbox">
 	<fieldset>
-		<form method="get" action="${cp }/search/search?pageNum=1">
+		<form method="get" action="${cp }/search/search?pageNum=1" id="form">
 			<input type="hidden" name="pageNum" value="1">
 			<div class="items">
 				<select id="CATEGORY" name="CATEGORY">
 					<option value="1" <c:if test="${CATEGORY=='1' }">selected</c:if>>상품분류 선택</option>
+					<option value="all" <c:if test="${category=='all' }">selected</c:if>>전체상품</option>
 					<option value="상의" <c:if test="${CATEGORY=='상의' }">selected</c:if>>상의</option>
 					<option value="하의" <c:if test="${CATEGORY=='하의' }">selected</c:if>>하의</option>
 					<option value="원피스" <c:if test="${CATEGORY=='원피스' }">selected</c:if>>원피스</option>

@@ -26,9 +26,13 @@ public class SearchController extends HttpServlet{
 		req.setAttribute("keyword", keyword);
 		System.out.println(keyword);
 		String category =req.getParameter("CATEGORY");
-		req.setAttribute("category", category);
+		if(category.equals("all")) {
+			req.setAttribute("category", "all");
+		}else {
+			req.setAttribute("category", category);
+		}
 		if(category!=null) {
-			if(category.equals("1") || category=="") {
+			if(category.equals("1") || category=="" || category.equals("all")) {
 				category=null;
 			}
 		}
