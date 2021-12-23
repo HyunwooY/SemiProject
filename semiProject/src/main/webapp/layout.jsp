@@ -35,7 +35,7 @@
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
 		}
-		if(${requestScope.deletecheck}){
+		if(${requestScope.deletecheck}==true){
 			alert('지금까지 이용해주셔서 감사합니다. \n다음에 놀려오시길 기원드립니다.');
 			location.href="${pageContext.request.contextPath }/layout";
 		}
