@@ -30,6 +30,9 @@ public class ShowPurchaseDetailController extends HttpServlet {
 			json.put("pi_name",vo.getPi_name());
 			json.put("pd_count",vo.getP_count());
 			json.put("pi_price",vo.getPi_price());
+			json.put("ph_state", vo.getPh_state());
+			json.put("pd_num", vo.getPd_num());
+			json.put("p_num",dao.findP_num(ph_num, vo.getPd_num()));
 			ajson.put(json);
 		}
 		resp.setContentType("text/plain;charset=utf-8");

@@ -15,6 +15,7 @@ public class InquireInsertController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("detailmain","/member/inquiryInsert.jsp");
+		req.setAttribute("detailtitle", "문의하기");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 	@Override

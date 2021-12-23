@@ -21,7 +21,11 @@ public class PurchaseDao {
 		ResultSet rs=null;
 		try {
 			con = JDBC.getCon();
-			ps=con.prepareStatement("insert into purchase_history values(ph_seq.nextval,?,?,'결제전',sysdate,?,?,?)");
+			if(ph_type.equals("신용카드")) {
+				ps=con.prepareStatement("insert into purchase_history values(ph_seq.nextval,?,?,'결제완료',sysdate,?,?,?)");
+			}else {
+				ps=con.prepareStatement("insert into purchase_history values(ph_seq.nextval,?,?,'결제전',sysdate,?,?,?)");
+			}
 			ps.setString(1, id);
 			ps.setString(2, ph_type);
 			ps.setString(3, vo.getAddr());
@@ -45,6 +49,7 @@ public class PurchaseDao {
 	public int purchase(ShowPurchaseListVo vo,int ph_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
+
 		try {
 			con = JDBC.getCon();
 			ps=con.prepareStatement("insert into packaging values(p_seq.nextval,?,?,?)");
@@ -83,6 +88,7 @@ public class PurchaseDao {
 			return null;
 		}
 	}
+	
 }
 
 
