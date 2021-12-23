@@ -4,18 +4,18 @@
 	#form1{
 		position:relative;
 		left: 40px;
-		bottom: 20px;
 		margin: auto;
 	}
 	#pwd{
-		width: 150px;
+		width: 130px;
 		height: 20px;
 		margin-bottom: 20px;
+		margin-left: 10px;
 	}
 	#btn{
-		width: 50px;
 		position: relative;
 		left: 50px;
+		width: 50px;
 	}
 </style>
 <script>

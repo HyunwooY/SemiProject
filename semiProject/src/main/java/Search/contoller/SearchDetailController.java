@@ -1,5 +1,6 @@
 package Search.contoller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,17 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import chaneloper.dao.Search_ResultDao;
-import chaneloper.dao.Search_inqDao;
+import chaneloper.dao.Search_Inq_RvDao;
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
 import chaneloper.vo.Search_ProductVo;
+import chaneloper.vo.Search_ReviewVo;
+import chaneloper.vo.Search_ReviewptVo;
 @WebServlet("/search/searchdetail")
 public class SearchDetailController extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		if(req.getParameter("pi_num")!=null) {
 			int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 			Search_ResultDao dao = new Search_ResultDao();
@@ -59,7 +64,7 @@ public class SearchDetailController extends HttpServlet{
 			}
 			int startRow=(pageNum-1)*10+1;
 			int endRow=startRow+9;	
-			Search_inqDao dao2=Search_inqDao.getInstance();
+			Search_Inq_RvDao dao2=Search_Inq_RvDao.getInstance();
 			ArrayList<Inquiry_historyVo> list=dao2.list(startRow, endRow, pi_num);
 			int pageCount=(int)Math.ceil(dao2.getCount(pi_num)/10.0);
 			int startPage=(pageNum-1)/10*10+1;
@@ -67,6 +72,14 @@ public class SearchDetailController extends HttpServlet{
 			if(endPage>pageCount) {
 				endPage=pageCount;
 			}
+			
+			
+			ArrayList<Search_ReviewVo> list_rv = dao2.getrv(pi_num);
+			ArrayList<Search_ReviewptVo> list_pt = dao2.getpt();
+			
+			req.setAttribute("list_rv", list_rv);
+			req.setAttribute("list_pt", list_pt);
+			
 			req.setAttribute("list", list);
 			req.setAttribute("endPage", endPage);
 			req.setAttribute("startPage", startPage);
@@ -81,7 +94,7 @@ public class SearchDetailController extends HttpServlet{
 			req.setAttribute("pi_num", pi_num);
 			
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
+			req.getRequestDispatcher("../layout.jsp").forward(req, resp);
 		}
 		
 		
@@ -89,9 +102,8 @@ public class SearchDetailController extends HttpServlet{
 			String get_color = req.getParameter("get_color");
 			req.setAttribute("post_color", get_color);
 			req.setAttribute("main","/search/searchDetail.jsp");
-			req.getRequestDispatcher("/search/searchDetailLayout.jsp").forward(req, resp);
+			req.getRequestDispatcher("../layout.jsp").forward(req, resp);
 		}
-
 
 	}
 
