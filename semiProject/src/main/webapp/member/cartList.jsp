@@ -51,10 +51,14 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 		let xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4 && xhr.status==200){
-				let count=document.getElementsByClassName("count")
+				let count=document.getElementsByClassName("count");
 				let priceAll=document.getElementsByClassName("priceAll");
-				count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)-1;
-				priceAll[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)*price;
+				if(parseInt(count[cookieNum-1].innerHTML)-1==0){
+					let cdown=document.getElementsByClassName("cdown");
+				}else{
+					count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)-1;
+					priceAll[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)*price;
+				}
 				let data=xhr.responseText;
 				let json=JSON.parse(data);
 				
@@ -62,6 +66,10 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 		}
 		xhr.open('get','${pageContext.request.contextPath}/cart/count?how=down&cookie_num='+cookieNum,true);
 		xhr.send();
+	}
+	function cookiedelete(cookienum){
+		console.log("aaaa")
+		location.href="${pageContext.request.contextPath}/member/deleteCookie?cookieNum="+cookienum;
 	}
 </script>
 <div id="cartlist">
@@ -98,8 +106,9 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 					<th width="250px">상품명</th>
 					<th width="100px">색상</th>
 					<th width="50px">사이즈</th>
-					<th width="100px">수량</th>
-					<th width="130px">가격</th>
+					<th width="80px">수량</th>
+					<th width="100px">가격</th>
+					<th width="50px"></th>
 				</tr>
 			</c:if>
 				<tr>
@@ -119,13 +128,14 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 							</a>
 						</div>
 						<div class="down">
-							<a href="javascript:countDown(${status.count},${vo.pi_price })">
+							<a href="javascript:countDown(${status.count},${vo.pi_price })" class="cdown">
 								<img src="${pageContext.request.contextPath}/images/down.png" >
 							</a>
 						</div>
 					</div>
 					</td>
 					<td class="priceAll">${priceAll}</td>
+					<td width="50px"><input type="button" value="상품삭제" onclick="cookiedelete(${status.count})"></td>
 				</tr>
 		</c:forEach>
 	</table>
