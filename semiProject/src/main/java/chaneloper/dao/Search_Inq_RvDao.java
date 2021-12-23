@@ -247,7 +247,6 @@ public class Search_Inq_RvDao {
 			rs = pstmt4.executeQuery();
 			if(rs.next()) {
 				ph_num = rs.getInt("ph_num");
-				System.out.println(ph_num+"ph_num셀렉트");
 			}
 			
 			String sql ="INSERT INTO REVIEW VALUES (rv_seq.nextval, ?, ?, sysdate, ?, ?)";
@@ -258,7 +257,6 @@ public class Search_Inq_RvDao {
 			pstmt.setString(4, r_content);
 			int updatecheck= pstmt.executeUpdate();
 			if(updatecheck>0) {
-				System.out.println("리뷰테이블 저장완료");
 			}
 
 			String sql2 ="select * from REVIEW where ph_num=? and r_title=? and r_hit=? and r_content=?";
@@ -270,7 +268,6 @@ public class Search_Inq_RvDao {
 			rs = pstmt2.executeQuery();
 			if(rs.next()) {
 				rnum = rs.getInt("r_num");
-				System.out.println(rnum+"rnum셀렉트");
 			}
 			String sql3 ="INSERT INTO REVIEW_PHOTO VALUES (?, ?)";
 			pstmt3=con.prepareStatement(sql3);

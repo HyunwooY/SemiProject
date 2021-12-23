@@ -29,6 +29,7 @@ public class SearchDetailController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		if(req.getParameter("pi_num")!=null) {
+			String savedir =req.getSession().getServletContext().getRealPath("/upload");
 			int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 			Search_ResultDao dao = new Search_ResultDao();
 			ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
@@ -92,6 +93,7 @@ public class SearchDetailController extends HttpServlet{
 			req.setAttribute("size", size);
 			req.setAttribute("img", img);
 			req.setAttribute("pi_num", pi_num);
+			req.setAttribute("savedir", savedir);
 			
 			req.setAttribute("main","/search/searchDetail.jsp");
 			req.getRequestDispatcher("../layout.jsp").forward(req, resp);
