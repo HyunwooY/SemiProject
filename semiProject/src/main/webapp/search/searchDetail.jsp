@@ -506,7 +506,8 @@
 <!-- 상품이미지 출력 -->
 	
 	<div id="showimg">
-			<c:forEach var="i" begin="0" end="2">
+			<c:forEach var="i" begin="0" end="${img.size()-1}">
+			
 						<img src="${pageContext.request.contextPath}/upload/${img[i]}">
 			</c:forEach>
 	 </div>
