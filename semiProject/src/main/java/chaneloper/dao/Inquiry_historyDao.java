@@ -113,6 +113,8 @@ public class Inquiry_historyDao {
 		}
 	}
 	
+	
+	
 	// 문의내역 수정
 	public int InquiryUpdate(Inquiry_historyVo vo) {
 		Connection con = null;
@@ -223,6 +225,7 @@ public class Inquiry_historyDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	
 	//가장 큰 글번호
 		public int getMaxNum() {
 			Connection con = null;

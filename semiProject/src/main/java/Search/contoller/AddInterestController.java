@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.AddInterestDao;
+import chaneloper.dao.InterestDao;
 @WebServlet("/search/interest")
 public class AddInterestController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(req.getParameter("mi_id")!=null && req.getParameter("pi_num")!=null) {
-			AddInterestDao dao = new AddInterestDao();
+			InterestDao dao = new InterestDao();
 			int rs= dao.addinter(req.getParameter("mi_id"), Integer.parseInt(req.getParameter("pi_num")));
 			resp.setContentType("text/xml;charset=utf-8");
 			PrintWriter pw = resp.getWriter();

@@ -5,7 +5,12 @@
 .btn1,.btn2,.btn3,.btn4{margin-right:-8px;}
 .btn2,.btn3,.btn4,.btn5{border-top-left:-5px;border-bottom-left:-5px}
 #start,#end{height:18px;position:relative;top:-2px}
-#table{width:1000px;position:relative;top:10px;text-align:center}
+#table{width:1000px;position:relative;top:10px;text-align:center;
+		border-top:2px solid black;border-bottom:2px solid black;
+		border-collapse:collapse;}
+#table {text-align:center;}
+th, tr{padding-left:0px;padding-right:0px;}
+th, td{padding-top:5px;padding-bottom:5px}
 </style>
 
 <div>
