@@ -16,9 +16,10 @@ import chaneloper.vo.Inquiry_historyVo;
 public class InquiryHistoryListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");		
-		
+		req.setCharacterEncoding("UTF-8");	
 		String spageNum = req.getParameter("pageNum");
+		String field=req.getParameter("field");
+		String keyword=req.getParameter("keyword");
 		int pageNum = 1;
 		if(spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
@@ -27,10 +28,9 @@ public class InquiryHistoryListController extends HttpServlet{
 		int endRow = startRow + 9;
 		
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
-		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow, null, null,null);
-		
-		
-		int count = dao.getCount(null, null,null);		// 전체 글의 수
+		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow,field,keyword);
+
+		int count = dao.getCount(field,keyword);		// 전체 글의 수
 		int pageCount = (int)Math.ceil(count / 10.0);		// 전체 페이지 수
 		int startPageNum = ((pageNum - 1) / 10 * 10) + 1;		// 시작 페이지 번호
 		int endPageNum = startPageNum + 9;		// 끝 페이지 번호
@@ -43,7 +43,8 @@ public class InquiryHistoryListController extends HttpServlet{
 		req.setAttribute("startPage", startPageNum);
 		req.setAttribute("endPage", endPageNum);
 		req.setAttribute("pageNum", pageNum);
-		
+		req.setAttribute("keyword", keyword);
+		req.setAttribute("field", field);
 		req.setAttribute("detailtitle", "문의내역");
 		req.setAttribute("detailmain", "/seller/inquiryList.jsp");
 		req.setAttribute("main", "/seller/sellerpage.jsp");

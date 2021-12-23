@@ -7,6 +7,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 #maindiv {position: relative; padding:50px;}
 #mainimg{position: relative; width:500px; height:600px;  float:left;margin-top:21px ; margin-left:150px; margin-right:50px;margin-bottom:80px; }
@@ -447,8 +448,8 @@
 			<th colspan=4>${name}</th>
 			<tr>
 			    <td colspan=4><br>
-				    가격 :  ${price}원<br>
-				    적립금 :  ${Math.round(price*0.01)}원
+				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
+				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
 			    </td>
 			</tr>
 			<tr>

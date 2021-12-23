@@ -31,7 +31,7 @@
 			<input type="checkbox" name="pi_category" value="아우터" onclick="checkOnlyOne(this)"/>아우터
 		</label>
 		<label>
-			<input type="checkbox" name="pi_category" value="악세서리" onclick="checkOnlyOne(this)"/>악세서리
+			<input type="checkbox" name="pi_category" value="악세사리" onclick="checkOnlyOne(this)"/>악세사리
 		</label>
 		<br>
 		

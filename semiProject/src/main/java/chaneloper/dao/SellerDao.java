@@ -193,7 +193,8 @@ public class SellerDao {
 			String sql = "SELECT PI.PI_NAME, PI.PI_NUM, PP.PP_TITLE, PI.PI_DATE, ROWNUM  FROM PRODUCT_INFOMATION PI"
 					+ " INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
 					+ " INNER JOIN SELLER_INFOMATION SI ON PI.SI_ID = SI.SI_ID"
-					+ " WHERE SI.SI_ID = ? AND ROWNUM>=? AND ROWNUM<=?";
+					+ " WHERE SI.SI_ID = ? AND ROWNUM>=? AND ROWNUM<=?"
+					+ " ORDER BY PI_DATE DESC";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setString(1, si_id);
 			pstmt.setInt(2, startRow);

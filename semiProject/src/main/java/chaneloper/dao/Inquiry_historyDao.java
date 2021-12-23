@@ -1,12 +1,14 @@
 package chaneloper.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import chaneloper.vo.Inquiry_historyVo;
+import db.JDBC;
 import db.JDBC;
 
 public class Inquiry_historyDao {
@@ -37,33 +39,6 @@ public class Inquiry_historyDao {
 		}
 	}
 	
-//	public Inquiry_historyVo select(int ih_num) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			con = JDBC.getCon();
-//			String sql ="select * from Inquiry_history where ih_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, ih_num);
-//			rs = pstmt.executeQuery();
-//			if(rs.next()) {
-//				String mi_id = rs.getString("mi_id");
-//				int pi_num = rs.getInt("pi_num");
-//				String ih_title = rs.getString("ih_title");
-//				String ih_question = rs.getString("ih_question");
-//				String ih_answer = rs.getString("ih_answer");
-//				Inquiry_historyVo Inquiry_history = new Inquiry_historyVo(ih_num,mi_id,pi_num,ih_title,ih_question,ih_answer);
-//				return Inquiry_history;
-//			}
-//			return null;
-//		}catch(SQLException s) {
-//			s.printStackTrace();
-//			return null;
-//		}finally {
-//			JDBC.close(con, pstmt, rs);
-//		}
-//	}
 	
 	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword, String id){
 		Connection con = null;
@@ -115,7 +90,77 @@ public class Inquiry_historyDao {
 		}
 	}
 	
+	public int getCount(String field,String keyword) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JDBC.getCon();
+			String sql="select NVL(count(num),0) from inquiry_history";
+			if(field!=null && !field.equals("")) {
+				sql += "where" + field + "like '%" + keyword + "%'";
+			}
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+			return rs.getInt(1);
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,rs);
+		}
+	}
 	
+	public ArrayList<Inquiry_historyVo> list(int startRow,int endRow,String field,String keyword){
+		String sql="";
+		if(field==null || field.equals("")) { //검색조건이 없는 경우
+		     sql="select * from "
+				+ "("
+				+ "select ih.*,rownum rnum from "
+				+ "("
+				+ "	select * from inquiry_history "
+				+ "	order by ih_num desc "
+				+ ")ih "
+				+ ") "
+				+ "where rnum>=? and rnum<=? ";
+		}else { //검색조건이 있는 경우
+			sql="select * from "
+					+ "("
+					+ "select ih.*,rownum rnum from "
+					+ "("
+					+ "	select * from inquiry_history "
+					+ "	order by ih_num desc "
+					+ ")ih "
+					+ ") "
+					+ "where rnum>=? and rnum<=? ";
+		}
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=JDBC.getCon();
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				rs=pstmt.executeQuery();
+				ArrayList<Inquiry_historyVo> list=new ArrayList<Inquiry_historyVo>();
+				while(rs.next()) {
+					String mi_id =rs.getString("mi_id");
+					String ih_title=rs.getString("ih_title");
+					Inquiry_historyVo vo=new Inquiry_historyVo(0,mi_id,0,ih_title,null,null);
+					list.add(vo);
+				}
+				return list;
+				}catch(SQLException s) {
+					s.printStackTrace();
+					return null;
+				}finally {
+					JDBC.close(con,pstmt,rs);
+			}
+	}
 	
 	// 문의내역 수정
 	public int InquiryUpdate(Inquiry_historyVo vo) {

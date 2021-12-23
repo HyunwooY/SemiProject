@@ -30,13 +30,13 @@ public class ProductDeleteController extends HttpServlet{
 		if(n>0) {
 			req.setAttribute("productcode", "success");
 			req.setAttribute("productList", productList);
-			req.setAttribute("main", "/seller/productInfoList?pageNum=1");
+			req.setAttribute("main", "/seller/productInfoList.jsp");
+			
 		}else {
 			req.setAttribute("productcode", "fail");
 			req.setAttribute("productList", productList);
-			req.setAttribute("main", "/seller/productInfoList?pageNum=1");
+			req.setAttribute("main", "/seller/productInfoList.jsp");
 		}
-		
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		resp.sendRedirect(req.getContextPath() + "/seller/productInfoList?pageNum=1");
 	}
 }
