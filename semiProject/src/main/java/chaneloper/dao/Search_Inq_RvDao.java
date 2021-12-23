@@ -240,7 +240,12 @@ public class Search_Inq_RvDao {
 		int rnum = 0;
 		try {
 			con=JDBC.getCon();
-			String sql4 = "select ph_num from purchase_history where pi_num=? and mi_id=?";
+			String sql4 = "SELECT ph.PH_NUM FROM PURCHASE_HISTORY ph ,PACKAGING p ,PRODUCT_DETAIL pd ,PRODUCT_INFOMATION pi2 "
+					+ "WHERE pi2.PI_NUM =pd.PI_NUM "
+					+ "AND pd.PD_NUM = p.PD_NUM "
+					+ "AND p.PH_NUM  = ph.PH_NUM "
+					+ "AND pi2.PI_NUM = ? "
+					+ "AND ph.MI_ID = ?";
 			pstmt4=con.prepareStatement(sql4);
 			pstmt4.setInt(1, pi_num);
 			pstmt4.setString(2, mi_id);
