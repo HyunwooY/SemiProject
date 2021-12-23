@@ -5,7 +5,7 @@
 #join{
 	position:relative;
 	margin:auto;
-	color:white;
+	color:black;
 	width:500px
 }
 #join {height:auto;text-align:left}

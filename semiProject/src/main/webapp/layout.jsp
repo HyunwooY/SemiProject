@@ -8,7 +8,7 @@
 <title>CHANELOPER입니다.</title>
 <style type="text/css">
 	*{margin:0px;padding:0px}
-	#wrap{width:1500px;height:auto;background-color:yellow;margin:auto;border:1px solid black;}
+	#wrap{width:1500px;height:auto;background-color:yellow;margin:auto;}
 	#wrap {position:relative;}
 	#ac{width:100%;height:60px;background-color:white;}
 	#header{width:100%;height:140px;background-color:white;text-align:center}
@@ -16,8 +16,8 @@
 	#ac #account li{display:inline;position:relative;right:60px;float:right;margin-right:15px;top:5px}
 	a{color:black;text-decoration:none}
 	#header #menu li{display:inline;position:relative;top:50px;font-size:1.2em;margin:40px}
-	#main{width:100%;overflow:hidden;background-color:#BDBDBD;text-align:center;} /* 혹시 text-align 주신분...?*/
-	#footer{width:100%;height:10%;background-color:gray}
+	#main{width:100%;overflow:hidden;background-color:white;text-align:center;} /* 혹시 text-align 주신분...?*/
+	#footer{width:100%;height:10%;background-color:white}
 	#footer #foot{text-align:center;padding-top:50px;padding-bottom:50px}
 	#footer #foot h3{margin-bottom:10px}
 	#com1, #com2, #com3{margin-bottom:10px}
@@ -34,6 +34,10 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
+		}
+		if(${requestScope.deletecheck}==true){
+			alert('지금까지 이용해주셔서 감사합니다. \n다음에 놀려오시길 기원드립니다.');
+			location.href="${pageContext.request.contextPath }/layout";
 		}
 	}
 

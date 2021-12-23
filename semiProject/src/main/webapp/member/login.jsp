@@ -6,7 +6,7 @@
 #login{
 	position:relative;
 	margin:auto;
-	color:white;
+	color:black;
 }
 #login form .input{width:200px;}
 #login form .input,label{font-size:1.3em;margin:10px}
