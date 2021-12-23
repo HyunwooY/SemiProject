@@ -258,6 +258,55 @@ public class SellerDao {
 		}
 	}
 	
+	// 판매자 상품 수정
+//	public int sellerProductDelete(ProductVo vo) {
+//		Connection con = null;
+//		PreparedStatement pstmt1 = null;
+//		PreparedStatement pstmt2 = null;
+//		PreparedStatement pstmt3 = null;
+//		PreparedStatement pstmt4 = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql1 = "UPDATE PRODUCT_INFOMATION SET PI_NAME=?, PI_PRICE=?, PI_COUNT=?, PD_COUNT=? WHERE PI_NUM=?";
+//			pstmt1 = con.prepareStatement(sql1);
+//			pstmt1.setString(1, vo.getPd_size());
+//			pstmt1.setString(2, vo.getPd_color());
+//			pstmt1.setInt(3, vo.getPd_count());
+//			pstmt1.setInt(4, vo.getPd_count());
+//			pstmt1.setInt(5, vo.getPi_num());
+//			int a = pstmt1.executeUpdate();
+//			
+//			String sql2 = "UPDATE PRODUCT_PHOTO SET PP_TITLE=? WHERE PI_NUM=?";
+//			pstmt2 = con.prepareStatement(sql2);
+//			pstmt2.setString(1, vo.getPp_title());
+//			pstmt2.setInt(2, vo.getPi_num());
+//			int b = pstmt2.executeUpdate();
+//			
+//			String sql3 = "UPDATE TAG T_NAME=? WHERE PI_NUM=?";
+//			pstmt3 = con.prepareStatement(sql3);
+//			pstmt3.setString(1, vo.getT_name());
+//			pstmt3.setInt(2, vo.getPi_num());
+//			int c = pstmt3.executeUpdate();
+//			
+//			String sql4 = "UPDATE PRODUCT_DETAIL SET PD_SIZE=?, PD_COLOR=?, PD_COUNT=? WHERE PI_NUM=?";
+//			pstmt4 = con.prepareStatement(sql4);
+//			pstmt4.setString(1, vo.getPd_size());
+//			pstmt4.setString(2, vo.getPd_color());
+//			pstmt4.setInt(3, vo.getPd_count());
+//			pstmt4.setInt(5, vo.getPi_num());
+//			int d = pstmt4.executeUpdate();
+//			
+//			return a + b + c + d;
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return -1;
+//		} finally {
+//			JDBC.close(pstmt3);
+//			JDBC.close(pstmt2);
+//			JDBC.close(con, pstmt1, null);
+//		}
+//	}
 }
 
 

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<form action="${pageContext.request.contextPath }/seller/productUpdate" enctype="multipart/form-data" method="post">
+	<form action="${pageContext.request.contextPath }/seller/sellerProductUpdate" enctype="multipart/form-data" method="post">
 		상품번호<br>
 		<input type="text" name="pi_num" value="${requestScope.vo.pi_num }" readonly="readonly"><br>
 		상품명<br>
