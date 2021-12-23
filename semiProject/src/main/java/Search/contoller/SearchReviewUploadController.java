@@ -36,13 +36,21 @@ public class SearchReviewUploadController extends HttpServlet{
 			String context = mr.getParameter("context");
 			int rating = Integer.parseInt(mr.getParameter("rating"));
 			Search_Inq_RvDao dao = Search_Inq_RvDao.getInstance();
-			
+			int ph_num = dao.getph_num(pi_num, mi_id);
+			if(ph_num<0) {
+				System.out.println("ph_num 을 가져오지 못했습니다.");
+			}
+			dao.insertrv(ph_num, title, rating, context);
+			int r_num =dao.getr_num();
+			if(r_num<0) {
+				System.out.println("r_num을 가져오지 못했습니다.");
+			}
 			for(int i=0;i<=Integer.parseInt(mr.getParameter("adbt"));i++) {
 				System.out.println(mr.getFilesystemName("file"+i));
 				String saveFileName = mr.getFilesystemName("file"+i);//저장된 파일명
 				String datadir = saveDir+"\\"+saveFileName;
 				File f = new File(datadir);
-				dao.insertrv(pi_num, mi_id, title, rating, context , saveFileName);
+				dao.insertrvp(r_num, saveFileName);
 			}
 				
 		}else {

@@ -21,9 +21,6 @@ public class SearchQnaDelController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(req.getParameter("mi_id")!=null && req.getParameter("pi_num")!=null) {
 			Search_Inq_RvDao dao=Search_Inq_RvDao.getInstance();
-			System.out.println(req.getParameter("mi_id"));
-			System.out.println(req.getParameter("title"));
-			System.out.println(req.getParameter("pi_num"));
 			int rs= dao.delqa(req.getParameter("mi_id"), Integer.parseInt(req.getParameter("pi_num")),req.getParameter("title"));
 			if(rs>0) {
 				System.out.println("삭제완료");

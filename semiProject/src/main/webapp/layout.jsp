@@ -57,7 +57,7 @@
 			if(keyword==""){
 				alert('검색어를 입력해주세요');
 			}else {
-				window.location.href = '${pageContext.request.contextPath}/search/search?keyword='+e.target.value;
+				window.location.href = '${pageContext.request.contextPath}/search/search?CATEGORY=&keyword='+e.target.value;
 			}
 		}	
 	}
@@ -104,7 +104,7 @@
 	<li><a href="${cp }/search/category?CATEGORY=악세사리&keyword=&sort=&pageNum=1">악세서리</a></li>
 	<li><a href="${cp }/seller/notice" >공지사항 </a></li>
 	<li id="search"  onmouseover="showText()" >
-		<a href="${cp }/search/search" >검색 </a></li>
+		<a href="${cp }/search/search?CATEGORY=" >검색 </a></li>
 </ul>
 	<input type="text" id="keyword" onkeypress="search(event)" onmouseout="delayText()">
 </div>
