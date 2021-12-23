@@ -88,9 +88,9 @@ public class ReviewDao {
 				int ph_num = rs.getInt("ph_num");
 				String r_title = rs.getString("r_title");
 				Date r_date = rs.getDate("r_date");
-				String r_hit = rs.getString("r_hit");
-				String rp_title = rs.getString("rp_title");
-				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, ph_num, r_hit, rp_title);
+				int r_hit = rs.getInt("r_hit");
+//				String rp_title = rs.getString("rp_title");
+				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, r_hit, rs.getString("r_content"), null);
 				list.add(vo);
 			}
 			return list;

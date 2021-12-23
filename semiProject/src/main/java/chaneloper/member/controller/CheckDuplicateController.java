@@ -21,9 +21,9 @@ public class CheckDuplicateController extends HttpServlet {
 		JSONObject json=new JSONObject();
 		MemberDao dao=MemberDao.getInstance();
 		if(dao.checkId(id)){
-			json.put("check", true);
-		}else {
 			json.put("check", false);
+		}else {
+			json.put("check", true);
 		}
 		PrintWriter pw=resp.getWriter();
 		pw.print(json);

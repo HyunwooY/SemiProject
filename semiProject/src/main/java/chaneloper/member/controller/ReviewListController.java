@@ -29,8 +29,8 @@ public class ReviewListController extends HttpServlet{
 		int endRow = startRow+9;
 		
 		ReviewDao dao = ReviewDao.getInstance();
-		if(dao.reviewSelect(id1)==id)
-		dao.list(startRow, endRow);
+//		if(dao.reviewSelect(id1)==id)
+//		dao.list(startRow, endRow);
 		
 		ArrayList<ReviewVo> list = dao.list(startRow, endRow);
 		int pageCount = (int)Math.ceil(dao.getCount()/10.0); 
