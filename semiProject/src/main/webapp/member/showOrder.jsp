@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
+#show{padding-top:10px}
 .btn1,.btn2,.btn3,.btn4{margin-right:-8px;}
 .btn2,.btn3,.btn4,.btn5{border-top-left:-5px;border-bottom-left:-5px}
 #start,#end{height:18px;position:relative;top:-2px}
-#table{width:1000px;position:relative;top:10px;text-align:center;
+#table{width:1000px;position:relative;margin-top:10px;margin-bottom:80px;text-align:center;
 		border-top:2px solid black;border-bottom:2px solid black;
 		border-collapse:collapse;}
 #table {text-align:center;}
@@ -17,6 +18,7 @@ th, td{padding-top:5px;padding-bottom:5px}
 <script>
 
 </script>
+<div id="phmain">
 <div>
 	<form method="get" action="${pageContext.request.contextPath }/member/showorder">
 		<input type="button" value="오늘" onclick="set(0)" class="btn1">
@@ -67,7 +69,7 @@ th, td{padding-top:5px;padding-bottom:5px}
 		</c:forEach>
 	</table>
 </div>
-
+</div>
 <script>
 	
 	function set(change){
@@ -183,20 +185,26 @@ th, td{padding-top:5px;padding-bottom:5px}
 				//newhCell9.colSpan="2";
 				newhCell9.style.width="50px"
 				newhCell9.style.fontWeight="bold";
+				
 				let newhCell10=newRow3.insertCell(3);
 				newhCell10.style.borderBottom="2px solid black";
-				newhCell10.colSpan="2";
-				newhCell10.style.width="240px"
 				newhCell10.style.fontWeight="bold";
+				
 				let newhCell11=newRow3.insertCell(4);
 				newhCell11.style.borderBottom="2px solid black";
-				newhCell11.style.width="170px";
+				//newhCell10.colSpan="2";
+				newhCell11.style.width="240px"
+				newhCell11.style.fontWeight="bold";
+				let newhCell12=newRow3.insertCell(5);
+				newhCell12.style.borderBottom="2px solid black";
+				newhCell12.style.width="170px";
 				
 				
 				newhCell7.innerHTML='상품사진';
 				newhCell8.innerHTML='상품명';
-				newhCell9.innerHTML='수량';
-				newhCell10.innerHTML='판매금액';
+				newhCell9.innerHTML="사이즈";
+				newhCell10.innerHTML='수량';
+				newhCell11.innerHTML='판매금액';
 				for(let i=0;i<list.length;i++){
 					if(i!=(list.length-1)){
 						let newRow2=table.insertRow(count+i+5); //6
@@ -206,20 +214,28 @@ th, td{padding-top:5px;padding-bottom:5px}
 						newdCell1.style.width="140px";
 						let newdCell2=newRow2.insertCell(1);
 						newdCell2.style.width="400px"
-						let newdCell3=newRow2.insertCell(2);
+						
+						let newdCell6=newRow2.insertCell(2); //신
+						newdCell6.style.width="400px"
+						
+						
+						let newdCell3=newRow2.insertCell(3);
 						newdCell3.style.width="50px"
 						//newdCell3.colSpan="1";
-						let newdCell4=newRow2.insertCell(3);
-						newdCell4.colSpan="2";
+						let newdCell4=newRow2.insertCell(4);
+						//newdCell4.colSpan="2";
 						newdCell4.style.width="240px"
 						/*let newdCell5=newRow2.insertCell(4);
 						newdCell5.colSpan="2";*/
-						let newdCell5=newRow2.insertCell(4);
+						let newdCell5=newRow2.insertCell(5);
 						//newdCell5.colSpan="1";
 						newdCell5.style.width="170px"
 						
 						newdCell1.innerHTML='<img src="${pageContext.request.contextPath}/upload/'+list[i].pp_title+'" class="img">';
-						newdCell2.innerHTML=list[i].pi_name;
+						newdCell2.innerHTML='<a href="javascript:goPdetail('+list[i].pi_num+')">'+list[i].pi_name+'</a>';
+						
+						newdCell6.innerHTML=list[i].pd_size;
+						
 						newdCell3.innerHTML=list[i].pd_count;
 						newdCell4.innerHTML=list[i].pi_price;
 
@@ -233,19 +249,27 @@ th, td{padding-top:5px;padding-bottom:5px}
 						newdCell1.style.width="140px";
 						newdCell1.style.borderBottom="2px solid black";
 						let newdCell2=newRow2.insertCell(1);
+						
+						let newdCell6=newRow2.insertCell(2); //신
+						newdCell6.style.width="400px"
+						newdCell6.style.borderBottom="2px solid black";
+						
 						newdCell2.style.borderBottom="2px solid black";
-						let newdCell3=newRow2.insertCell(2);
+						let newdCell3=newRow2.insertCell(3);
 						newdCell3.colSpan="1";
 						newdCell3.style.borderBottom="2px solid black";
-						let newdCell4=newRow2.insertCell(3);
-						newdCell4.colSpan="2";
+						let newdCell4=newRow2.insertCell(4);
+						//newdCell4.colSpan="2";
 						newdCell4.style.borderBottom="2px solid black";
-						let newdCell5=newRow2.insertCell(4);
+						let newdCell5=newRow2.insertCell(5);
 						newdCell5.colSpan="1";
 						newdCell5.style.borderBottom="2px solid black";
 
 						newdCell1.innerHTML='<img src="${pageContext.request.contextPath}/upload/'+list[i].pp_title+'" class="img">';
-						newdCell2.innerHTML=list[i].pi_name;
+						newdCell2.innerHTML='<a href="javascript:goPdetail('+list[i].pi_num+')">'+list[i].pi_name+'</a>';
+						
+						newdCell6.innerHTML=list[i].pd_size;
+						
 						newdCell3.innerHTML=list[i].pd_count;
 						newdCell4.innerHTML=list[i].pi_price;
 
@@ -275,6 +299,9 @@ th, td{padding-top:5px;padding-bottom:5px}
 	}
 	function pInquiry(ph_num){
 		location.href="${pageContext.request.contextPath }/member/change/status?status=inquiry&ph_num="+ph_num;
+	}
+	function goPdetail(pi_num){
+		location.href="${pageContext.request.contextPath }/search/searchdetail?pi_num="+pi_num;
 	}
 </script>
 

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
-#cartlist{position:relative;left:10px;top:-15px}
+#interestlist{position:relative;padding-bottom:100px;top:-15px}
 table{width:800px;position:relative;top:10px;}
 table {margin:0px;padding:0px;text-align:center;border-bottom:1px solid black;border-collapse:collapse}
 th, tr{padding-left:0px;padding-right:0px;}
@@ -21,7 +21,7 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 #isnull{padding-top:10px;padding-bottom:10px}
 #countControll{width:21px;height:50px;text-align:center;position:relative;float:left;left:40px}
 </style>
-<div id="cartlist">
+<div id="interestlist">
 	<table>
 		<c:forEach var="vo" items="${list}" varStatus="status">
 			<c:if test="${vo.si_name!=siname}">

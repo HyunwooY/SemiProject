@@ -79,10 +79,8 @@
 		<label>
 			<input type="checkbox" name="pd_color" value="BLACK">블랙<br>
 		</label>		
-		<br>
 
-
-		재고수량<br>
+		재고수<br>
 		<input type="text" name="pd_count"><br><br>
 		
 

@@ -37,7 +37,7 @@ public class InquiryHistoryController extends HttpServlet{
 		int endPageNum = startPageNum+9;
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;
-		}
+		}     
 		req.setAttribute("list", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPage", startPageNum);

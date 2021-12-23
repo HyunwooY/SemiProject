@@ -2,10 +2,19 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	table{width:990px}
+	    table, th, td {
+    border: 1px solid #bcbcbc;
+  }
+  table {
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
-	<!-- <h1>문의 내역</h1> -->
+	<h1>문의 내역</h1>
+	<br>
 	<table>
 		<tr>
 			<th>문의번호</th>
@@ -49,4 +58,16 @@
 		<c:if test="${requestScope.endPage < requestScope.pageCount }">
 			<a href="${cp }/seller/inquiryList?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
 		</c:if>
-	</div>  
+	</div>
+
+	<div>
+	<form method="post" action="${cp }/seller/inquiryList"">
+		<select name="field">
+		<option value="ih_num" <c:if test="${field=='ih_num' }">selected</c:if>>작성자</option>
+			<option value="mi_id" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
+			<option value="ih_title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
+		</select>
+		<input type="text" name="keyword" value="${keyword }">
+		<input type="submit" value="검색">
+	</form>
+</div>

@@ -33,7 +33,7 @@ public class InquireInsertController extends HttpServlet{
 			req.setAttribute("code", "success");
 		}else {
 			req.setAttribute("code", "fail");
-		}
+		}    
 		req.setAttribute("detailmain","/member/inquiryInsert.jsp");
 		req.setAttribute("detailtitle", "문의하기");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);

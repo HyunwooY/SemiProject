@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	#mypagediv{margin: auto; }
-	#mypagediv2{margin: 10px; padding-top: 30px; padding-left: 20px;}
-	#mypageform th{padding-top: 15px; padding-bottom: 10px;}
-	h2{margin-bottom: 20px;}
 	.mpinput{width: 300px; height: 23px;}
-	.mypagebtn{position: relative; left:170px; top: 50px; margin-right: 30px; width: 60px; height: 30px; }
+	.mypagebtn{position: relative; left:200px; top: 40px; margin-right: 30px; width: 70px; height: 30px; }
 </style>
 <script>
 	window.onload = function(){
 		if(${requestScope.result=='success'}){
 			alert("회원정보가 수정 되었습니다.");
 		}
-	} 
+	}  
 </script>
 <div id="mypagediv">
 	<div id="mypagediv2">
@@ -61,7 +57,7 @@
 			</tr>	
 			<tr>
 				<th>
-					<br><br><br><h3>기본 배송지 정보</h3>
+					<br><br><h3>기본 배송지 정보</h3>
 				</th>
 			</tr>
 			<tr>
