@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <style>
 	table {
@@ -42,7 +43,7 @@
 			<td>${listAll.pd_color }</td>
 			<td>${listAll.pi_num }</td>
 			<td>${listAll.pi_name }</td>
-			<td>${listAll.pi_price }</td>
+			<td><fmt:formatNumber value="${listAll.pi_price }" pattern="#,###"/>원</td>
 			<td>${listAll.pi_category }</td>
 		</tr>
 		</c:forEach>
