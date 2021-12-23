@@ -78,7 +78,7 @@ public class NoticeDao {
 		}
 
 		// 공지사항 삭제
-		public int NoticeDelete(int n_num) {
+		public int delete(int n_num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
@@ -87,8 +87,8 @@ public class NoticeDao {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,n_num);
 				return pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (SQLException s) {
+				s.printStackTrace();
 				return -1;
 			} finally {
 				JDBC.close(con, pstmt, null);

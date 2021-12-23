@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+  table {
+    width: 1100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
     
 <form method="post" action="${pageContext.request.contextPath }/seller/productInfoList">
 <table border="1" width="1000">
+
 	<tr>
 		<th>상품사진</th>
 		<th>상품이름</th>

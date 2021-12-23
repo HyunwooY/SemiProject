@@ -24,7 +24,8 @@
 			-답변:${vo.ih_answer }
 		</td>
 	</form>
-	<form method="post" action="${pageContext.request.contextPath }/seller/inquiryListReplyForm.jsp">
+	<form method="get" action="${pageContext.request.contextPath }/seller/inquiryreply">
+	<input type="hidden" name="ih_num" value="${vo.ih_num}">
 		<c:if test="${sessionScope.radio=='판매사업자' }">
 		<input type="submit" value="글쓰기">
 			</c:if>

@@ -51,15 +51,6 @@
 		<label>
 			<input type="checkbox" name="pd_color" value="BLACK">블랙<br>
 		</label>		
-<!-- 		분류<br> -->
-<!-- 		<select> -->
-<!-- 			<option>상의</option> -->
-<!-- 			<option>하의</option> -->
-<!-- 			<option>원피스</option> -->
-<!-- 			<option>아우터</option> -->
-<!-- 			<option>악세서리</option> -->
-<!-- 			<option> -->
-<!-- 		</select><br><br><br> -->
 		재고수<br>
 		<input type="text" name="pd_count"><br><br>
 		
