@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
-	#addaddress{display:none}
+	#addaddress{display:none; position:relative; left: 300px;}
+	#text{position:relative; left: 450px;}
 </style>
 <script>
 	function showForm(n){
@@ -23,14 +24,14 @@
 			alert("배송지 등록 실패");
 		}else if(${requestScope.code=='success'}){
 			alert("배송지가 수정 되었습니다.");
-		}
 		}else if(${requestScope.code=='fail'}){
 			alert("배송지 수정 실패");
 		}
 	} 
 </script>
 <div id="showaddress">
-		<table>
+		<h1 style="position:relative; left: 400px; bottom: 30px; margin: auto;">배송지 관리</h1>
+		<table width="1000" border="1" style="text-align: center; margin: auto; margin-bottom: 30px;">
 			<tr>
 				<th>배송지명</th><th>수령인</th><th>전화번호</th><th>주소</th><th>수정</th><th>삭제</th>
 			</tr>

@@ -14,8 +14,8 @@
 	#inquiryinsert{width: 1000px; margin: auto;}
 	#inquiryform{margin: 10px; margin: auto; left: 250px;}
 	#inform th{padding-top: 10px; padding-bottom: 10px; text-align: center;}
-	.iqyinput{width: 151px; height: 22px;}
-	.fbtn{position: relative; left: 100px; margin-right: 10px; width: 50px; height: 25px; border-radius: 10px;}
+	.iqyinput{width: 200px; height: 22px;}
+	.fbtn{position: relative; left: 120px; margin-top:20px; margin-right: 20px; width: 50px; height: 25px; border-radius: 10px;}
 </style>
 <div id="inquiryinsert">
 	<div id="inquiryform">
@@ -78,6 +78,11 @@
 	<c:otherwise>
 		<form method="post" action="${pageContext.request.contextPath }/mypage/insertinquiry">
 		<table id="inform">
+			<tr>
+				<th width="100px">
+					<h2 style="position:relative; left: 120px; bottom: 30px; margin: auto;">문의하기</h2>
+				</th>
+			</tr>
 			<tr>
 				<th width="100px">
 					<label for="id">작성자</label>
