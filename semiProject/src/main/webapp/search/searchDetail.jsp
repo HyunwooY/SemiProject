@@ -23,7 +23,7 @@
 #rvttable{position: relative; width:49%; height:500px;  float: right;margin-top:20px;}
 #rvdiv{width:300px; height:70px;text-align: left; position: relative; float: left; margin-b}
 #rvimg{width:300px;height:70px; position: relative; float: left;}
-#rvimg img{width:25%;height:100%; margin-right:13px;}
+#rvimg img{width:25%;height:100%; margin-right:13px;  }
 #myform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
     border: 0; /* 필드셋 테두리 제거 */
