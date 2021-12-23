@@ -14,6 +14,7 @@ import chaneloper.vo.NoticeVo;
 public class NoticeInsert extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("main", "/seler/notice.jsp");
 		req.getRequestDispatcher("/seller/noticeForm.jsp").forward(req, resp);
 	}
 	@Override
@@ -23,9 +24,9 @@ public class NoticeInsert extends HttpServlet {
 		NoticeVo vo = new NoticeVo(0,context);
 		NoticeDao dao = NoticeDao.getInstance();
 		int n = dao.NoticeInsert(vo);
+		req.setAttribute("main","/seller/notice.jsp");
+		//req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		resp.sendRedirect(req.getContextPath() + "/seller/notice");
-		req.setAttribute("main","/seller/noticeForm.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		
 	}
 

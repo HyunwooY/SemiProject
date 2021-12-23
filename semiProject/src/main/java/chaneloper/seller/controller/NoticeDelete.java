@@ -17,12 +17,12 @@ public class NoticeDelete extends HttpServlet{
 		NoticeDao dao = NoticeDao.getInstance();
 		int n=dao.delete(n_num);
 		if(n>0) {
-			//목록페이지로 이동 
-			resp.sendRedirect(req.getContextPath() +"/notice");//목록을 보여주는 리스트컨트롤러로 이동
+			req.getRequestDispatcher("/seller/notice").forward(req, resp);//목록페이지로 이동 
 		}else {
 			req.setAttribute("result", "fail");
-			req.getRequestDispatcher("/seller/notice.jsp").forward(req, resp);
 		}		
+		req.getRequestDispatcher("/seller/notice.jsp").forward(req, resp);
+		// resp.sendRedirect(req.getContextPath() +"/notice");//목록을 보여주는 리스트컨트롤러로 이동
 	}
 }
 
