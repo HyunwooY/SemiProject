@@ -130,9 +130,7 @@ public class ProductDao {
 			JDBC.close(pstmt2);
 			JDBC.close(con, pstmt1, null);
 		}
-	}
-	
-	
+	}	
 
 	// 상품 삭제
 	public int productDelete(int pi_num) {

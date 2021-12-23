@@ -20,13 +20,13 @@ public class ProductList extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		// 페이징 처리	
-				String spageNum = req.getParameter("pageNum");
-				int pageNum = 1;
-				if(spageNum != null) {
-					pageNum = Integer.parseInt(spageNum);
-				}
-				int startRow = (pageNum-1)*10+1;
-				int endRow = startRow + 9;
+		String spageNum = req.getParameter("pageNum");
+		int pageNum = 1;
+		if(spageNum != null) {
+			pageNum = Integer.parseInt(spageNum);
+		}
+		int startRow = (pageNum-1)*10+1;
+		int endRow = startRow + 9;
 	
 		String si_id = (String)req.getSession().getAttribute("id");
 		System.out.println("si_id:" + si_id);
