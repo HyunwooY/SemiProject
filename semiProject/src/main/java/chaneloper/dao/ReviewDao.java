@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import chaneloper.vo.AddressVo;
 import chaneloper.vo.ReviewVo;
 import db.JDBC;
 
@@ -39,14 +40,38 @@ public class ReviewDao {
 			JDBC.close(con, pstmt, null);
 		}
 	}
+	
+	//아이디 조인
+		public String selectaddr(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = JDBC.getCon();
+				String sql ="select  from member_infomation mi, purchase_history ph where ph.ph_num=? and mi.mi_id=ph.mi_id";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					String id = rs.getString("mi_id");
+					return id;
+				}
+				return null;
+			}catch(SQLException s) {
+				s.printStackTrace();
+				return null;
+			}finally {
+				JDBC.close(con, pstmt, rs);
+			}
+		}
+	
 	// 전체 리뷰 보기
-	public ArrayList<ReviewVo> list(int startRow, int endRow){
+	public ArrayList<ReviewVo> list(int startRow, int endRow, String id){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "";
 		try {
-				sql = "select * from "
+			String sql = "select * from "
 						+ "("
 						+ "		select rv.*, rownum rnum from"
 						+ "	    ("

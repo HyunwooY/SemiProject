@@ -12,7 +12,7 @@
 	<div>
 		<table width="1000" border="1" style="text-align: center; margin: auto;">
 			<tr>
-				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th><th>삭제</th>
+				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th><th width="5%">삭제</th>
 			</tr>
 			<c:forEach var="vo" items="${list }">
 		<tr>
