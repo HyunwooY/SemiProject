@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <div>
 	<form method="post" action="${pageContext.request.contextPath }">
-		<table >
+	<input type="hidden" name="id" value="">
+		<table>
 			<tr>
 				<th width="100px">
 					<label for="ph_num">상품번호</label>

@@ -42,19 +42,18 @@ public class ReviewDao {
 	}
 	
 	//아이디 조인
-		public String selectaddr(int num) {
+		public String reviewSelect(String id) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
 				con = JDBC.getCon();
-				String sql ="select  from member_infomation mi, purchase_history ph where ph.ph_num=? and mi.mi_id=ph.mi_id";
+				String sql ="select * from member_infomation mi, purchase_history ph where mi_id=? and mi.mi_id=ph.mi_id";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, num);
+				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
-					String id = rs.getString("mi_id");
-					return id;
+					return rs.getString("mi_id");
 				}
 				return null;
 			}catch(SQLException s) {
@@ -66,7 +65,7 @@ public class ReviewDao {
 		}
 	
 	// 전체 리뷰 보기
-	public ArrayList<ReviewVo> list(int startRow, int endRow, String id){
+	public ArrayList<ReviewVo> list(int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
