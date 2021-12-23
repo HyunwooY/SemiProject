@@ -42,6 +42,7 @@ public class SearchReviewUploadController extends HttpServlet{
 			}
 			dao.insertrv(ph_num, title, rating, context);
 			int r_num =dao.getr_num();
+			System.out.println("A"+r_num);
 			if(r_num<0) {
 				System.out.println("r_num을 가져오지 못했습니다.");
 			}
@@ -50,6 +51,7 @@ public class SearchReviewUploadController extends HttpServlet{
 				String saveFileName = mr.getFilesystemName("file"+i);//저장된 파일명
 				String datadir = saveDir+"\\"+saveFileName;
 				File f = new File(datadir);
+				System.out.println("B"+saveFileName);
 				dao.insertrvp(r_num, saveFileName);
 			}
 				

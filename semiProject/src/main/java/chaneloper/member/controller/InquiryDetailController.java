@@ -19,6 +19,7 @@ public class InquiryDetailController extends HttpServlet{
 		Inquiry_historyVo vo = dao.select(num);
 		req.setAttribute("vo", vo);
 		req.setAttribute("detailmain", "/member/inquiryDetail.jsp");
+		req.setAttribute("detailtitle", "나의 문의내역");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }
