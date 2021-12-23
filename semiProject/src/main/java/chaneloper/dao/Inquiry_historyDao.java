@@ -225,6 +225,7 @@ public class Inquiry_historyDao {
 			JDBC.close(con, pstmt, rs);
 		}
 	}
+	
 	//가장 큰 글번호
 		public int getMaxNum() {
 			Connection con = null;

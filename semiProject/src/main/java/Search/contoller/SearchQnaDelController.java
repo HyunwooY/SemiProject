@@ -10,14 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chaneloper.dao.AddInterestDao;
-import chaneloper.dao.Search_inqDao;
+
+import chaneloper.dao.Search_Inq_RvDao;
+
+import chaneloper.dao.InterestDao;
+
 @WebServlet("/search/inqdel")
 public class SearchQnaDelController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(req.getParameter("mi_id")!=null && req.getParameter("pi_num")!=null) {
-			Search_inqDao dao=Search_inqDao.getInstance();
+			Search_Inq_RvDao dao=Search_Inq_RvDao.getInstance();
 			System.out.println(req.getParameter("mi_id"));
 			System.out.println(req.getParameter("title"));
 			System.out.println(req.getParameter("pi_num"));

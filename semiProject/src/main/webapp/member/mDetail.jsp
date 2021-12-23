@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
 *{margin:0px;padding:0px}
-#mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
+#mdetail{position:relative;top:50px;width:80%;height:auto;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
 #info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
@@ -24,8 +24,8 @@
 	<div id="info">
 	<span>주문 목록</span>
 		<div id="short">
-			<span class="l">입금전 ${requestScope.bPayCom }</span>
-			<span class="l">입금완료 ${requestScope.aPayCom }</span>
+			<span class="l">결제전 ${requestScope.bPayCom }</span>
+			<span class="l">결제완료 ${requestScope.aPayCom }</span>
 			<span class="l">배송준비중 ${requestScope.preparingP }</span>
 			<span class="l">배송중 ${requestScope.beingDelivery }</span>
 			<span class="l">배송완료 ${requestScope.compDelivery }</span>
@@ -49,14 +49,15 @@
 			</div>
 			<div id="wishlist" class="menu">
 				<h4>WISH LIST</h4>
-				<a href="${pageContext.request.contextPath }">찜목록</a>
+				<a href="${pageContext.request.contextPath }/member/gointerest">찜목록</a>
 			</div>
 			<div id="myboard" class="menu">
 				<h4>MY BOARD</h4>
 				<a href="${pageContext.request.contextPath }/mypage/insertinquiry">문의하기</a><br>
 				<a href="${pageContext.request.contextPath }/mypage/history">문의내역 확인</a><br>
-				<a href="">리뷰관리</a>
+				<a href="${pageContext.request.contextPath }/mypage/reviewlist">리뷰관리</a>
 			</div>
+			
 		</div>
 		<div id="showtitle">
 			<h3>${requestScope.detailtitle }</h3>

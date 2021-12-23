@@ -14,6 +14,9 @@ public class OrderListController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
+		
+		
+		
 		req.setAttribute("detailmain", "sellerpage.jsp");
 		req.getRequestDispatcher("/seller/orderList.jsp").forward(req, resp);
 	}

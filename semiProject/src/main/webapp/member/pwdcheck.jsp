@@ -4,18 +4,18 @@
 	#form1{
 		position:relative;
 		left: 40px;
-		bottom: 20px;
 		margin: auto;
 	}
 	#pwd{
-		width: 150px;
+		width: 130px;
 		height: 20px;
 		margin-bottom: 20px;
+		margin-left: 10px;
 	}
 	#btn{
-		width: 50px;
 		position: relative;
 		left: 50px;
+		width: 50px;
 	}
 </style>
 <script>
@@ -45,7 +45,6 @@
 	}
 </script>
 <form method="post" action="<%=request.getContextPath() %>/member/checkpwd"  id="form1">
-	<h2>비밀번호 입력</h2><br>
 	<input type="password" name="pwd" id="pwd" placeholder="password"><br>
 	<input type="submit" value="확인" id="btn">
 </form>

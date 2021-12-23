@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+#main{padding-top:150px;padding-bottom:150px}
 #login{
 	position:relative;
-	top:150px;
 	margin:auto;
 	color:white;
 }

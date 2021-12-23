@@ -5,8 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CHANELOPER입니다.</title>
 <style type="text/css">
+	*{margin:0px;padding:0px}
+	#wrap{width:1500px;height:auto;background-color:yellow;margin:auto;border:1px solid black;}
+	#wrap {position:relative;}
+	#ac{width:100%;height:60px;background-color:white;}
+	#header{width:100%;height:140px;background-color:white;text-align:center}
+	#header h1{position:relative;margin:auto;top:10px;margin-bottom:5px}
+	#ac #account li{display:inline;position:relative;right:60px;float:right;margin-right:15px;top:5px}
+	a{color:black;text-decoration:none}
+	#header #menu li{display:inline;position:relative;top:50px;font-size:1.2em;margin:40px}
+	#main{width:100%;overflow:hidden;background-color:#BDBDBD;text-align:center;} /* 혹시 text-align 주신분...?*/
+	#footer{width:100%;height:10%;background-color:gray}
+	#footer #foot{text-align:center;padding-top:10px;padding-bottom:10px}
+	#footer #foot h3{margin-bottom:10px}
+	#com1, #com2, #com3{margin-bottom:10px}
 	#keyword {
 		width : 160px; height: 20px;
 		position: absolute; 
@@ -20,12 +34,11 @@
 		hideText();
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
-			}
-			alert('${errMsg}')
 		}
-//		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
-	
 	}
+
+//		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+
 	function showText() {
 		var keyword=document.getElementById("keyword");
 		keyword.style.display="block";
@@ -49,7 +62,7 @@
 		}	
 	}
 </script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
+<%--<link rel="stylesheet" href="${pageContext.request.contextPath }/css/css.css"> --%>
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 #mainTitle{font-family: 'KoPub Batang', serif;font-size:2.5em}
@@ -69,7 +82,7 @@
 			<li><a href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
 			<c:choose>
 				<c:when test="${sessionScope.radio=='일반사용자' }">
-					<li><a href="${pageContext.request.contextPath }/member/memberDetail">마이페이지</a></li>
+					<li><a href="${pageContext.request.contextPath }/member/showorder">마이페이지</a></li>
 				</c:when>
 				<c:when test="${sessionScope.radio=='판매사업자' }">
 					<li><a href="${pageContext.request.contextPath }/seller/sellerpage">마이페이지</a></li>
@@ -99,6 +112,12 @@
 	<jsp:include page="${requestScope.main }"/> 	
 </div>
 <div id="footer">
+	<div id="foot">
+		<h3>CHANELOPER(주)</h3>
+		<p id="com1">서울특별시 종로구 율곡로10길 105 디아망 4F(봉익동 10-1 디아망 4F) TEL : 070-8240-3211~3 FAX : 02-777-5407</p>
+		<p id="com2">사업자등록번호 : 104-81-59383 통신판매업신고번호 : 중구 065325 중앙HTA㈜</p><br>
+		<p id="com3">COPYRIGHT(C) HTA CO., LTD. ALL RIGHTS RESERVED.</p>
+	</div>
 </div>
 </div>
 </body>

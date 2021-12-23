@@ -2,29 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-	h1{
-		position:relative;
-		left: 40px;
-		bottom: 30px;
-		margin: auto;
-	}
-	table{
-		position:relative;
-		left: 45px;
-		bottom: 30px;
-		margin-top: 20px;
-	}
-	
+
 </style>
 <script>
 	if(vo == null){
 		alert("해당 게시물은 없거나 삭제되었습니다.");
 	}
 </script>
-<h1>내 문의 내역</h1>
-<form>
-</form>
-<table width="600">
+<table width="1000" border="1" style="text-align: center; margin: auto; margin-bottom: 30px;">
 	<tr>
 		<th>상품 번호</th><th>문의 제목</th><th>문의 내용</th><th>답변</th>
 	</tr>
@@ -42,4 +27,4 @@
 			</c:choose>
 		</tr>
 </table>
-<a href="${pageContext.request.contextPath }/mypage/history">전체 내역 보기</a>
+<a href="${pageContext.request.contextPath }/mypage/history" style="padding-left: 440px;">전체 내역 보기</a>

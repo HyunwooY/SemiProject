@@ -20,6 +20,7 @@
 .searchResult .record {margin: 15px auto 10px; padding: 2px 0 2px 8px;}
 .searchProducts{ width: 1100px; height: 950px;}
 .searchPaging{ width:600px; height: 100px; color: #757575;font-style: italic}
+.searchPaging #page{line-height: 100px; vertical-align: middle;}
 
 li {list-style: none; }
 ul.list{
@@ -46,7 +47,7 @@ ul.list li.item{
 }
 #searchBar {width: 175px; height: 50px; margin-top: 45px }
 .color{width:100px; height: 10px; list-style: none; float:left; }
-.imgDiv{ width: 100%; height: 300px;}
+.imgDiv{ width: 100%; height: 300px; border:1px solid black;}
 .imgDiv img{width:100%; height: 100%;}
 .price{margin-top: 4px; }
 .color li{
@@ -116,7 +117,7 @@ ul.list li.item{
 			<div class="box"> <!-- 상품1 안에 제일 큰 박스 -->
 				<div class="imgDiv">
 					<a href="${cp }/search/searchdetail?pi_num=${vo.pi_num }">
-						<img src="${cp }/${vo.pp_title}">
+						<img src="${cp }/upload/${vo.pp_title}">
 					</a>
 				</div>
 				<div class="prdInfo"> <!-- 상품 세부정보 -->
@@ -158,7 +159,7 @@ ul.list li.item{
 </div>
 
 <div class="searchPaging"><!-- 페이징 처리 하는부분 -->
-	<p>
+	<p id="page">
 	<c:if test="${startPage>10 }">
 		<a href="${cp }/search/search?pageNum=${startPage-1}&CATEGORY=${category}&keyword=${keyword }&sort=${sort}"><<</a>
 	</c:if>
