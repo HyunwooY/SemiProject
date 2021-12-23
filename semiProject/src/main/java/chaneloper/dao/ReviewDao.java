@@ -43,14 +43,9 @@ public class ReviewDao {
 				String r_title = rs.getString("r_title");
 				Date r_date = rs.getDate("r_date");
 				int r_hit = rs.getInt("r_hit");
-<<<<<<< HEAD
-//				String rp_title = rs.getString("rp_title");
-				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, r_hit, rs.getString("r_content"), null);
-=======
 				String r_content = rs.getString("r_content");
 				String rp_title = rs.getString("rp_title");
 				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, r_hit, r_content, rp_title);
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 				list.add(vo);
 			}
 			return list;
