@@ -15,10 +15,12 @@ public class OrderHistoryVo {
 	private int priceAll;
 	private String pp_title;
 	private int pd_num;
+	private String pd_size;
+	private int pi_num;
 	
 	public OrderHistoryVo() {};
 	public OrderHistoryVo(int ph_num, String mi_id, String ph_type, String ph_state, Date ph_regdate, String pi_name,
-			int p_count, int pi_price,int ph_count,int priceAll,String pp_title, int pd_num) {
+			int p_count, int pi_price,int ph_count,int priceAll,String pp_title, int pd_num,String pd_size,int pi_num) {
 		this.ph_num = ph_num;
 		this.mi_id = mi_id;
 		this.ph_type = ph_type;
@@ -31,8 +33,22 @@ public class OrderHistoryVo {
 		this.priceAll = priceAll;
 		this.pp_title=pp_title;
 		this.pd_num=pd_num;
+		this.pd_size=pd_size;
+		this.pi_num=pi_num;
 	}
 	
+	public int getPi_num() {
+		return pi_num;
+	}
+	public void setPi_num(int pi_num) {
+		this.pi_num = pi_num;
+	}
+	public String getPd_size() {
+		return pd_size;
+	}
+	public void setPd_size(String pd_size) {
+		this.pd_size = pd_size;
+	}
 	public int getPd_num() {
 		return pd_num;
 	}

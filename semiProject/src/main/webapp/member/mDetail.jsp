@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
 *{margin:0px;padding:0px}
+#main{padding-bottom:20px}
 #mdetail{position:relative;top:50px;width:80%;height:auto;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
@@ -12,9 +13,9 @@
 .r{float:right;position:relative;top:-20px}
 #detailmain{width:100%;height:600px;}
 #membermenu{float:left;width:15%;height:500px;padding-top:20px}
-#showtitle{float:left;width:85%;height:50px;padding-top:20px}
+#showtitle{float:left;width:85%;padding-top:20px}
 #showtitle span{position:relative;}
-#show{float:left;width:85%;height:400px}
+#show{float:left;width:85%;height:auto}
 .menu{margin-bottom:15px;}
 .menu h4{margin-bottom:5px}
 .menu a{margin-bottom:5px;display:inline-block;text-decoration: none;}

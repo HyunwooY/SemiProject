@@ -201,7 +201,7 @@ public class MemberDetailDao {
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			ps=con.prepareStatement("select ph.ph_num ph_num,pd.pd_num pd_num, ph_type, ph_state, ph_regdate, pi_name, p_count, pi_price, pp_title "
+			ps=con.prepareStatement("select ph.ph_num ph_num,pi.pi_num pi_num,pd.pd_num pd_num, ph_type,pd.pd_size pd_size, ph_state, ph_regdate, pi_name, p_count, pi_price, pp_title "
 					+ "from purchase_history ph, packaging p,product_detail pd,product_infomation pi, product_photo pp "
 					+ "where ph.ph_num=p.ph_num and p.pd_num=pd.pd_num and pd.pi_num=pi.pi_num and pp.pi_num=pi.pi_num "
 					+ "and ph.ph_num=? and"
@@ -211,7 +211,8 @@ public class MemberDetailDao {
 			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
 			while(rs.next()) {
 				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), null, rs.getString("ph_type"), rs.getString("ph_state"), 
-						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,rs.getString("pp_title"),rs.getInt("pd_num"));
+						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,
+						rs.getString("pp_title"),rs.getInt("pd_num"),rs.getString("pd_size"),rs.getInt("pi_num"));
 				list.add(vo);
 			}
 			return list;
@@ -256,7 +257,7 @@ public class MemberDetailDao {
 			rs1=ps1.executeQuery();
 			rs1.next();
 			OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs1.getString("ph_type"), rs.getString("ph_state"), 
-					rs.getDate("ph_regdate"), rs1.getString("pi_name"), 0, 0, rs.getInt("count"), rs.getInt("priceall"),null,0);
+					rs.getDate("ph_regdate"), rs1.getString("pi_name"), 0, 0, rs.getInt("count"), rs.getInt("priceall"),null,0,null,0);
 			list.add(vo);
 			}
 			return list;
@@ -286,7 +287,7 @@ public class MemberDetailDao {
 			ArrayList<OrderHistoryVo> list=new ArrayList<OrderHistoryVo>();
 			while(rs.next()) {
 				OrderHistoryVo vo=new OrderHistoryVo(rs.getInt("ph_num"), id, rs.getString("ph_type"), rs.getString("ph_state"), 
-						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,null,0);
+						rs.getDate("ph_regdate"), rs.getString("pi_name"), rs.getInt("p_count"), rs.getInt("pi_price"),0,0,null,0,null,0);
 				list.add(vo);
 			}
 			return list;

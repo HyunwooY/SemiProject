@@ -28,9 +28,14 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 <script>
 	var param="";
 	var checkcount=0;
-	function gobuy(){
-		console.log(param);
-	}
+	/*function gobuy(){
+		let product=document.getElementsByName("product");
+		for(let i=0;product.length;i++){
+			if(product[i].checked="checked"){
+				product[i].checked="on";
+			}
+		}
+	}*/
 	function countUp(cookieNum,price){
 		let xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
@@ -114,13 +119,16 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 				<tr>
 					<c:set var="pcount" value="${vo.purchase_count}"/>
 					<c:set var="priceAll" value="${pcount* vo.pi_price}"/>
-					<td><input type="checkbox" name="product" value="${vo.pd_num},${pcount},${vo.pi_num}"></td>
+					<td><input type="checkbox" name="product" value="${vo.pd_num},${status.count},${vo.pi_num}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
 					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
 					<td>${vo.pd_size }</td>		
 					<td>
-					<div class="count">${pcount}</div>
+					<div class="count">
+						${pcount}
+						<input type="text" name="count" value="${pcount}">
+					</div>
 					<div id="countControll">
 						<div class="up">
 							<a href="javascript:countUp(${status.count},${vo.pi_price })">

@@ -49,8 +49,11 @@ public class PayinfoController extends HttpServlet {
     		for(String s:product) {
     			String[] purchase=s.split(",");
     			int pd_num=Integer.parseInt(purchase[0]);
-    			int ph_count=Integer.parseInt(purchase[1]);
+    			int cookieNum=Integer.parseInt(purchase[1]);
     			int pi_num=Integer.parseInt(purchase[2]);
+    			System.out.println(cookieNum);
+    			
+    			int ph_count=Integer.parseInt(req.getParameter("count"+cookieNum));
     			PurchaseDao pdao=PurchaseDao.getInstance();
                 ShowPurchaseListVo svo=pdao.selectProduct(pd_num,ph_count,pi_num);
                 purchaseList.add(svo);

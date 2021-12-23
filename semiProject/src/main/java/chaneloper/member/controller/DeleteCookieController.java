@@ -51,7 +51,7 @@ public class DeleteCookieController extends HttpServlet {
 				}
 			}
 		}
-		
+		resp.sendRedirect(req.getContextPath()+"/member/cartlist");
 		
 		
 	}

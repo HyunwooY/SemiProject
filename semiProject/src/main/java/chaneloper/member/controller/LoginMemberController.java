@@ -41,23 +41,22 @@ public class LoginMemberController extends HttpServlet {
 					req.setAttribute("lcode", false);
 					req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); 
 					req.setAttribute("main", "/member/login.jsp");
-					//req.getRequestDispatcher("/layout").forward(req, resp);
+					req.getRequestDispatcher("/layout").forward(req, resp);
 				}
 				resp.sendRedirect(req.getContextPath()+"/member/buyProduct?count="+req.getSession().getAttribute("count")
 								+"&pi_num="+req.getSession().getAttribute("pi_num")+req.getSession().getAttribute("parame"));
 			}else {
 				if(dao.login(id, pwd)) {
-				//	req.setAttribute("lcode", true);
+					req.setAttribute("lcode", true);
 					req.getSession().setAttribute("radio", radio);
 					req.getSession().setAttribute("id", id);
-					//req.getRequestDispatcher("/layout").forward(req, resp);
+					resp.sendRedirect(req.getContextPath()+"/layout");
 				}else {
-				//	req.setAttribute("lcode", false);
+					req.setAttribute("lcode", false);
 					req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); 
-					req.getSession().setAttribute("main", "/member/login.jsp");
-					//req.getRequestDispatcher("/layout").forward(req, resp);
+					req.setAttribute("main", "/member/login.jsp");
+					req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 				}
-				resp.sendRedirect(req.getContextPath()+"/layout");
 			}
 			
 		}else if(radio.equals("판매사업자")) {
@@ -68,9 +67,11 @@ public class LoginMemberController extends HttpServlet {
 				req.getSession().setAttribute("id", id);
 			}else {
 				req.setAttribute("lcode", false);
+				req.setAttribute("main", "/member/login.jsp");
 				req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); 
+				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 			}
-			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+			
 		}		
 	}
 }

@@ -50,14 +50,13 @@ public class GoCartController extends HttpServlet {
             	}
             }
             System.out.println(lastCookieNum);
+            int minus=0;
             for(int i=lastCookieNum+1;i<=lastCookieNum+count;i++) {
             	boolean check=false;
-            	int minus=0;
                 String pd = req.getParameter("name"+(i-lastCookieNum));
                 for(Cookie cl:clist) {
                 	if(cl.getName().equals("JSESSIONID")) {
                 	}else {
-                		
                 		String clvalue=URLDecoder.decode(cl.getValue(),"utf-8");
                 		if(pi_num.equals(cl.getName().substring(cl.getName().indexOf("_")+1)) && 
                 				clvalue.substring(0, clvalue.length()-1).equals(pd.substring(0, pd.length()-1))) {
@@ -73,6 +72,7 @@ public class GoCartController extends HttpServlet {
                             resp.addCookie(c);  
                             check=true;
                             minus++;
+                            System.out.println(minus);
                             break;
                 		}
                 	}
@@ -80,7 +80,7 @@ public class GoCartController extends HttpServlet {
                 if(check==true) {
                 	continue;
                 }else {
-                	System.out.println(pd);
+                	System.out.println(i+","+(i-minus)+",");
         			Cookie c=new Cookie(("name"+(i-minus)).concat("_"+pi_num),URLEncoder.encode(pd,"utf-8"));
         			c.setPath("/");
         			c.setMaxAge(60*60*24*30); //30일 저장

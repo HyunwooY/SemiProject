@@ -151,7 +151,7 @@
 	}
 </script>
 <style>
-#purchase{position:relative;top:50px;left:100px;width:70%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
+#purchase{position:relative;top:50px;left:100px;width:70%;height:auto;margin:0px;padding:0px;text-align:left;margin:auto}
 #purchase h2{margin-bottom:30px}
 table{width:800px;position:relative;top:10px;}
 table {margin:0px;padding:0px;border-top:2px solid black;border-bottom:2px solid black;
@@ -171,6 +171,10 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 #purchasebtn{widht:100px;height:30px;font-size:1.05em}
 #name,#addr,#first,#mid,#last{height:25px}
 #input,#myAddr,#changeAddr,#idinfo th,td{width:}
+#payinfo ul{display:inline-block;list-style:none}
+#payinfo th,td{text-align:center}
+.chips{width:15px;height:15px;border:0.5px solid #ddd;position:relative;top:5px}
+.chipsdiv{text-align:center;position:relative;}
 </style>    
 <div id="purchase">
 	<h2>주문결제</h2>
@@ -262,7 +266,7 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 				<c:if test="${vo.si_name!=siname}">
 					<c:set var="siname" value="${vo.si_name }"/>
 					<tr>
-						<th colspan="6">${siname }</th>
+						<th colspan="6" style="text-align:left">${siname }</th>
 					</tr>
 					<tr>
 						<th>사진</th>
@@ -276,7 +280,11 @@ th, td{padding-top:5px;padding-bottom:5px;border-bottom:0.5px solid black}
 					<tr>
 						<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 						<td>${vo.pi_name }</td>
-						<td>${vo.pd_color }</td>
+						<td>
+							<div class="chipsdiv">
+								${vo.pd_color }<br>
+								<ul><li style="background-color:${vo.pd_color}" class=chips></li></ul>
+							</div></td>
 						<td>${vo.pd_size }</td>		
 						<td>${vo.purchase_count}</td>
 						<td>${vo.pi_price * vo.purchase_count}</td>
