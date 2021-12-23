@@ -77,7 +77,7 @@ ul.list li.item{
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <div class="searchbox">
 	<fieldset>
-		<form method="get" action="${cp }/search/search?pageNum=1">
+		<form method="get" action="${cp }/search/search?pageNum=1" id="form">
 			<input type="hidden" name="pageNum" value="1">
 			<div class="items">
 				<select id="CATEGORY" name="CATEGORY">
