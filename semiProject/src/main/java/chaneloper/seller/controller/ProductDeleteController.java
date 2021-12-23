@@ -13,7 +13,7 @@ import chaneloper.dao.ProductDao;
 import chaneloper.dao.SellerDao;
 import chaneloper.vo.ProductVo;
 
-@WebServlet("/seller/productDelete")
+@WebServlet("/productDelete")
 public class ProductDeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,6 +1,7 @@
 package chaneloper.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -180,9 +181,37 @@ public class SellerDao {
 			JDBC.close(con,pstmt,null);
 		}
 	}
+	//판매자 상품 리스트
+	public ArrayList<ProductVo> list(int pi_num, String si_id, int startRow, int endRow){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductVo> list1 = new ArrayList<ProductVo>();
+		try {
+			con = JDBC.getCon();
+			pstmt = con.prepareStatement("SELECT PI.PI_NAME, PI.PI_NUM,PP.PP_TITLE, ROWNUM  FROM PRODUCT_INFOMATION PI"
+					+ "INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
+					+ "WHERE PI.PI_NUM = ? AND PI.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?");
+			rs = pstmt.executeQuery();
+			pstmt.setInt(1, pi_num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			while(rs.next()) {
+				String pi_name = rs.getString("pi_name");
+				String pp_title = rs.getString("pp_title");
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, 0, 0, null, null, null, null, 0, pp_title, null);
+				list1.add(vo);
+			}
+			return list1;
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			JDBC.close(con, pstmt, rs);
+		}
+	}
 	
-	
-	// 판매자 상품 리스트
+	// 판매자 상품 세부 리스트
 	public ArrayList<ProductVo> productList(String si_id, int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -190,8 +219,7 @@ public class SellerDao {
 		ArrayList<ProductVo> list = new ArrayList<ProductVo>();
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP_TITLE, ROWNUM"
-					+ " FROM "
+			String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP.PP_TITLE, PI.PI_DATE, PI.PI_CATEGORY, ROWNUM FROM"
 					+ " SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_PHOTO PP, PRODUCT_DETAIL PD"
 					+ " WHERE SI.SI_ID = ? AND SI.SI_ID = PI.SI_ID AND PI.PI_NUM = PD.PI_NUM AND PD.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?"
 					+ " ORDER BY PI.PI_NUM ASC";
@@ -204,11 +232,13 @@ public class SellerDao {
 				int pi_num = rs.getInt("pi_num");
 				String pi_name = rs.getString("pi_name");
 				int pi_price = rs.getInt("pi_price");
+				Date pi_date = rs.getDate("pi_date");
+				String pi_category = rs.getString("pi_category");
 				String pd_size = rs.getString("pd_size");
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
 				String pp_title = rs.getString("pp_title");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, null, null, pd_size, pd_color, pd_count, pp_title, null);
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, null);
 				list.add(vo);
 			}
 			return list;

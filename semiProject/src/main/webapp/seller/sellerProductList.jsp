@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript">
-	function modify(){
-		location.href="${pageContext.request.contextPath}/seller/sellerProductUpdateForm";
-	}
-	function remove(){
-		location.href="${pageContext.request.contextPath}/seller/sellerProductDelete";
-	}
-</script>
+<!-- <script type="text/javascript"> -->
+<!-- 	function modify(){ -->
+<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductUpdateForm"; --%>
+<!-- 	} -->
+<!-- 	function remove(){ -->
+<%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductDelete"; --%>
+<!-- 	} -->
+<!-- </script> -->
 
 <form method="post" action="${pageContext.request.contextPath }/seller/sellerProductListForm">
 <table border="1" width="1000">
@@ -28,7 +28,7 @@
 	</tr>
 	<c:forEach var="productList" items="${requestScope.productList }">		
 	<tr>
-	<th><img src="${pageContext.request.contextPath }/upload/${productList.pp_title }"></th>
+	<th><img src="${pageContext.request.contextPath }/upload/${productList.pp_title }" alt="" width="100px" height="100px"></th>
 		<td>${productList.pi_name }</td>
 		<td>${productList.pi_num }</td>
 		<td>${productList.pd_size }</td>
@@ -38,7 +38,7 @@
 		<td>${productList.pi_price }원</td>
 		<td>${productList.pi_date }</td>
 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a>
-		<td><a href="${pageContext.request.contextPath }/seller/productDelete?pi_num=${productList.pi_num}">삭제</a>
+		<td><a href="${pageContext.request.contextPath }/productDelete?pi_num=${productList.pi_num}">삭제</a>
 	</tr>
 	</c:forEach>
 
