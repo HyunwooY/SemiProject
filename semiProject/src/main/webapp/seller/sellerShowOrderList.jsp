@@ -2,11 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+<style>
+	table {
+		word-break: break-all;
+	}
+</style>   
+    
 <form action="${pageContext.request.contextPath }/seller/orderListAll" method="post">
 	<table border="1" width="1500">
 		<tr>
 			<th>구매번호</th>
-			<th>구매자 ID</th>
+			<th>구매자ID</th>
 			<th>결제방법</th>
 			<th>주문상태</th>
 			<th>주문날짜</th>
@@ -21,7 +27,6 @@
 			<th>상품가격</th>
 			<th>분류</th>
 		</tr>
-		<tr>
 		<c:forEach var="listAll" items="${requestScope.listAll }">
 		<tr>
 			<td>${listAll.ph_num }<td>
@@ -41,6 +46,5 @@
 			<td>${listAll.pi_category }</td>
 		</tr>
 		</c:forEach>
-		</tr>
 	</table>
 </form>
