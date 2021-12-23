@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
 *{margin:0px;padding:0px}
-#mdetail{position:relative;top:50px;width:80%;height:1000px;margin:0px;padding:0px;text-align:left;margin:auto}
+#mdetail{position:relative;top:50px;width:80%;height:auto;margin:0px;padding:0px;text-align:left;margin:auto}
 #mdetail div{position:relative;}
 #mdetail h3{height:40px}
 #info{width:100%;height:80px;float:left;border-bottom:0.5px black solid}
@@ -57,6 +57,7 @@
 				<a href="${pageContext.request.contextPath }/mypage/history">문의내역 확인</a><br>
 				<a href="">리뷰관리</a>
 			</div>
+			
 		</div>
 		<div id="showtitle">
 			<h3>${requestScope.detailtitle }</h3>
