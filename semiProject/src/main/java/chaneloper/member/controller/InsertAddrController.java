@@ -35,6 +35,7 @@ public class InsertAddrController extends HttpServlet {
 			req.setAttribute("result", "fail");
 		}
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
+		req.setAttribute("detailtitle", "배송지 등록");
 		req.getRequestDispatcher("/member/addrmanagement").forward(req, resp);
 	}
 }

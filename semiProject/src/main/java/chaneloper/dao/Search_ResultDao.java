@@ -18,7 +18,26 @@ import chaneloper.vo.TagVo;
 import db.JDBC;
 
 public class Search_ResultDao {
-
+	// 조회수 올리기
+	public int increaseCount(int pi_num) {
+		Connection con= null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JDBC.getCon();
+			String sql= "UPDATE product_infomation"
+					+ " SET pi_count = pi_count + 1"
+					+ " WHERE pi_num = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pi_num);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,null);
+		}
+	}
+	
 	public ArrayList<Search_ProductVo> bestProduct(String keyword, String CATEGORY){
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -56,6 +56,7 @@ public class MemberModifyController extends HttpServlet{
 			req.setAttribute("result", "fail");
 		}
 		req.setAttribute("detailmain","/member/mypage.jsp");
+		req.setAttribute("detailtitle", "내 정보");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }

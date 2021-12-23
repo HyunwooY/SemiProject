@@ -46,6 +46,7 @@ public class InquiryHistoryController extends HttpServlet{
 		req.setAttribute("keyword", keyword);
 		req.setAttribute("field", field);
 		req.setAttribute("detailmain", "/member/myInquiryHistory.jsp");
+		req.setAttribute("detailtitle", "나의 문의내역");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }

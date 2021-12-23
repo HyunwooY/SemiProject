@@ -32,6 +32,8 @@ public class SearchDetailController extends HttpServlet{
 			int pi_num = Integer.parseInt(req.getParameter("pi_num"));
 			Search_ResultDao dao = new Search_ResultDao();
 			ArrayList<Search_ProductVo> product = dao.get_product(pi_num);
+			int good=dao.increaseCount(pi_num); // 제품 방문시 조회수 올리기 메소드
+			if(good>0) System.out.println("good");
 			ArrayList<String> color = new ArrayList<String>();
 			ArrayList<String> size = new ArrayList<String>();
 			ArrayList<String> img = new ArrayList<String>();

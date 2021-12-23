@@ -45,7 +45,6 @@
 	}
 </script>
 <form method="post" action="<%=request.getContextPath() %>/member/checkpwd"  id="form1">
-	<h2>비밀번호 입력</h2><br>
 	<input type="password" name="pwd" id="pwd" placeholder="password"><br>
 	<input type="submit" value="확인" id="btn">
 </form>
