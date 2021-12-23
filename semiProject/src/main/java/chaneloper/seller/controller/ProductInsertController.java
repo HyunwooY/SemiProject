@@ -41,19 +41,19 @@ public class ProductInsertController extends HttpServlet {
 		String t_name = multi.getParameter("t_name");
 		String pi_category = multi.getParameter("pi_category");
 		
-		ProductVo vo1 = new ProductVo(0, id, pi_name, pi_price, 0, null, pi_category, null, null, 0, pp_title, t_name);
+		ProductVo vo1 = new ProductVo(0, id, pi_name, pi_price, 0, null, pi_category, null, null, 0, pp_title, t_name, 0);
 		ProductDao dao = ProductDao.getInstance();	
 		
 		int n = dao.productInsert(vo1);
 		
 		if (n > 0 ) {
 			req.setAttribute("path", path);
-			req.setAttribute("detailmain", "productResult.jsp");
+			req.setAttribute("detailmain", "productInfoList.jsp");
 			req.setAttribute("productCode", "success");
 			req.setAttribute("main", "/seller/sellerpage.jsp");
 		} else {
 			req.setAttribute("productCode", "fail");
-			req.setAttribute("detailmain", "productResult.jsp");
+			req.setAttribute("detailmain", "productInfoList.jsp");
 			req.setAttribute("main", "/seller/sellerpage.jsp");
 		}
 		System.out.println("pi_num:" + n);
@@ -64,10 +64,10 @@ public class ProductInsertController extends HttpServlet {
 		
 		for(String size:pd_size) {
 			for(String color:pd_color) {
-					ProductVo vo2 = new ProductVo(0, null, null, 0, 0, null, null, size, color, pd_count, null, null);
+					ProductVo vo2 = new ProductVo(0, null, null, 0, 0, null, null, size, color, pd_count, null, null, 0);
 					dao.productInsertDetail(n,vo2);
 			}
 		}
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		resp.sendRedirect(req.getContextPath() + "/seller/productInfoList?pageNum=1");
 	}
 }

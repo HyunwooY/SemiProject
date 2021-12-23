@@ -215,7 +215,8 @@ public class ProductDao {
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
 				String t_name = rs.getString("t_name");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
+				int pd_num = rs.getInt("pd_num");
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, pi_count, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, t_name, pd_num);
 				list.add(vo);
 			}
 			return list;
