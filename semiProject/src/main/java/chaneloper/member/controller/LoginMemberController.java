@@ -67,6 +67,7 @@ public class LoginMemberController extends HttpServlet {
 				req.getSession().setAttribute("radio", radio);
 				req.getSession().setAttribute("id", id);
 				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+
 			}else {
 				req.setAttribute("lcode", false);
 				req.setAttribute("main", "/member/login.jsp");

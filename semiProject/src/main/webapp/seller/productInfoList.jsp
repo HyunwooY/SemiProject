@@ -4,12 +4,14 @@
 <style>
   table {
     width: 1100px;
-    height: 100px;
+    height: 300px;
     margin-left: auto;
     margin-right: auto;
   }
 </style>
-    
+<br>
+<h1>등록된 상품</h1>
+<br>
 <form method="post" action="${pageContext.request.contextPath }/seller/productInfoList">
 <table border="1" width="1000">
 

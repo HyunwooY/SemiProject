@@ -6,7 +6,7 @@
 		position:relative;
 		left: 40px;
 		top: 50px;
-		margin: auto;
+		margin-right: 350px;
 	}
 </style>
 <script>

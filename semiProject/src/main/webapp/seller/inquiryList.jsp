@@ -7,8 +7,8 @@
   }
   table {
     width: 960px;
-    height: 150px;
-    margin-left: auto;
+    height: 110px;
+    margin-left: 50px;
     margin-right: auto;
   }
 </style>
@@ -64,7 +64,6 @@
 	<div>
 	<form method="post" action="${cp }/seller/inquiryList"">
 		<select name="field">
-		<option value="ih_num" <c:if test="${field=='ih_num' }">selected</c:if>>작성자</option>
 			<option value="mi_id" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
 			<option value="ih_title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
 		</select>

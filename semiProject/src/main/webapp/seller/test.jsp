@@ -33,10 +33,13 @@
 		</tr>
 		</table>
 		<br>
+		<br>
+		<br>
 		<td>
 			-답변:${vo.ih_answer }
 		</td>
 	</form>
+	<br>
 	<br>
 	<br>
 	<form method="get" action="${pageContext.request.contextPath }/seller/inquiryreply">
