@@ -49,14 +49,18 @@ public class PurchaseDao {
 	public int purchase(ShowPurchaseListVo vo,int ph_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
-
+		PreparedStatement ps2=null;
 		try {
 			con = JDBC.getCon();
 			ps=con.prepareStatement("insert into packaging values(p_seq.nextval,?,?,?)");
 			ps.setInt(1, ph_num);
 			ps.setInt(2, vo.getPd_num());
 			ps.setInt(3, vo.getPurchase_count());
-			return ps.executeUpdate();
+			ps.executeUpdate();
+			ps2=con.prepareStatement("update product_detail set pd_count=pd_count-1 where pd_num=?");
+			ps2.setInt(1, vo.getPd_num());
+			return ps2.executeUpdate();
+			
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;

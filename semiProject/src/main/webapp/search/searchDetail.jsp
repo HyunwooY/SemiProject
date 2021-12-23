@@ -12,8 +12,9 @@
 #maindiv {position: relative; padding:50px;}
 #mainimg{position: relative; width:500px; height:600px;  float:left;margin-top:21px ; margin-left:150px; margin-right:50px;margin-bottom:80px; }
 #mainimg img{width:100%;height:100%;}
-#maintable{position: relative; float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
-#pubutton{position: relative; float: right; width: 40%;text-align: left; margin-right:50px;}
+#maintable{position: relative; float: right; width: 500px;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;margin-top:100px;}
+#showtable img{width:10px;height:10px;}
+#pubutton{position: relative; float: right; width: 40%;text-align: left;margin-left:10px;}
 #showimg{position: relative; width:100%;  clear:both; margin-bottom:40px;margin-top:20px;padding-right:100px; border-top: 1px solid #444444}
 #showimg img{width:900px; height:1200px;  background-size: contain; background-repeat: no-repeat; background-position: center;}
 #anno{width:700px;  display:inline-block; margin-left:50px; margin-right:50px;margin-top:20px; margin-bottom:20px; text-align: left;}
@@ -24,7 +25,8 @@
 #rvttable{position: relative; width:49%; height:500px;  float: right;margin-top:20px;}
 #rvdiv{width:300px; height:70px;text-align: left; position: relative; float: left; margin-b}
 #rvimg{width:300px;height:70px; position: relative; float: left;}
-#rvimg img{width:25%;height:100%; margin-right:13px;  }
+#rvimg img{width:25%;height:100%; margin-right:13px;}
+#sadann{position: absolute; right:400px; top:70px;}
 #myform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
     border: 0; /* 필드셋 테두리 제거 */
@@ -55,6 +57,7 @@
 #myform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
 }
+
 </style>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 
@@ -133,15 +136,13 @@
 		let td_count = document.createElement("td");
 		td_count.appendChild(pd_count);
 		
-		let pd_up = document.createElement("input");
-		let pd_down = document.createElement("input");
+		let pd_up = document.createElement("img");
+		let pd_down = document.createElement("img");
 		let side_span = document.createElement("span");
-		pd_up.type="button"
-		pd_up.value="+1";
+		pd_up.src="${pageContext.request.contextPath}/images/up.png"
 		pd_up.onclick=pl;
 		side_span.innerHTML="<br>"
-		pd_down.type="button"
-		pd_down.value="-1";
+		pd_down.src="${pageContext.request.contextPath}/images/down.png"
 		pd_down.onclick=mi;
 		let td_updown = document.createElement("td");
 		td_updown.appendChild(pd_up);
@@ -445,29 +446,30 @@
 <!-- 제품상세 -->
 	<div id="maintable">
 	    <table id="showtable" >
-			<th colspan=4>${name}</th>
+			<th colspan=3>${name}</th>
 			<tr>
+<<<<<<< HEAD
 			    <td colspan=4><br>
 				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
 				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
+=======
+			    <td colspan=3>
+				    가격 :  ${price}원
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    </td>
 			</tr>
 			<tr>
-			    <td colspan=4><br>
-				    사이즈 정보<br>
-				    M - 어깨 50 / 가슴 44 / 팔길이 63 / 총길이 82<br>
-					L - 어깨 52 / 가슴 46 / 팔길이 65 / 총길이 84
+			    <td colspan=3>
+			     적립금 :  ${Math.round(price*0.01)}원
 				</td>
 			</tr>
 			<tr>
-				<td colspan=4><br>
-					*실측 사이즈는 단면(cm)으로 측정되며, 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다.<br>
-					*컬러의 경우 촬영 환경에 따라 다소 차이가 있을 수 있습니다.<br><br>
+				<td colspan=3>
 				</td>
 			</tr>
 			<tr>
 
-				<td colspan=4>
+				<td colspan=3>
 <%  
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
@@ -476,11 +478,11 @@
 <%		
 	}
 %>
-<br>
+
 				</td>
 			</tr>
-			<tr><br>
-				<td colspan=4; id="size">
+			<tr>
+				<td colspan=3; id="size">
 				</td>
 			</tr>
 	    </table>
@@ -501,14 +503,19 @@
 	    			<a href="#" onclick="testscript()">장바구니 담기</a>&nbsp;&nbsp;
 	    		</td>
 	    	</tr>
+
 	    </table>
 	</div>
-	
+	<div id="sadann">
+		<span>별점:${score }</span>
+		<span>조회수:${count }</span>
+		<a href="#inqtable">문의/리뷰</a>
+	</div>	
+
 <!-- 상품이미지 출력 -->
 	
 	<div id="showimg">
 			<c:forEach var="i" begin="0" end="${img.size()-1}">
-			
 						<img src="${pageContext.request.contextPath}/upload/${img[i]}">
 			</c:forEach>
 	 </div>

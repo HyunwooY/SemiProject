@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+	#main{padding-top:40px;padding-bottom:40px}
+	#result{}
 	#result h1{position:relative;margin:auto;top:10px;margin-bottom:5px}
 	#result a{position:relative;top:40px;}
 </style>
