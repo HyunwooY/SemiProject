@@ -6,13 +6,14 @@
     border: 1px solid #bcbcbc;
   }
   table {
-    width: 400px;
-    height: 200px;
+    width: 960px;
+    height: 150px;
     margin-left: auto;
     margin-right: auto;
   }
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
+	<br>
 	<h1>문의 내역</h1>
 	<br>
 	<table>

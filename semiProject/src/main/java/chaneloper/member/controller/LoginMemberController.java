@@ -56,6 +56,7 @@ public class LoginMemberController extends HttpServlet {
 					req.setAttribute("errMsg", "아이디 혹은 비밀번호가 틀렸습니다."); 
 					req.setAttribute("main", "/member/login.jsp");
 					req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+					
 				}
 			}
 			
@@ -65,6 +66,7 @@ public class LoginMemberController extends HttpServlet {
 				req.setAttribute("lcode", true);
 				req.getSession().setAttribute("radio", radio);
 				req.getSession().setAttribute("id", id);
+				req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 			}else {
 				req.setAttribute("lcode", false);
 				req.setAttribute("main", "/member/login.jsp");
