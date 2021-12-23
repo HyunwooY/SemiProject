@@ -2,19 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-    table, th, td {
-    border: 1px solid #bcbcbc;
-  }
   table {
-    width: 400px;
-    height: 200px;
+    width: 900px;
+    height: 360px;
     margin-left: auto;
     margin-right: auto;
   }
 </style>
 
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-<!-- <h1>공지 사항</h1> -->
+<h1 style="text-align:center">공지사항</h1>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 <table>
     <tr>
         <th>작성번호</th>

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+  table {
+    width: 900px;
+    height: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
 <h1 style="text-align:center">공지사항작성</h1>
 <script>
     function backToList() {
@@ -9,10 +17,10 @@
 <form name="notice" method="post" action="${pageContext.request.contextPath }/seller/notice1">
     <table align="center">
         <tr>
-            <td align="right" valign="top">
+            <td align="right">
                 <br>글내용:&nbsp;</td>
                 <td>
-                    <textarea name="content" rows="10" cols="65" maxlength="4000"></textarea>
+                    <textarea name="content" rows="10" cols="106" maxlength="4000"></textarea>
                 </td>
             </tr>
             <tr>
