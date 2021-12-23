@@ -18,7 +18,7 @@
 	.fbtn{position: relative; left: 120px; margin-top:20px; margin-right: 20px; width: 50px; height: 25px; border-radius: 10px;}
 </style>
 <div id="inquiryinsert">
-	<div id="inquiryform">
+	<div id="inquiryform"> 
 	<c:choose>
 	<c:when test="${pd_num==null }">
 		<form method="post" action="${pageContext.request.contextPath }/mypage/insertinquiry">

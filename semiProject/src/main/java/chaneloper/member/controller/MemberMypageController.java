@@ -13,7 +13,7 @@ public class MemberMypageController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("detailmain", "/member/pwdcheck.jsp");
 		req.setAttribute("main", "/member/mDetail.jsp");
-		
+		req.setAttribute("detailtitle", "비밀번호 입력");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }

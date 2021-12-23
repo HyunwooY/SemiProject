@@ -24,7 +24,7 @@ public class AddrManagementController extends HttpServlet{
 		
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
 		req.setAttribute("main", "/member/mDetail.jsp");
-		
+		req.setAttribute("detailtitle", "배송지 관리");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 }
