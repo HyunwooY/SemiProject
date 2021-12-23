@@ -63,14 +63,6 @@
 						<textarea rows="5" cols="50" name="content"></textarea>
 					</td>
 				</tr>
-				<tr>
-					<th>
-						<label for="password">비밀번호</label>
-					</th>
-					<td>
-						<input type="password" name="password" id="password" class="iqyinput">
-					</td>
-				</tr>
 			</table>
 			<input type="submit" value="등록" class="fbtn"><input type="reset" value="취소" class="fbtn">
 		</form>
@@ -123,14 +115,6 @@
 					<textarea rows="5" cols="50" name="content">주문번호:${ph_num }</textarea>
 				</td>
 			</tr>
-			<tr>
-				<th>
-					<label for="password">비밀번호</label>
-				</th>
-				<td>
-					<input type="password" name="password" id="password" class="iqyinput">
-				</td>
-			</tr>
 		</table>
 		<input type="submit" value="등록" class="fbtn"><input type="reset" value="취소" class="fbtn">
 	</form>
@@ -138,12 +122,3 @@
 	</c:choose>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-

@@ -55,7 +55,7 @@
 				<h4>MY BOARD</h4>
 				<a href="${pageContext.request.contextPath }/mypage/insertinquiry">문의하기</a><br>
 				<a href="${pageContext.request.contextPath }/mypage/history">문의내역 확인</a><br>
-				<a href="">리뷰관리</a>
+				<a href="${pageContext.request.contextPath }/mypage/reviewlist">리뷰관리</a>
 			</div>
 			
 		</div>

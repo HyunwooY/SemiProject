@@ -13,7 +13,7 @@ import chaneloper.dao.ProductDao;
 import chaneloper.dao.SellerDao;
 import chaneloper.vo.ProductVo;
 
-@WebServlet("/seller/productDelete")
+@WebServlet("/productDelete")
 public class ProductDeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,7 +24,7 @@ public class ProductDeleteController extends HttpServlet{
 		
 		ProductDao dao = ProductDao.getInstance();
 		SellerDao dao1 = SellerDao.getInstance();
-		ArrayList<ProductVo> productList = dao1.productList(si_id);
+		ArrayList<ProductVo> productList = dao1.productList(si_id, 0, 0);
 		
 		int n= dao.productDelete(pi_num);
 		if(n>0) {

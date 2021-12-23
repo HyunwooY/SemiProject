@@ -31,12 +31,14 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 	function gobuy(){
 		console.log(param);
 	}
-	function countUp(cookieNum){
+	function countUp(cookieNum,price){
 		let xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4 && xhr.status==200){
-				let count=document.getElementsByClassName("count")
+				let count=document.getElementsByClassName("count");
+				let priceAll=document.getElementsByClassName("priceAll");
 				count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)+1;
+				priceAll[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)*price;
 				let data=xhr.responseText;
 				let json=JSON.parse(data);
 				
@@ -45,12 +47,18 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 		xhr.open('get','${pageContext.request.contextPath}/cart/count?how=up&cookie_num='+cookieNum,true);
 		xhr.send();
 	}
-	function countDown(cookieNum){
+	function countDown(cookieNum,price){
 		let xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4 && xhr.status==200){
-				let count=document.getElementsByClassName("count")
-				count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)-1;
+				let count=document.getElementsByClassName("count");
+				let priceAll=document.getElementsByClassName("priceAll");
+				if(parseInt(count[cookieNum-1].innerHTML)-1==0){
+					let cdown=document.getElementsByClassName("cdown");
+				}else{
+					count[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)-1;
+					priceAll[cookieNum-1].innerHTML=parseInt(count[cookieNum-1].innerHTML)*price;
+				}
 				let data=xhr.responseText;
 				let json=JSON.parse(data);
 				
@@ -58,6 +66,10 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 		}
 		xhr.open('get','${pageContext.request.contextPath}/cart/count?how=down&cookie_num='+cookieNum,true);
 		xhr.send();
+	}
+	function cookiedelete(cookienum){
+		console.log("aaaa")
+		location.href="${pageContext.request.contextPath}/member/deleteCookie?cookieNum="+cookienum;
 	}
 </script>
 <div id="cartlist">
@@ -94,32 +106,36 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 					<th width="250px">상품명</th>
 					<th width="100px">색상</th>
 					<th width="50px">사이즈</th>
-					<th width="100px">수량</th>
-					<th width="130px">가격</th>
+					<th width="80px">수량</th>
+					<th width="100px">가격</th>
+					<th width="50px"></th>
 				</tr>
 			</c:if>
 				<tr>
-					<td><input type="checkbox" name="product" value="${vo.pd_num},${vo.purchase_count},${vo.pi_num}"></td>
+					<c:set var="pcount" value="${vo.purchase_count}"/>
+					<c:set var="priceAll" value="${pcount* vo.pi_price}"/>
+					<td><input type="checkbox" name="product" value="${vo.pd_num},${pcount},${vo.pi_num}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
 					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
 					<td>${vo.pd_size }</td>		
 					<td>
-					<div class="count">${vo.purchase_count}</div>
+					<div class="count">${pcount}</div>
 					<div id="countControll">
 						<div class="up">
-							<a href="javascript:countUp(${status.count})">
+							<a href="javascript:countUp(${status.count},${vo.pi_price })">
 								<img src="${pageContext.request.contextPath}/images/up.png">
 							</a>
 						</div>
 						<div class="down">
-							<a href="javascript:countDown(${status.count})">
+							<a href="javascript:countDown(${status.count},${vo.pi_price })" class="cdown">
 								<img src="${pageContext.request.contextPath}/images/down.png" >
 							</a>
 						</div>
 					</div>
 					</td>
-					<td>${vo.pi_price * vo.purchase_count}</td>
+					<td class="priceAll">${priceAll}</td>
+					<td width="50px"><input type="button" value="상품삭제" onclick="cookiedelete(${status.count})"></td>
 				</tr>
 		</c:forEach>
 	</table>

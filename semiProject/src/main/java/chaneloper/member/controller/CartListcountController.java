@@ -38,18 +38,29 @@ public class CartListcountController extends HttpServlet {
 				}
 			}
 		}else if(how.equals("down")) {
+			int loopcount=1;
 			Cookie[] c=req.getCookies();
-			for(Cookie cc:c) {
-				if(cc.getName().equals("JSESSIONID")) {
+			for(int i=0;;i++) {
+				if(i>=c.length) i=0;
+				if(c[i].getName().equals("JSESSIONID")) {
 				}else {
-					if(Character.getNumericValue((cc.getName().charAt(4)))==cookieNum) {
-						int downcount=Integer.parseInt(URLDecoder.decode(cc.getValue(),"utf-8").substring(URLDecoder.decode(cc.getValue(),"utf-8").lastIndexOf(" ")+1))-1;
-						String npd=URLDecoder.decode(cc.getValue(),"utf-8").substring(0,URLDecoder.decode(cc.getValue(),"utf-8").lastIndexOf(" ")+1).concat(Integer.toString(downcount));
-						Cookie cookie=new Cookie(cc.getName(), URLEncoder.encode(npd,"utf-8"));
-						cookie.setPath("/");
-						cookie.setMaxAge(60*60*24*30);
-						resp.addCookie(cookie);
-	
+//					System.out.println(Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8")
+//							.substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1);
+					if(Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8")
+							.substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1==0) { // 상품개수가 0일 때
+						if(Integer.parseInt(c[i].getName().substring(4,c[i].getName().indexOf("_")))==cookieNum) {
+							break;
+						}
+					}else {//0이 아닐 때
+						if(Integer.parseInt(c[i].getName().substring(4,c[i].getName().indexOf("_")))==cookieNum) { 
+							int downcount=Integer.parseInt(URLDecoder.decode(c[i].getValue(),"utf-8").substring(URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1))-1;
+							String npd=URLDecoder.decode(c[i].getValue(),"utf-8").substring(0,URLDecoder.decode(c[i].getValue(),"utf-8").lastIndexOf(" ")+1).concat(Integer.toString(downcount));
+							Cookie cookie=new Cookie(c[i].getName(), URLEncoder.encode(npd,"utf-8"));
+							cookie.setPath("/");
+							cookie.setMaxAge(60*60*24*30);
+							resp.addCookie(cookie);
+							break;
+						}
 					}
 				}
 			}
