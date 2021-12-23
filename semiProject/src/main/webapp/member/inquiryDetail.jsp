@@ -9,9 +9,6 @@
 		alert("해당 게시물은 없거나 삭제되었습니다.");
 	}
 </script>
-<h1 style="position:relative; left: 400px; bottom: 30px; margin: auto;">내 문의 내역</h1>
-<form>
-</form>
 <table width="1000" border="1" style="text-align: center; margin: auto; margin-bottom: 30px;">
 	<tr>
 		<th>상품 번호</th><th>문의 제목</th><th>문의 내용</th><th>답변</th>

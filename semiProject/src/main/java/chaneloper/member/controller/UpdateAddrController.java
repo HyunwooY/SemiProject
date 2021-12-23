@@ -26,6 +26,7 @@ public class UpdateAddrController extends HttpServlet{
 			req.setAttribute("vo", vo);
 			req.setAttribute("detailmain", "/member/updateAddress.jsp");
 		}
+		req.setAttribute("detailtitle", "배송지 수정");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 	@Override
@@ -47,6 +48,7 @@ public class UpdateAddrController extends HttpServlet{
 			req.setAttribute("code", "fail");
 		}
 		req.setAttribute("detailmain", "/member/insertAddress.jsp");
+		req.setAttribute("detailtitle", "배송지 수정");
 		req.getRequestDispatcher("/member/addrmanagement").forward(req, resp);
 	}
 }

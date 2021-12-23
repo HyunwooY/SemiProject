@@ -16,7 +16,6 @@
 	} 
 </script>
 <div id="mypagediv">
-	<h2 style="padding-left: 200px;">내 정보</h2>
 	<div id="mypagediv2">
 	<form method="post" action="<%=request.getContextPath() %>/member/modify" id="form2">
 		<table id="mypageform">

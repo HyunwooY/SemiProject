@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import chaneloper.dao.Inquiry_historyDao;
 import chaneloper.vo.Inquiry_historyVo;
 @WebServlet("/mypage/ihdetail")
-public class inquiryDetailController extends HttpServlet{
+public class InquiryDetailController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int num = Integer.parseInt(req.getParameter("ih_num"));
@@ -19,6 +19,7 @@ public class inquiryDetailController extends HttpServlet{
 		Inquiry_historyVo vo = dao.select(num);
 		req.setAttribute("vo", vo);
 		req.setAttribute("detailmain", "/member/inquiryDetail.jsp");
+		req.setAttribute("detailtitle", "나의 문의내역");
 		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 	}
 	

@@ -13,7 +13,6 @@
 	}
 </script> 
 <div id="showdiv">
-	<h1 style="position:relative; left: 400px; bottom: 30px; margin: auto;">배송지 수정</h1>
 	<form method="post" action="${pageContext.request.contextPath }/member/updateaddr">
 		<input type="hidden" name="num" value="${vo.num }">
 		<label for="addrname">배송지명</label>
