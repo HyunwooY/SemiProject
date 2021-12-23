@@ -135,18 +135,55 @@ public class ProductDao {
 	// 상품 삭제
 	public int productDelete(int pi_num) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt5 = null;
+		PreparedStatement pstmt6 = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "DELETE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pi_num);
-			return pstmt.executeUpdate();
+			String sql = "DELETE FROM PRODUCT_PHOTO WHERE PI_NUM=?";
+			pstmt1 = con.prepareStatement(sql);
+			pstmt1.setInt(1, pi_num);
+			int a = pstmt1.executeUpdate();
+			
+			String sql2 = "DELETE FROM PRODUCT_DETAIL WHERE PI_NUM=?";
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setInt(1, pi_num);
+			int b = pstmt2.executeUpdate();
+			
+			String sql3 = "DELETE FROM INQUIRY_HISTORY WHERE PI_NUM=?";
+			pstmt3 = con.prepareStatement(sql3);
+			pstmt3.setInt(1, pi_num);
+			int c = pstmt3.executeUpdate();
+			
+			String sql4 = "DELETE FROM TAG WHERE PI_NUM=?";
+			pstmt4 = con.prepareStatement(sql4);
+			pstmt4.setInt(1, pi_num);
+			int d = pstmt4.executeUpdate();
+			
+			String sql5 = "DELETE FROM INTEREST_GOODS WHERE PI_NUM=?";
+			pstmt5 = con.prepareStatement(sql5);
+			pstmt5.setInt(1, pi_num);
+			int e = pstmt5.executeUpdate();
+			
+			String sql6 = "DELETE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
+			pstmt6 = con.prepareStatement(sql6);
+			pstmt6.setInt(1, pi_num);
+			int f = pstmt6.executeUpdate();
+			
+			return a + b + c + d + e + f; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
 		} finally {
-			JDBC.close(con, pstmt, null);
+			JDBC.close(pstmt6);
+			JDBC.close(pstmt5);
+			JDBC.close(pstmt4);
+			JDBC.close(pstmt3);
+			JDBC.close(pstmt2);
+			JDBC.close(con, pstmt1, null);
 		}
 	}
 	
