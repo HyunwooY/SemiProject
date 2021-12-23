@@ -9,16 +9,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 #maindiv {position: relative; padding:50px;}
-#mainimg{position: relative; width:400px; height:500px; border:1px solid red; float:left;margin-top:21px ; width: 40%;margin-left:50px; margin-right:50px;margin-bottom:80px;}
+#mainimg{position: relative; width:500px; height:600px;  float:left;margin-top:21px ; margin-left:150px; margin-right:50px;margin-bottom:80px; }
+#mainimg img{width:100%;height:100%;}
 #maintable{position: relative; float: right; width: 40%;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;}
 #pubutton{position: relative; float: right; width: 40%;text-align: left; margin-right:50px;}
-#showimg{position: relative; width:100%; height:300px; border:1px solid red; clear:both; margin-bottom:40px;}
-#showimg img{width:290px; height:290px; border:1px solid red; padding-right:100px}
-#inqtable{position: relative; width:49%; height:500px; border:1px solid red; float: left;}
-#inqt{width: 100%;  border-top: 1px solid #444444; border-collapse: collapse;}
+#showimg{position: relative; width:100%;  clear:both; margin-bottom:40px;margin-top:20px;padding-right:100px; border-top: 1px solid #444444}
+#showimg img{width:900px; height:1200px;  background-size: contain; background-repeat: no-repeat; background-position: center;}
+#anno{width:700px;  display:inline-block; margin-left:50px; margin-right:50px;margin-top:20px; margin-bottom:20px; text-align: left;}
+#inqtable{ position: relative; width:49%; height:500px;  float: left; margin-top:20px; border-right: 1px solid black; padding-right: 15px;}
+#inqt{width: 100%; border-collapse: collapse;}
 #inqt .td{min-height:25px;border-bottom: 1px solid #444444;padding: 10px;}
 #inqt .th{border-bottom: 1px solid #444444;padding: 10px;}
-#rvttable{position: relative; width:49%; height:500px; border:1px solid red; float: right;}
+#rvttable{position: relative; width:49%; height:500px;  float: right;margin-top:20px;}
+#rvdiv{width:300px; height:70px;text-align: left; position: relative; float: left; margin-b}
+#rvimg{width:300px;height:70px; position: relative; float: left;}
+#rvimg img{width:25%;height:100%; margin-right:13px;  }
 #myform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
     border: 0; /* 필드셋 테두리 제거 */
@@ -434,7 +439,7 @@
 <div id="maindiv">
 <!-- 이미지 -->
 	<div id="mainimg">
-		<img src="images/"+ ${img[0]}>
+		<img src="${pageContext.request.contextPath}/upload/${img[0]}">
 	</div>
 <!-- 제품상세 -->
 	<div id="maintable">
@@ -499,16 +504,62 @@
 	</div>
 	
 <!-- 상품이미지 출력 -->
+	
 	<div id="showimg">
 			<c:forEach var="i" begin="0" end="2">
-						<img src="images/"+ ${img[i]}>
+						<img src="${pageContext.request.contextPath}/upload/${img[i]}">
 			</c:forEach>
 	 </div>
-
-
+	 <hr/>
+	<div id="anno">
+		<h3>[교환 및 반품 안내]</h3><br>
+		<span>단순 변심에 의한 교환 및 반품은 고객님께서 왕복 택배 요금을 부담해 주셔야 합니다.</span><br><br>
+		<h3>[교환 및 반품 주소]</h3><br>
+		<span>택배사 이용시 : 서울특별시 종로구 율곡로10길 105 디아망 4F(봉익동 10-1 디아망 4F)  </span><br><br>
+		<h3>[교환 절차 안내]</h3><br>
+		<h3>1. 교환 신청하기 </h3><br>
+		<span>- 모든 교환 및 반품은 휴일포함 7일 이내 사이트내의 QnA 게시판을 통해 교환</span><br>
+		<span>및 반품 의사를 밝혀주셔야 합니다.</span><br><br>
+		<span>- 교환의 경우, 문의글 작성 시 교환을 원하시는 [색상]과 [사이즈]를 정확히 기입해주셔야</span><br>
+		<span>보다 빠른 교환 처리가 가능합니다.</span><br><br>
+		<span>- 여행 및 출장 등의 개인적인 사유로 인해 신청기간이 지날 경우 처리가 불가능한 점 양해부</span><br>
+		<span>탁드립니다.</span><br><br>
+		<h3>2. 교환할 제품 보내기 </h3><br>
+		<span>- 불량 및 오배송을 제외한 모든 교환건의 택배 접수는 택배사 상관없이 '선불결제'를 통해 직</span><br>
+		<span>접 접수해 주셔야 합니다.</span><br><br><br>
+		<span>- 쇼핑몰에서는 택배기사님 직접 픽업신청 서비스를 제공하지 않고 있습니다.</span><br>
+		<span>- 보내주신 제품은 평균 2~3일 이내 도착하며, 확인 후 교환제품 발송까지는 영업일 기준 최</span><br>
+		<span>대 3-7일이 소요될 수 있습니다.</span><br><br>
+		<h3>3. 교환완료 제품 수령하기 </h3><br>
+		<span>- 교환 택배비 입금 확인이 되어야 교환 제품이 발송되오니 확인 부탁드립니다.</span><br><br>
+		<h3>[반품 절차 안내]</h3><br>
+		<h3>1. 반품 신청하기</h3><br>
+		<span>- 모든 교환 및 반품은 휴일포함 7일 이내 사이트내 QnA게시판을 통해 교환 및</span><br>
+		<span>반품 의사를 밝혀주셔야 합니다.</span><br><br>
+		<span>- 반품원하실 경우, 문의글 작성 하실 때</span><br>
+		<span>원하시는 반품 서비스 1. 부분 반품/전체 반품 여부 2. 부분 반품 시 반품을 원하시는 제품명을</span><br>
+		<span>정확히 기입해주셔야 보다 빠른 반품 처리가 가능합니다.</span><br><br>
+		<span>- 무통장입금 거래 고객님의 경우, 반품 시 환불받으실 [계좌번호][은행명][예금주명]을 같이</span><br>
+		<span>기입해주셔야 확인 후 빠른 환불 처리가 가능합니다.</span><br><br>
+		<span>- 여행 및 출장 등의 개인적인 사유로 인해 신청기간이 지날 경우 처리가 어렵습니다.</span><br><br>
+		<h3>2. 반품할 제품 보내기</h3><br>
+		<span>- 불량 및 오배송을 제외한 모든 반품건의 택배 접수는 '선불결제'를 통해 직접 접수해 주셔야</span><br>
+		<span>합니다.</span><br><br>
+		<span>- 쇼핑몰에서는 택배기사님 직접 픽업신청 서비스를 제공하지 않고 있습니다.</span><br><br>
+		<span>- 보내주신 제품은 평균 2~3일 이내 도착합니다.</span><br><br>
+		<h3>3. 금액 환불</h3><br>
+		<span>- 반품 제품의 검품이 끝난 뒤에 실 결제 방식에 따라 환불을 도와드리고 있습니다.</span><br><br>
+		<span>- 무통장 입금으로 결제를 하신 고객님들은 회원가입 시 혹은 반품 문의글 작성 시</span><br>
+		<span>입력해 주신 계좌번호로 물품 도착 후 업무일 기준 1-2일 내로 환불금액을 입금해 드립니다.</span><br><br>
+		<span>- 카드 결제를 하신 고객님들은 카드사를 통해 결제 취소가 이루어져,</span><br>
+		<span> 전산상으로는 '환불 완료'라고 나타나도 금액 환불은 최대 3-7일 뒤에 완료될 수 있는 점 양해</span><br>
+		<span>부탁드립니다.</span><br><br>
+	</div>
+	<hr/>
 <!-- 문의 페이징 -->
 	<div id="inqtable">
 	<h2>문의사항</h2><br>
+	 <hr/>
 		<div id="p1">
 			<table id="inqt">
 				<tr>
@@ -548,15 +599,15 @@
 			<table>
 				<tr>
 					<td>제목</td>
-					<td><input id="p3_t" type="text" name="title" readonly size="60" style="height:30px"></td>
+					<td><input id="p3_t" type="text" name="title" readonly size="80" style="height:30px"></td>
 				</tr>
 				<tr>
 					<td>문의</td>
-					<td ><input id="p3_q" type="textarea" name="question" size="60" style="height:250px"></td>
+					<td ><input id="p3_q" type="textarea" name="question" size="80" style="height:250px"></td>
 				</tr>
 				<tr id="p3_tr">
 					<td>답변</td>
-					<td ><input id="p3_a" type="text" name="answer" readonly size="60" style="height:100px"></td>
+					<td ><input id="p3_a" type="text" name="answer" readonly size="80" style="height:100px"></td>
 				</tr>
 				<tr>
 					<td id="c1" >
@@ -575,10 +626,11 @@
 
 <!-- 리뷰 페이징 -->
 	<div id="rvttable">
-	<h2>리뷰</h2>
+	<h2>리뷰</h2><br>
+	 <hr/>
 		<div id="rvtable">
 			<c:forEach var="vo" items="${list_rv }">
-				<div>
+				<div id="rvdiv">
 					<span>${vo.getMI_ID() }</span> 
 					<c:forEach var="i" begin="0" end="${vo.getR_HIT()-1 }">
 					<span>★</span>
@@ -587,15 +639,15 @@
 					<span>${vo.getR_TITLE() }</span><br>
 					<span>${vo.getR_CONTENT() }</span><br>
 				</div>
+				<div id="rvimg">
 				<c:forEach var="vo2" items="${list_pt}">
 					<c:if test="${vo2.getR_num() eq vo.getR_NUM() }">
-							<div>
-								<img src="${vo2.getTitle() }">
-							</div>
+						<img src="${pageContext.request.contextPath}/upload/${vo2.getTitle()}">
 					</c:if>
 				</c:forEach>
+				</div>
 			</c:forEach>
-			<div>
+			<div style="position: absolute; right: 0px; bottom: 50px;">
 				<a href="#" onclick="addrv()">후기작성</a>
 			</div>
 		</div>
