@@ -49,4 +49,16 @@
 		<c:if test="${requestScope.endPage < requestScope.pageCount }">
 			<a href="${cp }/seller/inquiryList?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
 		</c:if>
-	</div>  
+	</div>
+
+	<div>
+	<form method="post" action="${cp }/seller/inquiryList"">
+		<select name="field">
+		<option value="ih_num" <c:if test="${field=='ih_num' }">selected</c:if>>작성자</option>
+			<option value="mi_id" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
+			<option value="ih_title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
+		</select>
+		<input type="text" name="keyword" value="${keyword }">
+		<input type="submit" value="검색">
+	</form>
+</div>

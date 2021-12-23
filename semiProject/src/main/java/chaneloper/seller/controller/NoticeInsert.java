@@ -24,6 +24,8 @@ public class NoticeInsert extends HttpServlet {
 		NoticeDao dao = NoticeDao.getInstance();
 		int n = dao.NoticeInsert(vo);
 		resp.sendRedirect(req.getContextPath() + "/seller/notice");
+		req.setAttribute("main","/seller/noticeForm.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		
 	}
 

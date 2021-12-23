@@ -4,6 +4,13 @@
 <style>
 	table{width:990px}
 </style>
+
+<!-- 	<script> 
+	function noticedelete(){
+ 		location.href="${pageContext.request.contextPath }/noticedelete?n_num=${vo.n_num}";
+ 	}
+       </script> -->
+       
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
 	<!-- <h1>공지 사항</h1> -->
 	<table>
@@ -16,8 +23,14 @@
 		<tr>
 			<td>${vo.n_num }</td>
 			<td>${vo.n_context}</td>
+		<c:if test="${sessionScope.radio=='판매사업자' }">
+<!-- 		<td><input type="button" value="삭제" onclick="noticedelete()"></td> -->
+	<td><a href="${pageContext.request.contextPath }/noticedelete?n_num=${vo.n_num }">삭제</a></td>
+		</c:if>
+
 			
 		</tr>
+		
 	</c:forEach>
 	<hr>
 	</table>
