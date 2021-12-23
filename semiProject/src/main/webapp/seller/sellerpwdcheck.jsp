@@ -3,9 +3,10 @@
 <style>
 	#form1{
 		position:relative;
-		left: 40px;
-		bottom: 30px;
+		bottom: 10px;
+		top: 50px;
 		margin: auto;
+		margin-right: 200px;
 	}
 	#pwd{
 		width: 150px;
@@ -17,8 +18,9 @@
 		position: relative;
 		left: 50px;
 	}
+</style>
 
-	} 
+<script>
 	window.onload = function(){
 		if(${requestScope.result == 'fail'}){
 			alert("올바른 비밀번호가 아닙니다.");

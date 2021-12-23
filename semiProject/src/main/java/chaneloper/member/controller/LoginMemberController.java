@@ -64,7 +64,7 @@ public class LoginMemberController extends HttpServlet {
 			if(dao.sellerLogin(id, pwd)) {
 				req.setAttribute("lcode", true);
 				req.getSession().setAttribute("radio", radio);
-				req.getSession().setAttribute("id", id);
+				req.getSession().setAttribute("id", id);				
 			}else {
 				req.setAttribute("lcode", false);
 				req.setAttribute("main", "/member/login.jsp");
