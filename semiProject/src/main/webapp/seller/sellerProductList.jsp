@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- <script type="text/javascript"> -->
 <!-- 	function modify(){ -->
 <%-- 		location.href="${pageContext.request.contextPath}/seller/sellerProductUpdateForm"; --%>
@@ -35,7 +35,7 @@
 		<td>${productList.pd_color }</td>
 		<td>${productList.pi_category }</td>
 		<td>${productList.pd_count }</td>
-		<td>${productList.pi_price }원</td>
+		<td><fmt:formatNumber value="${productList.pi_price }"/>원</td>
 		<td>${productList.pi_date }</td>
 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a>
 		<td><a href="${pageContext.request.contextPath }/productDelete?pi_num=${productList.pi_num}">삭제</a>
