@@ -65,8 +65,6 @@ public class CartListcountController extends HttpServlet {
 								cookie.setMaxAge(60*60*24*30);
 								resp.addCookie(cookie);
 								loopcount++;
-							}else {
-								loopcount++;
 							}
 						}
 						if(loopcount==c.length) break;
