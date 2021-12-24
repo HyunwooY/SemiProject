@@ -15,16 +15,17 @@
 <script>
 
 	function checklast(){
-		let pi_num = document.getElementsByName("hiddenpi_num")[0].value;
-		let pd_num = document.getElementsByName("hiddenpd_num")[0].value;
+		let pi_num = document.getElementsByName("hiddenpi_num")[0].innerHTML;
+		let pd_num = document.getElementsByName("hiddenpd_num")[0].innerHTML;
 		var num = pi_num;
 		let pltable = document.getElementById("pltable");
 		if(pltable.childnodes.length()==1){
 			num = 0;
 		}
-		
+		console.log(pi_num);
+		console.log(pd_num);
  		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num="+pd_num+"&pi_num="+pi_num+"&num="+num;
-		
+
 	}
 
 
@@ -64,8 +65,8 @@
 	</tr>
 	<tr id="hidden" style="display:none;">
 		<td colspan=9>
-			<input name="hiddenpi_num" type="text" value="${pl.pi_num}"/>
-			<input name="hiddenpd_num" type="text" value="${pl.pd_num }"/>
+			<a name="hiddenpi_num">${pl.pi_num}</a>
+			<a name="hiddenpd_num">${pl.pd_num }</a>
 		</td>
 	</tr>
 
