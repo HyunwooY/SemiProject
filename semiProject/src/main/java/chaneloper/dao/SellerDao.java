@@ -194,7 +194,7 @@ public class SellerDao {
 					+ " INNER JOIN PRODUCT_PHOTO PP ON PI.PI_NUM = PP.PI_NUM"
 					+ " INNER JOIN SELLER_INFOMATION SI ON PI.SI_ID = SI.SI_ID"
 					+ " WHERE SI.SI_ID = ? AND ROWNUM>=? AND ROWNUM<=?"
-					+ " ORDER BY PI_DATE DESC";
+					+ " ORDER BY PI_NUM DESC";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setString(1, si_id);
 			pstmt.setInt(2, startRow);
@@ -205,7 +205,7 @@ public class SellerDao {
 				String pi_name = rs.getString("pi_name");
 				String pp_title = rs.getString("pp_title");
 				Date pi_date = rs.getDate("pi_date");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, 0, 0, pi_date, null, null, null, 0, pp_title, null);
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, 0, 0, pi_date, null, null, null, 0, pp_title, null, 0);
 				list1.add(vo);
 			}
 			return list1;
@@ -225,7 +225,7 @@ public class SellerDao {
 		ArrayList<ProductVo> list = new ArrayList<ProductVo>();
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP.PP_TITLE, PI.PI_DATE, PI.PI_CATEGORY, ROWNUM FROM"
+			String sql = "SELECT DISTINCT PI.PI_NUM, PI.PI_NAME, PI.PI_PRICE, PD.PD_SIZE, PD.PD_COLOR, PD.PD_COUNT, PP.PP_TITLE, PI.PI_DATE, PI.PI_CATEGORY, PD.PD_NUM, ROWNUM FROM"
 					+ " SELLER_INFOMATION SI, PRODUCT_INFOMATION PI, PRODUCT_PHOTO PP, PRODUCT_DETAIL PD"
 					+ " WHERE SI.SI_ID = ? AND PI.PI_NUM = ? AND SI.SI_ID = PI.SI_ID AND PI.PI_NUM = PD.PI_NUM AND PI.PI_NUM = PP.PI_NUM AND ROWNUM>=? AND ROWNUM<=?"
 					+ " ORDER BY PI.PI_NUM ASC";
@@ -244,7 +244,8 @@ public class SellerDao {
 				String pd_color = rs.getString("pd_color");
 				int pd_count = rs.getInt("pd_count");
 				String pp_title = rs.getString("pp_title");
-				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, null);
+				int pd_num = rs.getInt("pd_num");
+				ProductVo vo = new ProductVo(pi_num, si_id, pi_name, pi_price, 0, pi_date, pi_category, pd_size, pd_color, pd_count, pp_title, null, pd_num);
 				list.add(vo);
 			}
 			return list;
@@ -276,24 +277,24 @@ public class SellerDao {
 		}
 	}
 	
-	// 판매자 상품 삭제
-	public int sellerDelete(int pi_num) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = JDBC.getCon();
-			String sql = "DELTE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pi_num);
-			return pstmt.executeUpdate();
-		} catch(SQLException se) {
-			se.printStackTrace();
-			return -1;
-		} finally {
-			JDBC.close(con, pstmt, null);
-		}
-	}
-	
+//	// 판매자 상품 삭제
+//	public int sellerDelete(int pi_num) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		try {
+//			con = JDBC.getCon();
+//			String sql = "DELTE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, pi_num);
+//			return pstmt.executeUpdate();
+//		} catch(SQLException se) {
+//			se.printStackTrace();
+//			return -1;
+//		} finally {
+//			JDBC.close(con, pstmt, null);
+//		}
+//	}
+//	
 	// 판매자 상품 수정
 //	public int sellerProductDelete(ProductVo vo) {
 //		Connection con = null;

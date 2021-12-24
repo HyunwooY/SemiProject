@@ -31,5 +31,6 @@
 <form method="post" action="<%=request.getContextPath() %>/seller/checkpwd"  id="form1">
 	<h1>비밀번호 입력</h1><br>
 	<input type="password" name="si_pwd" id="si_pwd" placeholder="password"><br>
+	<br>
 	<input type="submit" value="확인" id="btn">
 </form>

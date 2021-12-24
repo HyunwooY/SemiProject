@@ -3,8 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<br>
+<h1>상품 등록</h1>
+<br>
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">	
 		상품명<br>
 		<input type="text" name="pi_name"><br>
