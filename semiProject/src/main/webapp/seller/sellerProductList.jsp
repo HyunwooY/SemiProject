@@ -21,8 +21,7 @@
 		if(pltable.childnodes.length()==1){
 			num = 0;
 		}
-		
-		onload.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}&num="+num;
+		location.href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}&num="+num;
 	}
 
 
