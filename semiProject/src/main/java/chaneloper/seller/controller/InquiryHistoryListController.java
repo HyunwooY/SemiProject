@@ -17,6 +17,7 @@ public class InquiryHistoryListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");		
+		String id=(String)(req.getSession()).getAttribute("id");
 		
 		String spageNum = req.getParameter("pageNum");
 		int pageNum = 1;
@@ -27,7 +28,7 @@ public class InquiryHistoryListController extends HttpServlet{
 		int endRow = startRow + 9;
 		
 		Inquiry_historyDao dao = Inquiry_historyDao.getInstance();
-		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow, null, null,null);
+		ArrayList<Inquiry_historyVo> list = dao.list(startRow, endRow, null, null,id);
 
 		int count = dao.getCount(null, null,null);		// 전체 글의 수
 		int pageCount = (int)Math.ceil(count / 10.0);		// 전체 페이지 수

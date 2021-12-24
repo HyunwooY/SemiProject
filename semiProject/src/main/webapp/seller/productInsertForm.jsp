@@ -4,15 +4,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <br>
+<div name="update">
 <h1>상품 등록</h1>
 <br>
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/seller/insert">	
 		상품명<br>
 		<input type="text" name="pi_name"><br>
 		가격<br>
-		<input type="text" name="pi_price"><br>	
-<!-- 		분류<br> -->
-<!-- 		<input type="text" name="pi_category"><br>			 -->		
+		<input type="text" name="pi_price"><br>			
 		이미지<br>	
 		<input type="file" name="pp_title"><br><br><br>
 		
@@ -91,6 +90,7 @@
 		<input type="submit" value="등록" onclick="return checkBox()">
 		<input type="submit" value="취소" onclick="cansel()"><br>
 	</form>
+	</div>
 	
 	<script>
 		function cansel(){

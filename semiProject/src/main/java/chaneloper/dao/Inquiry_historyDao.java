@@ -39,6 +39,9 @@ public class Inquiry_historyDao {
 	
 	
 	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword, String id){
+		System.out.println("startRow:" + startRow);
+		System.out.println("endRow:" + endRow);
+		System.out.println("id:" + id);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -79,6 +82,7 @@ public class Inquiry_historyDao {
 				Inquiry_historyVo vo = new Inquiry_historyVo(ih_num, mi_id, pi_num, ih_title, ih_question, ih_answer);
 				list.add(vo);
 			}
+			System.out.println("daolist:" + list);
 			return list;
 		} catch(SQLException se) {
 			se.printStackTrace();
