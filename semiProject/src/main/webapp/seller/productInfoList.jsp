@@ -20,6 +20,7 @@
 		<th>상품이름</th>
 		<th>상품번호</th>
 		<th>상품등록일</th>
+		<th>삭제</th>
 		<th>상세정보보기</th>
 	</tr>
 	<c:forEach var="list" items="${requestScope.list }">		
@@ -28,6 +29,7 @@
 		<td>${list.pi_name }</td>
 		<td>${list.pi_num }</td>
 		<td>${list.pi_date }</td>
+		<td><a href="${pageContext.request.contextPath }/seller/productDel?pi_num=${list.pi_num}">삭제</a>
 		<td><a href="${pageContext.request.contextPath }/seller/producDetailtList?pi_num=${list.pi_num}">상세정보보기</a>
 	</tr>
 	</c:forEach>

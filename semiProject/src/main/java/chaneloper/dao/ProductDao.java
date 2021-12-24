@@ -191,6 +191,24 @@ public class ProductDao {
 		}
 	}
 	
+	public int productDel(int pi_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JDBC.getCon();		
+			String sql2 = "DELETE FROM PRODUCT_INFOMATION WHERE PI_NUM=?";
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setInt(1, pi_num);
+			return pstmt.executeUpdate(); //객체만 삭제		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			JDBC.close(con, pstmt, null);
+		}
+	}
+	
 	// 메인에 보여질 전체 상품 리스트
 	public ArrayList<ProductVo> listAll() {
 		Connection con = null;
