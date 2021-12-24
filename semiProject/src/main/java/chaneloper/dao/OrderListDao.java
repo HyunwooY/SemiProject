@@ -39,6 +39,7 @@ private static OrderListDao instance = new OrderListDao();
 		JDBC.close(con,pstmt,null);
 	}
 }
+	// 주문내역 리스트
 	public ArrayList<OrderListVo> list(String mi_id, int startRow, int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
