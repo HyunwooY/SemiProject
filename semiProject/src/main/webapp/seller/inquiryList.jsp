@@ -2,15 +2,14 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	    table, th, td {
-    border: 1px solid #bcbcbc;
-  }
+
   table {
     width: 960px;
     height: 110px;
     margin-left: 50px;
     margin-right: auto;
   }
+  
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
 	<br>

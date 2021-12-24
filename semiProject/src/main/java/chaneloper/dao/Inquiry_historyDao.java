@@ -37,7 +37,6 @@ public class Inquiry_historyDao {
 		}
 	}
 	
-
 	
 	public ArrayList<Inquiry_historyVo> list(int startRow, int endRow, String field, String keyword, String id){
 		Connection con = null;
@@ -89,6 +88,29 @@ public class Inquiry_historyDao {
 		}
 	}
 	
+	public int getCount(String field,String keyword) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JDBC.getCon();
+			String sql="select NVL(count(num),0) from inquiry_history";
+			if(field!=null && !field.equals("")) {
+				sql += "where" + field + "like '%" + keyword + "%'";
+			}
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+			return rs.getInt(1);
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			JDBC.close(con,pstmt,rs);
+		}
+	}
 	
 	
 	// 문의내역 수정
