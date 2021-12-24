@@ -29,6 +29,7 @@ public class ReviewListController extends HttpServlet{
 		
 		ReviewDao dao = ReviewDao.getInstance();
 		dao.list(startRow, endRow, id);
+		ArrayList<ReviewVo> plist = dao.photolist(id);
 		
 		ArrayList<ReviewVo> list = dao.list(startRow, endRow, id);
 		int pageCount = (int)Math.ceil(dao.getCount(id)/10.0); 
@@ -38,6 +39,7 @@ public class ReviewListController extends HttpServlet{
 			endPageNum=pageCount;
 		}
 		req.setAttribute("list", list);
+		req.setAttribute("plist", plist);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPage", startPageNum);
 		req.setAttribute("endPage", endPageNum);

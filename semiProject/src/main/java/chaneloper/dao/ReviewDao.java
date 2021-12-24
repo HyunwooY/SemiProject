@@ -27,7 +27,7 @@ public class ReviewDao {
 						+ "("
 						+ "		select rv.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from review re, review_photo rp where rp.mi_id=? and re.r_num=rp.r_num order by re.r_num desc"
+						+ "        select re.r_num r_num, re.ph_num ph_num, re.r_title r_title, re.r_date r_date, re.r_hit r_hit, re.r_content r_content from review re, purchase_history ph where ph.mi_id=? and  ph.ph_num=re.ph_num order by re.r_num desc"
 						+ "     ) rv"
 						+ ") where rnum>=? and rnum<=?";
 			con = JDBC.getCon();
@@ -44,8 +44,34 @@ public class ReviewDao {
 				Date r_date = rs.getDate("r_date");
 				int r_hit = rs.getInt("r_hit");
 				String r_content = rs.getString("r_content");
-				String rp_title = rs.getString("rp_title");
-				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, r_hit, r_content, rp_title);
+		//		String rp_title = rs.getString("rp_title");
+				ReviewVo vo = new ReviewVo(r_num, ph_num, r_title, r_date, r_hit, r_content, null);
+				list.add(vo);
+			}
+			return list;
+		} catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally{
+			JDBC.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<ReviewVo> photolist(String id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select rp.rp_title rp_title, rp.r_num r_num from review_photo rp, review re, purchase_history ph "
+					+ "where rp.r_num=re.r_num and re.ph_num=ph.ph_num and ph.mi_id=?";
+			con = JDBC.getCon();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			ArrayList<ReviewVo> list = new ArrayList<ReviewVo>();
+			while(rs.next()) {
+				
+				ReviewVo vo = new ReviewVo(rs.getInt("r_num"), 0, null, null, 0, null, rs.getString("rp_title"));
 				list.add(vo);
 			}
 			return list;
@@ -82,7 +108,7 @@ public class ReviewDao {
 			ResultSet rs = null;
 			try {
 				con = JDBC.getCon();
-				String sql = "SELECT NVL(count(r_num),0) cnt from review re, purchase_history ph where re.mi_id=ph.mi_id and mi_id=?";
+				String sql = "SELECT NVL(count(re.r_num),0) cnt from review re, purchase_history ph where re.ph_num=ph.ph_num and mi_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();

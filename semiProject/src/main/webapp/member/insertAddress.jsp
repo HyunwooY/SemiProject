@@ -41,7 +41,7 @@
 <div id="showaddress">
 		<table width="1000" border="1" style="text-align: center; margin: auto; margin-bottom: 30px;">
 			<tr>
-				<th>배송지명</th><th>수령인</th><th>전화번호</th><th>주소</th><th>수정</th><th>삭제</th>
+				<th width="15%">배송지명</th><th width="10%">수령인</th><th width="15%">전화번호</th><th>주소</th><th width="7%">수정</th><th width="7%">삭제</th>
 			</tr>
 			<c:forEach var="avo" items="${list }">
 			<tr>
