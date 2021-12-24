@@ -13,6 +13,8 @@
 #mainimg{position: relative; width:500px; height:600px;  float:left;margin-top:21px ; margin-left:150px; margin-right:50px;margin-bottom:80px; }
 #mainimg img{width:100%;height:100%;}
 #maintable{position: relative; float: right; width: 500px;margin-left:50px;margin-right:50px;text-align: left;margin-bottom:20px;margin-top:100px;}
+#showtable{width:100%;}
+#showtable td{width:200px;}
 #showtable img{width:10px;height:10px;}
 #pubutton{position: relative; float: right; width: 40%;text-align: left;margin-left:10px;}
 #showimg{position: relative; width:100%;  clear:both; margin-bottom:40px;margin-top:20px;padding-right:100px; border-top: 1px solid #444444}
@@ -448,11 +450,9 @@
 	    <table id="showtable" >
 			<th colspan=3>${name}</th>
 			<tr>
-			    <td colspan=4><br>
-				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br><br>
-
-				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
-
+			    <td colspan=3><br>
+				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
+				   <td>
 
 			</tr>
 
@@ -473,11 +473,10 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a><br>
+					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
 <%		
 	}
 %>
-
 				</td>
 			</tr>
 			<tr>
