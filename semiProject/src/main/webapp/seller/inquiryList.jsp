@@ -2,17 +2,17 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	    table, th, td {
-    border: 1px solid #bcbcbc;
-  }
+
   table {
-    width: 400px;
-    height: 200px;
-    margin-left: auto;
+    width: 960px;
+    height: 110px;
+    margin-left: 50px;
     margin-right: auto;
   }
+  
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
+	<br>
 	<h1>문의 내역</h1>
 	<br>
 	<table>
@@ -63,7 +63,6 @@
 	<div>
 	<form method="post" action="${cp }/seller/inquiryList"">
 		<select name="field">
-		<option value="ih_num" <c:if test="${field=='ih_num' }">selected</c:if>>작성자</option>
 			<option value="mi_id" <c:if test="${field=='mi_id' }">selected</c:if>>작성자</option>
 			<option value="ih_title" <c:if test="${field=='ih_title' }">selected</c:if>>제목</option>
 		</select>

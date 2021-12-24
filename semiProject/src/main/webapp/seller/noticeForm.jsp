@@ -8,6 +8,7 @@
     margin-right: auto;
   }
 </style>
+<br>
 <h1 style="text-align:center">공지사항작성</h1>
 <script>
     function backToList() {

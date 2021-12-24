@@ -448,16 +448,26 @@
 	    <table id="showtable" >
 			<th colspan=3>${name}</th>
 			<tr>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    <td colspan=4><br>
 				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
+<<<<<<< HEAD
 				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
+=======
 			    <td colspan=3>
 				    가격 :  ${price}원
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+=======
+				    
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    </td>
 			</tr>
 			<tr>
 			    <td colspan=3>
-			     적립금 :  ${Math.round(price*0.01)}원
+			     적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
 				</td>
 			</tr>
 			<tr>

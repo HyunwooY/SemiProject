@@ -43,9 +43,7 @@
 			<a href="${pageContext.request.contextPath }/seller/insert">상품 등록</a>	
 		</div>		
 	</div>
-	<!-- <div id="showtitle">
-		<span>${requestScope.detailtitle }</span>
-	</div> -->
+	
 	<div id="show">
 		<jsp:include page="${requestScope.detailmain }"></jsp:include>
 	</div>		
