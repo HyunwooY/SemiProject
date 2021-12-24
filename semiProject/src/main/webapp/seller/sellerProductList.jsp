@@ -15,13 +15,14 @@
 <script>
 
 	function checklast(){
-		
+		console.log(productList.pi_num);
 		var num = ${productList.pi_num};
 		let pltable = document.getElementById("pltable");
 		if(pltable.childnodes.length()==1){
 			num = 0;
 		}
 		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}&num="+num;
+		
 	}
 
 
