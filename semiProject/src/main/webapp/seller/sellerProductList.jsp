@@ -14,21 +14,6 @@
 
 <script>
 
-	function checklast(){
-		let pi_num = document.getElementsByName("hiddenpi_num")[0].innerHTML;
-		let pd_num = document.getElementsByName("hiddenpd_num")[0].innerHTML;
-		var num = pi_num;
-		let pltable = document.getElementById("pltable");
-		if(pltable.childnodes.length()==1){
-			num = 0;
-		}
-		console.log(pi_num);
-		console.log(pd_num);
- 		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num="+pd_num+"&pi_num="+pi_num+"&num="+num;
-
-	}
-
-
 </script>
 
 <br>
@@ -61,15 +46,8 @@
 		<td><fmt:formatNumber value="${pl.pi_price }"/>원</td>
 		<td>${pl.pi_date }</td>
 <%-- 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a> --%>
-		<td><a href="#" onclik="checklast()">삭제</a>
+		<td><a href="${pageContext.request.contextPath }/productDelete?pd_num=${pl.pd_num}&pi_num=${pl.pi_num }">삭제</a>
 	</tr>
-	<tr id="hidden" style="display:none;">
-		<td colspan=9>
-			<a name="hiddenpi_num">${pl.pi_num}</a>
-			<a name="hiddenpd_num">${pl.pd_num }</a>
-		</td>
-	</tr>
-
 	</c:forEach>
 
 </table>
