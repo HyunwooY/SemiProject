@@ -16,12 +16,12 @@
 
 	function checklast(){
 
-		var num = ${productList.pi_num};
+		var num = ${pl.pi_num};
 		let pltable = document.getElementById("pltable");
 		if(pltable.childnodes.length()==1){
 			num = 0;
 		}
-		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}&num="+num;
+		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${pl.pd_num}&pi_num=${pl.pi_num}&num="+num;
 		
 	}
 
