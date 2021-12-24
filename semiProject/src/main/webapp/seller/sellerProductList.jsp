@@ -11,6 +11,24 @@
     margin-right: auto;
   }
 </style>
+
+<script>
+
+	function checklast(){
+
+		var num = ${pl.pi_num};
+		let pltable = document.getElementById("pltable");
+		if(pltable.childnodes.length()==1){
+			num = 0;
+		}
+		alert(${pl.pi_num});
+// 		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${pl.pd_num}&pi_num=${pl.pi_num}&num="+num;
+		
+	}
+
+
+</script>
+
 <br>
 <h1>상품 상세정보</h1>
 <br>
@@ -19,29 +37,29 @@
 	<tr>
 		<th>상품사진</th>
 		<th>상품이름</th>
-		<th>상품번호</th>
+		<th>상품상세번호</th>
 		<th>상품사이즈</th>
 		<th>상품색상</th>
 		<th>상품분류</th>
 		<th>재고수</th>
 		<th>상품가격</th>
 		<th>상품등록일</th>
-		<th>수정</th>
+<!-- 		<th>수정</th> -->
 		<th>삭제</th>	
 	</tr>
-	<c:forEach var="productList" items="${requestScope.productList }">		
+	<c:forEach var="pl" items="${requestScope.pl }">		
 	<tr>
-	<th><img src="${pageContext.request.contextPath }/upload/${productList.pp_title }" alt="" width="100px" height="100px"></th>
-		<td>${productList.pi_name }</td>
-		<td>${productList.pi_num }</td>
-		<td>${productList.pd_size }</td>
-		<td>${productList.pd_color }</td>
-		<td>${productList.pi_category }</td>
-		<td>${productList.pd_count }</td>
-		<td><fmt:formatNumber value="${productList.pi_price }"/>원</td>
-		<td>${productList.pi_date }</td>
-		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a>
-		<td><a href="${pageContext.request.contextPath }/productDelete?pi_num=${productList.pi_num}">삭제</a>
+	<th id="pltable"><img src="${pageContext.request.contextPath }/upload/${pl.pp_title }" alt="" width="100px" height="100px"></th>
+		<td>${pl.pi_name }</td>
+		<td>${pl.pd_num }</td>
+		<td>${pl.pd_size }</td>
+		<td>${pl.pd_color }</td>
+		<td>${pl.pi_category }</td>
+		<td>${pl.pd_count }</td>
+		<td><fmt:formatNumber value="${pl.pi_price }"/>원</td>
+		<td>${pl.pi_date }</td>
+<%-- 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a> --%>
+		<td><a href="#" onclik="checklast()">삭제</a>
 	</tr>
 	</c:forEach>
 

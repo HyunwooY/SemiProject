@@ -18,6 +18,7 @@
 <h1 style="text-align:center">공지사항</h1>
 <br>
  <div id="not">
+<br>
 <table>
     <tr>
         <th>작성번호</th>
