@@ -53,6 +53,10 @@ public class Inquiry_historyVo {
 	public void setIh_answer(String ih_answer) {
 		this.ih_answer = ih_answer;
 	}
-	
+	@Override
+	public String toString() {
+		return "Inquiry_historyVo [ih_num=" + ih_num + ", mi_id=" + mi_id + ", pi_num=" + pi_num + ", ih_title="
+				+ ih_title + ", ih_question=" + ih_question + ", ih_answer=" + ih_answer + "]\n";
+	}
 	
 }

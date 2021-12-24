@@ -22,19 +22,16 @@ public class ProductDeleteController extends HttpServlet{
 //		String si_id = (String)req.getSession().getAttribute("id");
 		int pi_num = Integer.parseInt(req.getParameter("pi_num"));	
 		int pd_num = Integer.parseInt(req.getParameter("pd_num"));	
-		
-		int num = Integer.parseInt(req.getParameter("num"));	
-		if(pi_num==num) {
-			dao.productDelete(num, pd_num);
-			resp.sendRedirect(req.getContextPath() + "/seller/producDetailtList?pi_num=" + pi_num);
-		}else {
-			dao.productDelete(pi_num, pd_num);
-			resp.sendRedirect(req.getContextPath() + "/seller/productInfoList?pageNum=" +1);
-		}
-		
+		//jsp - > javascript - > 컨트롤러 실패
+		//jsp - > 컨트롤러 현재
+
+		dao.productDelete(0, pd_num);
+		resp.sendRedirect(req.getContextPath() + "/seller/producDetailtList?pi_num=" + pi_num);
+
 		
 //		SellerDao dao1 = SellerDao.getInstance();
-//		ArrayList<ProductVo> productList = dao1.productList(si_id, pi_num, 0, 0);	
+//		ArrayList<ProductVo> productList = dao1.productList(si_id, pi_num, 0, 0);
+
 
 	}
 }

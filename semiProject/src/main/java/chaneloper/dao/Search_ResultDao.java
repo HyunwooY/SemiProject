@@ -54,7 +54,7 @@ public class Search_ResultDao {
 						+ "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count"
 						+ " from product_infomation pi, product_detail pd, product_photo pp"
 						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
-						+ " AND pi_category = "+ "\'"+ CATEGORY+ "\'"
+						+ " AND pi_category = "+ "\'"+ CATEGORY+ "\' and pp.pp_main='대표사진'"
 						+ " order by pi_count desc"
 						+ "   )z"
 						+ ") where rnum>=1 and rnum<=4"; 
@@ -160,7 +160,7 @@ public class Search_ResultDao {
 						+ "SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a"
 						+ " INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM)"
 						+ " INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM)"
-						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\' and c.pp_main='대표사진'"
 						+ "   )z"
 						+ ") where rnum>=? and rnum<=?"; 
 					pstmt=con.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class Search_ResultDao {
 						+ "   ("
 						+ "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count"
 						+ " from product_infomation pi, product_detail pd, product_photo pp"
-						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\' and pp.pp_main='대표사진'"
 						+ " order by "+ sort +" desc"
 						+ "   )z"
 						+ " ) where rnum>=? and rnum<=?";	
@@ -188,7 +188,7 @@ public class Search_ResultDao {
 						+	"SELECT distinct a.PI_NUM ,a.PI_NAME,a.PI_PRICE, c.PP_TITLE FROM PRODUCT_INFOMATION a"
 						+ " INNER JOIN PRODUCT_DETAIL b ON(a.PI_NUM = b.PI_NUM)"
 						+ " INNER JOIN PRODUCT_PHOTO c ON(a.PI_NUM = c.PI_NUM)"
-						+ " where a.PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " where a.PI_NAME like "+"\'%"+keyword+"%\' and c.pp_main='대표사진'"
 						+ " AND a.PI_CATEGORY = "+ "\'" + CATEGORY + "\'"
 						+ "   )z"
 						+ ") where rnum>=? and rnum<=?"; 
@@ -202,7 +202,7 @@ public class Search_ResultDao {
 						+ "   ("
 						+ "select distinct pi.pi_num, pi_name, pi_price, pp_title, pi_date, pi_count"
 						+ " from product_infomation pi, product_detail pd, product_photo pp"
-						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\'"
+						+ " where pi.pi_num=pd.pi_num and pd.pi_num=pp.pi_num and PI_NAME like "+"\'%"+keyword+"%\' and pp.pp_main='대표사진'"
 						+ " AND pi_category = "+ "\'"+ CATEGORY+ "\'"
 						+ " order by "+ sort +" desc"
 						+ "   )z"

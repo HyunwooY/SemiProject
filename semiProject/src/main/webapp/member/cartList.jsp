@@ -117,11 +117,13 @@ tr, td{border-bottom:1px solid black;border-collapse:collapse}
 				</tr>
 			</c:if>
 				<tr>
+
 					<c:set var="pcount" value="${vo.purchase_count}"/>
 					<c:set var="priceAll" value="${pcount* vo.pi_price}"/>
 					<td><input type="checkbox" name="product" value="${status.count}"></td>
 					<td width="140px"><img src="${pageContext.request.contextPath}/upload/${vo.pp_title}" class="imgs"></td>
 					<td>${vo.pi_name }</td>
+
 					<td>${vo.pd_color }<br><ul><li style="background-color:${vo.pd_color}" class=chips></li></ul></td>
 					<td>${vo.pd_size }</td>		
 					<td>

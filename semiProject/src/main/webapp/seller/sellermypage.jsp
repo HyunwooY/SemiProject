@@ -4,9 +4,16 @@
 <style>
 	#form2{
 		position:relative;
-		left: 40px;
-		top: 50px;
 		margin-right: 350px;
+		left:60px;
+	}
+	#sinfo{
+		height:auto;
+		}
+		
+	#main{
+		padding-bottom:50px;
+		padding-top:50px;
 	}
 </style>
 <script>
@@ -16,6 +23,7 @@
 		}
 	} 
 </script>
+<div id="sinfo">
 <form method="post" action="<%=request.getContextPath() %>/seller/informationUpdate" id="form2">
 	<h1>내 정보</h1>
 	<br>
@@ -43,3 +51,4 @@
 	<br>
 	<input type="submit" value="수정"><input type="reset" value="취소"> 
 </form>
+</div>

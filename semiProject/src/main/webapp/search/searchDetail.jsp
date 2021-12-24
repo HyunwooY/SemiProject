@@ -448,28 +448,40 @@
 	    <table id="showtable" >
 			<th colspan=3>${name}</th>
 			<tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    <td colspan=4><br>
+<<<<<<< HEAD
+				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br><br>
+=======
 				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
+
 <<<<<<< HEAD
 				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
+<<<<<<< HEAD
 =======
 			    <td colspan=3>
 				    가격 :  ${price}원
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 =======
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 				    
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+=======
+=======
+				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원<br><br>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    </td>
 			</tr>
+<<<<<<< HEAD
 			<tr>
 			    <td colspan=3>
-			     적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
+			     적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원<br><br>
 				</td>
 			</tr>
+=======
+
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			<tr>
 				<td colspan=3>
 				</td>
@@ -481,7 +493,7 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
+					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a><br>
 <%		
 	}
 %>
