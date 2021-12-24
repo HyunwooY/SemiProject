@@ -50,18 +50,20 @@ public class Inquiry_historyDao {
 			if(field==null || field.equals("")) {
 				sql = "select * from "
 						+ "("
-						+ "		select ih.*, rownum rnum from"
+						+ "		select r.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from inquiry_history where mi_id=? order by ih_num desc"
-						+ "     ) ih"
+						+ "        SELECT ih.ih_num ih_num, ih.mi_id mi_id,ih.pi_num pi_num,ih.ih_title ih_title,ih.ih_question ih_question, ih.ih_answer ih_answer from inquiry_history ih,seller_infomation si, product_infomation pi "
+						+ "		   where pi.pi_num=ih.pi_num and si.si_id=pi.si_id and si.si_id=?"
+						+ "     ) r"
 						+ ") where rnum>=? and rnum<=?";
 			}else {
 				sql = "select * from "
 						+ "("
-						+ "		select ih.*, rownum rnum from"
+						+ "		select i.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from inquiry_history where mi_id=? and " + field + " like '%" + keyword + "%'"
-						+ "     ) ih"
+						+ "        select ih.ih_num ih_num, ih.mi_id mi_id,ih.pi_num pi_num,ih.ih_title ih_title,ih.ih_question ih_question, ih.ih_answer ih_answer from inquiry_history ih,seller_infomation si, product_infomation pi "
+						+ " 	   where pi.pi_num=ih.pi_num and si.si_id=pi.si_id and si.si_id=? and " + field + " like '%" + keyword + "%'"
+						+ "     ) i"
 						+ ") where rnum>=? and rnum<=?";
 			}
 			con = JDBC.getCon();
@@ -210,7 +212,8 @@ public class Inquiry_historyDao {
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history where mi_id=?";
+			String sql = "SELECT NVL(count(ih_num),0) cnt from inquiry_history ih,seller_infomation si, product_infomation pi "
+					+"where pi.pi_num=ih.pi_num and si.si_id=pi.si_id and si.si_id=?";
 			if(field!=null && !field.equals("")) {
 				sql += " and " + field + " like '%" + keyword + "%'";
 			}
