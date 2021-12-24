@@ -451,15 +451,11 @@
 			    <td colspan=4><br>
 				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
 
-				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
+				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원<br><br>
 
 			    </td>
 			</tr>
-			<tr>
-			    <td colspan=3>
-			     적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
-				</td>
-			</tr>
+
 			<tr>
 				<td colspan=3>
 				</td>
