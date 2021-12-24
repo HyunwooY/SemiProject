@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import chaneloper.dao.Search_ResultDao;
+import chaneloper.dao.Interst_goodsDao;
 import chaneloper.dao.Search_Inq_RvDao;
 import chaneloper.vo.Inquiry_historyVo;
 import chaneloper.vo.ReviewVo;
@@ -76,10 +77,15 @@ public class SearchDetailController extends HttpServlet{
 				endPage=pageCount;
 			}
 			
+			Interst_goodsDao dao3 = Interst_goodsDao.getInstance();
+			int score = dao3.count_ig(pi_num);
+			int count = dao3.count_pi_count(pi_num);
 			
 			ArrayList<Search_ReviewVo> list_rv = dao2.getrv(pi_num);
 			ArrayList<Search_ReviewptVo> list_pt = dao2.getpt();
 			
+			req.setAttribute("score", score);
+			req.setAttribute("count", count);
 			req.setAttribute("list_rv", list_rv);
 			req.setAttribute("list_pt", list_pt);
 			
