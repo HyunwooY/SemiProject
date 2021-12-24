@@ -32,7 +32,7 @@ public class ProductUpdateController extends HttpServlet{
 		String pp_title = req.getParameter("pp_title");
 		String t_name = req.getParameter("t_name");
 		
-		ProductVo vo = new ProductVo(0, null, pi_name, pi_price, 0, null, pi_category, pd_size, pd_color, pd_count, pp_title, t_name);
+		ProductVo vo = new ProductVo(0, null, pi_name, pi_price, 0, null, pi_category, pd_size, pd_color, pd_count, pp_title, t_name, 0);
 		
 		ProductDao dao = ProductDao.getInstance();
 		int n=dao.productUpdate(vo);

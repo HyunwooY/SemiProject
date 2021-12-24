@@ -20,6 +20,7 @@ public class ProductVo {
 	private String pd_size; // 상품 사이즈
 	private String pd_color; // 상품 색상
 	private int pd_count; // 제품수량
+	private int pd_num;		// 상품 상세 번호
 
 	// product_photo 테이블
 	private String pp_title; // 사진 파일 이름
@@ -31,7 +32,7 @@ public class ProductVo {
 	}
 
 	public ProductVo(int pi_num, String si_id, String pi_name, int pi_price, int pi_count, Date pi_date,
-			String pi_category, String pd_size, String pd_color, int pd_count, String pp_title, String t_name) {
+			String pi_category, String pd_size, String pd_color, int pd_count, String pp_title, String t_name, int pd_num) {
 		this.pi_num = pi_num;
 		this.si_id = si_id;
 		this.pi_name = pi_name;
@@ -44,6 +45,7 @@ public class ProductVo {
 		this.pd_count = pd_count;
 		this.pp_title = pp_title;
 		this.t_name = t_name;
+		this.pd_num = pd_num;
 	}
 
 	public int getPi_num() {
@@ -140,6 +142,14 @@ public class ProductVo {
 
 	public void setT_name(String t_name) {
 		this.t_name = t_name;
+	}
+
+	public int getPd_num() {
+		return pd_num;
+	}
+
+	public void setPd_num(int pd_num) {
+		this.pd_num = pd_num;
 	}
 	
 	

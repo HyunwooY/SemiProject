@@ -18,6 +18,7 @@ public class SellerPageController extends HttpServlet{
 		SellerDao dao = SellerDao.getInstance();
 		
 		req.setAttribute("main", "/seller/sellerpage.jsp");
+		req.setAttribute("detailmain", "/seller/orderlist.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

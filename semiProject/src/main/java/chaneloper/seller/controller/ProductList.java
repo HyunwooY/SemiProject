@@ -42,6 +42,7 @@ public class ProductList extends HttpServlet {
 		}
 		
 		req.setAttribute("list", list);
+		req.setAttribute("detailmain", "/sellerpage.jsp");
 		req.setAttribute("main", "/seller/productInfoList.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}

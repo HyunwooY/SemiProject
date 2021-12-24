@@ -12,7 +12,14 @@
 <br>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <h1 style="text-align:center">공지사항</h1>
+<<<<<<< HEAD
 <br>
+=======
+<<<<<<< HEAD
+=======
+<br>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 <table>
     <tr>
         <th>작성번호</th>
