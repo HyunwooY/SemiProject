@@ -22,31 +22,60 @@ public class PwdCheckController extends HttpServlet{
 		String id = (String)req.getSession().getAttribute("id");
 		String pwd = req.getParameter("pwd");
 		MemberDao dao = MemberDao.getInstance();
-		if(dao.login(id, pwd)) {
-			MemberVo vo = dao.select(id);
-			if(vo==null) {
-				req.setAttribute("result", "fail");
-				req.setAttribute("detailtitle", "비밀번호 입력");
+		if(req.getAttribute("delete")==null||req.getAttribute("delete").equals("")){
+			System.out.println("aaaa");
+			if(dao.login(id, pwd)) {
+				MemberVo vo = dao.select(id);
+				if(vo==null) {
+					req.setAttribute("result", "fail");
+					req.setAttribute("detailtitle", "비밀번호 입력");
+				}else {
+					req.setAttribute("vo", vo);
+					AddressVo addrvo = dao.selectaddr(id, vo.getName());
+					req.setAttribute("addrvo",addrvo);
+					req.setAttribute("detailmain","/member/mypage.jsp");
+					req.setAttribute("detailtitle", "내 정보");
+					req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+				}
 			}else {
-				req.setAttribute("vo", vo);
-				AddressVo addrvo = dao.selectaddr(id, vo.getName());
-				req.setAttribute("addrvo",addrvo);
-				req.setAttribute("detailmain","/member/mypage.jsp");
-				req.setAttribute("detailtitle", "내 정보");
+				req.setAttribute("result", "fail");
+				req.setAttribute("detailmain", "/member/pwdcheck.jsp");
+				req.setAttribute("detailtitle", "비밀번호 입력");
 				req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
 			}
 		}else {
-			req.setAttribute("result", "fail");
-			req.setAttribute("detailmain", "/member/pwdcheck.jsp");
-			req.setAttribute("detailtitle", "비밀번호 입력");
-			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+			if(dao.login(id, pwd)) {
+				MemberVo vo = dao.select(id);
+				if(vo==null) {
+					req.setAttribute("result", "fail");
+					req.setAttribute("detailtitle", "비밀번호 입력");
+					req.setAttribute("detailmain", "/member/pwdcheck.jsp");
+					req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+				}else {
+					dao.delete(id, pwd);
+					req.setAttribute("deletecheck", true);
+					req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+				}
+				req.setAttribute("result", "fail");
+				req.setAttribute("detailtitle", "비밀번호 입력");
+				req.setAttribute("detailmain", "/member/pwdcheck.jsp");
+				req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+			}
 		}
 	}            
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("detailmain", "/member/pwdcheck.jsp");
-		req.setAttribute("detailtitle", "비밀번호 입력");
-		req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		if(req.getParameter("delete")==null||req.getParameter("delete").equals("")) {
+			req.setAttribute("detailmain", "/member/pwdcheck.jsp");
+			req.setAttribute("detailtitle", "비밀번호 입력");
+			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		}else {
+			req.setAttribute("delete", "true");
+			req.setAttribute("detailmain", "/member/pwdcheck.jsp");
+			req.setAttribute("detailtitle", "비밀번호 입력");
+			req.getRequestDispatcher("/member/memberDetail").forward(req, resp);
+		}
+		
 /*		JSONObject json = new JSONObject();
 		if(dao.login(id, pwd)) {
 			json.put("check", true);
@@ -55,5 +84,6 @@ public class PwdCheckController extends HttpServlet{
 		}	
 		PrintWriter pw = resp.getWriter();
 		pw.print(json); */
+		
 	}
 }

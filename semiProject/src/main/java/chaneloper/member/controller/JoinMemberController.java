@@ -32,6 +32,7 @@ public class JoinMemberController extends HttpServlet {
 		AddressVo avo=new AddressVo(0, id, name, "기본배송지", phone, addr);
 		MemberDao dao=MemberDao.getInstance();
 		int n=dao.insert(vo)+dao.insertaddr(avo);
+		System.out.println("aaaaa"+n);
 		if(n>1) {
 			req.setAttribute("joincode", "success");
 			req.setAttribute("main", "result.jsp");
@@ -39,6 +40,6 @@ public class JoinMemberController extends HttpServlet {
 			req.setAttribute("joincode", "fail");
 			req.setAttribute("main", "result.jsp");
 		}
-		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		req.getRequestDispatcher("/layout").forward(req, resp);
 	}
 }

@@ -3,6 +3,7 @@
 <style>
 	.mpinput{width: 300px; height: 23px;}
 	.mypagebtn{position: relative; left:200px; top: 40px; margin-right: 30px; width: 70px; height: 30px; }
+	#deleteMember{float:right;position:relative;top:330px;font-size:0.8em}
 </style>
 <script>
 	window.onload = function(){
@@ -10,9 +11,19 @@
 			alert("회원정보가 수정 되었습니다.");
 		}
 	}  
+	function deletemember(){
+		if(confirm("정말 회원탈퇴 하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/member/checkpwd?delete=true";
+		}else{
+			alert("감사합니다. 앞으로도 저희 CHANELOPER를 많이 이용해주세요!");
+		}
+	}
 </script>
 <div id="mypagediv">
 	<div id="mypagediv2">
+		<div id="deleteMember">
+			<a href="javascript:deletemember()">회원탈퇴</a>
+		</div>
 	<form method="post" action="<%=request.getContextPath() %>/member/modify" id="form2">
 		<table id="mypageform">
 			<tr>

@@ -2,29 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-<style>
-	
-</style>
 <div>
-	<div> 
-		    
-	</div>
 	<div>
 		<table width="1000" border="1" style="text-align: center; margin: auto;">
 			<tr>
-				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th><th width="5%">삭제</th>
+				<th width="10%">리뷰 번호</th><th width="10%">상품 번호</th><th>사진</th><th>제목</th><th>내용</th><th width="10%">별점</th><th>삭제</th>
 			</tr>
 			<c:forEach var="vo" items="${list }">
-		<tr>
-			<td>${vo.r_num }</td>
-			<td>${vo.ph_num }</td>
-			<td></td> 
-			<td>${vo.r_title }</td>
-			<td>${vo.r_content }</td>
-			<td>${vo.r_hit }</td>
-			<td><a href="${cp }/mypage/reviewlist?r_num=${vo.r_num }">삭제</a></td>
-		</tr>
-	</c:forEach>
+				<tr>
+					<td>${vo.r_num }</td>
+					<td>${vo.ph_num }</td>
+					<td></td> 
+					<td>${vo.r_title }</td>
+					<td>${vo.r_content }</td>
+					<td>${vo.r_hit }</td>
+					<td><a href="<%=request.getContextPath()%>/mypage/deletereview?r_num=${vo.r_num}">삭제</a></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 	<!-- 페이징 처리 -->
