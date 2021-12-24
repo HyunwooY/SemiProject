@@ -448,11 +448,9 @@
 	    <table id="showtable" >
 			<th colspan=3>${name}</th>
 			<tr>
-			    <td colspan=4><br>
-				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br><br>
-
-				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
-
+			    <td colspan=3><br>
+				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
+				   <td>
 
 			</tr>
 
@@ -473,11 +471,10 @@
 	ArrayList<String> color = (ArrayList<String>)request.getAttribute("color");
 	for(int i =0 ;i<color.size();i++){
 %>
-					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a><br>
+					<a href="#" onclick="get_size(event)"><%=color.get(i) %></a>
 <%		
 	}
 %>
-
 				</td>
 			</tr>
 			<tr>

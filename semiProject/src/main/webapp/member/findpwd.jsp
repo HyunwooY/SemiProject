@@ -3,9 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
+#main{padding-top:90px;padding-bottom:40px}
 #find{
 	position:relative;
-	top: 90px;
 	margin: auto;
 	color: black;
 }
@@ -18,7 +18,7 @@ label{margin: 15px; font-size: 1.3em;}
 #id{width: 250px; height: 20px;}
 #email{width: 250px; height: 20px; margin-bottom: 20px;}
 #btn{width: 100px; height: 35px; font-size: 15px;}
-a{color:white;}
+a{color:black;}
 </style>
 <script>
 	var radio = null;
