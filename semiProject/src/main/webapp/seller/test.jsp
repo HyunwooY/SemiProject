@@ -15,18 +15,18 @@
 <form id='action'>
 <c:set var = "cp" value = "${pageContext.request.contextPath }"/>
 	<table>
-	<div>
+	<div name="moveon">
 		<tr>
-			<td width="-30%" align="center"> 작성자 </td>
+			<td width="-30%" align="center"> </td>
 			<td> <input type='text' id='title' name='title' value='${vo.mi_id }' disabled></td>
 		</tr>
 		<tr>
-			<td width="-30%" align="center"> 제목 </td>
+			<td width="-30%" align="center">  </td>
 			<td> <input type='text' id='title' name='title' value='${vo.ih_title }' disabled></td>
 		</tr>
 	</div>
 		<tr>
-			<td width="-30%" align="center"> 내용 </td>
+			<td width="-30%" align="center"> </td>
 			<td>
 				<textarea rows="20" cols="60" id='content' name='content' disabled>${vo.ih_question}</textarea>
 			</td>
@@ -34,12 +34,10 @@
 		</table>
 		<br>
 		<br>
-		<br>
 		<td>
 			-답변:${vo.ih_answer }
 		</td>
 	</form>
-	<br>
 	<br>
 	<br>
 	<form method="get" action="${pageContext.request.contextPath }/seller/inquiryreply">

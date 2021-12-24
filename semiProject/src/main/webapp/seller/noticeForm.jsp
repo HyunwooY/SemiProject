@@ -18,8 +18,7 @@
 <form name="notice" method="post" action="${pageContext.request.contextPath }/seller/notice1">
     <table align="center">
         <tr>
-            <td align="right">
-                <br>글내용:&nbsp;</td>
+            <td align="right"></td>
                 <td>
                     <textarea name="content" rows="10" cols="106" maxlength="4000"></textarea>
                 </td>

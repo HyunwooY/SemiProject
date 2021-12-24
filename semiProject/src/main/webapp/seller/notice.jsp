@@ -8,18 +8,17 @@
     margin-left: auto;
     margin-right: auto;
   }
+  
+  #not{
+  	margin-right:50px
+  }
 </style>
 <br>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <h1 style="text-align:center">공지사항</h1>
-<<<<<<< HEAD
 <br>
-=======
-<<<<<<< HEAD
-=======
+ <div id="not">
 <br>
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
->>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 <table>
     <tr>
         <th>작성번호</th>
@@ -37,7 +36,9 @@
                 </c:if>
             </tr>
         </c:forEach>
-        <hr></table>
+        <hr>
+        </table>
+         </div>
         <form name="notice" method="get" action="${pageContext.request.contextPath }/seller/notice1">
             <c:if test="${sessionScope.radio=='판매사업자' }">
                 <input type="submit" value="글쓰기"></c:if>

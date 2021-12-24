@@ -7,6 +7,10 @@
 	table {
 		word-break: break-all;
 	}
+	#main{
+		padding-bottom:50px;
+		padding-top:50px;
+	}
 </style>   
     
 <form action="${pageContext.request.contextPath }/seller/orderListAll" method="post">

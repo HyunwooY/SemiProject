@@ -19,6 +19,7 @@
 <br>
 <h1>상품 상세정보</h1>
 <br>
+<br>
 <form method="post" action="${pageContext.request.contextPath }/seller/sellerProductListForm">
 <table border="1" width="1000">
 	<tr>
