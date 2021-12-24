@@ -35,11 +35,11 @@
 		<td>${productList.pd_size }</td>
 		<td>${productList.pd_color }</td>
 		<td>${productList.pi_category }</td>
-		<td>${productList.pd_count } - ${productList. }</td>
+		<td>${productList.pd_count }</td>
 		<td><fmt:formatNumber value="${productList.pi_price }"/>원</td>
 		<td>${productList.pi_date }</td>
 <%-- 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a> --%>
-		<td><a href="${pageContext.request.contextPath }/productDelete?pi_num=${productList.pi_num}">삭제</a>
+		<td><a href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}">삭제</a>
 	</tr>
 	</c:forEach>
 
