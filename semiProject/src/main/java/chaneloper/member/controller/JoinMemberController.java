@@ -40,6 +40,6 @@ public class JoinMemberController extends HttpServlet {
 			req.setAttribute("joincode", "fail");
 			req.setAttribute("main", "result.jsp");
 		}
-		req.getRequestDispatcher("/layout").forward(req, resp);
+		resp.sendRedirect(req.getContextPath()+"/layout");
 	}
 }

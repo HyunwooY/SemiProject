@@ -7,7 +7,7 @@
 	position:relative;
 	top: 90px;
 	margin: auto;
-	color: white;
+	color: black;
 }
 h1{margin-bottom: 20px;}
 #member{margin-right: 100px;}

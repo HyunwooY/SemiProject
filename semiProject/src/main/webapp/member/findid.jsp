@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+#main{padding-top:90px;padding-bottom:40px}
 #find{
 	position:relative;
-	top: 90px;
 	margin: auto;
-	color: white;
+	color: black;
 }
 h1{margin-bottom: 20px;}
 #member{margin-right: 100px;}
@@ -16,7 +16,7 @@ label{margin: 15px; font-size: 1.3em;}
 #name{width: 250px; height: 20px;}
 #email{width: 250px; height: 20px; margin-bottom: 20px;}
 #btn{width: 100px; height: 35px; font-size: 15px;}
-a{color:white;}
+
 </style>
 <script type="text/javascript">
 	var radio = null;

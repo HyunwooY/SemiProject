@@ -37,7 +37,7 @@ public class ProductDao {
 			pstmt1.setInt(4, vo.getPi_count());
 			pstmt1.setString(5, vo.getPi_category());			
 			int a = pstmt1.executeUpdate();
-			String sql2 = "INSERT INTO PRODUCT_PHOTO VALUES(?, PRO_SEQ.CURRVAL)";
+			String sql2 = "INSERT INTO PRODUCT_PHOTO VALUES(?, PRO_SEQ.CURRVAL,'대표사진')";
 			pstmt2 = con.prepareStatement(sql2);
 			pstmt2.setString(1, vo.getPp_title());			
 			int b = pstmt2.executeUpdate();

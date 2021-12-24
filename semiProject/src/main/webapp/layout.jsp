@@ -35,13 +35,8 @@
 		if(${requestScope.lcode==false}){
 			alert('${errMsg}')
 		}
-		if(${requestScope.deletecheck}==true){
-			alert('지금까지 이용해주셔서 감사합니다. \n다음에 놀려오시길 기원드립니다.');
-			location.href="${pageContext.request.contextPath }/layout";
-		}
-	}
 
-//		window.open("${pageContext.request.contextPath}/seller/noticepopup.jsp","_blank","width=500,height=700");
+	}
 
 	function showText() {
 		var keyword=document.getElementById("keyword");
