@@ -264,11 +264,11 @@ public class SellerDao {
 		ResultSet rs = null;
 		try {
 			con = JDBC.getCon();
-			String sql = "SELECT NVL(count(pi_num),0) cnt FROM PRODUCT_INFOMATION";
+			String sql = "SELECT count(*) FROM PRODUCT_INFOMATION";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getInt("cnt");
+				return rs.getInt(1);
 			}
 			return -1;
 		} catch(SQLException se) {
