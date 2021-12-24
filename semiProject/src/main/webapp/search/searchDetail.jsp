@@ -454,6 +454,7 @@
 =======
 				    가격 :  <fmt:formatNumber value="${price}" pattern="#,###"/>원<br>
 
+<<<<<<< HEAD
 				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원
 <<<<<<< HEAD
 =======
@@ -465,15 +466,22 @@
 				    
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 =======
+=======
+				    적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원<br><br>
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 
 >>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			    </td>
 			</tr>
+<<<<<<< HEAD
 			<tr>
 			    <td colspan=3>
 			     적립금 :  <fmt:formatNumber value="${Math.round(price*0.01)}" pattern="#,###"/>원<br><br>
 				</td>
 			</tr>
+=======
+
+>>>>>>> branch 'master' of https://github.com/HyunwooY/SemiProject.git
 			<tr>
 				<td colspan=3>
 				</td>

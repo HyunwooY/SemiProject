@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<style>
+ table {
+    width: 990px;
+    height: 36px;
+    margin-left: 60px;
+    margin-right: auto;
+  }
+  #main{
+		padding-bottom:50px;
+		padding-top:50px;
+	}
+</style>
 	<c:set var="cp" value="${pageContext.request.contextPath }"/>
 	<table border="1">
 		<tr>
@@ -52,5 +57,3 @@
 			<a href="${cp }/seller/inquiryList?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
 		</c:if>
 	</div>
-</body>
-</html>
