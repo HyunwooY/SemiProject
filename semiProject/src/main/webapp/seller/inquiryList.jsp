@@ -10,10 +10,12 @@
     margin-right: auto;
   }
   
+  #inquirytitle{position:relative;left:-110px;}
+  
 </style>
 	<c:set var = "cp" value = "${pageContext.request.contextPath }"/>
 	<br>
-	<h1>문의 내역</h1>
+	<div id="inquirytitle"><h1>문의 내역</h1></div>
 	<br>
 	<table>
 		<tr>

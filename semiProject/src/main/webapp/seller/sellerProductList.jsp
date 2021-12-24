@@ -15,14 +15,16 @@
 <script>
 
 	function checklast(){
-		
-		var num = ${productList.pi_num};
+		let pi_num = document.getElementsByName("hiddenpi_num")[0].value;
+		let pd_num = document.getElementsByName("hiddenpd_num")[0].value;
+		var num = pi_num;
 		let pltable = document.getElementById("pltable");
 		if(pltable.childnodes.length()==1){
 			num = 0;
 		}
 		
-		onload.location.href="${pageContext.request.contextPath }/productDelete?pd_num=${productList.pd_num}&pi_num=${productList.pi_num}&num="+num;
+ 		window.location.href="${pageContext.request.contextPath }/productDelete?pd_num="+pd_num+"&pi_num="+pi_num+"&num="+num;
+		
 	}
 
 
@@ -46,20 +48,27 @@
 <!-- 		<th>수정</th> -->
 		<th>삭제</th>	
 	</tr>
-	<c:forEach var="productList" items="${requestScope.productList }">		
+	<c:forEach var="pl" items="${requestScope.pl }">		
 	<tr>
-	<th id="pltable"><img src="${pageContext.request.contextPath }/upload/${productList.pp_title }" alt="" width="100px" height="100px"></th>
-		<td>${productList.pi_name }</td>
-		<td>${productList.pd_num }</td>
-		<td>${productList.pd_size }</td>
-		<td>${productList.pd_color }</td>
-		<td>${productList.pi_category }</td>
-		<td>${productList.pd_count }</td>
-		<td><fmt:formatNumber value="${productList.pi_price }"/>원</td>
-		<td>${productList.pi_date }</td>
+	<th id="pltable"><img src="${pageContext.request.contextPath }/upload/${pl.pp_title }" alt="" width="100px" height="100px"></th>
+		<td>${pl.pi_name }</td>
+		<td>${pl.pd_num }</td>
+		<td>${pl.pd_size }</td>
+		<td>${pl.pd_color }</td>
+		<td>${pl.pi_category }</td>
+		<td>${pl.pd_count }</td>
+		<td><fmt:formatNumber value="${pl.pi_price }"/>원</td>
+		<td>${pl.pi_date }</td>
 <%-- 		<td><a href="${pageContext.request.contextPath }/seller/productUpdate?pi_num=${productList.pi_num}">수정</a> --%>
 		<td><a href="#" onclik="checklast()">삭제</a>
 	</tr>
+	<tr id="hidden" style="display:none;">
+		<td colspan=9>
+			<input name="hiddenpi_num" type="text" value="${pl.pi_num}"/>
+			<input name="hiddenpd_num" type="text" value="${pl.pd_num }"/>
+		</td>
+	</tr>
+
 	</c:forEach>
 
 </table>

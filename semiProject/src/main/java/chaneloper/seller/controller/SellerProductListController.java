@@ -44,7 +44,7 @@ public class SellerProductListController extends HttpServlet {
 			endPageNum = pageCount;
 		}
 		
-		req.setAttribute("productList", productList);
+		req.setAttribute("pl", productList);
 		req.setAttribute("main", "/seller/sellerProductList.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}

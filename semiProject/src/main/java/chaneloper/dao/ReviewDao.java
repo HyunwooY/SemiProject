@@ -27,7 +27,8 @@ public class ReviewDao {
 						+ "("
 						+ "		select rv.*, rownum rnum from"
 						+ "	    ("
-						+ "        select * from review re, review_photo rp where rp.mi_id=? and re.r_num=rp.r_num order by re.r_num desc"
+						+ "        select * from review re, review_photo rp, purchase_history ph"
+						+ " where ph.mi_id=? and re.r_num=rp.r_num order and ph.ph_num=re.ph_num by re.r_num desc"
 						+ "     ) rv"
 						+ ") where rnum>=? and rnum<=?";
 			con = JDBC.getCon();
