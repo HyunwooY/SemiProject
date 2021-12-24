@@ -146,9 +146,9 @@ public class ProductDao {
 			String sql2 = "DELETE FROM PRODUCT_DETAIL WHERE PD_NUM=?";
 			pstmt2 = con.prepareStatement(sql2);
 			pstmt2.setInt(1, pd_num);
-			int b = pstmt2.executeUpdate();		
+			int b = pstmt2.executeUpdate(); //객체만 삭제		
 				
-			if(pi_num != 0) {				
+			if(pi_num != 0) {		//전부다 삭제		
 				String sql = "DELETE FROM PRODUCT_PHOTO WHERE PI_NUM=?";
 				pstmt1 = con.prepareStatement(sql);
 				pstmt1.setInt(1, pi_num);
