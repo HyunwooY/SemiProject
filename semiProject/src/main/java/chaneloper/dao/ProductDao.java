@@ -191,6 +191,7 @@ public class ProductDao {
 		}
 	}
 	
+	// 상품 삭제
 	public int productDel(int pi_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -249,4 +250,6 @@ public class ProductDao {
 			JDBC.close(con, pstmt, rs);
 		}		
 	}
+
 }
+

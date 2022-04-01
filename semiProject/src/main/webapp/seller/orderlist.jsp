@@ -57,3 +57,6 @@
 			<a href="${cp }/seller/inquiryList?pageNum=${requestScope.endPage+1}">[다음 페이지]</a>
 		</c:if>
 	</div>
+	
+	
+	
